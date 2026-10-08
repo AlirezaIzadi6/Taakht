@@ -110,7 +110,8 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 ```text
 Taakht/
 ├── docs/            design documents (see Documentation below)
-├── src/        one solution (.NET) or module (Go) per service
+├── src/             one solution (.NET) or module (Go) per service
+├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── Makefile         setup, fmt, lint, test
 ├── lefthook.yml     git hooks (pre-commit fixes, Conventional Commits check)
 └── .github/         CI
@@ -136,6 +137,7 @@ Known and intentional for the current phase:
 - The platform does not arbitrate item-condition disputes; it only records and forwards claims.
 - Informal competitors (Telegram/Instagram swap groups, global swap apps) have not been analyzed yet.
 - The system runs on a single node; there is no fault tolerance against the loss of a node or of infrastructure components.
+- Services do not authenticate each other in this phase: the internal network is isolated and only the gateway publishes a port, so it must not be exposed beyond the gateway. Production target is mutual TLS between services.
 
 ### What would change in production
 
