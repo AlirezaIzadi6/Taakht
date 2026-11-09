@@ -62,16 +62,35 @@ jobs:
           list=$(find . -name go.mod -not -path '*/node_modules/*' -exec dirname {} \; | sort | jq -R -s -c 'split("\n")[:-1]')
           echo "list=$list" >> "$GITHUB_OUTPUT"
 
-  pr-title:
+  commit-messages:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: read
+    env:
+      BASE_REF: ${{ github.base_ref }}
     steps:
-      # Squash-merge uses the PR title as the commit message, so enforce Conventional Commits here.
-      - uses: amannn/action-semantic-pull-request@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # PRs are merged with "Rebase and merge", so every commit lands on main as written:
+      # each message must follow Conventional Commits and there must be no merge commits.
+      - name: Check commit messages and history shape
+        run: |
+          pattern='^(feat|fix|docs|refactor|test|chore|perf|build|ci)(\([a-z0-9-]+\))?!?: .+'
+          range="origin/${BASE_REF}..HEAD"
+          status=0
+          if [ -n "$(git rev-list --merges "$range")" ]; then
+            echo "This branch contains merge commits. Rebase onto ${BASE_REF} instead of merging it."
+            status=1
+          fi
+          for sha in $(git rev-list --no-merges "$range"); do
+            subject=$(git log -1 --format=%s "$sha")
+            if ! printf '%s\n' "$subject" | grep -qE "$pattern"; then
+              echo "Not a Conventional Commit: $sha $subject"
+              status=1
+            fi
+          done
+          exit $status
 
   dotnet:
     needs: changes
@@ -131,7 +150,7 @@ jobs:
   # Single required status check for branch protection: skipped jobs count as OK, failed/cancelled ones don't.
   ci-ok:
     if: always()
-    needs: [pr-title, dotnet, go]
+    needs: [commit-messages, dotnet, go]
     runs-on: ubuntu-latest
     steps:
       - name: Verify results
