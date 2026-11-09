@@ -10,6 +10,7 @@ Entry point for all Taakht design documents. The root [README](../README.md) is 
 | [`domain/`](domain/) | [Ubiquitous language](domain/ubiquitous-language.md), [Event Storming output](domain/event-storming.md), [context map](domain/context-map.md), [event reconciliation](domain/event-storming-reconciliation.md) | Technology choices |
 | [`architecture/`](architecture/) | [Architecture overview](architecture/architecture-overview.md) (current state), [chronological decisions log](architecture/architecture-decisions-log.md), [design principles](architecture/design-principles.md), diagrams | The final "why" of a single decision (that is an ADR) |
 | `adr/` | One file per architecture decision, in English. See [adr/README.md](adr/README.md) | Conventions, remaining work |
+| `evidence/` | Experiments and document reviews behind ADRs, with results and what was not verified | The decision itself |
 | `guidelines/` | Conventions that follow from decisions: topic naming, retry/DLQ patterns, client libraries, deploy config, code style | Decisions with trade-offs |
 | `api/` | API documentation (OpenAPI, Postman) and event contracts | Internal design |
 | `testing/` | Test strategy, load and stress test scenarios and recorded results (the scripts themselves live with the code) | Unit test code |

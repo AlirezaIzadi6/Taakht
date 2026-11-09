@@ -114,6 +114,7 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 Taakht/
 ├── docs/            design documents (see Documentation below)
 ├── src/        one solution (.NET) or module (Go) per service
+├── spikes/          throwaway experiments behind the evidence docs
 ├── Makefile         setup, fmt, lint, test
 ├── lefthook.yml     git hooks (pre-commit fixes, Conventional Commits check)
 └── .github/         CI
@@ -159,6 +160,7 @@ Known and intentional for the current phase:
 | [`docs/domain/`](docs/domain) | Ubiquitous language, Event Storming output, bounded contexts, context map |
 | [`docs/architecture/`](docs/architecture) | Architecture overview (current state), chronological decisions log, diagrams |
 | [`docs/adr/`](docs/adr/README.md) | One architecture decision per file, with the reasoning |
+| [`docs/evidence/`](docs/evidence) | Experiments and document reviews behind the ADRs, with what was not verified (the runnable code is in [`spikes/`](spikes)) |
 | [`docs/guidelines/`](docs/guidelines) | Conventions that follow from decisions (topic naming, retry/DLQ, code style) |
 | [`docs/api/`](docs/api) | API documentation and event contracts |
 | [`docs/testing/`](docs/testing) | Test strategy, load/stress scenarios and recorded results |
