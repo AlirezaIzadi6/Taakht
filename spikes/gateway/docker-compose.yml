@@ -1,0 +1,12 @@
+name: taakht-spike
+services:
+  backend:
+    build: ./backend
+  envoy:
+    image: envoyproxy/envoy:v1.34-latest
+    command: ["-c", "/etc/envoy/envoy.yaml"]
+    volumes:
+      - ./gateway/envoy.yaml:/etc/envoy/envoy.yaml:ro
+      - ./gateway/descriptor.binpb:/etc/envoy/descriptor.binpb:ro
+    ports: ["18080:8080"]
+    depends_on: [backend]

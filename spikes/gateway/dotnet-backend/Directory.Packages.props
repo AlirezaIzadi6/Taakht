@@ -1,0 +1,6 @@
+<Project>
+  <!-- This spike is not part of the product build: it opts out of the repo's central package management. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>
