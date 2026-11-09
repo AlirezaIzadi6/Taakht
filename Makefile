@@ -6,8 +6,9 @@ LEFTHOOK_VERSION ?= latest
 GOLANGCI_LINT_VERSION ?= latest
 
 # Every .NET service has its own solution; every Go service has its own module.
-DOTNET_SOLUTIONS := $(shell find . \( -name '*.sln' -o -name '*.slnx' \) -not -path '*/node_modules/*')
-GO_MODULES := $(shell find . -name go.mod -not -path '*/node_modules/*' -exec dirname {} \;)
+# spikes/ holds throwaway experiments behind the evidence docs; they are not linted or tested.
+DOTNET_SOLUTIONS := $(shell find . \( -name '*.sln' -o -name '*.slnx' \) -not -path '*/node_modules/*' -not -path './spikes/*')
+GO_MODULES := $(shell find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -exec dirname {} \;)
 
 .PHONY: help setup prereqs tools hooks fmt lint test
 
