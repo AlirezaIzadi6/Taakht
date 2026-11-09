@@ -69,7 +69,7 @@ To skip the hooks for one commit, use `git commit --no-verify`. CI runs the same
 - The .NET job runs once per solution, discovered from the `*.sln`/`*.slnx` files: restore, format check, Release build (analyzers run as errors) and tests.
 - The Go job runs once per module, discovered from the `go.mod` files: `golangci-lint` and `go test -race`.
 - If any .NET or Go file or shared config changes, all solutions or modules of that stack run. Narrowing this to affected services only is a possible later optimization.
-- Pull request titles must follow Conventional Commits, because squash merge uses the title as the commit message.
+- Every commit message in a pull request must follow Conventional Commits and the branch must contain no merge commits, because PRs are merged with "Rebase and merge" and each commit lands on `main` as written (the `commit-messages` job checks this).
 - `ci-ok` is the single required status check for branch protection.
 
 ## Code quality configuration

@@ -120,9 +120,9 @@ Each .NET service has its own solution file and each Go service its own module. 
 
 ## Contributing
 
-- Commit messages and pull request titles follow [Conventional Commits](https://www.conventionalcommits.org), e.g. `feat(reputation): add score projection`. PRs are squash-merged, so the title becomes the commit message.
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org), e.g. `feat(reputation): add score projection`. History is linear: we rebase, we do not merge. Keep a branch up to date by rebasing it onto `main`, and merge PRs with "Rebase and merge", so every commit lands on `main` as written. See [development process](docs/process/development-process.md#git-workflow).
 - Git hooks fix formatting on staged files; anything they cannot fix mechanically (nullable warnings, unchecked errors, missing `CancellationToken`/`context.Context`) must be fixed by hand.
-- CI runs `ci-ok` as the single required check: format/lint, build and tests per solution or module, with unrelated stacks skipped.
+- CI runs `ci-ok` as the single required check: commit-message and history check, format/lint, build and tests per solution or module, with unrelated stacks skipped.
 - Every architecture decision is recorded as an English ADR with a single decision each, see [`docs/adr/`](docs/adr/README.md).
 - All documentation and code identifiers are in English; only user-facing messages are localized to Persian.
 

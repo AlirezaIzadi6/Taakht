@@ -13,7 +13,7 @@ Entry point for all Taakht design documents. The root [README](../README.md) is 
 | `guidelines/` | Conventions that follow from decisions: topic naming, retry/DLQ patterns, client libraries, deploy config, code style | Decisions with trade-offs |
 | `api/` | API documentation (OpenAPI, Postman) and event contracts | Internal design |
 | `testing/` | Test strategy, load and stress test scenarios and recorded results (the scripts themselves live with the code) | Unit test code |
-| `process/` | How the team works: Scrum, GitHub workflow, meetings | Architecture |
+| [`process/`](process/) | [How the team works](process/development-process.md): Scrum, GitHub workflow, meetings | Architecture |
 | `get-started.md` | Developer onboarding: prerequisites, setup, everyday commands, git hooks, CI, troubleshooting | Architecture, conventions that follow from decisions |
 | `open-items.md` | Undecided questions and remaining steps, the working list that feeds new ADRs | Decided material |
 
