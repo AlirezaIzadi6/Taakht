@@ -53,13 +53,13 @@ jobs:
       # Every solution file (one per .NET service) becomes one matrix entry.
       - id: solutions
         run: |
-          list=$(find . \( -name '*.sln' -o -name '*.slnx' \) -not -path '*/node_modules/*' | sort | jq -R -s -c 'split("\n")[:-1]')
+          list=$(find . \( -name '*.sln' -o -name '*.slnx' \) -not -path '*/node_modules/*' -not -path './spikes/*' | sort | jq -R -s -c 'split("\n")[:-1]')
           echo "list=$list" >> "$GITHUB_OUTPUT"
 
       # Every directory holding a go.mod becomes one matrix entry.
       - id: modules
         run: |
-          list=$(find . -name go.mod -not -path '*/node_modules/*' -exec dirname {} \; | sort | jq -R -s -c 'split("\n")[:-1]')
+          list=$(find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -exec dirname {} \; | sort | jq -R -s -c 'split("\n")[:-1]')
           echo "list=$list" >> "$GITHUB_OUTPUT"
 
   commit-messages:
