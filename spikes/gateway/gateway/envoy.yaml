@@ -1,0 +1,55 @@
+static_resources:
+  listeners:
+    - name: public
+      address: { socket_address: { address: 0.0.0.0, port_value: 8080 } }
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: public
+                route_config:
+                  name: public_routes
+                  virtual_hosts:
+                    - name: all
+                      domains: ["*"]
+                      routes:
+                        - match: { prefix: "/v1/" }
+                          route: { cluster: hello_service }
+                http_filters:
+                  - name: envoy.filters.http.jwt_authn
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication
+                      providers:
+                        spike:
+                          issuer: spike-issuer
+                          claim_to_headers:
+                            - header_name: x-user-id
+                              claim_name: sub
+                          local_jwks:
+                            inline_string: '{"keys":[{"kty":"oct","alg":"HS256","k":"c3Bpa2UtdGVzdC1zZWNyZXQtc3Bpa2UtdGVzdC0wMTIz"}]}'
+                      rules:
+                        - match: { prefix: "/v1/" }
+                          requires: { provider_name: spike }
+                  - name: envoy.filters.http.grpc_json_transcoder
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
+                      proto_descriptor: /etc/envoy/descriptor.binpb
+                      services: [taakht.hello.v1.HelloService]
+                      auto_mapping: false
+                      match_incoming_request_route: true
+                  - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+  clusters:
+    - name: hello_service
+      type: STRICT_DNS
+      typed_extension_protocol_options:
+        envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+          "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+          explicit_http_config: { http2_protocol_options: {} }
+      load_assignment:
+        cluster_name: hello_service
+        endpoints:
+          - lb_endpoints:
+              - endpoint: { address: { socket_address: { address: backend, port_value: 9090 } } }

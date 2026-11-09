@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.*" />
+    <Protobuf Include="api/proto/taakht/hello/v1/hello.proto"
+              ProtoRoot="api/proto"
+              AdditionalImportDirs="third_party"
+              GrpcServices="Server" />
+    <Protobuf Include="third_party/google/api/annotations.proto" ProtoRoot="third_party" GrpcServices="None" />
+    <Protobuf Include="third_party/google/api/http.proto" ProtoRoot="third_party" GrpcServices="None" />
+  </ItemGroup>
+</Project>
