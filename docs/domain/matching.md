@@ -61,7 +61,6 @@ The further apart two compatible categories are in the tree, the lower the score
 - A pair is a match if it passes the filters (compatible categories, location, the optional distance filter, no block); the score only orders matches. There is no minimum score.
 - Three factors: category fit, closeness of the two items' neighbourhoods, and the other party's trust score.
 - Category fit is computed per direction, and each viewer ranks by their own direction: how well the other Ad's "I have" fits my "I want". Whoever wants "tools" sees a drill near the top, while whoever wants "drill" sees a general "tools" Ad lower. The pair is still a match for both (both directions pass the filters). Closeness is the same for both viewers; trust is the other party's.
-- Ads with no open negotiation rank above Ads that have some, to encourage owners to settle their negotiations. Where this sits among the other factors is set together with the weights.
 - Priority for each viewer: category fit first, then closeness, then trust, which only separates matches that are otherwise about equal. The weights are configurable so they can be tuned with real data.
 
 ### Other decisions
@@ -74,6 +73,5 @@ The further apart two compatible categories are in the tree, the lower the score
 
 ## Open points
 
-- Where "no open negotiation" sits among category fit, closeness and trust.
 
 - Where the neighbourhood centres (and the neighbourhood list) come from. For the demo, a small seeded dataset.

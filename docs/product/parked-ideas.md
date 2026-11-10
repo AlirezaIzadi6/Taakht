@@ -22,6 +22,14 @@ Each entry answers five questions: what the idea is, how it helps, why it is par
 - **What it needs:** loop detection in Matching, an all-or-nothing agreement and lock across several Ads, and a rule for what happens when one member drops out.
 - **Revisit when:** two-party matching leaves many Ads without any match.
 
+## Ranking by the number of open negotiations
+
+- **Idea:** an Ad with no open negotiation ranks above an Ad that has some, so owners are encouraged to settle their negotiations.
+- **How it helps:** pushes owners to answer and decide, and spreads attention over Ads that are still free.
+- **Why parked:** it is one more ranking factor and its weight is a guess; matching works without it, and the negotiation cap and deadlines already push owners to settle.
+- **What it needs:** the open-negotiation counter of an Ad exposed to Matching (fed by events), and a place and weight among category fit, closeness and trust.
+- **Revisit when:** many Ads sit with open negotiations that nobody settles.
+
 ## Penalty for repeated ghosting
 
 - **Idea:** a user whose negotiations keep expiring without a response loses reputation, and may lose some swap access.
