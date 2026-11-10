@@ -1,8 +1,12 @@
 # Taakht
 
+![Go](https://img.shields.io/badge/Go-1.27-00ADD8?style=flat&logo=go)
+![.NET](https://img.shields.io/badge/.NET-10-512BD4?style=flat&logo=dotnet)
+![DDD](https://img.shields.io/badge/Design-DDD-success?style=flat)
+
 **A goods-swap layer for a classifieds platform (designed around Divar), built as a microservices portfolio project.**
 
-> **Status: design phase (draft).** The architecture is documented and the key decisions are recorded; implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
+> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as draft ADRs; repo tooling (CI, Makefile, edge gateway config) is in place. Service implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
 
 ## The idea
 
@@ -114,6 +118,7 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 Taakht/
 ├── docs/            design documents (see Documentation below)
 ├── src/        one solution (.NET) or module (Go) per service
+├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── spikes/          throwaway experiments behind the evidence docs
 ├── Makefile         setup, fmt, lint, test
 ├── lefthook.yml     git hooks (pre-commit fixes, Conventional Commits check)
@@ -142,6 +147,7 @@ Known and intentional for the current phase:
 - Item value and price estimation, inter-city exchange and a few other ideas are deliberately parked (see [parked ideas](docs/product/parked-ideas.md)).
 - How the lock Saga behaves while the Ad service is unavailable is designed but not yet tested.
 - The system runs on a single node; there is no fault tolerance against the loss of a node or of infrastructure components.
+- Services do not authenticate each other in this phase: the internal network is isolated and only the gateway publishes a port, so it must not be exposed beyond the gateway. Production target is mutual TLS between services.
 
 ### What would change in production
 
