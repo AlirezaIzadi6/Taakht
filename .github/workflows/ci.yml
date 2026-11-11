@@ -68,9 +68,12 @@ jobs:
     env:
       BASE_REF: ${{ github.base_ref }}
     steps:
+      # Check out the PR's own head commit. The default is GitHub's synthetic merge
+      # commit, which would make every PR look like it contains a merge commit.
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       # PRs are merged with "Rebase and merge", so every commit lands on main as written:
       # each message must follow Conventional Commits and there must be no merge commits.
