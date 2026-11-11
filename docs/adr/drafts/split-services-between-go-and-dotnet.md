@@ -38,7 +38,7 @@ Both languages produced services from one proto behind one gateway in a spike. D
 ## References
 
 - [Use a single monorepo for all services](use-a-monorepo.md)
-- [Build the system as microservices](use-microservices.md)
+- [Build the system as microservices](../0001-build-the-system-as-microservices.md)
 - [Structure Deal as a modular monolith in .NET](structure-deal-as-modular-monolith.md)
 - [Use a Saga with compensating transactions for exclusive ad locking](use-saga-and-compensating-transactions-for-locking.md)
 - [Define the API contract in Protobuf](define-api-contract-in-protobuf.md)
