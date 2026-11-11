@@ -10,7 +10,7 @@ Date: 2026-10-08. Backs the ADR "Build the system as microservices". This is a d
 
 ## How this applies
 
-The published advice favours a modular monolith for a two-person team with unvalidated boundaries. The ADR chooses microservices anyway, for two stated drivers: an expected scaling need that is not measured, and the project's goal of demonstrating distributed-systems problems. The ADR records the cost and the risk instead of arguing the advice away.
+The published advice favours a modular monolith for a two-person team with unvalidated boundaries. The ADR chooses microservices anyway, for three stated drivers: an expected scaling need that is not measured, the project's goal of demonstrating distributed-systems problems, and a two-person team working in two languages. The ADR records the cost and the risk instead of arguing the advice away.
 
 ## Not verified
 
