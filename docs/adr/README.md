@@ -37,3 +37,4 @@ ADRs are written in English.
 
 | # | Title | Status | Context |
 |---|---|---|---|
+| [0001](0001-build-the-system-as-microservices.md) | Build the system as microservices | Accepted | cross-cutting |

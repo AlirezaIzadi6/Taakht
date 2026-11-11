@@ -22,7 +22,7 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 |---|---|---|---|---|
 | **Foundation** | | | | |
 | 1 | Monorepo | Stack named | README, Makefile and CI already assume it | - |
-| 2 | Microservice architecture | Draft | `use-microservices`; reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | 1 |
+| 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | 1 |
 | 3 | Service decomposition | Draft | `structure-deal-as-modular-monolith`; working boundaries: Ad and Matching (Go), Deal (combining negotiation and swap as a modular monolith in .NET) and Reputation (.NET); Communication and Delivery minimal or mocked; context map in [docs/domain/context-map.md](domain/context-map.md). The ADR covers Deal only; why Ad is apart from Matching, and why Reputation and Communication are separate services, is not recorded in an ADR yet | 2 |
 | 4 | Languages: Go and .NET, and the rule that splits services between them | Draft | `split-services-between-go-and-dotnet`; no benchmark, rests on workload fit and learning | 3 |
 | **Communication** | | | | |
