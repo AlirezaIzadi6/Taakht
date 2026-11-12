@@ -416,5 +416,11 @@ Source: review of the draft ADRs; recorded in ADR 0005.
 - **Envoy is the single public entry point** and transcodes REST/JSON to gRPC with `grpc_json_transcoder`, driven by a descriptor built from the shared protos. Only annotated RPCs are public. grpc-gateway, in-service transcoding, APISIX, Kong and Connect were compared from documentation and one spike; grpc-gateway was the close alternative.
 - **Not decided here:** where JWTs are validated (separate ADR), and the edge API style (REST only, no GraphQL; open item 17, reasoning not written yet). Rate limit values are configuration, not an ADR.
 
+## JWT validation at the edge, 2026-11-12 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0006.
+
+- **JWTs are verified in Envoy** (`jwt_authn`: signature, expiry, issuer, audience). Envoy forwards only the user id as `x-user-id`; services read it through their own gRPC interceptor and pass it on unchanged. No revocation, so tokens must be short-lived; the lifetime, identity provider and key rotation are still open.
+- **Known risk:** a service reachable without Envoy would accept a forged identity. For now the internal network is isolated; service-to-service authentication is decided separately.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
