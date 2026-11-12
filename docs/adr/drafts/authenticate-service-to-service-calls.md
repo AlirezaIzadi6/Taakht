@@ -31,7 +31,7 @@ In phase 1 we will not enforce service identity between services. The internal n
 - Positive: no early plumbing; a clear upgrade path; the risk is explicit.
 - Negative / trade-offs we accept: phase 1 offers no defence if the internal network is breached; the demo must not be exposed beyond the gateway.
 - Follow-ups:
-  - Create the shared channel and interceptor library for Go and .NET (convention doc).
+  - Define the channel and interceptor setup for Go and .NET in a convention doc; each service keeps its own copy (ADR 0003).
   - Add the risk to the README "Known limitations".
   - Decide the certificate mechanism with the deployment topology; then write the mTLS ADR (this one would be superseded).
   - Decide Kafka client authentication separately.
