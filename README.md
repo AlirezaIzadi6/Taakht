@@ -36,7 +36,7 @@ Services are classified by how deep the implementation goes:
 | **Ad** | Owns Ads: creation, versioned edits, publish/hide, atomic locking via Saga, consumption by a Swap (Go 1.27) | Core | Full |
 | **Matching** | Neighbourhood/category/reputation-aware candidate discovery (Criteria against the Ad index); two-sided sync and async matching (Go 1.27) | Core | Full |
 | **Deal** | Modular monolith (.NET 10) combining **Negotiation** (multi-candidate negotiations, 3-pillar proposal snapshots, approvals, state machine) and **Swap** (exclusive lock coordination, locker fee payment relay, blind handoff, immutable audit vault) | Core | Full |
-| **Communication** | Downstream event listener and notification translator (calling external notification provider); trade chat for demo (minimal) (.NET 10) | Supporting | Minimal |
+| **Communication** | Downstream event listener and notification translator (calling external notification provider); trade chat for demo (minimal) (Go 1.27) | Supporting | Minimal |
 | **Reputation** | Event-sourced internal trust score (recomputable when the formula changes), review question after a swap, abuse-report review queue, blocking, penalties; Matching keeps a local copy of the score (.NET 10) | Supporting | Minimal |
 | **Provider adapters** | Everything outside the swap domain (see below) | Generic | Mock |
 
@@ -73,7 +73,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 
 ## Tech stack
 
-- **Languages:** Go 1.27 (high-load services: Ad, Matching), C# / .NET 10 (Deal modular monolith, Reputation, Communication)
+- **Languages:** Go 1.27 (Ad, Matching, Communication), C# / .NET 10 (Deal modular monolith, Reputation)
 - **Async communication:** Apache Kafka (domain events published through a transactional outbox)
 - **Sync communication:** gRPC between services, REST/JSON at the edge behind an API Gateway (Envoy: load balancing, rate limiting, JWT validation); no GraphQL
 - **Storage:** PostgreSQL as the durable store, Elasticsearch for search and match scoring, Redis for caching, sorting and neighbourhood distances (its exact role is being redefined), dedicated Event Store for Reputation
@@ -117,7 +117,8 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 ```text
 Taakht/
 ├── docs/            design documents (see Documentation below)
-├── src/        one solution (.NET) or module (Go) per service
+├── api/             Protobuf contracts for the services and events (planned)
+├── src/             one solution (.NET) or module (Go) per service
 ├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── spikes/          throwaway experiments behind the evidence docs
 ├── Makefile         setup, fmt, lint, test
