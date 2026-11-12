@@ -36,6 +36,6 @@ Go to .NET works with plain Protobuf. An incompatible type change (v3) raised no
 
 ## References
 
-- [Define the API contract in Protobuf](define-api-contract-in-protobuf.md)
+- [Define the API contract in Protobuf](../0004-define-api-contract-in-protobuf.md)
 - Protobuf guidance on safe changes and long-term storage (protobuf.dev best practices)
 - Confluent Protobuf serializer documentation; Confluent Community License FAQ

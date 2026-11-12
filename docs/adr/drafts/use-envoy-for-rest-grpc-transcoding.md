@@ -38,7 +38,7 @@ Transcoding, error mapping, JWT and rate limiting worked in a spike; one setting
 
 ## References
 
-- [Define the API contract in Protobuf](define-api-contract-in-protobuf.md)
+- [Define the API contract in Protobuf](../0004-define-api-contract-in-protobuf.md)
 - Envoy gRPC-JSON transcoder: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter
 - ASP.NET Core gRPC JSON transcoding: https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding
 - grpc-gateway: https://github.com/grpc-ecosystem/grpc-gateway
