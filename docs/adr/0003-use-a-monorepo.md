@@ -27,7 +27,7 @@ Options 2 to 4 were argued, not tried.
 - Positive: atomic cross-service changes; one CI definition; simple onboarding.
 - Negative: service independence depends on rules we must keep, and nothing enforces them; no per-service access control; infrastructure code is duplicated between services.
 - Rules: services depend on each other only through contracts in `api/`, never by importing another service's code; each service has its own solution or module and test project; CI keeps path filters and `ci-ok` as the single required check.
-- Known gaps: no service exists yet, so solution and module discovery and the per-service jobs have never run (path filters, `ci-ok` and the skip logic have run on documentation-only pull requests). The "contracts only" rule is not enforced by any tool and relies on review. Where the generated contract code is stored is not decided.
+- Known gaps: no service exists yet, so solution and module discovery and the per-service jobs have never run (path filters, `ci-ok` and the skip logic have run on documentation-only pull requests). The "contracts only" rule is not enforced by any tool and relies on review. Generated contract code is not committed (see the [API conventions](../guidelines/api-conventions.md)).
 - Revisit when more than one team owns the code, services need very different access control, CI time for a typical change becomes unacceptable, or the duplicated infrastructure code starts to hurt.
 
 ## References

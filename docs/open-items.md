@@ -28,7 +28,7 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | **Communication** | | | | |
 | 5 | Sync versus async rule (gRPC for requests, events for state changes) | Stack named | README | 3 |
 | 6 | Kafka | Stack named | README; project memory | 5 |
-| 7 | API contract in Protobuf | Draft | `define-api-contract-in-protobuf`; spike-verified (Go and .NET); the OpenAPI-first alternative was argued, not tried | 1, 5 |
+| 7 | API contract in Protobuf | Decided | ADR 0004 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
 | 8 | Kafka event format (Protobuf, no registry for now) | Draft | `describe-kafka-events-in-protobuf`; spike-verified; registry options compared from documentation only | 6, 7 |
 | 9 | Transactional outbox | Stack named | README | 6, 12 |
 | 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Draft | `use-saga-and-compensating-transactions-for-locking`; eventual consistency with Saga and compensating transactions; driving forces explicitly weighted | 5, 6, 9 |
