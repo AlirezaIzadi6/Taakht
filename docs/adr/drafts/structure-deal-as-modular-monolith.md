@@ -43,4 +43,4 @@ Key architectural rules:
 - [Architecture Decisions Log](../../architecture/architecture-decisions-log.md)
 - [Context Map](../../domain/context-map.md)
 - [Build the system as microservices](../0001-build-the-system-as-microservices.md)
-- [Split services between Go and .NET](split-services-between-go-and-dotnet.md)
+- [Split services between Go and .NET](../0002-split-services-between-go-and-dotnet.md)
