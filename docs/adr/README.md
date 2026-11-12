@@ -41,3 +41,4 @@ ADRs are written in English.
 | [0002](0002-split-services-between-go-and-dotnet.md) | Split services between Go and .NET by workload | Accepted | cross-cutting |
 | [0003](0003-use-a-monorepo.md) | Use a single monorepo for all services | Accepted | cross-cutting |
 | [0004](0004-define-api-contract-in-protobuf.md) | Define the API contract in Protobuf | Accepted | cross-cutting |
+| [0005](0005-use-envoy-for-rest-grpc-transcoding.md) | Use Envoy as the edge gateway for REST to gRPC transcoding | Accepted | cross-cutting |

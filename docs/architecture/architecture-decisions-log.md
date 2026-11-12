@@ -410,5 +410,11 @@ Source: review of the draft ADRs; recorded in ADR 0004.
 - **Generated code is not committed.** It is produced at build time (`buf generate` for Go through a `make generate` target, `Grpc.Tools` for .NET). This is a convention, not an ADR: it is cheap to reverse and lives in the API conventions guideline.
 - **No shared interceptor library.** Following ADR 0003, each service keeps its own gRPC interceptor setup.
 
+## Envoy as the edge gateway, 2026-11-12 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0005.
+
+- **Envoy is the single public entry point** and transcodes REST/JSON to gRPC with `grpc_json_transcoder`, driven by a descriptor built from the shared protos. Only annotated RPCs are public. grpc-gateway, in-service transcoding, APISIX, Kong and Connect were compared from documentation and one spike; grpc-gateway was the close alternative.
+- **Not decided here:** where JWTs are validated (separate ADR), and the edge API style (REST only, no GraphQL; open item 17, reasoning not written yet). Rate limit values are configuration, not an ADR.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

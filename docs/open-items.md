@@ -41,8 +41,8 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
 | 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; the ADR is not written. Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
 | **Edge and security** | | | | |
-| 17 | Edge API style | Stack named | Decided 2026-10-06: REST only, no GraphQL (revisit if different clients appear). Reasoning and rejected options still to be written, probably inside the Envoy draft | 7 |
-| 18 | Envoy as edge gateway and REST to gRPC transcoding (rate limiting as a section) | Draft | `use-envoy-for-rest-grpc-transcoding`; spike-verified; grpc-gateway compared in a spike | 7, 17 |
+| 17 | Edge API style | Stack named | Decided 2026-10-06: REST only, no GraphQL (revisit if different clients appear). Reasoning and rejected options are still to be written (not covered by ADR 0005; a short ADR of its own, or a decision-log note) | 7 |
+| 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
 | 19 | JWT validation at the edge | Draft | `validate-jwt-at-the-edge`; spike-verified | 18 |
 | 20 | Service-to-service authentication | Draft | `authenticate-service-to-service-calls`; reasoning only, no spike; may merge with 19. Decided 2026-10-06: no service-to-service authentication in phase 1; production later | 19 |
 | 21 | Real-time channel (chat, notifications) | Open | Communication service combines WebSocket chat and system notifications; chat is minimal/mocked in demo and independent of negotiation | 5 |
