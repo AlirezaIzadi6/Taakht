@@ -34,6 +34,6 @@ We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt
 
 ## References
 
-- [Use Envoy for REST to gRPC transcoding](use-envoy-for-rest-grpc-transcoding.md)
+- [Use Envoy for REST to gRPC transcoding](../0005-use-envoy-for-rest-grpc-transcoding.md)
 - Envoy `jwt_authn` filter documentation
 - README, Technology section
