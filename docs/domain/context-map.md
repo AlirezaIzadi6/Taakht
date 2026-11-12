@@ -16,7 +16,7 @@ flowchart TD
 
     subgraph Supporting ["Supporting contexts"]
         Reputation["Reputation Context\n(Event Sourced - .NET)\n[Downstream to Deal, Upstream to Matching]"]
-        Communication["Communication Context\n(.NET / WebSocket)\n[Downstream Listener]"]
+        Communication["Communication Context\n(Go / WebSocket)\n[Downstream Listener]"]
     end
 
     subgraph External ["External services and infrastructure (Generic / External)"]

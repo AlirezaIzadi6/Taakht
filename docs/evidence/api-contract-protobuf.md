@@ -29,5 +29,6 @@ The C# generated for an annotated proto references `Google.Api`, so the build fa
 
 ## Not verified
 
-- The build with .NET 10: the `dotnet/sdk:10.0` image (10.0.401) had an empty `dotnet.runtimeconfig.json` when pulled on 2026-10-06 and could not run. The development machine also had only .NET SDK 8 and 9 while `global.json` asks for 10.0.400.
+- .NET 10: the spike targets .NET 9. The same service builds and starts on .NET 10 (checked 2026-11-12); the REST calls through Envoy were not re-run on it.
+
 - The alternatives (OpenAPI-first, code-first per language) were reasoned about, not tried.

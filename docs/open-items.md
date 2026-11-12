@@ -21,10 +21,10 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | # | Topic | Status | Draft or note | Depends on |
 |---|---|---|---|---|
 | **Foundation** | | | | |
-| 1 | Monorepo | Stack named | README, Makefile and CI already assume it | - |
-| 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | 1 |
-| 3 | Service decomposition | Draft | `structure-deal-as-modular-monolith`; working boundaries: Ad and Matching (Go), Deal (combining negotiation and swap as a modular monolith in .NET) and Reputation (.NET); Communication and Delivery minimal or mocked; context map in [docs/domain/context-map.md](domain/context-map.md). The ADR covers Deal only; why Ad is apart from Matching, and why Reputation and Communication are separate services, is not recorded in an ADR yet | 2 |
-| 4 | Languages: Go and .NET, and the rule that splits services between them | Draft | `split-services-between-go-and-dotnet`; no benchmark, rests on workload fit and learning | 3 |
+| 1 | Monorepo | Decided | ADR 0003 (Accepted); README, Makefile and CI already assume it; shared infrastructure code between services is not shared for now | 2, 4 |
+| 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | - |
+| 3 | Service decomposition | Draft | `structure-deal-as-modular-monolith`; working boundaries: Ad and Matching (Go), Deal (combining negotiation and swap as a modular monolith in .NET) and Reputation (.NET); Communication (Go, minimal) and a mocked `DeliveryProvider`; context map in [docs/domain/context-map.md](domain/context-map.md). The ADR covers Deal only; why Ad is apart from Matching, and why Reputation and Communication are separate services, is not recorded in an ADR yet | 2 |
+| 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0002 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
 | **Communication** | | | | |
 | 5 | Sync versus async rule (gRPC for requests, events for state changes) | Stack named | README | 3 |
 | 6 | Kafka | Stack named | README; project memory | 5 |

@@ -397,5 +397,11 @@ Source: working sessions with Alireza, reviewing the step-2 output. Details are 
 - **Admin.** No admin panel: each service has admin endpoints that work with the `role=admin` JWT claim.
 - **Suspension.** `Suspended` is a separate Ad state (not `Hidden`); Matching removes the Ad, negotiations that have not reached `AgreementReached` are cancelled, a negotiation waiting for the lock and any Swap are untouched, the owner can edit and object but not publish. User suspension is admin-only, suspends all the user's Ads and refuses new requests; the user keeps open chats, search and a chat with an admin, and login is not blocked in the demo.
 
+## Languages per service and the monorepo, 2026-11-12 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0002 and ADR 0003.
+
+- **Language split.** Go for Ad, Matching and Communication; .NET for Deal and Reputation. The rule is a rule of thumb (Go where the main work is concurrency and throughput, .NET where it is rich domain state), not a measured result; the learning goal and balancing the work between the two people also count. This replaces the open assignment of the two supporting services.
+- **Monorepo.** All services, the contracts (`api/`), the gateway config and the docs stay in one repository; services share contracts only. Infrastructure code that several services need (outbox, gRPC interceptors) is not shared for now: each service keeps its own copy until the duplication hurts.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
