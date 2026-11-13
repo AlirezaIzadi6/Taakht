@@ -31,7 +31,7 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 7 | API contract in Protobuf | Decided | ADR 0004 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
 | 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0009 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
 | 9 | Transactional outbox | Stack named | README | 6, 12 |
-| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Draft | `use-saga-and-compensating-transactions-for-locking`; eventual consistency with Saga and compensating transactions; driving forces explicitly weighted | 5, 6, 9 |
+| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Partly decided | ADR 0011 (Accepted) covers the exclusive lock Saga, chosen for the demonstration driver, not for correctness; outage behaviour not tested; idempotent consumers and delivery semantics still open | 5, 6, 9 |
 | **Data** | | | | |
 | 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
 | 12 | PostgreSQL | Stack named | README; whether any NoSQL store is needed is still open; storage for Communication is not chosen (Deal uses PostgreSQL) | 11 |

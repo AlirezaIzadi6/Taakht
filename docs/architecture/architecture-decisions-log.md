@@ -440,5 +440,12 @@ Source: review of the draft ADRs; recorded in ADR 0010.
 - **Deal stays one .NET service with two modules (`Negotiation` and `Swap`)**, as decided on 2026-11-04. The ADR drops two claims that were never measured (network latency saved, extraction "with minimal refactoring") and keeps the reasoning that matters: the post-agreement logic is small, and two services would add a boundary and a distributed transaction between the end of a negotiation and the creation of its swap.
 - **Not covered:** how the Ad lock is acquired (separate decision), and the transactional outbox, which Deal's design uses but which still has no ADR of its own (open item 9).
 
+## Saga for the exclusive Ad lock, 2026-11-13 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0011.
+
+- **The Saga stays as decided on 2026-11-04**, now stated plainly: correctness is the same in every option (the atomic claim inside Ad decides the winner), so the Saga is chosen for the demonstration driver, with a synchronous claim as the rejected alternative. The unmeasured performance claims and the "senior-level mastery" wording were dropped.
+- **The outage rule is part of the decision:** a timeout is never a rejection; `ClaimLock` is retried until an explicit reply. It is designed but not tested.
+- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend this design and may need a new ADR.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

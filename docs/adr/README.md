@@ -47,3 +47,4 @@ ADRs are written in English.
 | [0008](0008-use-kafka-for-events-between-services.md) | Use Apache Kafka for events between services | Accepted | cross-cutting |
 | [0009](0009-describe-kafka-events-in-protobuf.md) | Describe Kafka events in Protobuf, without a schema registry for now | Accepted | cross-cutting |
 | [0010](0010-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal |
+| [0011](0011-use-saga-and-compensating-transactions-for-locking.md) | Use a Saga with compensating transactions for exclusive Ad locking | Accepted | Ad, Deal |
