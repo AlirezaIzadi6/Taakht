@@ -38,5 +38,5 @@ In phase 1 we will not enforce service identity between services. The internal n
 
 ## References
 
-- [Validate JWTs at the Envoy edge](validate-jwt-at-the-edge.md)
+- [Validate JWTs at the Envoy edge](../0006-validate-jwts-at-the-edge.md)
 - gRPC authentication guide; ASP.NET Core gRPC authentication and authorization; SPIFFE overview
