@@ -22,7 +22,8 @@ We will use Apache Kafka as the broker for domain events between services, with 
 1. **Apache Kafka (chosen)** - ordering per key, several independent consumers, replay and compacted topics. Secondary reasons, stated openly: the common ecosystem and the learning goal. Cost: memory overhead on a single node and more to operate.
 2. **RabbitMQ** - strong in routing, acknowledgements, retries and per-message dead-letter queues, and suited to a command queue. Replay and per-key ordering exist only with Streams or Super Streams, which is not its native model.
 3. **NATS JetStream** - lighter, and one tool for sync and async. Rejected because we keep gRPC for the Protobuf contract, and its ecosystem is smaller.
-4. **Redis Streams, Postgres as a queue** - rejected in the same discussion; no reason was recorded.
+4. **Redis Streams** - Redis is in the stack as a cache and for sorting, so the event history would compete for its memory, which limits retention and replay; per-aggregate ordering would have to be built by sharding streams by hand, where Kafka gives it with the partition key. Reasoning, not tried.
+5. **Postgres as a queue** - no new infrastructure and fine for a simple command queue, but several independent consumers per event, an offset per consumer, retention, replay and a compacted feed (needed to rebuild Matching's index) would all be ours to build. Reasoning, not tried.
 
 ## Consequences
 

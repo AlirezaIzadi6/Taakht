@@ -431,7 +431,7 @@ Source: review of the draft ADRs; recorded in ADR 0007.
 ## Kafka as the broker and Protobuf events, 2026-11-13 (with Arman)
 Source: review of the draft ADRs; recorded in ADR 0008 and ADR 0009.
 
-- **ADR 0008 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had none recorded. Outbox, delivery semantics and the partition strategy still need their own decisions.
+- **ADR 0008 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had no recorded reason, so ADR 0008 gives one for each (reasoning, not tried). Outbox, delivery semantics and the partition strategy still need their own decisions.
 - **ADR 0009: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
 
 ---
