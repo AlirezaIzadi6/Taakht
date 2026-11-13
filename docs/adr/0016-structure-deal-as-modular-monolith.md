@@ -1,4 +1,4 @@
-# 0015. Structure Deal as a modular monolith in .NET combining negotiation and swap
+# 0016. Structure Deal as a modular monolith in .NET combining negotiation and swap
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -19,7 +19,7 @@ An earlier proposal split them into two services. The platform never touches mon
 We will build **Deal as a single deployable .NET service ([ADR 0003](0003-split-services-between-go-and-dotnet.md)) structured as a modular monolith** with two isolated internal modules, `Negotiation` and `Swap`.
 
 1. **Logical isolation:** separate namespaces, domain models, aggregate roots and database schemas. Boundaries are enforced by project references and architecture tests.
-2. **In-process communication through domain events and an outbox:** when an agreement is reached, `Negotiation` records it and writes `AgreementReached` to its outbox in the same local transaction. The Swap is created only after the Ad lock is acquired, from an immutable snapshot of the agreement handed in-process to `Swap`. Events for other services go to Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)) through the same outbox. How the Ad lock is acquired is decided in [ADR 0016](0016-take-the-exclusive-ad-lock-in-the-ad-service.md).
+2. **In-process communication through domain events and an outbox:** when an agreement is reached, `Negotiation` records it and writes `AgreementReached` to its outbox in the same local transaction. The Swap is created only after the Ad lock is acquired, from an immutable snapshot of the agreement handed in-process to `Swap`. Events for other services go to Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)) through the same outbox. How the Ad lock is acquired is decided in [ADR 0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md).
 3. **No direct database coupling:** `Swap` never queries `Negotiation`'s models or tables; it receives the snapshot of the agreement and the Ad versions.
 4. **Extraction readiness:** `Swap` is kept separable so it can become its own service if it grows. The effort of extracting it was not estimated.
 
@@ -32,7 +32,7 @@ We will build **Deal as a single deployable .NET service ([ADR 0003](0003-split-
 ## Consequences
 
 - Positive: no network hop or distributed transaction between negotiation and swap; high cohesion inside Deal; fewer services to run for two people.
-- Negative: one process, so a crash or memory leak in the locker payment listener can affect negotiation availability; boundaries rely on discipline and architecture tests (for example NetArchTest); the transactional outbox is part of this design ([ADR 0013](0013-publish-events-through-a-transactional-outbox.md)).
+- Negative: one process, so a crash or memory leak in the locker payment listener can affect negotiation availability; boundaries rely on discipline and architecture tests (for example NetArchTest); the transactional outbox is part of this design ([ADR 0014](0014-publish-events-through-a-transactional-outbox.md)).
 - Revisit when Swap needs independent scaling or deployment, or integrates with logistics networks that need their own security boundary.
 
 ## References

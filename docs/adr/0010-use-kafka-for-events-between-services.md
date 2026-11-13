@@ -29,7 +29,7 @@ We will use Apache Kafka as the broker for domain events between services, with 
 
 - Positive: per-aggregate ordering through the partition key; several consumers per event; replay.
 - Negative: the broker does not order events across different aggregates, so the lock and index consistency are not solved by it and need their own mechanism; memory overhead on one node; Kafka is one more component to run.
-- Follow-ups, each its own decision: the event format is [ADR 0012](0012-describe-kafka-events-in-protobuf.md), the transactional outbox is [ADR 0013](0013-publish-events-through-a-transactional-outbox.md), delivery semantics are [ADR 0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md), and the partition and ordering strategy is still open. Topic names, retry and dead-letter handling and client settings go in a convention document.
+- Follow-ups, each its own decision: the event format is [ADR 0012](0012-describe-kafka-events-in-protobuf.md), the transactional outbox is [ADR 0014](0014-publish-events-through-a-transactional-outbox.md), delivery semantics are [ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md), and the partition and ordering strategy is still open. Topic names, retry and dead-letter handling and client settings go in a convention document.
 
 ## References
 

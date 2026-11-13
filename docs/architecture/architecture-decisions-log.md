@@ -435,7 +435,7 @@ Source: review of the draft ADRs; recorded in ADR 0010 and ADR 0012.
 - **ADR 0012: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
 
 ## Deal as a modular monolith, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0015.
+Source: review of the draft ADRs; recorded in ADR 0016.
 
 - **Deal stays one .NET service with two modules (`Negotiation` and `Swap`)**, as decided on 2026-11-04. The ADR drops two claims that were never measured (network latency saved, extraction "with minimal refactoring") and keeps the reasoning that matters: the post-agreement logic is small, and two services would add a boundary and a distributed transaction between the end of a negotiation and the creation of its swap.
 - **Not covered:** how the Ad lock is acquired (separate decision), and the transactional outbox, which Deal's design uses but which still has no ADR of its own (open item 9).
@@ -443,18 +443,19 @@ Source: review of the draft ADRs; recorded in ADR 0015.
 ## The ADR set reordered and completed, 2026-11-13 (with Arman)
 Source: review of the ADRs after they were accepted one by one.
 
-- **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and five ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (transactional outbox), 0014 (at-least-once delivery, idempotent consumers). The locking draft became two ADRs: 0016 (the lock) and 0017 (the swap Saga).
-- **Drafted from the repo, to confirm:** ADR 0002 (the reasons for each split and each rejected merge come from the log and the context map) and ADR 0013 (a polling relay rather than change data capture; the same outbox table for Deal's two modules and for Kafka).
+- **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and six ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (PostgreSQL), 0014 (transactional outbox), 0015 (at-least-once delivery, processed-events table). The locking draft became 0017 (the lock) and 0018 (the swap Saga).
+- **Drafted from the repo, to confirm:** ADR 0002 (the reasons for each split and each rejected merge come from the log and the context map) and ADR 0014 (a polling relay rather than change data capture; the same outbox table for Deal's two modules and for Kafka).
 - Numbers are permanent from now on; the rule is noted in the ADR README.
-- **The Taakht MVP was folded in (2026-11-13).** The MVP (separate `Taakht-MVP` repository) had implemented and tested the outbox, the processed-events table and the lock flow, so ADR 0013 and ADR 0014 now rest on its results instead of reasoning. ADR 0004 now allows one infrastructure-only platform library per language (the MVP built exactly that), ADR 0009 keeps the narrow `x-internal-token` guard for `system:` identities,.
+- **The Taakht MVP was folded in (2026-11-13).** The MVP (separate `Taakht-MVP` repository) had implemented and tested the outbox, the processed-events table and the lock flow, so ADR 0014 and ADR 0015 now rest on its results instead of reasoning. ADR 0004 now allows one infrastructure-only platform library per language (the MVP built exactly that), ADR 0009 keeps the narrow `x-internal-token` guard for `system:` identities,.
 - **`AdRegistryProvider` became `TaxonomyProvider`:** Taakht has no link to Divar ads, so only Divar's category taxonomy and city/neighbourhood division are read.
+- **PostgreSQL got its own ADR (0013)**, listing the features the design relies on (row locks and `SKIP LOCKED`, `ON CONFLICT DO NOTHING`, `clock_timestamp()`), so the cost of ever switching engines is visible. It is placed before the outbox, which uses them. Elasticsearch and Redis are still to be discussed before an ADR.
 
 ## The Ad lock and the swap Saga, 2026-11-13 (with Arman)
-Source: review of the draft ADRs against the Taakht MVP; recorded in ADR 0016 and ADR 0017.
+Source: review of the draft ADRs against the Taakht MVP; recorded in ADR 0017 and ADR 0018.
 
 - **The lock is a synchronous atomic claim in the Ad service** (`ClaimLock`, called by Deal's Swap module, idempotent by swap id, both Ads in one transaction in ascending id order). This is what the MVP built and tested; the earlier asynchronous `ClaimLock` command over Kafka was dropped. Even with a synchronous call the flow still needs a waiting state, retries and a sweeper, so "synchronous" does not remove the need for failure handling.
 - **The Saga moved to the swap lifecycle:** lock, locker fees within one hour, then completion or cancellation, where cancellation releases the Ads, cancels the locker reservation and penalises the party who did not pay. That is where the compensations are real and cross-service.
-- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend ADR 0016 and may need a new ADR.
+- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend ADR 0017 and may need a new ADR.
 
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

@@ -1,4 +1,4 @@
-# 0017. Run the swap lifecycle as a Saga with compensating transactions
+# 0018. Run the swap lifecycle as a Saga with compensating transactions
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -7,15 +7,15 @@
 
 ## Context
 
-After the Ads are locked ([ADR 0016](0016-take-the-exclusive-ad-lock-in-the-ad-service.md)), a swap goes through steps that touch different services, each with its own database. Each party pays the locker fee for their own leg within one hour. Then the swap is either completed (the Ads are closed for good and the review question opens) or cancelled (the locker reservation is cancelled, the Ads are released and the party who did not pay gets a penalty on their trust score). A failure in the middle has to undo what was already done, and one transaction cannot span Ad, Deal and Reputation.
+After the Ads are locked ([ADR 0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md)), a swap goes through steps that touch different services, each with its own database. Each party pays the locker fee for their own leg within one hour. Then the swap is either completed (the Ads are closed for good and the review question opens) or cancelled (the locker reservation is cancelled, the Ads are released and the party who did not pay gets a penalty on their trust score). A failure in the middle has to undo what was already done, and one transaction cannot span Ad, Deal and Reputation.
 
 ## Decision
 
-We will run the swap lifecycle as a Saga orchestrated by the Swap module in Deal. The module owns the state machine and the deadline timers, and every step is a local transaction that publishes an event through the outbox ([ADR 0013](0013-publish-events-through-a-transactional-outbox.md)). Each step that can be undone has a compensating action:
+We will run the swap lifecycle as a Saga orchestrated by the Swap module in Deal. The module owns the state machine and the deadline timers, and every step is a local transaction that publishes an event through the outbox ([ADR 0014](0014-publish-events-through-a-transactional-outbox.md)). Each step that can be undone has a compensating action:
 
 - **Payment deadline missed (`PaymentTimedOut`):** the swap is cancelled (`SwapCancelled`); Ad releases the lock on both Ads; the locker reservation is cancelled; Reputation applies a penalty to the party who did not pay; the negotiation is cancelled.
 - **Both legs paid (`SwapCompleted`):** Ad closes both Ads for good and the review question opens.
-- **Stuck steps:** a sweeper in the Swap module retries or republishes a step that has not progressed. Every step and every compensation is idempotent ([ADR 0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md)), so a retry is safe.
+- **Stuck steps:** a sweeper in the Swap module retries or republishes a step that has not progressed. Every step and every compensation is idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)), so a retry is safe.
 
 After the lock there is no voluntary withdrawal; the only way out is the deadline.
 

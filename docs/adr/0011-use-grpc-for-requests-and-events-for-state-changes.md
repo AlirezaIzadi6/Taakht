@@ -11,7 +11,7 @@ Services ([ADR 0001](0001-build-the-system-as-microservices.md)) talk to each ot
 
 ## Decision
 
-We will use gRPC for synchronous requests, where the caller needs the answer to continue, and Kafka events for state changes that other services react to. An asynchronous command over Kafka is allowed only where the sender must not wait; there is none today (the Ad lock claim is a synchronous gRPC call, [ADR 0016](0016-take-the-exclusive-ad-lock-in-the-ad-service.md)). This ADR gives the rule, not the list of calls: which calls are synchronous is decided per feature.
+We will use gRPC for synchronous requests, where the caller needs the answer to continue, and Kafka events for state changes that other services react to. An asynchronous command over Kafka is allowed only where the sender must not wait; there is none today (the Ad lock claim is a synchronous gRPC call, [ADR 0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md)). This ADR gives the rule, not the list of calls: which calls are synchronous is decided per feature.
 
 ## Options considered
 
@@ -23,7 +23,7 @@ We will use gRPC for synchronous requests, where the caller needs the answer to 
 
 - Positive: services stay decoupled in time for state changes; new consumers of an event need no change in the producer.
 - Negative: data copied between services (for example Matching's copy of trust scores) is only eventually consistent ([open-items.md](../open-items.md), item 11); a team member has to decide for each call whether the caller really needs the answer.
-- Follow-up: delivery guarantees for events are in [ADR 0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md).
+- Follow-up: delivery guarantees for events are in [ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md).
 
 ## References
 

@@ -167,7 +167,7 @@ In the MVP/demo phase it works as a **Mock** and issues JWT tokens carrying the 
 
 ## 7. Resolved decisions and hotspots
 
-1. **Concurrent lock race:** solved by an atomic, synchronous claim in the Ad service ([ADR 0016](../adr/0016-take-the-exclusive-ad-lock-in-the-ad-service.md)).
+1. **Concurrent lock race:** solved by an atomic, synchronous claim in the Ad service ([ADR 0017](../adr/0017-take-the-exclusive-ad-lock-in-the-ad-service.md)).
 2. **Negotiation/Swap boundary:** combined in one unified service called **Deal**, built as a **Modular Monolith**, to avoid unnecessary network complexity and distributed transactions.
 3. **Proposal model:** the three-component snapshot model replaced double approval; the item and the logistics terms are one inseparable package.
 4. **Chat:** independent of negotiation, with no effect on counters or the expiry timer.

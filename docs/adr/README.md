@@ -49,8 +49,9 @@ ADRs are written in English.
 | [0010](0010-use-kafka-for-events-between-services.md) | Use Apache Kafka for events between services | Accepted | cross-cutting |
 | [0011](0011-use-grpc-for-requests-and-events-for-state-changes.md) | Use gRPC for requests and events for state changes between services | Accepted | cross-cutting |
 | [0012](0012-describe-kafka-events-in-protobuf.md) | Describe Kafka events in Protobuf, without a schema registry for now | Accepted | cross-cutting |
-| [0013](0013-publish-events-through-a-transactional-outbox.md) | Publish events through a transactional outbox with a polling relay | Accepted | cross-cutting |
-| [0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md) | Deliver events at least once and make consumers idempotent with a processed-events table | Accepted | cross-cutting |
-| [0015](0015-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal (Negotiation and Swap) |
-| [0016](0016-take-the-exclusive-ad-lock-in-the-ad-service.md) | Take the exclusive Ad lock in the Ad service with a synchronous atomic claim | Accepted | Ad, Deal (Negotiation and Swap) |
-| [0017](0017-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Accepted | Deal (Swap), Ad, Reputation |
+| [0013](0013-use-postgresql-as-the-service-database.md) | Use PostgreSQL as the database of the services | Accepted | cross-cutting |
+| [0014](0014-publish-events-through-a-transactional-outbox.md) | Publish events through a transactional outbox with a polling relay | Accepted | cross-cutting |
+| [0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md) | Deliver events at least once and make consumers idempotent with a processed-events table | Accepted | cross-cutting |
+| [0016](0016-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal (Negotiation and Swap) |
+| [0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md) | Take the exclusive Ad lock in the Ad service with a synchronous atomic claim | Accepted | Ad, Deal (Negotiation and Swap) |
+| [0018](0018-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Accepted | Deal (Swap), Ad, Reputation |

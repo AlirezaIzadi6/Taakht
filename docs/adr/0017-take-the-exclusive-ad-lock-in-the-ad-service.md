@@ -1,4 +1,4 @@
-# 0016. Take the exclusive Ad lock in the Ad service with a synchronous atomic claim
+# 0017. Take the exclusive Ad lock in the Ad service with a synchronous atomic claim
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -7,7 +7,7 @@
 
 ## Context
 
-When two parties agree to swap, both Ads must become unavailable to every other negotiation, and of several competing agreements on the same Ad exactly one may win. An Ad can also be edited between the approval and the lock, so the agreed version has to be checked at the moment of locking. Ad (Go) and Deal (.NET) are different services with separate databases ([ADR 0003](0003-split-services-between-go-and-dotnet.md), [ADR 0015](0015-structure-deal-as-modular-monolith.md)), so one transaction cannot cover both.
+When two parties agree to swap, both Ads must become unavailable to every other negotiation, and of several competing agreements on the same Ad exactly one may win. An Ad can also be edited between the approval and the lock, so the agreed version has to be checked at the moment of locking. Ad (Go) and Deal (.NET) are different services with separate databases ([ADR 0003](0003-split-services-between-go-and-dotnet.md), [ADR 0016](0016-structure-deal-as-modular-monolith.md)), so one transaction cannot cover both.
 
 The Taakht MVP (separate `Taakht-MVP` repository) implemented and tested this decision, so most of the evidence below is from running code.
 

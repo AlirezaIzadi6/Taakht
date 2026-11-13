@@ -1,4 +1,4 @@
-# 0014. Deliver events at least once and make consumers idempotent with a processed-events table
+# 0015. Deliver events at least once and make consumers idempotent with a processed-events table
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -7,7 +7,7 @@
 
 ## Context
 
-Events travel through Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)) and are published through a transactional outbox ([ADR 0013](0013-publish-events-through-a-transactional-outbox.md)). A producer can retry, and a consumer can see a redelivery after a rebalance or a failed offset commit, so the same event can arrive more than once. A lost event is worse: an Ad that never reaches Matching's index would stay invisible with nothing to show it. Handlers change state (close Ads, cancel negotiations, create swaps), so applying an event twice must be harmless, and events from different topics can arrive in any order relative to each other.
+Events travel through Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)) and are published through a transactional outbox ([ADR 0014](0014-publish-events-through-a-transactional-outbox.md)). A producer can retry, and a consumer can see a redelivery after a rebalance or a failed offset commit, so the same event can arrive more than once. A lost event is worse: an Ad that never reaches Matching's index would stay invisible with nothing to show it. Handlers change state (close Ads, cancel negotiations, create swaps), so applying an event twice must be harmless, and events from different topics can arrive in any order relative to each other.
 
 The Taakht MVP (separate `Taakht-MVP` repository) built and tested this in Go and .NET.
 

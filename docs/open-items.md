@@ -23,18 +23,18 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | **Foundation** | | | | |
 | 1 | Monorepo | Decided | ADR 0004 (Accepted); README, Makefile and CI already assume it; one platform library per language for infrastructure code, no shared domain code | 2, 4 |
 | 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | - |
-| 3 | Service decomposition | Decided | ADR 0002 (Accepted); five services, the merges that were rejected are listed there; Deal is structured in ADR 0015; context map in [docs/domain/context-map.md](domain/context-map.md) | 2 |
+| 3 | Service decomposition | Decided | ADR 0002 (Accepted); five services, the merges that were rejected are listed there; Deal is structured in ADR 0016; context map in [docs/domain/context-map.md](domain/context-map.md) | 2 |
 | 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0003 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
 | **Communication** | | | | |
 | 5 | Sync versus async rule (gRPC for requests, events for state changes) | Decided | ADR 0011 (Accepted); reasoning, nothing tried; the list of synchronous calls is decided per feature | 3 |
 | 6 | Kafka | Decided | ADR 0010 (Accepted); reasoning from the decisions log, nothing benchmarked | 5 |
 | 7 | API contract in Protobuf | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
 | 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0012 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
-| 9 | Transactional outbox | Decided | ADR 0013 (Accepted); polling relay, change data capture left as a later option; argued from documentation, not tried | 6, 12 |
-| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0014 (delivery at least once, idempotent consumers), ADR 0016 (synchronous atomic lock in Ad, tested in the MVP) and ADR 0017 (swap lifecycle Saga); the penalty to Reputation and the locker reservation cancel were not built in the MVP | 5, 6, 9 |
+| 9 | Transactional outbox | Decided | ADR 0014 (Accepted); polling relay, change data capture left as a later option; argued from documentation, not tried | 6, 12 |
+| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0015 (delivery at least once, idempotent consumers), ADR 0017 (synchronous atomic lock in Ad, tested in the MVP) and ADR 0018 (swap lifecycle Saga); the penalty to Reputation and the locker reservation cancel were not built in the MVP | 5, 6, 9 |
 | **Data** | | | | |
 | 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
-| 12 | PostgreSQL | Stack named | README; whether any NoSQL store is needed is still open; storage for Communication is not chosen (Deal uses PostgreSQL) | 11 |
+| 12 | PostgreSQL | Decided | ADR 0013 (Accepted); the features the design relies on are listed there; whether any NoSQL store is needed, the Reputation event store and the storage of Communication are still open | 11 |
 | 13 | Event sourcing in Reputation (including upcasting) | Stack named | README; project memory; Reputation's scope grew (blocking, abuse-report queue, penalties), so check that event sourcing still fits the admin queue and blocking | 8, 12 |
 | 14 | Search (Elasticsearch for search and match scoring) | Stack named | README; to be discussed before an ADR (the MVP used a SQL read model) | 3 |
 | 15 | Neighbourhood distance and the role of Redis | Stack named | README says Redis for geo; search is now neighbourhood-based (precomputed distances between neighbourhoods, no exact coordinates), so the Elasticsearch/Redis split must be redefined; to be discussed before an ADR | 14 |
@@ -79,10 +79,10 @@ Open questions that are not ADRs. Carried over from the Persian working list in 
 - For a real Divar team: is Divar's existing chat enough, or is a deal-specific chat needed (moderation, evidence in disputes)?
 - Research on informal swap competitors (Telegram/Instagram groups, Vinted-like apps), so that "why Divar wins" rests on evidence.
 
-**Negotiation and lock** (to think about later; affects ADR 0016)
+**Negotiation and lock** (to think about later; affects ADR 0017)
 - Idea from Arman: when a negotiation on an Ad reaches `AgreementReached`, mark the Ad as being in an agreement, so no new negotiation opens on it and two agreements on the same Ad cannot happen at once. One possible shape: a hold per Ad in Deal's own database (unique `ad_id`), inserted atomically with `AgreementReached` and released when the lock result arrives (rejected), or replaced by the Ad's `Locked` state.
 - To decide: whether the hold blocks only new requests, or also a second agreement on the same Ad (the second approval is refused and not recorded); the release rules; whether a negotiation waiting for the lock is frozen (no edit, approve, retract or withdraw, with its expiry timer paused); and what "available" means for `ClaimLock` (Published or Hidden, because an Ad hidden by the negotiation cap must still be able to conclude; not Locked, Closed or Suspended), with a new rejection reason `NotAvailable` that cancels the negotiation.
-- Effect: the `AlreadyLocked` path of the Saga would almost disappear and the Ad claim would remain the final authority, so ADR 0016 would be extended or followed by a new ADR.
+- Effect: the `AlreadyLocked` path of the Saga would almost disappear and the Ad claim would remain the final authority, so ADR 0017 would be extended or followed by a new ADR.
 
 **Parked ideas** (pricing sub-domain, hotspots, multi-item Ads, filming, trust badge) live in [product/parked-ideas.md](product/parked-ideas.md).
 

@@ -1,4 +1,4 @@
-# 0013. Publish events through a transactional outbox with a polling relay
+# 0014. Publish events through a transactional outbox with a polling relay
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -26,7 +26,7 @@ Each service will write its events to an `outbox` table in the same database tra
 ## Consequences
 
 - Positive: a committed change always has its event recorded; a Kafka outage delays events but does not break writes; the rows are an inspectable record of what was published.
-- Negative: delivery is at least once, so consumers must be idempotent ([ADR 0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md)); each hop adds up to a poll interval; published rows must be pruned (the MVP keeps them 24 hours); with several relay instances `SKIP LOCKED` lets them publish different batches at once, so global order is not guaranteed (order per Kafka key from one relay is).
+- Negative: delivery is at least once, so consumers must be idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)); each hop adds up to a poll interval; published rows must be pruned (the MVP keeps them 24 hours); with several relay instances `SKIP LOCKED` lets them publish different batches at once, so global order is not guaranteed (order per Kafka key from one relay is).
 - Not covered by the MVP tests: a crash between the broker acknowledgement and the `published_at` update (the batch would be published again), and alerting on a growing backlog.
 
 ## Evidence (Taakht MVP, one laptop)
