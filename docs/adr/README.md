@@ -44,3 +44,5 @@ ADRs are written in English.
 | [0005](0005-use-envoy-for-rest-grpc-transcoding.md) | Use Envoy as the edge gateway for REST to gRPC transcoding | Accepted | cross-cutting |
 | [0006](0006-validate-jwts-at-the-edge.md) | Validate JWTs at the Envoy edge | Accepted | cross-cutting |
 | [0007](0007-authenticate-service-to-service-calls.md) | Authenticate service-to-service calls: isolated network now, mTLS in production | Accepted | cross-cutting |
+| [0008](0008-use-kafka-for-events-between-services.md) | Use Apache Kafka for events between services | Accepted | cross-cutting |
+| [0009](0009-describe-kafka-events-in-protobuf.md) | Describe Kafka events in Protobuf, without a schema registry for now | Accepted | cross-cutting |
