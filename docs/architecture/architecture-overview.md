@@ -20,7 +20,7 @@ Decision: no side service is merely "assumed or consumed from Divar". Each sits 
 | Interface | Responsibility | Phase 1 (this project) | Later phase (optional, if time allows) |
 |---|---|---|---|
 | `AuthProvider` | Login / session / JWT | Issues a fake JWT for a seeded user with a `UserId`, with no real password check | Real validation |
-| `AdRegistryProvider` | Create/read Ads and users | Seeded fake data plus minimal CRUD | Real integration with Divar's Ads |
+| `TaxonomyProvider` | Reads Divar's category taxonomy and city/neighbourhood division | A small fixed dataset | Real integration with Divar's taxonomy |
 | `KYCProvider` | Higher-level identity verification for locker handover | Always returns true/passed (some seeded users are rejected to exercise errors) | Integration with a real KYC service |
 | `DeliveryProvider` | Integration with the **locker** (the only handover method with an external partner), user eligibility check, receiving payment and status webhooks, payment status inquiry, `CancelReservation` | Mock with fixed/simulated statuses (behind an ACL) | Integration with a real locker partner |
 | `ReportProvider` | Abuse reports (any user can be reported, even without a shared deal or negotiation: fake Ad, harassment, fraud intent) | Records a simple entry; the review workflow is the admin queue described in the Reputation service | Integration with Divar's real abuse-report system |
@@ -28,7 +28,7 @@ Decision: no side service is merely "assumed or consumed from Divar". Each sits 
 
 **Removed:** `WalletProvider` and `PSP/EscrowGateway` do not exist. The platform does not lock, hold or move any money; wallet, gateway and escrow licensing are outside the project scope.
 
-The full category taxonomy and the geographic division (city/neighbourhood) are mocked in phase 1 as a fixed/simplified dataset inside the `AdRegistryProvider` mock.
+The full category taxonomy and the geographic division (city/neighbourhood) are mocked in phase 1 as a fixed/simplified dataset inside the `TaxonomyProvider` mock.
 
 ## 3. Service map (current state)
 

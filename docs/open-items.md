@@ -21,7 +21,7 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | # | Topic | Status | Draft or note | Depends on |
 |---|---|---|---|---|
 | **Foundation** | | | | |
-| 1 | Monorepo | Decided | ADR 0004 (Accepted); README, Makefile and CI already assume it; shared infrastructure code between services is not shared for now | 2, 4 |
+| 1 | Monorepo | Decided | ADR 0004 (Accepted); README, Makefile and CI already assume it; one platform library per language for infrastructure code, no shared domain code | 2, 4 |
 | 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | - |
 | 3 | Service decomposition | Decided | ADR 0002 (Accepted); five services, the merges that were rejected are listed there; Deal is structured in ADR 0015; context map in [docs/domain/context-map.md](domain/context-map.md) | 2 |
 | 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0003 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
@@ -36,8 +36,8 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
 | 12 | PostgreSQL | Stack named | README; whether any NoSQL store is needed is still open; storage for Communication is not chosen (Deal uses PostgreSQL) | 11 |
 | 13 | Event sourcing in Reputation (including upcasting) | Stack named | README; project memory; Reputation's scope grew (blocking, abuse-report queue, penalties), so check that event sourcing still fits the admin queue and blocking | 8, 12 |
-| 14 | Search (Elasticsearch for search and match scoring) | Stack named | README | 3 |
-| 15 | Neighbourhood distance and the role of Redis | Stack named | README says Redis for geo; search is now neighbourhood-based (precomputed distances between neighbourhoods, no exact coordinates), so the Elasticsearch/Redis split must be redefined | 14 |
+| 14 | Search (Elasticsearch for search and match scoring) | Decided | ADR 0017 (Accepted); no search engine was tried (the MVP used a SQL read model) | 3 |
+| 15 | Neighbourhood distance and the role of Redis | Decided | ADR 0017 (Accepted); the precomputed neighbourhood matrix lives in Redis; the role of Redis is the least settled part and is revisited when Matching is built | 14 |
 | 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
 | 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; the ADR is not written. Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
 | **Edge and security** | | | | |

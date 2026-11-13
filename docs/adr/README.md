@@ -50,6 +50,7 @@ ADRs are written in English.
 | [0011](0011-use-grpc-for-requests-and-events-for-state-changes.md) | Use gRPC for requests and events for state changes between services | Accepted | cross-cutting |
 | [0012](0012-describe-kafka-events-in-protobuf.md) | Describe Kafka events in Protobuf, without a schema registry for now | Accepted | cross-cutting |
 | [0013](0013-publish-events-through-a-transactional-outbox.md) | Publish events through a transactional outbox with a polling relay | Accepted | cross-cutting |
-| [0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md) | Deliver events at least once and make consumers idempotent | Accepted | cross-cutting |
+| [0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md) | Deliver events at least once and make consumers idempotent with a processed-events table | Accepted | cross-cutting |
 | [0015](0015-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal (Negotiation and Swap) |
 | [0016](0016-use-saga-and-compensating-transactions-for-locking.md) | Use a Saga with compensating transactions for exclusive Ad locking | Accepted | Ad, Deal (Negotiation and Swap) |
+| [0017](0017-use-elasticsearch-and-redis-for-matching.md) | Use Elasticsearch for the Matching index and Redis for neighbourhood distances and caching | Accepted | Matching |

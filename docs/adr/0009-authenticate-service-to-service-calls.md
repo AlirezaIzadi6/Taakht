@@ -17,7 +17,7 @@ From the gRPC and ASP.NET Core documentation (not tested):
 
 ## Decision
 
-In phase 1 we will not enforce service identity between services. The internal network is isolated (only Envoy publishes a port) and the accepted risk is documented in the README limitations. Each service creates its gRPC channels and interceptors in one place, so authentication can be added there later. The production target is mutual TLS between services; the mechanism for issuing and rotating certificates (scripted, a service mesh, or SPIFFE/SPIRE) is decided together with the deployment topology ([open-items.md](../open-items.md), item 23).
+In phase 1 we will not enforce service identity between services. The internal network is isolated (only Envoy publishes a port) and the accepted risk is documented in the README limitations. Channels and interceptors come from the platform library of each language, so authentication can be added in one place per language later. One narrow guard is kept: an identity that starts with `system:` (a service acting on its own behalf, for example Deal claiming Ads) is accepted only together with a shared secret in the `x-internal-token` metadata, so a user cannot claim a system identity. This does not tell which service is calling. The production target is mutual TLS between services; the mechanism for issuing and rotating certificates (scripted, a service mesh, or SPIFFE/SPIRE) is decided together with the deployment topology ([open-items.md](../open-items.md), item 23).
 
 ## Options considered
 
@@ -29,10 +29,10 @@ In phase 1 we will not enforce service identity between services. The internal n
 ## Consequences
 
 - Positive: no early plumbing; a clear upgrade path; the risk is explicit.
-- Negative: phase 1 offers no defence if the internal network is breached, and the demo must not be exposed beyond the gateway. Services share no infrastructure code ([ADR 0004](0004-use-a-monorepo.md)), so adding mTLS later means changing each service's channel setup, not one library.
+- Negative: phase 1 offers no defence if the internal network is breached, and the demo must not be exposed beyond the gateway. Channels and interceptors live in the platform library of each language ([ADR 0004](0004-use-a-monorepo.md)), so adding mTLS later means changing two libraries and redeploying every service.
 - Follow-ups: define the channel and interceptor setup for Go and .NET in a convention doc; decide the certificate mechanism with the deployment topology and then write the mTLS ADR (this one would be superseded); decide Kafka client authentication separately.
 
 ## References
 
-- Reasoning from documentation; nothing was tried in a spike.
+- Reasoning from documentation. The `x-internal-token` guard was built and used in the Taakht MVP (`docs/architecture/mvp-architecture.md`, "Identity"); the rest was not tried.
 - gRPC authentication guide; ASP.NET Core gRPC authentication and authorization; SPIFFE overview

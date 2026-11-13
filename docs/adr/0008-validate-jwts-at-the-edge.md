@@ -11,7 +11,7 @@ Clients authenticate with JWTs (in phase 1 `AuthProvider` is a mock that issues 
 
 ## Decision
 
-We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt_authn` filter and reject invalid requests before they reach a service. Envoy forwards only the claims services need (initially the user id as `x-user-id`) as gRPC metadata, using `claim_to_headers`. Services read the user identity through a gRPC interceptor (each service keeps its own copy, see [ADR 0004](0004-use-a-monorepo.md)) and pass it unchanged on outgoing calls. `jwt_authn` has no revocation, so we rely on short-lived tokens; the lifetime is set when the identity provider is chosen.
+We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt_authn` filter and reject invalid requests before they reach a service. Envoy forwards only the claims services need (initially the user id as `x-user-id`) as gRPC metadata, using `claim_to_headers`. Services read the user identity through the identity interceptor in the platform library of its language ([ADR 0004](0004-use-a-monorepo.md)) and pass it unchanged on outgoing calls. `jwt_authn` has no revocation, so we rely on short-lived tokens; the lifetime is set when the identity provider is chosen.
 
 ## Options considered
 

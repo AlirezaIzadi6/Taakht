@@ -19,7 +19,7 @@ We will build five services:
 - **Reputation** (Supporting): the trust score, abuse reports and blocking.
 - **Communication** (Supporting): notifications and a minimal chat.
 
-Everything outside the swap domain (the Ad registry, authentication, KYC, the locker partner, the notification channel, report intake) sits behind provider adapters with mock implementations and is not a service.
+Everything outside the swap domain (the category taxonomy, authentication, KYC, the locker partner, the notification channel, report intake) sits behind provider adapters with mock implementations and is not a service.
 
 ## Options considered
 

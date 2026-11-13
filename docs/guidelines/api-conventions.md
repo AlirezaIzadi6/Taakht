@@ -21,7 +21,7 @@ Conventions that follow from the Protobuf API contract decision. Not an ADR; che
 
 ## Caller identity
 
-- The user id reaches services as the `x-user-id` metadata key, set by Envoy from the verified JWT (`sub` claim). Services read it only through a gRPC interceptor (each service keeps its own copy, see ADR 0004) and pass it unchanged on outgoing calls.
+- The user id reaches services as the `x-user-id` metadata key, set by Envoy from the verified JWT (`sub` claim). Services read it only through the identity interceptor of the platform library of their language (ADR 0004) and pass it unchanged on outgoing calls.
 - Verified in a spike (2026-10-06): a client-sent `x-user-id` is overwritten or dropped on routes covered by a `jwt_authn` rule.
 
 ## Generated code

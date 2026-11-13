@@ -401,14 +401,14 @@ Source: working sessions with Alireza, reviewing the step-2 output. Details are 
 Source: review of the draft ADRs; recorded in ADR 0003 and ADR 0004.
 
 - **Language split.** Go for Ad, Matching and Communication; .NET for Deal and Reputation. The rule is a rule of thumb (Go where the main work is concurrency and throughput, .NET where it is rich domain state), not a measured result; the learning goal and balancing the work between the two people also count. This replaces the open assignment of the two supporting services.
-- **Monorepo.** All services, the contracts (`api/`), the gateway config and the docs stay in one repository; services share contracts only. Infrastructure code that several services need (outbox, gRPC interceptors) is not shared for now: each service keeps its own copy until the duplication hurts.
+- **Monorepo.** All services, the contracts (`api/`), the gateway config and the docs stay in one repository; services share contracts and one infrastructure-only platform library per language (`libs/`); no domain code is shared. The Taakht MVP showed this working, so the earlier "each service keeps its own copy" was dropped.
 
 ## API contract in Protobuf, 2026-11-12 (with Arman)
 Source: review of the draft ADRs; recorded in ADR 0005.
 
 - **Protobuf is the single source of truth** for service APIs, in the shared `api/` directory; REST routes come from `google.api.http` annotations; code, the gateway descriptor and the OpenAPI document are generated. Tried only with a hello-world service; the alternatives were argued, not tried.
 - **Generated code is not committed.** It is produced at build time (`buf generate` for Go through a `make generate` target, `Grpc.Tools` for .NET). This is a convention, not an ADR: it is cheap to reverse and lives in the API conventions guideline.
-- **No shared interceptor library.** Following ADR 0004, each service keeps its own gRPC interceptor setup.
+- **Interceptors come from the platform library of each language**, following ADR 0004.
 
 ## Envoy as the edge gateway, 2026-11-12 (with Arman)
 Source: review of the draft ADRs; recorded in ADR 0007.
@@ -426,7 +426,7 @@ Source: review of the draft ADRs; recorded in ADR 0008.
 Source: review of the draft ADRs; recorded in ADR 0009.
 
 - **Phase 1: no service identity is enforced between services.** The internal network is isolated (only Envoy publishes a port) and the risk is documented in the README. Each service creates its channels and interceptors in one place so authentication can be added there. **Production target: mutual TLS**; the certificate mechanism is decided with the deployment topology. API keys and an internal token issuer were rejected; reasoning only, nothing was tried.
-- **Cost of the per-service setup:** adding mTLS later means changing each service, since ADR 0004 shares no infrastructure code.
+- **Cost of the platform library:** adding mTLS later means changing two libraries and redeploying every service.
 
 ## Kafka as the broker and Protobuf events, 2026-11-13 (with Arman)
 Source: review of the draft ADRs; recorded in ADR 0010 and ADR 0012.
@@ -446,6 +446,9 @@ Source: review of the ADRs after they were accepted one by one.
 - **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and five ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (transactional outbox), 0014 (at-least-once delivery, idempotent consumers). The Saga became ADR 0016.
 - **Drafted from the repo, to confirm:** ADR 0002 (the reasons for each split and each rejected merge come from the log and the context map) and ADR 0013 (a polling relay rather than change data capture; the same outbox table for Deal's two modules and for Kafka).
 - Numbers are permanent from now on; the rule is noted in the ADR README.
+- **The Taakht MVP was folded in (2026-11-13).** The MVP (separate `Taakht-MVP` repository) had implemented and tested the outbox, the processed-events table and the lock flow, so ADR 0013 and ADR 0014 now rest on its results instead of reasoning. ADR 0004 now allows one infrastructure-only platform library per language (the MVP built exactly that), ADR 0009 keeps the narrow `x-internal-token` guard for `system:` identities, and ADR 0017 records Elasticsearch and Redis for Matching (the MVP used a SQL read model).
+- **`AdRegistryProvider` became `TaxonomyProvider`:** Taakht has no link to Divar ads, so only Divar's category taxonomy and city/neighbourhood division are read.
+- **Still open:** the lock flow (ADR 0016) against the MVP's synchronous `LockAds` call.
 
 ## Saga for the exclusive Ad lock, 2026-11-13 (with Arman)
 Source: review of the draft ADRs; recorded in ADR 0016.

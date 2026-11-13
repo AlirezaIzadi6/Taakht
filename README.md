@@ -47,7 +47,7 @@ Every dependency outside the swap domain sits behind a small interface with a mo
 | Interface | Phase 1 (this project) |
 |---|---|
 | `AuthProvider` | Issues a JWT for seeded users, no real password check |
-| `AdRegistryProvider` | Seeded fake ads/users and a small fixed category/neighborhood taxonomy |
+| `TaxonomyProvider` | Divar's category taxonomy and city/neighbourhood division, from a small fixed dataset (Taakht has no link to Divar ads) |
 | `KYCProvider` | Always passes |
 | `DeliveryProvider` | Simulated locker statuses (the only delivery method integrated with a partner) |
 | `ReportProvider` | Records an abuse report (any user can be reported, not only a trade counterpart), no review workflow |
@@ -118,6 +118,7 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 Taakht/
 ├── docs/            design documents (see Documentation below)
 ├── api/             Protobuf contracts for the services and events (planned)
+├── libs/            one platform library per language: infrastructure code only (planned)
 ├── src/             one solution (.NET) or module (Go) per service
 ├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── spikes/          throwaway experiments behind the evidence docs
