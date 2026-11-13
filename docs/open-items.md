@@ -31,13 +31,13 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 7 | API contract in Protobuf | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
 | 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0012 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
 | 9 | Transactional outbox | Decided | ADR 0013 (Accepted); polling relay, change data capture left as a later option; argued from documentation, not tried | 6, 12 |
-| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0014 (delivery at least once, idempotent consumers) and ADR 0016 (lock Saga, chosen for the demonstration driver, not for correctness); outage behaviour not tested; the hold idea in the section below may extend ADR 0016 | 5, 6, 9 |
+| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0014 (delivery at least once, idempotent consumers), ADR 0016 (synchronous atomic lock in Ad, tested in the MVP) and ADR 0017 (swap lifecycle Saga); the penalty to Reputation and the locker reservation cancel were not built in the MVP | 5, 6, 9 |
 | **Data** | | | | |
 | 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
 | 12 | PostgreSQL | Stack named | README; whether any NoSQL store is needed is still open; storage for Communication is not chosen (Deal uses PostgreSQL) | 11 |
 | 13 | Event sourcing in Reputation (including upcasting) | Stack named | README; project memory; Reputation's scope grew (blocking, abuse-report queue, penalties), so check that event sourcing still fits the admin queue and blocking | 8, 12 |
-| 14 | Search (Elasticsearch for search and match scoring) | Decided | ADR 0017 (Accepted); no search engine was tried (the MVP used a SQL read model) | 3 |
-| 15 | Neighbourhood distance and the role of Redis | Decided | ADR 0017 (Accepted); the precomputed neighbourhood matrix lives in Redis; the role of Redis is the least settled part and is revisited when Matching is built | 14 |
+| 14 | Search (Elasticsearch for search and match scoring) | Stack named | README; to be discussed before an ADR (the MVP used a SQL read model) | 3 |
+| 15 | Neighbourhood distance and the role of Redis | Stack named | README says Redis for geo; search is now neighbourhood-based (precomputed distances between neighbourhoods, no exact coordinates), so the Elasticsearch/Redis split must be redefined; to be discussed before an ADR | 14 |
 | 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
 | 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; the ADR is not written. Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
 | **Edge and security** | | | | |

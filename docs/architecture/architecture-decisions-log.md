@@ -443,19 +443,18 @@ Source: review of the draft ADRs; recorded in ADR 0015.
 ## The ADR set reordered and completed, 2026-11-13 (with Arman)
 Source: review of the ADRs after they were accepted one by one.
 
-- **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and five ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (transactional outbox), 0014 (at-least-once delivery, idempotent consumers). The Saga became ADR 0016.
+- **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and five ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (transactional outbox), 0014 (at-least-once delivery, idempotent consumers). The locking draft became two ADRs: 0016 (the lock) and 0017 (the swap Saga).
 - **Drafted from the repo, to confirm:** ADR 0002 (the reasons for each split and each rejected merge come from the log and the context map) and ADR 0013 (a polling relay rather than change data capture; the same outbox table for Deal's two modules and for Kafka).
 - Numbers are permanent from now on; the rule is noted in the ADR README.
-- **The Taakht MVP was folded in (2026-11-13).** The MVP (separate `Taakht-MVP` repository) had implemented and tested the outbox, the processed-events table and the lock flow, so ADR 0013 and ADR 0014 now rest on its results instead of reasoning. ADR 0004 now allows one infrastructure-only platform library per language (the MVP built exactly that), ADR 0009 keeps the narrow `x-internal-token` guard for `system:` identities, and ADR 0017 records Elasticsearch and Redis for Matching (the MVP used a SQL read model).
+- **The Taakht MVP was folded in (2026-11-13).** The MVP (separate `Taakht-MVP` repository) had implemented and tested the outbox, the processed-events table and the lock flow, so ADR 0013 and ADR 0014 now rest on its results instead of reasoning. ADR 0004 now allows one infrastructure-only platform library per language (the MVP built exactly that), ADR 0009 keeps the narrow `x-internal-token` guard for `system:` identities,.
 - **`AdRegistryProvider` became `TaxonomyProvider`:** Taakht has no link to Divar ads, so only Divar's category taxonomy and city/neighbourhood division are read.
-- **Still open:** the lock flow (ADR 0016) against the MVP's synchronous `LockAds` call.
 
-## Saga for the exclusive Ad lock, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0016.
+## The Ad lock and the swap Saga, 2026-11-13 (with Arman)
+Source: review of the draft ADRs against the Taakht MVP; recorded in ADR 0016 and ADR 0017.
 
-- **The Saga stays as decided on 2026-11-04**, now stated plainly: correctness is the same in every option (the atomic claim inside Ad decides the winner), so the Saga is chosen for the demonstration driver, with a synchronous claim as the rejected alternative. The unmeasured performance claims were dropped.
-- **The outage rule is part of the decision:** a timeout is never a rejection; `ClaimLock` is retried until an explicit reply. It is designed but not tested.
-- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend this design and may need a new ADR.
+- **The lock is a synchronous atomic claim in the Ad service** (`ClaimLock`, called by Deal's Swap module, idempotent by swap id, both Ads in one transaction in ascending id order). This is what the MVP built and tested; the earlier asynchronous `ClaimLock` command over Kafka was dropped. Even with a synchronous call the flow still needs a waiting state, retries and a sweeper, so "synchronous" does not remove the need for failure handling.
+- **The Saga moved to the swap lifecycle:** lock, locker fees within one hour, then completion or cancellation, where cancellation releases the Ads, cancels the locker reservation and penalises the party who did not pay. That is where the compensations are real and cross-service.
+- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend ADR 0016 and may need a new ADR.
 
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

@@ -17,7 +17,7 @@ Main aggregate root for the data of the items.
 | System (negotiation cap) | `HideAd` (reason: cap) | `AdHidden` + `system_hold` | Notification to the Ad owner that the cap of 10 concurrent negotiations was reached. |
 | Admin | `SuspendAd` / `ReinstateAd` | `AdSuspended` / `AdReinstated` | `Suspended` is a state of its own, separate from `Hidden`, so the owner cannot publish the Ad again; reinstating restores the state it had before (Published or Hidden).<br>1. Matching removes the Ad from the index, like `Hidden`.<br>2. Open negotiations on the Ad that have not reached `AgreementReached` are cancelled by the system (`CancelNegotiation`, reason: suspended). A negotiation waiting for the lock and any existing Swap are not touched, because an agreement is binding.<br>3. The owner is notified. The owner can still edit the Ad (a new `AdVersion`), but cannot publish it, and can file an objection (see the Reputation & Trust cluster). |
 | System (Matching) | `FindMatches` | `MatchFound` (per pair) | Communication sends a match-suggestion notification to the owners of both Ads. |
-| System (Saga / lock) | `ClaimLock` (both Ads with the agreed version, one transaction) | `ExclusiveLockAcquired` / `ExclusiveLockRejected` (reason: `AlreadyLocked` or `VersionChanged`) | On success: both Ads become `Locked` together and leave the index.<br>On rejection: no Ad changes. `AlreadyLocked`: the negotiation is cancelled. `VersionChanged`: the negotiation stays open and a new proposal is built on the current version. |
+| System (Deal, lock) | `ClaimLock` (both Ads with the agreed version, one transaction) | `ExclusiveLockAcquired` / `ExclusiveLockRejected` (reason: `AlreadyLocked` or `VersionChanged`) | On success: both Ads become `Locked` together and leave the index.<br>On rejection: no Ad changes. `AlreadyLocked`: the negotiation is cancelled. `VersionChanged`: the negotiation stays open and a new proposal is built on the current version. |
 | System (end of deal) | `CloseAd` | `AdClosed` | Final state of the Ad; irreversible, consumed by the deal. |
 
 **Key decisions:**
@@ -39,12 +39,12 @@ The unified deal service, built as a **Modular Monolith** with two isolated logi
 | Ad owner | `DeclineNegotiation` | `NegotiationDeclined` | The negotiation is closed and the Ad counters go down. |
 | Either party | `WithdrawNegotiation` | `NegotiationWithdrawn` | The negotiation is cancelled and the Ad counters go down. |
 | System (time) | `ExpireNegotiation` | `NegotiationExpired` | After 3 days without activity, or at the absolute cap of 30 days from opening, the negotiation expires and the counters go down. Activities that extend: acceptance of the negotiation, `ProposalApproved`, and a user's manual edit of the terms. Activities that do not extend: `ApprovalRetracted`, rejecting a revision, the system's `RebaseProposal`, chat, and viewing. Before acceptance the deadline is a fixed 3 days. |
-| System (Saga compensating transaction) | `CancelNegotiation` (reason: transferred to someone else) | `NegotiationCancelled` | Counters go down and both parties are notified. |
+| System (after a rejected lock) | `CancelNegotiation` (reason: transferred to someone else) | `NegotiationCancelled` | Counters go down and both parties are notified. |
 | Either party | `ReviseProposal` | `ProposalRevised` | A new proposal with the new terms is born; the previous approvals of both parties are reset. |
 | System (Policy reacting to `AdEdited` or to `ExclusiveLockRejected` with reason `VersionChanged`) | `RebaseProposal` | `ProposalRevised` (reason: Ad changed) | A new proposal is built with the current Ad versions and the same terms. It carries no approval, and both parties (including the editor) must explicitly approve again. It does not extend the negotiation deadline. |
 | Either party | `ApproveProposal` | `ProposalApproved` | If the other party has also approved the same active proposal, the system policy issues the `ConcludeAgreement` command. |
 | Either party | `RetractApproval` | `ApprovalRetracted` | The user's approval is removed from the current proposal. |
-| System (full-approval Policy) | `ConcludeAgreement` | `AgreementReached` | 1. The negotiation moves to "waiting for lock".<br>2. The Saga sends the `ClaimLock` command to the Ad service. |
+| System (full-approval Policy) | `ConcludeAgreement` | `AgreementReached` | 1. The negotiation moves to "waiting for lock".<br>2. The Swap module in Deal calls `ClaimLock` on the Ad service (synchronous). |
 
 **Request cap rule (per Ad pair):**
 - Each directed Ad pair (requester's Ad → target Ad) has 3 request rights. Every `RequestNegotiation` consumes one right at the moment it is sent; rejection, expiry and withdrawal add nothing to the counter.
@@ -167,7 +167,7 @@ In the MVP/demo phase it works as a **Mock** and issues JWT tokens carrying the 
 
 ## 7. Resolved decisions and hotspots
 
-1. **Concurrent lock race:** solved with a **Saga and eventual consistency** with a compensating transaction between Negotiation and Ad (ADR 10).
+1. **Concurrent lock race:** solved by an atomic, synchronous claim in the Ad service ([ADR 0016](../adr/0016-take-the-exclusive-ad-lock-in-the-ad-service.md)).
 2. **Negotiation/Swap boundary:** combined in one unified service called **Deal**, built as a **Modular Monolith**, to avoid unnecessary network complexity and distributed transactions.
 3. **Proposal model:** the three-component snapshot model replaced double approval; the item and the logistics terms are one inseparable package.
 4. **Chat:** independent of negotiation, with no effect on counters or the expiry timer.

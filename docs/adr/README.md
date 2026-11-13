@@ -52,5 +52,5 @@ ADRs are written in English.
 | [0013](0013-publish-events-through-a-transactional-outbox.md) | Publish events through a transactional outbox with a polling relay | Accepted | cross-cutting |
 | [0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md) | Deliver events at least once and make consumers idempotent with a processed-events table | Accepted | cross-cutting |
 | [0015](0015-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal (Negotiation and Swap) |
-| [0016](0016-use-saga-and-compensating-transactions-for-locking.md) | Use a Saga with compensating transactions for exclusive Ad locking | Accepted | Ad, Deal (Negotiation and Swap) |
-| [0017](0017-use-elasticsearch-and-redis-for-matching.md) | Use Elasticsearch for the Matching index and Redis for neighbourhood distances and caching | Accepted | Matching |
+| [0016](0016-take-the-exclusive-ad-lock-in-the-ad-service.md) | Take the exclusive Ad lock in the Ad service with a synchronous atomic claim | Accepted | Ad, Deal (Negotiation and Swap) |
+| [0017](0017-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Accepted | Deal (Swap), Ad, Reputation |

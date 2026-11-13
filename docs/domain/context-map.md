@@ -89,7 +89,7 @@ Blocking also flows from Reputation: `UserBlocked` / `UserUnblocked` are consume
 |---|---|---|---|
 | Matching | Core | Full | The heart of the product; where concurrency and ranking are shown |
 | Ad | Core | Full | Versioned Ads and the atomic exclusive lock |
-| Deal (Negotiation and Swap) | Core | Full | The consistency-critical flows: proposals, approvals, the lock Saga, binding agreements |
+| Deal (Negotiation and Swap) | Core | Full | The consistency-critical flows: proposals, approvals, the Ad lock call, the swap Saga, binding agreements |
 | Reputation | Supporting | Minimal to shallow | Real (event-sourced), but it also holds blocking and abuse reports, so it is a little more than minimal |
 | Communication | Supporting | Minimal | Real but shallow: notifications and simple chat |
 | `DeliveryProvider`, `AuthProvider`, `KYCProvider`, `NotificationProvider`, `ReportProvider` | Generic | Mock | Behind interfaces; replacing a mock with the real service is only a wiring change |

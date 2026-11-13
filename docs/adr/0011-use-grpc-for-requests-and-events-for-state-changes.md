@@ -11,7 +11,7 @@ Services ([ADR 0001](0001-build-the-system-as-microservices.md)) talk to each ot
 
 ## Decision
 
-We will use gRPC for synchronous requests, where the caller needs the answer to continue, and Kafka events for state changes that other services react to. An asynchronous command over Kafka is allowed only where the sender must not wait; the lock claim in the locking Saga is the one such command today. This ADR gives the rule, not the list of calls: which calls are synchronous is decided per feature.
+We will use gRPC for synchronous requests, where the caller needs the answer to continue, and Kafka events for state changes that other services react to. An asynchronous command over Kafka is allowed only where the sender must not wait; there is none today (the Ad lock claim is a synchronous gRPC call, [ADR 0016](0016-take-the-exclusive-ad-lock-in-the-ad-service.md)). This ADR gives the rule, not the list of calls: which calls are synchronous is decided per feature.
 
 ## Options considered
 
