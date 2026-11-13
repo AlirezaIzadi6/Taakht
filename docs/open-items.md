@@ -44,7 +44,7 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 17 | Edge API style | Stack named | Decided 2026-10-06: REST only, no GraphQL (revisit if different clients appear). Reasoning and rejected options are still to be written (not covered by ADR 0005; a short ADR of its own, or a decision-log note) | 7 |
 | 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
 | 19 | JWT validation at the edge | Decided | ADR 0006 (Accepted); tried only with a hello-world service in a spike | 18 |
-| 20 | Service-to-service authentication | Draft | `authenticate-service-to-service-calls`; reasoning only, no spike; may merge with 19. Decided 2026-10-06: no service-to-service authentication in phase 1; production later | 19 |
+| 20 | Service-to-service authentication | Decided | ADR 0007 (Accepted); reasoning from documentation only, no spike; no service-to-service authentication in phase 1, mTLS as the production target | 19 |
 | 21 | Real-time channel (chat, notifications) | Open | Communication service combines WebSocket chat and system notifications; chat is minimal/mocked in demo and independent of negotiation | 5 |
 | **Operations** | | | | |
 | 22 | Observability stack | Open | README: only Logstash named, rest TBD | - |
