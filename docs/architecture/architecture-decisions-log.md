@@ -398,47 +398,61 @@ Source: working sessions with Alireza, reviewing the step-2 output. Details are 
 - **Suspension.** `Suspended` is a separate Ad state (not `Hidden`); Matching removes the Ad, negotiations that have not reached `AgreementReached` are cancelled, a negotiation waiting for the lock and any Swap are untouched, the owner can edit and object but not publish. User suspension is admin-only, suspends all the user's Ads and refuses new requests; the user keeps open chats, search and a chat with an admin, and login is not blocked in the demo.
 
 ## Languages per service and the monorepo, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0002 and ADR 0003.
+Source: review of the draft ADRs; recorded in ADR 0003 and ADR 0004.
 
 - **Language split.** Go for Ad, Matching and Communication; .NET for Deal and Reputation. The rule is a rule of thumb (Go where the main work is concurrency and throughput, .NET where it is rich domain state), not a measured result; the learning goal and balancing the work between the two people also count. This replaces the open assignment of the two supporting services.
 - **Monorepo.** All services, the contracts (`api/`), the gateway config and the docs stay in one repository; services share contracts only. Infrastructure code that several services need (outbox, gRPC interceptors) is not shared for now: each service keeps its own copy until the duplication hurts.
 
 ## API contract in Protobuf, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0004.
+Source: review of the draft ADRs; recorded in ADR 0005.
 
 - **Protobuf is the single source of truth** for service APIs, in the shared `api/` directory; REST routes come from `google.api.http` annotations; code, the gateway descriptor and the OpenAPI document are generated. Tried only with a hello-world service; the alternatives were argued, not tried.
 - **Generated code is not committed.** It is produced at build time (`buf generate` for Go through a `make generate` target, `Grpc.Tools` for .NET). This is a convention, not an ADR: it is cheap to reverse and lives in the API conventions guideline.
-- **No shared interceptor library.** Following ADR 0003, each service keeps its own gRPC interceptor setup.
+- **No shared interceptor library.** Following ADR 0004, each service keeps its own gRPC interceptor setup.
 
 ## Envoy as the edge gateway, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0005.
+Source: review of the draft ADRs; recorded in ADR 0007.
 
 - **Envoy is the single public entry point** and transcodes REST/JSON to gRPC with `grpc_json_transcoder`, driven by a descriptor built from the shared protos. Only annotated RPCs are public. grpc-gateway, in-service transcoding, APISIX, Kong and Connect were compared from documentation and one spike; grpc-gateway was the close alternative.
 - **Not decided here:** where JWTs are validated (separate ADR), and the edge API style (REST only, no GraphQL; open item 17, reasoning not written yet). Rate limit values are configuration, not an ADR.
 
 ## JWT validation at the edge, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0006.
+Source: review of the draft ADRs; recorded in ADR 0008.
 
 - **JWTs are verified in Envoy** (`jwt_authn`: signature, expiry, issuer, audience). Envoy forwards only the user id as `x-user-id`; services read it through their own gRPC interceptor and pass it on unchanged. No revocation, so tokens must be short-lived; the lifetime, identity provider and key rotation are still open.
 - **Known risk:** a service reachable without Envoy would accept a forged identity. For now the internal network is isolated; service-to-service authentication is decided separately.
 
 ## Service-to-service authentication, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0007.
+Source: review of the draft ADRs; recorded in ADR 0009.
 
 - **Phase 1: no service identity is enforced between services.** The internal network is isolated (only Envoy publishes a port) and the risk is documented in the README. Each service creates its channels and interceptors in one place so authentication can be added there. **Production target: mutual TLS**; the certificate mechanism is decided with the deployment topology. API keys and an internal token issuer were rejected; reasoning only, nothing was tried.
-- **Cost of the per-service setup:** adding mTLS later means changing each service, since ADR 0003 shares no infrastructure code.
+- **Cost of the per-service setup:** adding mTLS later means changing each service, since ADR 0004 shares no infrastructure code.
 
 ## Kafka as the broker and Protobuf events, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0008 and ADR 0009.
+Source: review of the draft ADRs; recorded in ADR 0010 and ADR 0012.
 
-- **ADR 0008 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had no recorded reason, so ADR 0008 gives one for each (reasoning, not tried). Outbox, delivery semantics and the partition strategy still need their own decisions.
-- **ADR 0009: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
+- **ADR 0010 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had no recorded reason, so ADR 0010 gives one for each (reasoning, not tried). Outbox, delivery semantics and the partition strategy still need their own decisions.
+- **ADR 0012: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
 
 ## Deal as a modular monolith, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0010.
+Source: review of the draft ADRs; recorded in ADR 0015.
 
 - **Deal stays one .NET service with two modules (`Negotiation` and `Swap`)**, as decided on 2026-11-04. The ADR drops two claims that were never measured (network latency saved, extraction "with minimal refactoring") and keeps the reasoning that matters: the post-agreement logic is small, and two services would add a boundary and a distributed transaction between the end of a negotiation and the creation of its swap.
 - **Not covered:** how the Ad lock is acquired (separate decision), and the transactional outbox, which Deal's design uses but which still has no ADR of its own (open item 9).
+
+## The ADR set reordered and completed, 2026-11-13 (with Arman)
+Source: review of the ADRs after they were accepted one by one.
+
+- **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and five ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (transactional outbox), 0014 (at-least-once delivery, idempotent consumers). The Saga became ADR 0016.
+- **Drafted from the repo, to confirm:** ADR 0002 (the reasons for each split and each rejected merge come from the log and the context map) and ADR 0013 (a polling relay rather than change data capture; the same outbox table for Deal's two modules and for Kafka).
+- Numbers are permanent from now on; the rule is noted in the ADR README.
+
+## Saga for the exclusive Ad lock, 2026-11-13 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0016.
+
+- **The Saga stays as decided on 2026-11-04**, now stated plainly: correctness is the same in every option (the atomic claim inside Ad decides the winner), so the Saga is chosen for the demonstration driver, with a synchronous claim as the rejected alternative. The unmeasured performance claims were dropped.
+- **The outage rule is part of the decision:** a timeout is never a rejection; `ClaimLock` is retried until an explicit reply. It is designed but not tested.
+- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend this design and may need a new ADR.
 
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

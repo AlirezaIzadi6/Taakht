@@ -1,12 +1,12 @@
 # Kafka event conventions (draft)
 
-Conventions that follow from [ADR 0009](../adr/0009-describe-kafka-events-in-protobuf.md). Not an ADR; cheap to change.
+Conventions that follow from [ADR 0012](../adr/0012-describe-kafka-events-in-protobuf.md). Not an ADR; cheap to change.
 
 ## Records
 
 - The payload is plain Protobuf bytes.
 - Each record carries two headers: `message-type` (the fully qualified message name) and `schema-version`.
-- The partition key is the aggregate id ([ADR 0008](../adr/0008-use-kafka-for-events-between-services.md)).
+- The partition key is the aggregate id ([ADR 0010](../adr/0010-use-kafka-for-events-between-services.md)).
 
 ## Schema rules
 

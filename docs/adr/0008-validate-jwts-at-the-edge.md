@@ -1,4 +1,4 @@
-# 0006. Validate JWTs at the Envoy edge
+# 0008. Validate JWTs at the Envoy edge
 
 - Status: Accepted
 - Date: 2026-11-12
@@ -7,11 +7,11 @@
 
 ## Context
 
-Clients authenticate with JWTs (in phase 1 `AuthProvider` is a mock that issues a token for seeded users). The README places JWT validation in the API gateway ([ADR 0005](0005-use-envoy-for-rest-grpc-transcoding.md)). Services are written in Go and .NET. We must decide where tokens are verified and how services learn who the caller is, including when one service calls another on behalf of a user.
+Clients authenticate with JWTs (in phase 1 `AuthProvider` is a mock that issues a token for seeded users). The README places JWT validation in the API gateway ([ADR 0007](0007-use-envoy-for-rest-grpc-transcoding.md)). Services are written in Go and .NET. We must decide where tokens are verified and how services learn who the caller is, including when one service calls another on behalf of a user.
 
 ## Decision
 
-We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt_authn` filter and reject invalid requests before they reach a service. Envoy forwards only the claims services need (initially the user id as `x-user-id`) as gRPC metadata, using `claim_to_headers`. Services read the user identity through a gRPC interceptor (each service keeps its own copy, see [ADR 0003](0003-use-a-monorepo.md)) and pass it unchanged on outgoing calls. `jwt_authn` has no revocation, so we rely on short-lived tokens; the lifetime is set when the identity provider is chosen.
+We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt_authn` filter and reject invalid requests before they reach a service. Envoy forwards only the claims services need (initially the user id as `x-user-id`) as gRPC metadata, using `claim_to_headers`. Services read the user identity through a gRPC interceptor (each service keeps its own copy, see [ADR 0004](0004-use-a-monorepo.md)) and pass it unchanged on outgoing calls. `jwt_authn` has no revocation, so we rely on short-lived tokens; the lifetime is set when the identity provider is chosen.
 
 ## Options considered
 

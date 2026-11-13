@@ -1,4 +1,4 @@
-# 0002. Split services between Go and .NET by workload
+# 0003. Split services between Go and .NET by workload
 
 - Status: Accepted
 - Date: 2026-11-12

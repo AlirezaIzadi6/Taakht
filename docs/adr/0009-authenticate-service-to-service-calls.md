@@ -1,4 +1,4 @@
-# 0007. Authenticate service-to-service calls: isolated network now, mTLS in production
+# 0009. Authenticate service-to-service calls: isolated network now, mTLS in production
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -7,7 +7,7 @@
 
 ## Context
 
-Services trust the user identity that Envoy forwards ([ADR 0006](0006-validate-jwts-at-the-edge.md)). That trust is only sound if nothing but Envoy and the other services can reach them. The README lists service-to-service authentication as TBD with API keys proposed. Phase 1 is a single-node demo with a mock `AuthProvider`; production must run with replicas and real isolation.
+Services trust the user identity that Envoy forwards ([ADR 0008](0008-validate-jwts-at-the-edge.md)). That trust is only sound if nothing but Envoy and the other services can reach them. The README lists service-to-service authentication as TBD with API keys proposed. Phase 1 is a single-node demo with a mock `AuthProvider`; production must run with replicas and real isolation.
 
 From the gRPC and ASP.NET Core documentation (not tested):
 
@@ -29,7 +29,7 @@ In phase 1 we will not enforce service identity between services. The internal n
 ## Consequences
 
 - Positive: no early plumbing; a clear upgrade path; the risk is explicit.
-- Negative: phase 1 offers no defence if the internal network is breached, and the demo must not be exposed beyond the gateway. Services share no infrastructure code ([ADR 0003](0003-use-a-monorepo.md)), so adding mTLS later means changing each service's channel setup, not one library.
+- Negative: phase 1 offers no defence if the internal network is breached, and the demo must not be exposed beyond the gateway. Services share no infrastructure code ([ADR 0004](0004-use-a-monorepo.md)), so adding mTLS later means changing each service's channel setup, not one library.
 - Follow-ups: define the channel and interceptor setup for Go and .NET in a convention doc; decide the certificate mechanism with the deployment topology and then write the mTLS ADR (this one would be superseded); decide Kafka client authentication separately.
 
 ## References

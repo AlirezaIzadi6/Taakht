@@ -1,4 +1,4 @@
-# 0005. Use Envoy as the edge gateway for REST to gRPC transcoding
+# 0007. Use Envoy as the edge gateway for REST to gRPC transcoding
 
 - Status: Accepted
 - Date: 2026-11-12
@@ -7,9 +7,9 @@
 
 ## Context
 
-External clients speak REST/JSON; services speak gRPC in Go and .NET ([ADR 0002](0002-split-services-between-go-and-dotnet.md)). The README places a gateway at the edge for load balancing, rate limiting and JWT validation. We must choose what translates REST to gRPC.
+External clients speak REST/JSON ([ADR 0006](0006-use-rest-json-at-the-edge-without-graphql.md)); services speak gRPC in Go and .NET ([ADR 0003](0003-split-services-between-go-and-dotnet.md)). The README places a gateway at the edge for load balancing, rate limiting and JWT validation. We must choose what translates REST to gRPC.
 
-What matters: the REST mapping comes from the Protobuf contract (`google.api.http`, [ADR 0004](0004-define-api-contract-in-protobuf.md)) and not from a second configuration; it works for both languages; JWT validation and rate limiting can live in the same place; and replacing it later stays cheap (see [design principles](../architecture/design-principles.md)).
+What matters: the REST mapping comes from the Protobuf contract (`google.api.http`, [ADR 0005](0005-define-api-contract-in-protobuf.md)) and not from a second configuration; it works for both languages; JWT validation and rate limiting can live in the same place; and replacing it later stays cheap (see [design principles](../architecture/design-principles.md)).
 
 ## Decision
 

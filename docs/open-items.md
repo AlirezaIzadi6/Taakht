@@ -21,17 +21,17 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | # | Topic | Status | Draft or note | Depends on |
 |---|---|---|---|---|
 | **Foundation** | | | | |
-| 1 | Monorepo | Decided | ADR 0003 (Accepted); README, Makefile and CI already assume it; shared infrastructure code between services is not shared for now | 2, 4 |
+| 1 | Monorepo | Decided | ADR 0004 (Accepted); README, Makefile and CI already assume it; shared infrastructure code between services is not shared for now | 2, 4 |
 | 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | - |
-| 3 | Service decomposition | Draft | ADR 0010 (Accepted) covers Deal only; working boundaries: Ad and Matching (Go), Deal (combining negotiation and swap as a modular monolith in .NET) and Reputation (.NET); Communication (Go, minimal) and a mocked `DeliveryProvider`; context map in [docs/domain/context-map.md](domain/context-map.md). The ADR covers Deal only; why Ad is apart from Matching, and why Reputation and Communication are separate services, is not recorded in an ADR yet | 2 |
-| 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0002 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
+| 3 | Service decomposition | Decided | ADR 0002 (Accepted); five services, the merges that were rejected are listed there; Deal is structured in ADR 0015; context map in [docs/domain/context-map.md](domain/context-map.md) | 2 |
+| 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0003 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
 | **Communication** | | | | |
-| 5 | Sync versus async rule (gRPC for requests, events for state changes) | Stack named | README | 3 |
-| 6 | Kafka | Decided | ADR 0008 (Accepted); reasoning from the decisions log, nothing benchmarked | 5 |
-| 7 | API contract in Protobuf | Decided | ADR 0004 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
-| 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0009 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
-| 9 | Transactional outbox | Stack named | README | 6, 12 |
-| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Draft | `use-saga-and-compensating-transactions-for-locking`; eventual consistency with Saga and compensating transactions; driving forces explicitly weighted | 5, 6, 9 |
+| 5 | Sync versus async rule (gRPC for requests, events for state changes) | Decided | ADR 0011 (Accepted); reasoning, nothing tried; the list of synchronous calls is decided per feature | 3 |
+| 6 | Kafka | Decided | ADR 0010 (Accepted); reasoning from the decisions log, nothing benchmarked | 5 |
+| 7 | API contract in Protobuf | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
+| 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0012 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
+| 9 | Transactional outbox | Decided | ADR 0013 (Accepted); polling relay, change data capture left as a later option; argued from documentation, not tried | 6, 12 |
+| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0014 (delivery at least once, idempotent consumers) and ADR 0016 (lock Saga, chosen for the demonstration driver, not for correctness); outage behaviour not tested; the hold idea in the section below may extend ADR 0016 | 5, 6, 9 |
 | **Data** | | | | |
 | 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
 | 12 | PostgreSQL | Stack named | README; whether any NoSQL store is needed is still open; storage for Communication is not chosen (Deal uses PostgreSQL) | 11 |
@@ -41,10 +41,10 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
 | 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; the ADR is not written. Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
 | **Edge and security** | | | | |
-| 17 | Edge API style | Stack named | Decided 2026-10-06: REST only, no GraphQL (revisit if different clients appear). Reasoning and rejected options are still to be written (not covered by ADR 0005; a short ADR of its own, or a decision-log note) | 7 |
-| 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
-| 19 | JWT validation at the edge | Decided | ADR 0006 (Accepted); tried only with a hello-world service in a spike | 18 |
-| 20 | Service-to-service authentication | Decided | ADR 0007 (Accepted); reasoning from documentation only, no spike; no service-to-service authentication in phase 1, mTLS as the production target | 19 |
+| 17 | Edge API style | Decided | ADR 0006 (Accepted); REST/JSON only, no GraphQL (revisit if clients with different access patterns appear) | 7 |
+| 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0007 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
+| 19 | JWT validation at the edge | Decided | ADR 0008 (Accepted); tried only with a hello-world service in a spike | 18 |
+| 20 | Service-to-service authentication | Decided | ADR 0009 (Accepted); reasoning from documentation only, no spike; no service-to-service authentication in phase 1, mTLS as the production target | 19 |
 | 21 | Real-time channel (chat, notifications) | Open | Communication service combines WebSocket chat and system notifications; chat is minimal/mocked in demo and independent of negotiation | 5 |
 | **Operations** | | | | |
 | 22 | Observability stack | Open | README: only Logstash named, rest TBD | - |
@@ -79,10 +79,10 @@ Open questions that are not ADRs. Carried over from the Persian working list in 
 - For a real Divar team: is Divar's existing chat enough, or is a deal-specific chat needed (moderation, evidence in disputes)?
 - Research on informal swap competitors (Telegram/Instagram groups, Vinted-like apps), so that "why Divar wins" rests on evidence.
 
-**Negotiation and lock** (to think about later; affects the locking ADR)
+**Negotiation and lock** (to think about later; affects ADR 0016)
 - Idea from Arman: when a negotiation on an Ad reaches `AgreementReached`, mark the Ad as being in an agreement, so no new negotiation opens on it and two agreements on the same Ad cannot happen at once. One possible shape: a hold per Ad in Deal's own database (unique `ad_id`), inserted atomically with `AgreementReached` and released when the lock result arrives (rejected), or replaced by the Ad's `Locked` state.
 - To decide: whether the hold blocks only new requests, or also a second agreement on the same Ad (the second approval is refused and not recorded); the release rules; whether a negotiation waiting for the lock is frozen (no edit, approve, retract or withdraw, with its expiry timer paused); and what "available" means for `ClaimLock` (Published or Hidden, because an Ad hidden by the negotiation cap must still be able to conclude; not Locked, Closed or Suspended), with a new rejection reason `NotAvailable` that cancels the negotiation.
-- Effect: the `AlreadyLocked` path of the Saga would almost disappear and the Ad claim would remain the final authority, so the locking ADR has to be revised.
+- Effect: the `AlreadyLocked` path of the Saga would almost disappear and the Ad claim would remain the final authority, so ADR 0016 would be extended or followed by a new ADR.
 
 **Parked ideas** (pricing sub-domain, hotspots, multi-item Ads, filming, trust badge) live in [product/parked-ideas.md](product/parked-ideas.md).
 

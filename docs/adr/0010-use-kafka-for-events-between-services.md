@@ -1,4 +1,4 @@
-# 0008. Use Apache Kafka for events between services
+# 0010. Use Apache Kafka for events between services
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -7,7 +7,7 @@
 
 ## Context
 
-Services ([ADR 0001](0001-build-the-system-as-microservices.md)) talk to each other over gRPC for requests ([ADR 0004](0004-define-api-contract-in-protobuf.md)) and need an asynchronous channel for state changes. The decision was taken on 2026-09-25 and is recorded in the [decisions log](../architecture/architecture-decisions-log.md); this ADR writes it down with its reasons.
+Services ([ADR 0001](0001-build-the-system-as-microservices.md)) talk to each other over gRPC for requests ([ADR 0005](0005-define-api-contract-in-protobuf.md)) and need an asynchronous channel for state changes. The decision was taken on 2026-09-25 and is recorded in the [decisions log](../architecture/architecture-decisions-log.md); this ADR writes it down with its reasons.
 
 - Almost all asynchronous messages are domain events, not commands: about 15 events against one real command at the time.
 - Events have several consumers. Ad events go to Matching, Deal and Communication, and the order of versions per Ad matters.
@@ -29,7 +29,7 @@ We will use Apache Kafka as the broker for domain events between services, with 
 
 - Positive: per-aggregate ordering through the partition key; several consumers per event; replay.
 - Negative: the broker does not order events across different aggregates, so the lock and index consistency are not solved by it and need their own mechanism; memory overhead on one node; Kafka is one more component to run.
-- Follow-ups, each its own decision: the transactional outbox, delivery semantics (at-least-once with idempotent consumers) and the partition and ordering strategy; the event format is [ADR 0009](0009-describe-kafka-events-in-protobuf.md). Topic names, retry and dead-letter handling and client settings go in a convention document.
+- Follow-ups, each its own decision: the event format is [ADR 0012](0012-describe-kafka-events-in-protobuf.md), the transactional outbox is [ADR 0013](0013-publish-events-through-a-transactional-outbox.md), delivery semantics are [ADR 0014](0014-deliver-events-at-least-once-with-idempotent-consumers.md), and the partition and ordering strategy is still open. Topic names, retry and dead-letter handling and client settings go in a convention document.
 
 ## References
 

@@ -1,4 +1,4 @@
-# 0003. Use a single monorepo for all services
+# 0004. Use a single monorepo for all services
 
 - Status: Accepted
 - Date: 2026-11-12
@@ -7,7 +7,7 @@
 
 ## Context
 
-The system is a set of services ([ADR 0001](0001-build-the-system-as-microservices.md)) written in Go and .NET ([language split](0002-split-services-between-go-and-dotnet.md)), run by a team of two. The repository already assumes a single repo: the Makefile discovers every `*.sln` and `go.mod`, and CI uses path filters, per-solution and per-module jobs and a single required check (`ci-ok`) so unrelated stacks are skipped.
+The system is a set of services ([ADR 0001](0001-build-the-system-as-microservices.md)) written in Go and .NET ([language split](0003-split-services-between-go-and-dotnet.md)), run by a team of two. The repository already assumes a single repo: the Makefile discovers every `*.sln` and `go.mod`, and CI uses path filters, per-solution and per-module jobs and a single required check (`ci-ok`) so unrelated stacks are skipped.
 
 ## Decision
 

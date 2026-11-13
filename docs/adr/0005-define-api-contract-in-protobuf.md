@@ -1,4 +1,4 @@
-# 0004. Define the API contract in Protobuf
+# 0005. Define the API contract in Protobuf
 
 - Status: Accepted
 - Date: 2026-11-12
@@ -7,7 +7,7 @@
 
 ## Context
 
-Services are written in Go and .NET ([ADR 0002](0002-split-services-between-go-and-dotnet.md)), live in one repository ([ADR 0003](0003-use-a-monorepo.md)) and talk to each other over gRPC. Clients reach the system through a REST/JSON edge. We need one place that defines every API so that:
+Services are written in Go and .NET ([ADR 0003](0003-split-services-between-go-and-dotnet.md)), live in one repository ([ADR 0004](0004-use-a-monorepo.md)) and talk to each other over gRPC. Clients reach the system through a REST/JSON edge. We need one place that defines every API so that:
 
 - Go and .NET services cannot drift apart on message shapes.
 - The REST surface and its documentation cannot drift from what the services actually accept.
