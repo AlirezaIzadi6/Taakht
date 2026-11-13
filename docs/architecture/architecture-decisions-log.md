@@ -422,5 +422,11 @@ Source: review of the draft ADRs; recorded in ADR 0006.
 - **JWTs are verified in Envoy** (`jwt_authn`: signature, expiry, issuer, audience). Envoy forwards only the user id as `x-user-id`; services read it through their own gRPC interceptor and pass it on unchanged. No revocation, so tokens must be short-lived; the lifetime, identity provider and key rotation are still open.
 - **Known risk:** a service reachable without Envoy would accept a forged identity. For now the internal network is isolated; service-to-service authentication is decided separately.
 
+## Service-to-service authentication, 2026-11-13 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0007.
+
+- **Phase 1: no service identity is enforced between services.** The internal network is isolated (only Envoy publishes a port) and the risk is documented in the README. Each service creates its channels and interceptors in one place so authentication can be added there. **Production target: mutual TLS**; the certificate mechanism is decided with the deployment topology. API keys and an internal token issuer were rejected; reasoning only, nothing was tried.
+- **Cost of the per-service setup:** adding mTLS later means changing each service, since ADR 0003 shares no infrastructure code.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
