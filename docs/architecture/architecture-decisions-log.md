@@ -434,5 +434,11 @@ Source: review of the draft ADRs; recorded in ADR 0008 and ADR 0009.
 - **ADR 0008 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had no recorded reason, so ADR 0008 gives one for each (reasoning, not tried). Outbox, delivery semantics and the partition strategy still need their own decisions.
 - **ADR 0009: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
 
+## Deal as a modular monolith, 2026-11-13 (with Arman)
+Source: review of the draft ADRs; recorded in ADR 0010.
+
+- **Deal stays one .NET service with two modules (`Negotiation` and `Swap`)**, as decided on 2026-11-04. The ADR drops two claims that were never measured (network latency saved, extraction "with minimal refactoring") and keeps the reasoning that matters: the post-agreement logic is small, and two services would add a boundary and a distributed transaction between the end of a negotiation and the creation of its swap.
+- **Not covered:** how the Ad lock is acquired (separate decision), and the transactional outbox, which Deal's design uses but which still has no ADR of its own (open item 9).
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
