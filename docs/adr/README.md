@@ -41,13 +41,13 @@ ADRs are written in English.
 | [0002](0002-split-the-system-into-five-services.md) | Split the system into five services | Accepted | cross-cutting |
 | [0003](0003-split-services-between-go-and-dotnet.md) | Split services between Go and .NET by workload | Accepted | cross-cutting |
 | [0004](0004-use-a-monorepo.md) | Use a single monorepo for all services | Accepted | cross-cutting |
-| [0005](0005-define-api-contract-in-protobuf.md) | Define the API contract in Protobuf | Accepted | cross-cutting |
-| [0006](0006-use-rest-json-at-the-edge-without-graphql.md) | Use REST/JSON at the edge, without GraphQL | Accepted | cross-cutting |
-| [0007](0007-use-envoy-for-rest-grpc-transcoding.md) | Use Envoy as the edge gateway for REST to gRPC transcoding | Accepted | cross-cutting |
-| [0008](0008-validate-jwts-at-the-edge.md) | Validate JWTs at the Envoy edge | Accepted | cross-cutting |
-| [0009](0009-authenticate-service-to-service-calls.md) | Authenticate service-to-service calls: isolated network now, mTLS in production | Accepted | cross-cutting |
-| [0010](0010-use-kafka-for-events-between-services.md) | Use Apache Kafka for events between services | Accepted | cross-cutting |
-| [0011](0011-use-grpc-for-requests-and-events-for-state-changes.md) | Use gRPC for requests and events for state changes between services | Accepted | cross-cutting |
+| [0005](0005-use-grpc-for-requests-and-events-for-state-changes.md) | Use gRPC for requests and events for state changes between services | Accepted | cross-cutting |
+| [0006](0006-define-api-contract-in-protobuf.md) | Define the API contract in Protobuf | Accepted | cross-cutting |
+| [0007](0007-use-rest-json-at-the-edge-without-graphql.md) | Use REST/JSON at the edge, without GraphQL | Accepted | cross-cutting |
+| [0008](0008-use-envoy-for-rest-grpc-transcoding.md) | Use Envoy as the edge gateway for REST to gRPC transcoding | Accepted | cross-cutting |
+| [0009](0009-validate-jwts-at-the-edge.md) | Validate JWTs at the Envoy edge | Accepted | cross-cutting |
+| [0010](0010-authenticate-service-to-service-calls.md) | Authenticate service-to-service calls: isolated network now, mTLS in production | Accepted | cross-cutting |
+| [0011](0011-use-kafka-for-events-between-services.md) | Use Apache Kafka for events between services | Accepted | cross-cutting |
 | [0012](0012-describe-kafka-events-in-protobuf.md) | Describe Kafka events in Protobuf, without a schema registry for now | Accepted | cross-cutting |
 | [0013](0013-use-postgresql-as-the-service-database.md) | Use PostgreSQL as the database of the services | Accepted | cross-cutting |
 | [0014](0014-publish-events-through-a-transactional-outbox.md) | Publish events through a transactional outbox with a polling relay | Accepted | cross-cutting |

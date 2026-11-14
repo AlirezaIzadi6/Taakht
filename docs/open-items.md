@@ -26,9 +26,9 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 3 | Service decomposition | Decided | ADR 0002 (Accepted); five services, the merges that were rejected are listed there; Deal is structured in ADR 0016; context map in [docs/domain/context-map.md](domain/context-map.md) | 2 |
 | 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0003 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
 | **Communication** | | | | |
-| 5 | Sync versus async rule (gRPC for requests, events for state changes) | Decided | ADR 0011 (Accepted); reasoning, nothing tried; the list of synchronous calls is decided per feature | 3 |
-| 6 | Kafka | Decided | ADR 0010 (Accepted); reasoning from the decisions log, nothing benchmarked | 5 |
-| 7 | API contract in Protobuf | Decided | ADR 0005 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
+| 5 | Sync versus async rule (gRPC for requests, events for state changes) | Decided | ADR 0005 (Accepted); reasoning, nothing tried; the list of synchronous calls is decided per feature | 3 |
+| 6 | Kafka | Decided | ADR 0011 (Accepted); reasoning from the decisions log, nothing benchmarked | 5 |
+| 7 | API contract in Protobuf | Decided | ADR 0006 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
 | 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0012 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
 | 9 | Transactional outbox | Decided | ADR 0014 (Accepted); polling relay, change data capture left as a later option; argued from documentation, not tried | 6, 12 |
 | 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0015 (delivery at least once, idempotent consumers), ADR 0017 (synchronous atomic lock in Ad, tested in the MVP) and ADR 0018 (swap lifecycle Saga); the penalty to Reputation and the locker reservation cancel were not built in the MVP | 5, 6, 9 |
@@ -41,10 +41,10 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
 | 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; the ADR is not written. Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
 | **Edge and security** | | | | |
-| 17 | Edge API style | Decided | ADR 0006 (Accepted); REST/JSON only, no GraphQL (revisit if clients with different access patterns appear) | 7 |
-| 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0007 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
-| 19 | JWT validation at the edge | Decided | ADR 0008 (Accepted); tried only with a hello-world service in a spike | 18 |
-| 20 | Service-to-service authentication | Decided | ADR 0009 (Accepted); reasoning from documentation only, no spike; no service-to-service authentication in phase 1, mTLS as the production target | 19 |
+| 17 | Edge API style | Decided | ADR 0007 (Accepted); REST/JSON only, no GraphQL (revisit if clients with different access patterns appear) | 7 |
+| 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0008 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
+| 19 | JWT validation at the edge | Decided | ADR 0009 (Accepted); tried only with a hello-world service in a spike | 18 |
+| 20 | Service-to-service authentication | Decided | ADR 0010 (Accepted); reasoning from documentation only, no spike; no service-to-service authentication in phase 1, mTLS as the production target | 19 |
 | 21 | Real-time channel (chat, notifications) | Open | Communication service combines WebSocket chat and system notifications; chat is minimal/mocked in demo and independent of negotiation | 5 |
 | **Operations** | | | | |
 | 22 | Observability stack | Open | README: only Logstash named, rest TBD | - |

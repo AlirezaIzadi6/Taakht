@@ -15,7 +15,7 @@ We will run the swap lifecycle as a Saga orchestrated by the Swap module in Deal
 
 - **Payment deadline missed (`PaymentTimedOut`):** the swap is cancelled (`SwapCancelled`); Ad releases the lock on both Ads; the locker reservation is cancelled; Reputation applies a penalty to the party who did not pay; the negotiation is cancelled.
 - **Both legs paid (`SwapCompleted`):** Ad closes both Ads for good and the review question opens.
-- **Stuck steps:** a sweeper in the Swap module retries or republishes a step that has not progressed. Every step and every compensation is idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)), so a retry is safe.
+- **Stuck steps:** sweepers inside Deal retry or republish a step that has not progressed (the MVP had one in Negotiation for the agreement and one in Swap for the payment deadline). Every step and every compensation is idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)), so a retry is safe.
 
 After the lock there is no voluntary withdrawal; the only way out is the deadline.
 
@@ -25,6 +25,7 @@ After the lock there is no voluntary withdrawal; the only way out is the deadlin
 2. **Choreography with no orchestrator** - each service decides on its own from the events it sees. The state of a swap would be spread over services and nobody would own the deadline. Argued, not tried.
 3. **One distributed transaction across the services** - not available: the services use separate Postgres databases and Kafka, which cannot take part in one transaction.
 4. **No compensation, repair by hand** - a cancelled swap would leave Ads locked until an operator noticed.
+5. **A workflow engine such as Temporal** - it would own the state, the timers and the retries, but it is another runtime to run and a programming model to adopt, and the decisions log only notes that the swap saga lives inside the service. Not evaluated.
 
 ## Consequences
 

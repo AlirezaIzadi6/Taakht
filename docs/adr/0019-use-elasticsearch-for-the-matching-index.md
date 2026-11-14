@@ -7,7 +7,7 @@
 
 ## Context
 
-Matching ([ADR 0002](0002-split-the-system-into-five-services.md)) keeps a derived index of Ads, built from Ad events and rebuildable from them ([ADR 0010](0010-use-kafka-for-events-between-services.md), [ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)). The [matching rules](../domain/matching.md) set what it must do:
+Matching ([ADR 0002](0002-split-the-system-into-five-services.md)) keeps a derived index of Ads, built from Ad events and rebuildable from them ([ADR 0011](0011-use-kafka-for-events-between-services.md), [ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)). The [matching rules](../domain/matching.md) set what it must do:
 
 - Two-way matching: each side's "have" must fit the other's "want".
 - Categories form a tree, and the further apart two compatible categories are, the lower the score.
@@ -23,7 +23,7 @@ We will keep the Matching index in Elasticsearch, which also ranks results by th
 ## Options considered
 
 1. **Elasticsearch for the index and ranking, reference data in service memory (chosen)** - filtering, scoring and ranking in one engine that can be sharded when the index grows (the city is a natural shard key, since matching never crosses cities). Cost: a JVM component with its own memory and mapping to run, and a reindex when the fields used for scoring change.
-2. **Elasticsearch and Redis, as the README said** - Redis was meant for geo queries and sorting. Search later became neighbourhood-based, so the geo need went away; ranking is done by Elasticsearch; the distance matrix is small enough for service memory (a few tens of thousands of numbers if a city has a few hundred neighbourhoods, an estimate); and a second copy of the same data would have to be kept in step with the index.
+2. **Elasticsearch and Redis, as the README planned earlier** - Redis was meant for geo queries and sorting. Search later became neighbourhood-based, so the geo need went away; ranking is done by Elasticsearch; the distance matrix is small enough for service memory (a few tens of thousands of numbers if a city has a few hundred neighbourhoods, an estimate); and a second copy of the same data would have to be kept in step with the index.
 3. **A PostgreSQL read model in Matching, scored in Go** - what the Taakht MVP did (`ad_index`, six static neighbourhoods). At the MVP's small data size and on one laptop, search p95 stayed under 25 ms up to about 1,500 requests per second; this says nothing about a large index. Not chosen because the design targets a large platform (ADR 0001) and the project wants a search engine as the ranking stack. Not tried at scale.
 
 None of the three was tried at scale.

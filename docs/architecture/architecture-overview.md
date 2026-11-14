@@ -133,8 +133,8 @@ Details of actors, commands and policies: [domain/event-storming.md](../domain/e
 
 ## 5. Data model and consistency
 
-- **Communication between microservices:** fully asynchronous through **Apache Kafka** (with the Transactional Outbox pattern in each service; at-least-once delivery and the aggregate id as partition key). Internal synchronous communication uses **gRPC**.
-- **Intra-service communication in Deal:** the Negotiation and Swap modules communicate inside the .NET process through **Transactional Outbox / Domain Events**, keeping the databases and domain models of the contexts isolated, with no distributed transaction inside Deal. The Swap module receives an immutable snapshot of the agreement only after `ExclusiveLockAcquired` arrives from Ad.
+- **Communication between microservices:** requests use **gRPC**; state changes are events through **Apache Kafka** ([ADR 0005](../adr/0005-use-grpc-for-requests-and-events-for-state-changes.md)), with a transactional outbox in each service, at-least-once delivery, idempotent consumers and the aggregate id as partition key.
+- **Intra-service communication in Deal:** the Negotiation and Swap modules communicate inside the .NET process through **Transactional Outbox / Domain Events**, keeping the databases and domain models of the contexts isolated, with no distributed transaction inside Deal. The Swap module receives an immutable snapshot of the agreement only after the Ad service has granted the lock (`ExclusiveLockAcquired`).
 - **Exclusive lock:** the Ad service owns it; Deal calls it synchronously and the winner is decided by the atomic claim of both Ads in one Ad-service transaction, with a version check ([ADR 0017](../adr/0017-take-the-exclusive-ad-lock-in-the-ad-service.md)). The swap lifecycle after the lock (locker fees, completion or cancellation with compensations) runs as a Saga ([ADR 0018](../adr/0018-run-the-swap-lifecycle-as-a-saga.md)).
 - **Request-right counter:** kept in the Negotiation module, incremented by an atomic statement in the same transaction that creates the negotiation; no Saga.
 - **Datastores:**
@@ -142,7 +142,7 @@ Details of actors, commands and policies: [domain/event-storming.md](../domain/e
   - **Elasticsearch:** the main Matching index and ranking of results by Criteria and neighbourhood filters.
   - **In service memory, no shared cache for now:** the category tree and the precomputed neighbourhood distances ([ADR 0019](../adr/0019-use-elasticsearch-for-the-matching-index.md)).
   - **Separate Event Store:** for the Reputation service, storing raw events and computing scores lazily.
-- **Authentication:** the JWT issued by `AuthProvider` is validated at the Envoy Gateway and the `x-user-id` header is passed to the services. In the demo phase there is no authentication between services.
+- **Authentication:** the JWT issued by `AuthProvider` is validated at the Envoy Gateway and the `x-user-id` header is passed to the services. In the demo phase there is no authentication between services, apart from a shared-secret guard that keeps a user from claiming a `system:` identity ([ADR 0010](../adr/0010-authenticate-service-to-service-calls.md)).
 
 ## 6. Deployment topology
 

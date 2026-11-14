@@ -7,7 +7,7 @@
 
 ## Context
 
-Events travel through Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)) and are published through a transactional outbox ([ADR 0014](0014-publish-events-through-a-transactional-outbox.md)). A producer can retry, and a consumer can see a redelivery after a rebalance or a failed offset commit, so the same event can arrive more than once. A lost event is worse: an Ad that never reaches Matching's index would stay invisible with nothing to show it. Handlers change state (close Ads, cancel negotiations, create swaps), so applying an event twice must be harmless, and events from different topics can arrive in any order relative to each other.
+Events travel through Kafka ([ADR 0011](0011-use-kafka-for-events-between-services.md)) and are published through a transactional outbox ([ADR 0014](0014-publish-events-through-a-transactional-outbox.md)). A producer can retry, and a consumer can see a redelivery after a rebalance or a failed offset commit, so the same event can arrive more than once. A lost event is worse: an Ad that never reaches Matching's index would stay invisible with nothing to show it. Handlers change state (close Ads, cancel negotiations, create swaps), so applying an event twice must be harmless, and events from different topics can arrive in any order relative to each other.
 
 The Taakht MVP (separate `Taakht-MVP` repository) built and tested this in Go and .NET.
 
@@ -26,8 +26,8 @@ We will deliver events at least once and give every consuming service a `process
 ## Consequences
 
 - Positive: replays are absorbed the same way in both languages; a failing handler rolls back its dedupe row, so a retry runs it again.
-- Negative: a failing handler is retried with backoff and blocks its partition, unless it marks the failure permanent (then the event is logged and recorded in a dead-letter table, and an operator replays it by hand); a wrong "permanent" classification drops an event apart from the log. `processed_events` rows are pruned after a retention window (7 days in the MVP), which must stay well above any realistic redelivery window. Ordering is guaranteed only per aggregate, through the partition key ([ADR 0010](0010-use-kafka-for-events-between-services.md)).
-- Follow-ups: a replay tool and alerting on the dead-letter table.
+- Negative: a failing handler is retried with backoff and blocks its partition unless the failure is marked permanent; how failures are classified and parked is in the [Kafka event conventions](../guidelines/kafka-events.md). `processed_events` rows are pruned after a retention window (7 days in the MVP), which must stay well above any realistic redelivery window. Ordering is guaranteed only per aggregate, through the partition key ([ADR 0011](0011-use-kafka-for-events-between-services.md)).
+- Follow-up: alerting on the dead-letter table, which nothing watches today.
 
 ## Evidence (Taakht MVP, one laptop)
 

@@ -11,7 +11,7 @@ Two people work on the project, one in Go and one in .NET, and learning both sta
 
 ## Decision
 
-We will use Go for services whose main work is concurrency and throughput, and .NET for services whose main work is rich domain state. Assignment: Go for Ad, Matching and Communication; .NET for Deal (negotiation and settlement) and Reputation.
+We will use Go for services whose main work is concurrency and throughput, and .NET for services whose main work is rich domain state. Assignment: Go for Ad, Matching and Communication; .NET for Deal (negotiation and swap) and Reputation.
 
 ## Options considered
 
@@ -24,7 +24,7 @@ We will use Go for services whose main work is concurrency and throughput, and .
 
 - Positive: both languages are used in a real distributed setting; the two people work in parallel, each in their own stack.
 - Negative: duplicated tooling and infrastructure libraries; two sets of dependencies and security updates; cross-language debugging.
-- Known gaps: the split rests on the learning goal and on a workload rule of thumb. No benchmark or prototype shows that either language is a better fit for any service, and the correctness of the exclusive lock does not depend on the language (it rests on database constraints). Communication's real-time channel is not designed yet.
+- Known gaps: the split rests on the learning goal and on a workload rule of thumb. No benchmark or prototype shows that either language is a better fit for any service, and the correctness of the exclusive lock does not depend on the language (it rests on one transaction in the Ad service). Communication's real-time channel is not designed yet.
 - Revisit when a service's workload changes class, ownership changes, or running two stacks costs more than it teaches.
 
 ## References

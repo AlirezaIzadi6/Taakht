@@ -1,4 +1,4 @@
-# 0007. Use Envoy as the edge gateway for REST to gRPC transcoding
+# 0008. Use Envoy as the edge gateway for REST to gRPC transcoding
 
 - Status: Accepted
 - Date: 2026-11-12
@@ -7,9 +7,9 @@
 
 ## Context
 
-External clients speak REST/JSON ([ADR 0006](0006-use-rest-json-at-the-edge-without-graphql.md)); services speak gRPC in Go and .NET ([ADR 0003](0003-split-services-between-go-and-dotnet.md)). The README places a gateway at the edge for load balancing, rate limiting and JWT validation. We must choose what translates REST to gRPC.
+External clients speak REST/JSON ([ADR 0007](0007-use-rest-json-at-the-edge-without-graphql.md)); services speak gRPC in Go and .NET ([ADR 0003](0003-split-services-between-go-and-dotnet.md)). The README places a gateway at the edge for load balancing, rate limiting and JWT validation. We must choose what translates REST to gRPC.
 
-What matters: the REST mapping comes from the Protobuf contract (`google.api.http`, [ADR 0005](0005-define-api-contract-in-protobuf.md)) and not from a second configuration; it works for both languages; JWT validation and rate limiting can live in the same place; and replacing it later stays cheap (see [design principles](../architecture/design-principles.md)).
+What matters: the REST mapping comes from the Protobuf contract (`google.api.http`, [ADR 0006](0006-define-api-contract-in-protobuf.md)) and not from a second configuration; it works for both languages; JWT validation and rate limiting can live in the same place; and replacing it later stays possible (see [design principles](../architecture/design-principles.md)).
 
 ## Decision
 
@@ -19,8 +19,8 @@ We will run Envoy as the single public entry point and use its `grpc_json_transc
 
 1. **Envoy `grpc_json_transcoder` (chosen)** - one translation point for every service language. JWT validation (`jwt_authn`) and rate limiting (`local_ratelimit`) are configuration, not code we write. Cost: a 175 MB image, YAML to maintain, and a descriptor change needs an Envoy restart.
 2. **Transcoding inside each service** (ASP.NET Core gRPC JSON transcoding) - runs in-process with no extra hop, but covers .NET only, so Go services would need a different mechanism. Microsoft's docs limit it to server streaming, and the `Grpc.Swagger` OpenAPI package is deprecated with no replacement.
-3. **Standalone grpc-gateway proxy (Go)** - uses the same `google.api.http` annotations, so switching later is cheap, and the image is small (27 MB in the spike). It transcodes correctly, but JWT validation, rate limiting and claim forwarding are code we write and own (73 lines in the spike). A proto change means regenerate, rebuild and redeploy.
-4. **Other API gateways** - APISIX's `grpc-transcode` plugin does not use `google.api.http` annotations (the HTTP mapping is configured per route), which would create a second source of truth next to the proto. Kong's docs did not say whether it uses annotations; not evaluated further.
+3. **Standalone grpc-gateway proxy (Go)** - uses the same `google.api.http` annotations, so moving the transcoding to it later is possible, and the image is small (27 MB in the spike). It transcodes correctly, but JWT validation, rate limiting and claim forwarding are code we write and own (73 lines in the spike). A proto change means regenerate, rebuild and redeploy.
+4. **Other API gateways** - APISIX's `grpc-transcode` plugin does not use `google.api.http` annotations (the HTTP mapping is configured per route), which would create a second source of truth next to the proto. Kong's docs did not say whether it uses annotations, and other gateways and proxies were not compared.
 5. **Connect** - the docs we read list no .NET support, so it cannot serve both stacks.
 
 ## Consequences
@@ -31,7 +31,7 @@ We will run Envoy as the single public entry point and use its `grpc_json_transc
 
 ## References
 
-- [Evidence: edge gateway](../evidence/edge-gateway.md) (transcoding, error mapping, JWT and rate limiting worked in a spike with one hello-world service; `match_incoming_request_route: true` is mandatory; grpc-gateway compared in the same spike)
+- [Evidence: edge gateway](../evidence/edge-gateway.md) (transcoding, error mapping, JWT and rate limiting worked in a spike with one hello-world service; `match_incoming_request_route: true` is mandatory; grpc-gateway compared in the same spike). The Taakht MVP later ran Envoy transcoding with JWT validation in front of four services (`docs/architecture/mvp-architecture.md` in `Taakht-MVP`); it did not build rate limiting.
 - Envoy gRPC-JSON transcoder: https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_json_transcoder_filter
 - ASP.NET Core gRPC JSON transcoding: https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding
 - grpc-gateway: https://github.com/grpc-ecosystem/grpc-gateway

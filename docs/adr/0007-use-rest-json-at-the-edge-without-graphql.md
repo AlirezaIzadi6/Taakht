@@ -1,4 +1,4 @@
-# 0006. Use REST/JSON at the edge, without GraphQL
+# 0007. Use REST/JSON at the edge, without GraphQL
 
 - Status: Accepted
 - Date: 2026-11-13
@@ -11,13 +11,14 @@ Clients reach the system through one public edge. Early on, GraphQL was consider
 
 ## Decision
 
-We will expose REST/JSON only at the edge, with no GraphQL. The REST surface comes from the Protobuf contract ([ADR 0005](0005-define-api-contract-in-protobuf.md)) and is served by the gateway.
+We will expose REST/JSON only at the edge, with no GraphQL. The REST surface comes from the Protobuf contract ([ADR 0006](0006-define-api-contract-in-protobuf.md)) and is served by the gateway.
 
 ## Options considered
 
 1. **REST/JSON only (chosen)** - the REST routes are declared once in the proto files and generated, so there is no second API surface to build or keep in step.
 2. **REST plus GraphQL** - helps when several client types need different shapes of data, which the API-only demo does not have; it would add a GraphQL layer next to the Protobuf contract.
 3. **GraphQL only** - would replace the REST mapping that the contract and the gateway already provide, and give two sources of truth for the API shape.
+4. **gRPC or gRPC-Web to clients** - not discussed; the README and the gateway assume REST/JSON for clients.
 
 All three were argued, not tried.
 
@@ -29,5 +30,5 @@ All three were argued, not tried.
 
 ## References
 
-- [Decisions log](../architecture/architecture-decisions-log.md), "Communication and authentication" and the 2026-10-06 refinements
+- [Decisions log](../architecture/architecture-decisions-log.md), the "Communication and authentication" notes of the 1405/07/02 meeting and the "No GraphQL" entry under "Incoming cap and automatic Hidden, 1405/07/14"
 - README, "Running the demo"

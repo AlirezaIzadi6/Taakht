@@ -7,7 +7,7 @@
 
 ## Context
 
-Services exchange domain events through Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)). Some consumers read old events again, for example Matching rebuilding its index from the Ad topic, so a schema chosen now has to stay readable for a long time and is hard to change later. Producers and consumers are written in Go and .NET ([ADR 0003](0003-split-services-between-go-and-dotnet.md)). The REST and gRPC contract is already in Protobuf ([ADR 0005](0005-define-api-contract-in-protobuf.md)). Phase 1 is a single-node demo run by one team in one repository with one CI ([ADR 0004](0004-use-a-monorepo.md)).
+Services exchange domain events through Kafka ([ADR 0011](0011-use-kafka-for-events-between-services.md)). Some consumers read old events again, for example Matching rebuilding its index from the Ad topic, so a schema chosen now has to stay readable for a long time and is hard to change later. Producers and consumers are written in Go and .NET ([ADR 0003](0003-split-services-between-go-and-dotnet.md)). The REST and gRPC contract is already in Protobuf ([ADR 0006](0006-define-api-contract-in-protobuf.md)). Phase 1 is a single-node demo run by one team in one repository with one CI ([ADR 0004](0004-use-a-monorepo.md)).
 
 ## Decision
 

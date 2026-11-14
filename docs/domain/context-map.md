@@ -49,7 +49,7 @@ flowchart TD
 ### 2.1. Ad and Deal (the central core of the transactions)
 - **Direction:** `Ad` is upstream and `Deal` is downstream.
 - **Integration pattern:** **Customer / Supplier** with a **Published Language** (Protobuf over Kafka and gRPC contracts).
-- **Architectural analysis:** The Deal service depends on Ad's data and events to check the state of the item and to create the agreement. Events such as `AdEdited` cause active proposals in Deal to be replaced (`RebaseProposal`). At final agreement, Deal sends the `ClaimLock` command to Ad through the Saga coordinator. Because Deal is Ad's direct customer, the requirements of the lock interface and of the Ad events are set by mutual agreement.
+- **Architectural analysis:** The Deal service depends on Ad's data and events to check the state of the item and to create the agreement. Events such as `AdEdited` cause active proposals in Deal to be replaced (`RebaseProposal`). At final agreement, the Swap module in Deal calls `ClaimLock` on the Ad service (a synchronous call). Because Deal is Ad's direct customer, the requirements of the lock interface and of the Ad events are set by mutual agreement.
 
 ### 2.2. Ad and Matching
 - **Direction:** `Ad` is upstream and `Matching` is downstream.

@@ -15,7 +15,7 @@ The system is designed for the scale the business needs and runs as a single-nod
 
 ## Decision
 
-We will build the system as independently deployable services, each owning its data. The working boundaries are Ad, Matching, Deal and Reputation, plus a minimal Communication service. The boundaries are recorded in [ADR 0002](0002-split-the-system-into-five-services.md).
+We will build the system as independently deployable services, each owning its data. The working boundaries are Ad, Matching, Deal and Reputation, plus a minimal Communication service. The boundaries are recorded in ADR 0002.
 
 ## Options considered
 

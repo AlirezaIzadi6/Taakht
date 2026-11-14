@@ -7,7 +7,7 @@
 
 ## Context
 
-Every service owns its data ([ADR 0002](0002-split-the-system-into-five-services.md)). Ad needs to claim two Ads in one transaction, Deal keeps proposals and snapshots, and every service writes an outbox and a processed-events table in the same transaction as its state changes ([ADR 0014](0014-publish-events-through-a-transactional-outbox.md), [ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)). The decisions log confirmed PostgreSQL early on for its SQL-level support and scalability. Whether any NoSQL store is needed at all was left open. The Reputation event store, the Matching index and the storage of Communication are separate questions and are not covered here.
+Every service owns its data ([ADR 0002](0002-split-the-system-into-five-services.md)). Ad needs to claim two Ads in one transaction, Deal keeps proposals and snapshots, and every service writes an outbox and a processed-events table in the same transaction as its state changes. The decisions log confirmed PostgreSQL early on for its SQL-level support and scalability. Whether any NoSQL store is needed at all was left open. The Reputation event store, the Matching index and the storage of Communication are separate questions and are not covered here.
 
 ## Decision
 
@@ -44,5 +44,5 @@ Options 2 and 3 were argued, not tried.
 
 ## References
 
-- [Decisions log](../architecture/architecture-decisions-log.md), "Stack" section (PostgreSQL)
+- [Decisions log](../architecture/architecture-decisions-log.md), the "Storage and search" notes of the 1405/07/02 meeting (PostgreSQL)
 - [Architecture overview](../architecture/architecture-overview.md), "Datastores"

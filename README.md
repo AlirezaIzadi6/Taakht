@@ -6,7 +6,7 @@
 
 **A goods-swap layer for a classifieds platform (designed around Divar), built as a microservices portfolio project.**
 
-> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as draft ADRs; repo tooling (CI, Makefile, edge gateway config) is in place. Service implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
+> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as ADRs in [`docs/adr/`](docs/adr/README.md); repo tooling (CI, Makefile, edge gateway config) is in place. Service implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
 
 ## The idea
 
@@ -149,7 +149,7 @@ Known and intentional for the current phase:
 - Item value and price estimation, inter-city exchange and a few other ideas are deliberately parked (see [parked ideas](docs/product/parked-ideas.md)).
 - How the lock behaves while the Ad service is unavailable was exercised only by the Taakht MVP's fault-injection tests, not yet by this design's own code.
 - The system runs on a single node; there is no fault tolerance against the loss of a node or of infrastructure components.
-- Services do not authenticate each other in this phase: the internal network is isolated and only the gateway publishes a port, so it must not be exposed beyond the gateway. Production target is mutual TLS between services.
+- Services do not authenticate each other in this phase: the internal network is isolated and only the gateway publishes a port, so it must not be exposed beyond the gateway. A shared-secret guard only keeps a user from claiming a `system:` identity ([ADR 0010](docs/adr/0010-authenticate-service-to-service-calls.md)). Production target is mutual TLS between services.
 
 ### What would change in production
 

@@ -1,4 +1,4 @@
-# 0005. Define the API contract in Protobuf
+# 0006. Define the API contract in Protobuf
 
 - Status: Accepted
 - Date: 2026-11-12

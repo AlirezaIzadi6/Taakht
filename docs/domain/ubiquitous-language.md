@@ -41,7 +41,7 @@ To avoid overlap and conflicts between concepts, these verbs are standardised st
 | **Retract** (`RetractApproval`) | On an active approval | The user takes back an earlier approval before the final agreement is reached. |
 | **Withdraw** (`WithdrawNegotiation`) | During an open negotiation | One of the two parties voluntarily leaves the negotiating table. |
 | **Expire** (`ExpireNegotiation`) | System-driven (time) | 3 days pass without new activity, or the absolute cap of 30 days is reached. |
-| **Cancel** (`CancelNegotiation`) | System-driven (external event) | The system cancels the negotiation with a stated reason (for example the item was given away in a competing negotiation following a rejected Saga lock). |
+| **Cancel** (`CancelNegotiation`) | System-driven (external event) | The system cancels the negotiation with a stated reason (for example the item was given away in a competing negotiation following a rejected lock). |
 
 ---
 

@@ -7,7 +7,7 @@
 
 ## Context
 
-A service changes its own database and must publish an event about the change to Kafka ([ADR 0010](0010-use-kafka-for-events-between-services.md)). Writing to the database and to Kafka are two separate systems: a crash between them either loses the event or announces a change that was rolled back. Deal also needs events inside the service, between its two modules.
+A service changes its own database and must publish an event about the change to Kafka ([ADR 0011](0011-use-kafka-for-events-between-services.md)). Writing to the database and to Kafka are two separate systems: a crash between them either loses the event or announces a change that was rolled back. Deal also needs events inside the service, between its two modules.
 
 The Taakht MVP (a one-week build kept in the separate `Taakht-MVP` repository) implemented and tested this decision in Go and .NET, so the evidence below is from running code, not from reasoning.
 
@@ -26,12 +26,12 @@ Each service will write its events to an `outbox` table in the same database tra
 ## Consequences
 
 - Positive: a committed change always has its event recorded; a Kafka outage delays events but does not break writes; the rows are an inspectable record of what was published.
-- Negative: delivery is at least once, so consumers must be idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)); each hop adds up to a poll interval; published rows must be pruned (the MVP keeps them 24 hours); with several relay instances `SKIP LOCKED` lets them publish different batches at once, so global order is not guaranteed (order per Kafka key from one relay is).
+- Negative: delivery is at least once, so consumers must be idempotent; each hop adds up to a poll interval; published rows must be pruned (the MVP keeps them 24 hours); only one relay per service publishes at a time (the active one holds an advisory lock and standby instances take over; the MVP tested this with two instances), which keeps the order per Kafka key.
 - Not covered by the MVP tests: a crash between the broker acknowledgement and the `published_at` update (the batch would be published again), and alerting on a growing backlog.
 
 ## Evidence (Taakht MVP, one laptop)
 
-- Outbox lag (`published_at - created_at`) was at most 1.06 s in Negotiation, 0.40 s in Swap, 0.26 s in Ad and 0.30 s in Matching over the load-test runs.
+- Outbox lag (`published_at - created_at`) was at most 1.06 s in Negotiation, 0.40 s in Swap, 0.26 s in Ad and 0.30 s in Matching over the load-test runs, read on freshly wiped databases after a fix for a Windows `localhost` stall; before the fix the .NET services showed 3.7 to 4.2 s.
 - A bug found while building: `created_at DEFAULT now()` is the transaction start, so events of one transaction had equal timestamps and no order; `clock_timestamp()` plus `id` as tie-breaker fixed it.
 - Fault injection: with Kafka stopped for 15 s, for 70 s, or the producer killed with the agreement still in its outbox, the row stayed unpublished and the flow completed after the restart.
 - Sources: `docs/testing/chaos-test-results.md` (scenarios 3, 5, 11), `docs/testing/load-test-results.md` and `docs/adr/drafts/use-a-transactional-outbox-for-events.md` in `Taakht-MVP`.
