@@ -6,7 +6,7 @@
 
 **A goods-swap layer for a classifieds platform (designed around Divar), built as a microservices portfolio project.**
 
-> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as draft ADRs; repo tooling (CI, Makefile, edge gateway config) is in place. Service implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
+> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as ADRs in [`docs/adr/`](docs/adr/README.md); repo tooling (CI, Makefile, edge gateway config) is in place. Service implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
 
 ## The idea
 
@@ -22,7 +22,7 @@ Honest framing: this is a **calculated bet for a Growth/Experiments team**, not 
 2. **Publish an Ad** to become discoverable. An Ad has an "I have" side (a category, which can be very general, and the neighbourhood of the item are required) and an "I want" side (all optional: categories, neighbourhoods of the city, a maximum distance; empty means anything). It is persistent, versioned, and stays active in the matching engine after restarts. It can be hidden at any time; it is never deleted. Once a deal is agreed on it, the Ad is locked and leaves the index, and it is closed for good (still not deleted) when nothing can cancel the agreement any more. Matching is event-driven and two-way, and each user sees the matches ranked by how well the other Ad fits what they asked for. The user is notified when matches appear (one notification groups the matches from one publish or edit).
 3. **Request and negotiate.** Chat is independent of negotiation: you can open one with the owner of any Ad you see. A negotiation request opens a **Negotiation** in the **Deal** service right away, with a 3-pillar **Proposal** snapshot (`Ad1_Version + Ad2_Version + Terms`). Each Ad can have at most 10 open negotiations at a time (inbound and outbound combined; configurable), and each pair of Ads allows only 3 requests until one is accepted. An unanswered request expires after 3 days; an accepted negotiation expires after 3 days without activity or 30 days in total. Blocking a user cuts chat, matching and new requests between the two and withdraws their open negotiations.
 4. **Pin down the terms.** Goods and terms form a single package. Any edit to an Ad or to the logistics terms produces a new proposal snapshot that keeps the unchanged pillars and carries no approval; both sides, including the editor, must approve again explicitly. Each party gives a single, explicit approval on the active proposal.
-5. **Lock.** When both sides approve the active Proposal, an agreement is reached (`AgreementReached`), which is still tentative. A **Saga** asks the Ad service to claim both Ads in one atomic transaction (`ClaimLock`), which succeeds only if both are still available at the agreed versions. On `ExclusiveLockAcquired` the Ads become `Locked`, competing negotiations on them are cancelled with notifications, and the exchange moves to the **Swap** phase; from here the agreement is binding. If another negotiation won (`AlreadyLocked`), the losing negotiation is cancelled; if an Ad was edited meanwhile (`VersionChanged`), the proposal is rebuilt on the new versions and both sides approve again.
+5. **Lock.** When both sides approve the active Proposal, an agreement is reached (`AgreementReached`), which is still tentative. Deal asks the Ad service, with a synchronous call (`ClaimLock`), to claim both Ads in one atomic transaction, which succeeds only if both are still available at the agreed versions. When the claim succeeds (`ExclusiveLockAcquired`) the Ads become `Locked`, competing negotiations on them are cancelled with notifications, and the exchange moves to the **Swap** phase; from here the agreement is binding. If another negotiation won (`AlreadyLocked`), the losing negotiation is cancelled; if an Ad was edited meanwhile (`VersionChanged`), the proposal is rebuilt on the new versions and both sides approve again.
 6. **Complete the swap.** The platform never touches money: any price difference is paid directly between the two parties, outside the system. The parties pick one of two delivery methods per leg (a **locker**, or **in person / courier** arranged by themselves); each party pays the locker fee for their own leg directly to the locker partner within a 1-hour deadline, otherwise the Swap is cancelled and a penalty is applied to their reputation. There is no withdrawal after the lock. After a completed swap each party is asked whether they were satisfied; users can also report abuse, and the internal trust score is only used to rank matches.
 
 ## Architecture at a glance
@@ -33,7 +33,7 @@ Services are classified by how deep the implementation goes:
 
 | Service | Responsibility | Class | Implementation |
 |---|---|---|---|
-| **Ad** | Owns Ads: creation, versioned edits, publish/hide, atomic locking via Saga, consumption by a Swap (Go 1.27) | Core | Full |
+| **Ad** | Owns Ads: creation, versioned edits, publish/hide, atomic locking, consumption by a Swap (Go 1.27) | Core | Full |
 | **Matching** | Neighbourhood/category/reputation-aware candidate discovery (Criteria against the Ad index); two-sided sync and async matching (Go 1.27) | Core | Full |
 | **Deal** | Modular monolith (.NET 10) combining **Negotiation** (multi-candidate negotiations, 3-pillar proposal snapshots, approvals, state machine) and **Swap** (exclusive lock coordination, locker fee payment relay, blind handoff, immutable audit vault) | Core | Full |
 | **Communication** | Downstream event listener and notification translator (calling external notification provider); trade chat for demo (minimal) (Go 1.27) | Supporting | Minimal |
@@ -47,7 +47,7 @@ Every dependency outside the swap domain sits behind a small interface with a mo
 | Interface | Phase 1 (this project) |
 |---|---|
 | `AuthProvider` | Issues a JWT for seeded users, no real password check |
-| `AdRegistryProvider` | Seeded fake ads/users and a small fixed category/neighborhood taxonomy |
+| `TaxonomyProvider` | Divar's category taxonomy and city/neighbourhood division, from a small fixed dataset (Taakht has no link to Divar ads) |
 | `KYCProvider` | Always passes |
 | `DeliveryProvider` | Simulated locker statuses (the only delivery method integrated with a partner) |
 | `ReportProvider` | Records an abuse report (any user can be reported, not only a trade counterpart), no review workflow |
@@ -61,7 +61,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 
 - **Persistent, class-level, versioned Ad** instead of a toggle on an existing Divar ad.
 - **Modular Monolith for Deal in .NET**, keeping negotiation and swap in isolated modules with internal transactional outbox events to eliminate unnecessary network latency.
-- **Saga and compensating transactions for exclusive ad locking** with explicitly weighted strategic drivers.
+- **An atomic, synchronous Ad lock in the Ad service, and a Saga with compensating transactions for the swap lifecycle** (lock, locker fees, completion or cancellation).
 - **Three-pillar Proposal snapshot model** (`Ad1_Version + Ad2_Version + Terms`) with single approval per side, ensuring legal safety and clean state machines.
 - **Matching versus search:** matching is automatic, two-way and ranked per viewer (category fit, then distance, then trust); search is a plain filter over the index with no distance.
 - **Blocking** is a trust-and-safety concern with effects on chat, matching and negotiation, without letting anyone escape a binding agreement.
@@ -76,7 +76,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 - **Languages:** Go 1.27 (Ad, Matching, Communication), C# / .NET 10 (Deal modular monolith, Reputation)
 - **Async communication:** Apache Kafka (domain events published through a transactional outbox)
 - **Sync communication:** gRPC between services, REST/JSON at the edge behind an API Gateway (Envoy: load balancing, rate limiting, JWT validation); no GraphQL
-- **Storage:** PostgreSQL as the durable store, Elasticsearch for search and match scoring, Redis for caching, sorting and neighbourhood distances (its exact role is being redefined), dedicated Event Store for Reputation
+- **Storage:** PostgreSQL as the durable store, Elasticsearch for search and match scoring, no shared cache for now (static reference data such as the category tree and the neighbourhood distances stays in service memory), dedicated Event Store for Reputation
 - **Observability:** Logstash (rest of the stack TBD)
 - **Testing:** unit, integration and end-to-end tests; scripted load and stress tests kept in the repo, with results recorded
 
@@ -118,6 +118,7 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 Taakht/
 ├── docs/            design documents (see Documentation below)
 ├── api/             Protobuf contracts for the services and events (planned)
+├── libs/            one platform library per language: infrastructure code only (planned)
 ├── src/             one solution (.NET) or module (Go) per service
 ├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── spikes/          throwaway experiments behind the evidence docs
@@ -146,9 +147,9 @@ Known and intentional for the current phase:
 - The platform does not arbitrate item-condition disputes; it only records and forwards claims.
 - Informal competitors (Telegram/Instagram swap groups, global swap apps) have not been analyzed yet.
 - Item value and price estimation, inter-city exchange and a few other ideas are deliberately parked (see [parked ideas](docs/product/parked-ideas.md)).
-- How the lock Saga behaves while the Ad service is unavailable is designed but not yet tested.
+- How the lock behaves while the Ad service is unavailable was exercised only by the Taakht MVP's fault-injection tests, not yet by this design's own code.
 - The system runs on a single node; there is no fault tolerance against the loss of a node or of infrastructure components.
-- Services do not authenticate each other in this phase: the internal network is isolated and only the gateway publishes a port, so it must not be exposed beyond the gateway. Production target is mutual TLS between services.
+- Services do not authenticate each other in this phase: the internal network is isolated and only the gateway publishes a port, so it must not be exposed beyond the gateway. A shared-secret guard only keeps a user from claiming a `system:` identity ([ADR 0010](docs/adr/0010-authenticate-service-to-service-calls.md)). Production target is mutual TLS between services.
 
 ### What would change in production
 

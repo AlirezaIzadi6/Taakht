@@ -166,7 +166,7 @@ Source: summaries of the team meeting (the raw files were deleted after being re
 
 **Storage and search**
 - **Elasticsearch:** decided, because the scoring system (ranking of match results) depends on it and all the data cannot be kept in Redis.
-- **Redis:** for spatial (geo-spatial) capabilities and sorting.
+- **Redis:** for spatial (geo-spatial) capabilities and sorting. (Dropped from the design on 2026-11-14, ADR 0019.)
 - **PostgreSQL:** confirmed for strong support and scalability at the SQL level. Open: whether a NoSQL database is needed at all or Postgres is enough.
 - The exact division of work between Elasticsearch and Redis in the Matching index (both have geo) is open; see `open-items.md`.
 
@@ -314,7 +314,7 @@ Source: Alireza's decision (reconciling the ES list).
 - **The locker eligibility check in the mock:** pass by default, and rejected for some seeded users so the error path is also seen in the demo.
 - **No GraphQL:** only REST at the edge (previously "under consideration").
 - **Service-to-service authentication:** none in phase 1; for production later. The old "API Key" proposal (team meeting section 07/02) was dropped.
-- **NoSQL and the Elasticsearch/Redis split:** open; NoSQL is examined further and the ES/Redis split needs an ADR. The rest of the stack decisions (Matching scalability, Negotiation/Communication storage, real-time channel, deployment, observability, load-test tooling, Gateway product) each need a separate ADR.
+- **NoSQL and the Elasticsearch/Redis split:** (settled in ADR 0019 on 2026-11-14: Elasticsearch yes, Redis not for now) open at the time; NoSQL is examined further and the ES/Redis split needs an ADR. The rest of the stack decisions (Matching scalability, Negotiation/Communication storage, real-time channel, deployment, observability, load-test tooling, Gateway product) each need a separate ADR.
 - **Search is neighbourhood-based** (not location-based): the user picks several neighbourhoods, inter-city is allowed, there is no maximum-distance filter, but distance (at neighbourhood level) affects scoring. Effect: a neighbourhood filter and distance data between neighbourhoods are needed instead of exact geo; this feeds the ES/Redis split ADR.
 
 ## Phase 2 of Event Storming review and major architecture decisions, 1405/08/14 (2026-11-04)
@@ -329,6 +329,7 @@ Source: the phase 2 and 3 Event Storming session, the Open Items review, and fin
   - *(Refined on 2026-11-06: Swap is created only after the lock is acquired from Ad; see the last section.)*
 
 ### 2. Managing the race condition and exclusive Ad lock with a Saga and eventual consistency (ADR 10)
+**Superseded on 2026-11-13:** the lock is now a synchronous atomic claim in the Ad service (ADR 0017) and the Saga covers the swap lifecycle (ADR 0018); the flow below describes the earlier asynchronous design. "ADR 10" in the heading is the old draft number, not ADR 0010.
 - **Problem:** several negotiations racing to finalise an agreement over one Ad (concurrent `ConcludeAgreement`).
 - **Two options were examined:**
   1. Strong consistency by moving the lock fully inside the Ad aggregate.
@@ -388,7 +389,7 @@ Source: working sessions with Alireza, reviewing the step-2 output. Details are 
 - **Negotiation deadline.** Before the Ad owner accepts: a fixed 3 days. After acceptance: 3 days without activity, absolute cap of 30 days from opening. Extending activities: accepting the negotiation, `ProposalApproved`, and a user's manual edit of terms. Not extending: `ApprovalRetracted`, rejecting a revision, system rebase, chat, viewing. This closes the TTL item left open on 07/13.
 - **Request cap.** Each directed Ad pair (requester's Ad → target Ad) has 3 request rights; each request consumes one at the moment it is sent; acceptance resets the counter; a system cancellation before acceptance refunds the right; only one open negotiation per Ad pair. Kept in the Negotiation module and incremented atomically in the same transaction as opening the negotiation.
 - **Agreement is binding once the lock is acquired.** `AgreementReached` is tentative; `SwapCreated` follows `ExclusiveLockAcquired`. No voluntary withdrawal after `SwapCreated`; the only cancellation cause is non-payment. With no locker leg, `SwapCompleted` follows `SwapCreated` immediately as a separate event.
-- **Outage rule (not tested).** A timeout is never treated as failure; only an explicit `ExclusiveLockRejected` is. `ClaimLock` is idempotent and retried until a reply arrives. To be verified with a spike that stops the Ad service in the middle of a Saga. Deferred options: a synchronous fast path with Saga fallback, a circuit breaker on approvals, redundant Ad instances.
+- **Outage rule (not tested at the time; the Taakht MVP tested it later, see ADR 0017).** A timeout is never treated as failure; only an explicit `ExclusiveLockRejected` is. `ClaimLock` is idempotent and retried until a reply arrives. To be verified with a spike that stops the Ad service in the middle of a Saga. Deferred options: a synchronous fast path with Saga fallback, a circuit breaker on approvals, redundant Ad instances.
 - **Reputation.** Numeric 1 to 5 reviews with comments are dropped; `Review` is the question "were you satisfied?" after completion (yes/no or score, decided later; time window currently 5 days). The internal trust score stays but is not shown to users. Abuse reports work like Stack Overflow: every report goes to an admin queue; a reporter at or above the minimum score has an instant effect; a rejected report lowers the reporter's score. `SuspendUser` stays on hold.
 - **Communication.** Chat key is (pair of users, Ad), like Divar. In the demo only notifications and simple chat (send, read) are built; mute and watch are a later phase.
 - **Blocking (`UserBlocked`).** Owned by Reputation & Trust, because it affects Communication, Matching and Deal. It works both ways until `UserUnblocked`: no new chat messages (old ones stay visible), Ads hidden from each other and no `MatchFound`, no new negotiation requests, and open negotiations that have not reached `AgreementReached` are withdrawn by the system. A negotiation waiting for the lock and any existing Swap are not touched, so blocking cannot be used to escape a binding agreement. The blocked user is notified. Consumers keep a local copy of the blocked pairs (a small eventual-consistency window is accepted). Withdrawn negotiations do not come back on unblock.
@@ -398,47 +399,70 @@ Source: working sessions with Alireza, reviewing the step-2 output. Details are 
 - **Suspension.** `Suspended` is a separate Ad state (not `Hidden`); Matching removes the Ad, negotiations that have not reached `AgreementReached` are cancelled, a negotiation waiting for the lock and any Swap are untouched, the owner can edit and object but not publish. User suspension is admin-only, suspends all the user's Ads and refuses new requests; the user keeps open chats, search and a chat with an admin, and login is not blocked in the demo.
 
 ## Languages per service and the monorepo, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0002 and ADR 0003.
+Source: review of the draft ADRs; recorded in ADR 0003 and ADR 0004.
 
 - **Language split.** Go for Ad, Matching and Communication; .NET for Deal and Reputation. The rule is a rule of thumb (Go where the main work is concurrency and throughput, .NET where it is rich domain state), not a measured result; the learning goal and balancing the work between the two people also count. This replaces the open assignment of the two supporting services.
-- **Monorepo.** All services, the contracts (`api/`), the gateway config and the docs stay in one repository; services share contracts only. Infrastructure code that several services need (outbox, gRPC interceptors) is not shared for now: each service keeps its own copy until the duplication hurts.
+- **Monorepo.** All services, the contracts (`api/`), the gateway config and the docs stay in one repository; services share contracts and one infrastructure-only platform library per language (`libs/`); no domain code is shared. The Taakht MVP showed this working, so the earlier "each service keeps its own copy" was dropped.
 
 ## API contract in Protobuf, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0004.
+Source: review of the draft ADRs; recorded in ADR 0006.
 
 - **Protobuf is the single source of truth** for service APIs, in the shared `api/` directory; REST routes come from `google.api.http` annotations; code, the gateway descriptor and the OpenAPI document are generated. Tried only with a hello-world service; the alternatives were argued, not tried.
 - **Generated code is not committed.** It is produced at build time (`buf generate` for Go through a `make generate` target, `Grpc.Tools` for .NET). This is a convention, not an ADR: it is cheap to reverse and lives in the API conventions guideline.
-- **No shared interceptor library.** Following ADR 0003, each service keeps its own gRPC interceptor setup.
+- **Interceptors come from the platform library of each language**, following ADR 0004.
 
 ## Envoy as the edge gateway, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0005.
+Source: review of the draft ADRs; recorded in ADR 0008.
 
 - **Envoy is the single public entry point** and transcodes REST/JSON to gRPC with `grpc_json_transcoder`, driven by a descriptor built from the shared protos. Only annotated RPCs are public. grpc-gateway, in-service transcoding, APISIX, Kong and Connect were compared from documentation and one spike; grpc-gateway was the close alternative.
 - **Not decided here:** where JWTs are validated (separate ADR), and the edge API style (REST only, no GraphQL; open item 17, reasoning not written yet). Rate limit values are configuration, not an ADR.
 
 ## JWT validation at the edge, 2026-11-12 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0006.
+Source: review of the draft ADRs; recorded in ADR 0009.
 
 - **JWTs are verified in Envoy** (`jwt_authn`: signature, expiry, issuer, audience). Envoy forwards only the user id as `x-user-id`; services read it through their own gRPC interceptor and pass it on unchanged. No revocation, so tokens must be short-lived; the lifetime, identity provider and key rotation are still open.
 - **Known risk:** a service reachable without Envoy would accept a forged identity. For now the internal network is isolated; service-to-service authentication is decided separately.
 
 ## Service-to-service authentication, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0007.
+Source: review of the draft ADRs; recorded in ADR 0010.
 
 - **Phase 1: no service identity is enforced between services.** The internal network is isolated (only Envoy publishes a port) and the risk is documented in the README. Each service creates its channels and interceptors in one place so authentication can be added there. **Production target: mutual TLS**; the certificate mechanism is decided with the deployment topology. API keys and an internal token issuer were rejected; reasoning only, nothing was tried.
-- **Cost of the per-service setup:** adding mTLS later means changing each service, since ADR 0003 shares no infrastructure code.
+- **Cost of the platform library:** adding mTLS later means changing two libraries and redeploying every service.
 
 ## Kafka as the broker and Protobuf events, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0008 and ADR 0009.
+Source: review of the draft ADRs; recorded in ADR 0011 and ADR 0012.
 
-- **ADR 0008 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had no recorded reason, so ADR 0008 gives one for each (reasoning, not tried). Outbox, delivery semantics and the partition strategy still need their own decisions.
-- **ADR 0009: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
+- **ADR 0011 writes down the 2026-09-25 broker decision** (Kafka, partition key = aggregate id, Kafka is not a source of truth, compacted topics are only a replayable feed). RabbitMQ and NATS JetStream were rejected with the reasons recorded in this log; Redis Streams and Postgres as a queue had no recorded reason, so ADR 0011 gives one for each (reasoning, not tried). Outbox, delivery semantics and the partition strategy still need their own decisions.
+- **ADR 0012: events are Protobuf messages in `api/`, no schema registry.** The envelope headers and schema rules live in `docs/guidelines/kafka-events.md`, because this log already said envelope details belong in a convention document. A registry is reconsidered when producers appear outside this repository's CI.
 
 ## Deal as a modular monolith, 2026-11-13 (with Arman)
-Source: review of the draft ADRs; recorded in ADR 0010.
+Source: review of the draft ADRs; recorded in ADR 0016.
 
 - **Deal stays one .NET service with two modules (`Negotiation` and `Swap`)**, as decided on 2026-11-04. The ADR drops two claims that were never measured (network latency saved, extraction "with minimal refactoring") and keeps the reasoning that matters: the post-agreement logic is small, and two services would add a boundary and a distributed transaction between the end of a negotiation and the creation of its swap.
 - **Not covered:** how the Ad lock is acquired (separate decision), and the transactional outbox, which Deal's design uses but which still has no ADR of its own (open item 9).
+
+## The ADR set reordered and completed, 2026-11-13 (with Arman)
+Source: review of the ADRs after they were accepted one by one.
+
+- **Why:** several ADRs relied on decisions that had no ADR yet (service boundaries, the sync/async rule, the REST-only edge, the outbox, delivery semantics). The accepted ADRs were renumbered once so that each follows the decisions it relies on, and six ADRs were added: 0002 (five services), 0006 (REST/JSON at the edge), 0011 (gRPC for requests, events for state changes), 0013 (PostgreSQL), 0014 (transactional outbox), 0015 (at-least-once delivery, processed-events table). The locking draft became 0017 (the lock) and 0018 (the swap Saga).
+- **Drafted from the repo, to confirm:** ADR 0002 (the reasons for each split and each rejected merge come from the log and the context map) and ADR 0014 (a polling relay rather than change data capture; the same outbox table for Deal's two modules and for Kafka).
+- Numbers are permanent from now on; the rule is noted in the ADR README.
+- **The Taakht MVP was folded in (2026-11-13).** The MVP (separate `Taakht-MVP` repository) had implemented and tested the outbox, the processed-events table and the lock flow, so ADR 0014 and ADR 0015 now rest on its results instead of reasoning. ADR 0004 now allows one infrastructure-only platform library per language (the MVP built exactly that), ADR 0010 keeps the narrow `x-internal-token` guard for `system:` identities,.
+- **`AdRegistryProvider` became `TaxonomyProvider`:** Taakht has no link to Divar ads, so only Divar's category taxonomy and city/neighbourhood division are read.
+- **PostgreSQL got its own ADR (0013)**, listing the features the design relies on (row locks and `SKIP LOCKED`, `ON CONFLICT DO NOTHING`, `clock_timestamp()`), so the cost of ever switching engines is visible. It is placed before the outbox, which uses them. Elasticsearch and Redis are still to be discussed before an ADR.
+
+## The Ad lock and the swap Saga, 2026-11-13 (with Arman)
+Source: review of the draft ADRs against the Taakht MVP; recorded in ADR 0017 and ADR 0018.
+
+- **The lock is a synchronous atomic claim in the Ad service** (`ClaimLock`, called by Deal's Swap module, idempotent by swap id, both Ads in one transaction in ascending id order). This is what the MVP built and tested; the earlier asynchronous `ClaimLock` command over Kafka was dropped. Even with a synchronous call the flow still needs a waiting state, retries and a sweeper, so "synchronous" does not remove the need for failure handling.
+- **The Saga moved to the swap lifecycle:** lock, locker fees within one hour, then completion or cancellation, where cancellation releases the Ads, cancels the locker reservation and penalises the party who did not pay. That is where the compensations are real and cross-service.
+- **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend ADR 0017 and may need a new ADR.
+
+## Elasticsearch yes, Redis not for now, 2026-11-14 (with Arman)
+Source: discussion of the Matching index; recorded in ADR 0019.
+
+- **Elasticsearch stays** as the Matching index and ranking engine; the city is the natural shard key. The MVP's SQL read model worked at small scale but says nothing about a large index.
+- **Redis is dropped from the current design.** It was planned for geo queries and sorting; search became neighbourhood-based, ranking is Elasticsearch's job, and the category tree and the neighbourhood distance matrix are small enough for service memory. It returns, as its own ADR, only for a concrete need: a cache shared by several instances, a real-time backplane for chat across several Communication instances, or a global rate limit across several gateways.
 
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

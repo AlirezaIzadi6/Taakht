@@ -20,7 +20,7 @@ Decision: no side service is merely "assumed or consumed from Divar". Each sits 
 | Interface | Responsibility | Phase 1 (this project) | Later phase (optional, if time allows) |
 |---|---|---|---|
 | `AuthProvider` | Login / session / JWT | Issues a fake JWT for a seeded user with a `UserId`, with no real password check | Real validation |
-| `AdRegistryProvider` | Create/read Ads and users | Seeded fake data plus minimal CRUD | Real integration with Divar's Ads |
+| `TaxonomyProvider` | Reads Divar's category taxonomy and city/neighbourhood division | A small fixed dataset | Real integration with Divar's taxonomy |
 | `KYCProvider` | Higher-level identity verification for locker handover | Always returns true/passed (some seeded users are rejected to exercise errors) | Integration with a real KYC service |
 | `DeliveryProvider` | Integration with the **locker** (the only handover method with an external partner), user eligibility check, receiving payment and status webhooks, payment status inquiry, `CancelReservation` | Mock with fixed/simulated statuses (behind an ACL) | Integration with a real locker partner |
 | `ReportProvider` | Abuse reports (any user can be reported, even without a shared deal or negotiation: fake Ad, harassment, fraud intent) | Records a simple entry; the review workflow is the admin queue described in the Reputation service | Integration with Divar's real abuse-report system |
@@ -28,14 +28,14 @@ Decision: no side service is merely "assumed or consumed from Divar". Each sits 
 
 **Removed:** `WalletProvider` and `PSP/EscrowGateway` do not exist. The platform does not lock, hold or move any money; wallet, gateway and escrow licensing are outside the project scope.
 
-The full category taxonomy and the geographic division (city/neighbourhood) are mocked in phase 1 as a fixed/simplified dataset inside the `AdRegistryProvider` mock.
+The full category taxonomy and the geographic division (city/neighbourhood) are mocked in phase 1 as a fixed/simplified dataset inside the `TaxonomyProvider` mock.
 
 ## 3. Service map (current state)
 
 | Service | Responsibility | Data ownership | Class | Implementation | Language/stack |
 |---|---|---|---|---|---|
-| **Ad** | Create, edit (versioned), `Published ⇄ Hidden`, lock and close with a deal; managing the open-negotiation counter; answering the Saga's atomic lock requests (both Ads in one transaction) | **Ads** (versioned; durable PostgreSQL storage) | Core | Full | Go 1.27 |
-| **Matching** | Candidate discovery by neighbourhood/category/trust; applying Eligibility Config; two-way matching of Ads and running Criteria (sync and async) | Matching index (Elasticsearch + Redis) + local copy of trust scores | Core | Full | Go 1.27 |
+| **Ad** | Create, edit (versioned), `Published ⇄ Hidden`, lock and close with a deal; managing the open-negotiation counter; answering the synchronous atomic lock request from Deal (both Ads in one transaction) | **Ads** (versioned; durable PostgreSQL storage) | Core | Full | Go 1.27 |
+| **Matching** | Candidate discovery by neighbourhood/category/trust; applying Eligibility Config; two-way matching of Ads and running Criteria (sync and async) | Matching index (Elasticsearch, with the trust score copied into it); category tree and neighbourhood distances in service memory | Core | Full | Go 1.27 |
 | **Deal** | The unified deal service, a **Modular Monolith** with two isolated modules:<br>1. **Negotiation module:** open negotiations (cap of 10 per Ad), snapshot proposals, approvals, the request-right counter per Ad pair, and starting the agreement.<br>2. **Swap module:** the final handover state machine, locker payment relay, and evidence recording (Audit Vault) | Deal database (PostgreSQL) with separate schemas/tables for Negotiation and Swap; internal communication via Outbox | Core | Full | C# / .NET 10 |
 | **Communication** | Downstream listener (Conformist) of domain events, translating them into text messages for `NotificationProvider`; plus a minimal chat module for the demo (independent of negotiation) | Messages and notification records | Supporting | Minimal | Go 1.27 |
 | **Reputation** | Internal trust score with **Event Sourcing**; penalties based on Swap outcomes; review question after a swap; abuse reports and objections (admin queue only for low-standing reporters and for objections); user blocking (`UserBlocked`, consumed by Communication, Matching and Deal); user suspension by an admin; publishes `TrustScoreUpdated` for Matching | Own Event Store | Supporting | Minimal | C# / .NET 10 |
@@ -60,7 +60,7 @@ The full glossary is in [domain/ubiquitous-language.md](../domain/ubiquitous-lan
 
 ## 4. Key flows
 
-### Flow 1: from Ad to agreement and exclusive lock (Saga pattern)
+### Flow 1: from Ad to agreement and exclusive lock (synchronous lock)
 1. **Creating and publishing an Ad:** user A creates an Ad. If "publish" is selected, `AdCreated` and `AdPublished` are emitted. Matching indexes the Ad, publishes `MatchFound` if there is a match (once per Ad pair), and Communication sends a notification.
 2. **Requesting and opening a negotiation:** user B sends `RequestNegotiation` on A's Ad, which starts the negotiation (`NegotiationOpened` with an initial system proposal). Each directed Ad pair (requester's Ad, target Ad) has only 3 request rights; every request consumes one at the moment it is sent, only one negotiation can be open per pair, and acceptance resets the counter to zero. A request with no rights left is rejected and only the user sees an error. The Ad owner accepts with `AcceptNegotiation` (`NegotiationActive`). The open-negotiation counter of both Ads goes up by one (when it reaches 10, the Ad is temporarily hidden with the `system_hold` flag).
 3. **Bargaining and changes (three-component snapshot model):**
@@ -69,13 +69,13 @@ The full glossary is in [domain/ubiquitous-language.md](../domain/ubiquitous-lan
    - If a party changes the terms (`ReviseProposal`), a new proposal is created with the new Terms and the previous Ad versions, with no approval.
    - If a party edits their Ad in the Ad service (`AdEdited`), the system (`RebaseProposal`) creates a new proposal with the new Ad version and the previous terms, with no approval. Both parties, including the editor, must approve explicitly again; there is no implicit approval. The system-made proposal does not extend the deadline.
    - Deadline: a fixed 3 days before the Ad owner accepts; after acceptance, 3 days without activity, with an absolute cap of 30 days from opening. Accepting the negotiation, `ProposalApproved` and a user's manual edit of the terms extend it.
-4. **Final approval and running the Saga:**
+4. **Final approval and the lock:**
    - Both parties send `ApproveProposal` on the current proposal (`ProposalApproved`).
    - When the system sees both approvals, it issues `ConcludeAgreement` and `AgreementReached` is published. The UI shows "Finalizing agreement...". The agreement is still tentative: nothing is binding yet and the Ads are not locked.
-   - The **Saga Coordinator** sends one `ClaimLock` command to the Ad service, carrying both Ads with the version fixed in the proposal. It is idempotent by negotiation id.
+   - The Swap module in Deal calls `ClaimLock` on the Ad service (a synchronous gRPC call), carrying both Ads with the version fixed in the proposal. It is idempotent by swap id.
    - **Happy path:** the Ad service claims both Ads in one local transaction, in ascending id order. For each Ad the status must be `Available` and the current version must equal the agreed version. Both Ads become `Locked` and leave the Matching index, and `ExclusiveLockAcquired` is emitted. The system sends `CancelNegotiation` (reason: given to someone else) to all competing negotiations of both Ads (`NegotiationCancelled`). The Swap module in Deal is activated and `SwapCreated` is emitted. From here the agreement is binding.
-   - **Failure path (compensating transaction):** if no Ad changed, `ExclusiveLockRejected` is returned with a reason. `AlreadyLocked`: another negotiation won, and the Saga cancels the losing negotiation (`CancelNegotiation`) with the message "unfortunately the item was given away". `VersionChanged`: an Ad was edited in the meantime; the negotiation stays open, `RebaseProposal` builds a new proposal on the current versions, and both parties approve again.
-   - **Outage rule (not yet tested):** a timeout is never treated as failure. Only an explicit `ExclusiveLockRejected` is. `ClaimLock` is retried until a reply arrives.
+   - **Failure path:** if no Ad changed, `ExclusiveLockRejected` is returned with a reason. `AlreadyLocked`: another negotiation won, and Deal cancels the losing negotiation (`CancelNegotiation`) with the message "unfortunately the item was given away". `VersionChanged`: an Ad was edited in the meantime; the negotiation stays open, `RebaseProposal` builds a new proposal on the current versions, and both parties approve again.
+   - **Outage rule:** a timeout is never treated as a rejection. Only an explicit `ExclusiveLockRejected` is. `ClaimLock` is retried with backoff until a reply arrives, and the negotiation stays in "waiting for the lock". The Taakht MVP tested this by stopping the Ad service during the lock.
 
 ### Flow 2: running the Swap and recording trust
 1. **Start of the physical phase:** once `SwapCreated` is emitted, the Swap module freezes the agreement terms (audit trail). The platform holds no money. The agreed price difference is settled directly between the parties, outside the system.
@@ -133,16 +133,16 @@ Details of actors, commands and policies: [domain/event-storming.md](../domain/e
 
 ## 5. Data model and consistency
 
-- **Communication between microservices:** fully asynchronous through **Apache Kafka** (with the Transactional Outbox pattern in each service; at-least-once delivery and the aggregate id as partition key). Internal synchronous communication uses **gRPC**.
-- **Intra-service communication in Deal:** the Negotiation and Swap modules communicate inside the .NET process through **Transactional Outbox / Domain Events**, keeping the databases and domain models of the contexts isolated, with no distributed transaction inside Deal. The Swap module receives an immutable snapshot of the agreement only after `ExclusiveLockAcquired` arrives from Ad.
-- **Exclusive lock:** managed by a **Saga with eventual consistency** and a compensating transaction between Deal and Ad. The winner is decided by the atomic claim of both Ads in one Ad-service transaction, with a version check. Behaviour during an Ad outage is not yet tested (see the locking ADR).
+- **Communication between microservices:** requests use **gRPC**; state changes are events through **Apache Kafka** ([ADR 0005](../adr/0005-use-grpc-for-requests-and-events-for-state-changes.md)), with a transactional outbox in each service, at-least-once delivery, idempotent consumers and the aggregate id as partition key.
+- **Intra-service communication in Deal:** the Negotiation and Swap modules communicate inside the .NET process through **Transactional Outbox / Domain Events**, keeping the databases and domain models of the contexts isolated, with no distributed transaction inside Deal. The Swap module receives an immutable snapshot of the agreement only after the Ad service has granted the lock (`ExclusiveLockAcquired`).
+- **Exclusive lock:** the Ad service owns it; Deal calls it synchronously and the winner is decided by the atomic claim of both Ads in one Ad-service transaction, with a version check ([ADR 0017](../adr/0017-take-the-exclusive-ad-lock-in-the-ad-service.md)). The swap lifecycle after the lock (locker fees, completion or cancellation with compensations) runs as a Saga ([ADR 0018](../adr/0018-run-the-swap-lifecycle-as-a-saga.md)).
 - **Request-right counter:** kept in the Negotiation module, incremented by an atomic statement in the same transaction that creates the negotiation; no Saga.
 - **Datastores:**
   - **PostgreSQL:** durable source of truth for Ad and Deal (version records and snapshots).
   - **Elasticsearch:** the main Matching index and ranking of results by Criteria and neighbourhood filters.
-  - **Redis:** neighbourhood geographic distance data and fast caching.
+  - **In service memory, no shared cache for now:** the category tree and the precomputed neighbourhood distances ([ADR 0019](../adr/0019-use-elasticsearch-for-the-matching-index.md)).
   - **Separate Event Store:** for the Reputation service, storing raw events and computing scores lazily.
-- **Authentication:** the JWT issued by `AuthProvider` is validated at the Envoy Gateway and the `x-user-id` header is passed to the services. In the demo phase there is no authentication between services.
+- **Authentication:** the JWT issued by `AuthProvider` is validated at the Envoy Gateway and the `x-user-id` header is passed to the services. In the demo phase there is no authentication between services, apart from a shared-secret guard that keeps a user from claiming a `system:` identity ([ADR 0010](../adr/0010-authenticate-service-to-service-calls.md)).
 
 ## 6. Deployment topology
 
@@ -152,7 +152,7 @@ Details of actors, commands and policies: [domain/event-storming.md](../domain/e
 ## 7. Testing and observability
 
 - **Tests:** a test pyramid of unit tests, integration tests (with Docker and test containers for Kafka and PostgreSQL), and full end-to-end tests over the API.
-- **Concurrency and load testing:** concurrency tests for Ad lock races and the Saga's compensating transactions with stress-test tools, with logs and results recorded in the repository. A planned spike stops the Ad service in the middle of a Saga to verify the outage rule.
+- **Concurrency and load testing:** concurrency tests for Ad lock races and the Saga's compensating transactions with stress-test tools, with logs and results recorded in the repository. The Taakht MVP's fault-injection tests already stop the Ad service in the middle of the lock; the same scenarios are to be repeated on this design's implementation.
 - **Observability:** centralised logs in JSON format, with Logstash for aggregation.
 
 ---

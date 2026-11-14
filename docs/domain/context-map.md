@@ -11,7 +11,7 @@ flowchart TD
     subgraph Core ["Business core (Core Domain)"]
         Ad["Ad Context\n(Go / PostgreSQL)\n[Upstream]"]
         Deal["Deal Context\n(Modular Monolith - .NET)\n[Downstream to Ad, Upstream to Reputation]"]
-        Matching["Matching Context\n(Go / Elasticsearch + Redis)\n[Downstream]"]
+        Matching["Matching Context\n(Go / Elasticsearch)\n[Downstream]"]
     end
 
     subgraph Supporting ["Supporting contexts"]
@@ -49,12 +49,12 @@ flowchart TD
 ### 2.1. Ad and Deal (the central core of the transactions)
 - **Direction:** `Ad` is upstream and `Deal` is downstream.
 - **Integration pattern:** **Customer / Supplier** with a **Published Language** (Protobuf over Kafka and gRPC contracts).
-- **Architectural analysis:** The Deal service depends on Ad's data and events to check the state of the item and to create the agreement. Events such as `AdEdited` cause active proposals in Deal to be replaced (`RebaseProposal`). At final agreement, Deal sends the `ClaimLock` command to Ad through the Saga coordinator. Because Deal is Ad's direct customer, the requirements of the lock interface and of the Ad events are set by mutual agreement.
+- **Architectural analysis:** The Deal service depends on Ad's data and events to check the state of the item and to create the agreement. Events such as `AdEdited` cause active proposals in Deal to be replaced (`RebaseProposal`). At final agreement, the Swap module in Deal calls `ClaimLock` on the Ad service (a synchronous call). Because Deal is Ad's direct customer, the requirements of the lock interface and of the Ad events are set by mutual agreement.
 
 ### 2.2. Ad and Matching
 - **Direction:** `Ad` is upstream and `Matching` is downstream.
 - **Integration pattern:** **Conformist**.
-- **Architectural analysis:** Matching only builds a read model in Elasticsearch and Redis from Ad events (`AdPublished`, `AdEdited`, `AdHidden`, `AdClosed`). It imposes no structure or special requirement on the Ad service and fully follows the Ad data model.
+- **Architectural analysis:** Matching only builds a read model in Elasticsearch from Ad events (`AdPublished`, `AdEdited`, `AdHidden`, `AdClosed`). It imposes no structure or special requirement on the Ad service and fully follows the Ad data model.
 
 ### 2.3. Deal and Reputation
 - **Direction:** `Deal` is upstream and `Reputation` is downstream.
@@ -89,7 +89,7 @@ Blocking also flows from Reputation: `UserBlocked` / `UserUnblocked` are consume
 |---|---|---|---|
 | Matching | Core | Full | The heart of the product; where concurrency and ranking are shown |
 | Ad | Core | Full | Versioned Ads and the atomic exclusive lock |
-| Deal (Negotiation and Swap) | Core | Full | The consistency-critical flows: proposals, approvals, the lock Saga, binding agreements |
+| Deal (Negotiation and Swap) | Core | Full | The consistency-critical flows: proposals, approvals, the Ad lock call, the swap Saga, binding agreements |
 | Reputation | Supporting | Minimal to shallow | Real (event-sourced), but it also holds blocking and abuse reports, so it is a little more than minimal |
 | Communication | Supporting | Minimal | Real but shallow: notifications and simple chat |
 | `DeliveryProvider`, `AuthProvider`, `KYCProvider`, `NotificationProvider`, `ReportProvider` | Generic | Mock | Behind interfaces; replacing a mock with the real service is only a wiring change |
