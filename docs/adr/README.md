@@ -55,3 +55,4 @@ ADRs are written in English.
 | [0016](0016-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal (Negotiation and Swap) |
 | [0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md) | Take the exclusive Ad lock in the Ad service with a synchronous atomic claim | Accepted | Ad, Deal (Negotiation and Swap) |
 | [0018](0018-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Accepted | Deal (Swap), Ad, Reputation |
+| [0019](0019-use-elasticsearch-for-the-matching-index.md) | Use Elasticsearch for the Matching index, without Redis for now | Accepted | Matching |

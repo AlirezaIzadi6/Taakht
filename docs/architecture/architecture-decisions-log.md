@@ -457,5 +457,11 @@ Source: review of the draft ADRs against the Taakht MVP; recorded in ADR 0017 an
 - **The Saga moved to the swap lifecycle:** lock, locker fees within one hour, then completion or cancellation, where cancellation releases the Ads, cancels the locker reservation and penalises the party who did not pay. That is where the compensations are real and cross-service.
 - **Open:** Arman's idea of a hold on the Ad after `AgreementReached` (open-items) would extend ADR 0017 and may need a new ADR.
 
+## Elasticsearch yes, Redis not for now, 2026-11-14 (with Arman)
+Source: discussion of the Matching index; recorded in ADR 0019.
+
+- **Elasticsearch stays** as the Matching index and ranking engine; the city is the natural shard key. The MVP's SQL read model worked at small scale but says nothing about a large index.
+- **Redis is dropped from the current design.** It was planned for geo queries and sorting; search became neighbourhood-based, ranking is Elasticsearch's job, and the category tree and the neighbourhood distance matrix are small enough for service memory. It returns, as its own ADR, only for a concrete need: a cache shared by several instances, a real-time backplane for chat across several Communication instances, or a global rate limit across several gateways.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

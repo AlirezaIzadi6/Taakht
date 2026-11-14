@@ -11,7 +11,7 @@ flowchart TD
     subgraph Core ["Business core (Core Domain)"]
         Ad["Ad Context\n(Go / PostgreSQL)\n[Upstream]"]
         Deal["Deal Context\n(Modular Monolith - .NET)\n[Downstream to Ad, Upstream to Reputation]"]
-        Matching["Matching Context\n(Go / Elasticsearch + Redis)\n[Downstream]"]
+        Matching["Matching Context\n(Go / Elasticsearch)\n[Downstream]"]
     end
 
     subgraph Supporting ["Supporting contexts"]
@@ -54,7 +54,7 @@ flowchart TD
 ### 2.2. Ad and Matching
 - **Direction:** `Ad` is upstream and `Matching` is downstream.
 - **Integration pattern:** **Conformist**.
-- **Architectural analysis:** Matching only builds a read model in Elasticsearch and Redis from Ad events (`AdPublished`, `AdEdited`, `AdHidden`, `AdClosed`). It imposes no structure or special requirement on the Ad service and fully follows the Ad data model.
+- **Architectural analysis:** Matching only builds a read model in Elasticsearch from Ad events (`AdPublished`, `AdEdited`, `AdHidden`, `AdClosed`). It imposes no structure or special requirement on the Ad service and fully follows the Ad data model.
 
 ### 2.3. Deal and Reputation
 - **Direction:** `Deal` is upstream and `Reputation` is downstream.

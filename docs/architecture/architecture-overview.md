@@ -35,7 +35,7 @@ The full category taxonomy and the geographic division (city/neighbourhood) are 
 | Service | Responsibility | Data ownership | Class | Implementation | Language/stack |
 |---|---|---|---|---|---|
 | **Ad** | Create, edit (versioned), `Published ⇄ Hidden`, lock and close with a deal; managing the open-negotiation counter; answering the synchronous atomic lock request from Deal (both Ads in one transaction) | **Ads** (versioned; durable PostgreSQL storage) | Core | Full | Go 1.27 |
-| **Matching** | Candidate discovery by neighbourhood/category/trust; applying Eligibility Config; two-way matching of Ads and running Criteria (sync and async) | Matching index (Elasticsearch + Redis) + local copy of trust scores | Core | Full | Go 1.27 |
+| **Matching** | Candidate discovery by neighbourhood/category/trust; applying Eligibility Config; two-way matching of Ads and running Criteria (sync and async) | Matching index (Elasticsearch, with the trust score copied into it); category tree and neighbourhood distances in service memory | Core | Full | Go 1.27 |
 | **Deal** | The unified deal service, a **Modular Monolith** with two isolated modules:<br>1. **Negotiation module:** open negotiations (cap of 10 per Ad), snapshot proposals, approvals, the request-right counter per Ad pair, and starting the agreement.<br>2. **Swap module:** the final handover state machine, locker payment relay, and evidence recording (Audit Vault) | Deal database (PostgreSQL) with separate schemas/tables for Negotiation and Swap; internal communication via Outbox | Core | Full | C# / .NET 10 |
 | **Communication** | Downstream listener (Conformist) of domain events, translating them into text messages for `NotificationProvider`; plus a minimal chat module for the demo (independent of negotiation) | Messages and notification records | Supporting | Minimal | Go 1.27 |
 | **Reputation** | Internal trust score with **Event Sourcing**; penalties based on Swap outcomes; review question after a swap; abuse reports and objections (admin queue only for low-standing reporters and for objections); user blocking (`UserBlocked`, consumed by Communication, Matching and Deal); user suspension by an admin; publishes `TrustScoreUpdated` for Matching | Own Event Store | Supporting | Minimal | C# / .NET 10 |
@@ -140,7 +140,7 @@ Details of actors, commands and policies: [domain/event-storming.md](../domain/e
 - **Datastores:**
   - **PostgreSQL:** durable source of truth for Ad and Deal (version records and snapshots).
   - **Elasticsearch:** the main Matching index and ranking of results by Criteria and neighbourhood filters.
-  - **Redis:** neighbourhood geographic distance data and fast caching.
+  - **In service memory, no shared cache for now:** the category tree and the precomputed neighbourhood distances ([ADR 0019](../adr/0019-use-elasticsearch-for-the-matching-index.md)).
   - **Separate Event Store:** for the Reputation service, storing raw events and computing scores lazily.
 - **Authentication:** the JWT issued by `AuthProvider` is validated at the Envoy Gateway and the `x-user-id` header is passed to the services. In the demo phase there is no authentication between services.
 

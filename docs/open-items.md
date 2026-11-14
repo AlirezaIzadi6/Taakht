@@ -36,8 +36,8 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
 | 12 | PostgreSQL | Decided | ADR 0013 (Accepted); the features the design relies on are listed there; whether any NoSQL store is needed, the Reputation event store and the storage of Communication are still open | 11 |
 | 13 | Event sourcing in Reputation (including upcasting) | Stack named | README; project memory; Reputation's scope grew (blocking, abuse-report queue, penalties), so check that event sourcing still fits the admin queue and blocking | 8, 12 |
-| 14 | Search (Elasticsearch for search and match scoring) | Stack named | README; to be discussed before an ADR (the MVP used a SQL read model) | 3 |
-| 15 | Neighbourhood distance and the role of Redis | Stack named | README says Redis for geo; search is now neighbourhood-based (precomputed distances between neighbourhoods, no exact coordinates), so the Elasticsearch/Redis split must be redefined; to be discussed before an ADR | 14 |
+| 14 | Search (Elasticsearch for search and match scoring) | Decided | ADR 0019 (Accepted); tried at no scale (the MVP used a SQL read model) | 3 |
+| 15 | Neighbourhood distance and the role of Redis | Decided | ADR 0019 (Accepted); no Redis for now, the precomputed neighbourhood matrix and the category tree stay in service memory; Redis returns only with a concrete need | 14 |
 | 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
 | 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; the ADR is not written. Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
 | **Edge and security** | | | | |
