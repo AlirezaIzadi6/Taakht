@@ -40,7 +40,7 @@ Options 2 to 6 were argued; only the chosen one was built.
 
 - Ten final approvals on one hot Ad at the same instant, with 40 to 200 requesters: in every run exactly one swap for the Ad was not rejected or cancelled, and the Ad ended closed. One run per setting.
 - Ad killed while the swap handled the agreement: the swap stayed in `LOCKING`, the handler was retried with backoff, and the claim succeeded 5 s after Ad was back (chaos scenario 2).
-- In the MVP a sweeper in Negotiation republishes a stuck agreement, and a late lock reopens a negotiation the sweeper had cancelled; both were tested in scenarios 9, 10 and 12. Not tested: a crash between the lock commit and the swap update.
+- A stuck agreement was republished by a sweeper, and a late lock reopened a negotiation the sweeper had cancelled (scenarios 9, 10 and 12). Not tested: a crash between the lock commit and the swap update.
 - Sources: `docs/adr/drafts/take-the-exclusive-ad-lock-in-the-ad-service.md`, `docs/testing/chaos-test-results.md` and `docs/testing/load-test-results.md` in `Taakht-MVP`.
 
 ## References

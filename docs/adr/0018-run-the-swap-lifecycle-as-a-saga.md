@@ -15,7 +15,7 @@ We will run the swap lifecycle as a Saga orchestrated by the Swap module in Deal
 
 - **Payment deadline missed (`PaymentTimedOut`):** the swap is cancelled (`SwapCancelled`); Ad releases the lock on both Ads; the locker reservation is cancelled; Reputation applies a penalty to the party who did not pay; the negotiation is cancelled.
 - **Both legs paid (`SwapCompleted`):** Ad closes both Ads for good and the review question opens.
-- **Stuck steps:** sweepers inside Deal retry or republish a step that has not progressed (the MVP had one in Negotiation for the agreement and one in Swap for the payment deadline). Every step and every compensation is idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)), so a retry is safe.
+- **Stuck steps:** a sweeper inside Deal retries or republishes a step that has not progressed, and enforces the payment deadline; its intervals are in the [outbox and sweeper conventions](../guidelines/outbox-and-sweepers.md). Every step and every compensation is idempotent ([ADR 0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md)), so a retry is safe.
 
 After the lock there is no voluntary withdrawal; the only way out is the deadline.
 
