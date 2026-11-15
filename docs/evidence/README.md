@@ -10,3 +10,6 @@ Each file states the date, the setup, the results, and what was **not** verified
 | [edge-gateway.md](edge-gateway.md) | Envoy transcoding, JWT at the edge |
 | [kafka-events.md](kafka-events.md) | Kafka events in Protobuf |
 | [microservices-vs-monolith.md](microservices-vs-monolith.md) | Build the system as microservices |
+| [elasticsearch-matching-load-test.md](elasticsearch-matching-load-test.md) | Elasticsearch for the Matching index |
+| [mvp-stack-memory.md](mvp-stack-memory.md) | Deployment guideline (memory of the MVP stack) |
+| [observability-stack.md](observability-stack.md) | Observability stack (ADR 0020) and the deployment guideline |
