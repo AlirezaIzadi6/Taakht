@@ -50,6 +50,7 @@ Decisions that are not yet recorded as ADRs, in the order we work through them. 
 | 22 | Observability stack | Decided | ADR 0020 (Proposed, awaiting review); the stack was tried with the MVP's real logs and metrics (see the evidence); real traces and Alertmanager were not; alert rules, retention, sampling and where it runs are still to define, and service level objectives wait until there is a running system | - |
 | 23 | Deployment topology and scaling | Partly decided | For now one node per environment, described in the [deployment guideline](guidelines/deployment.md); a domestic cloud or PaaS, Kubernetes (locally first), several nodes and replicas are later experiments and will need an ADR | 1, 2 |
 | 25 | Ad content moderation | Open | Direction (2026-11-15): approval of Ads by an LLM, not needed from day one. Parked until the design is complete and the first development phase is up and running. To design: what is checked (text now, media if uploads come), before or after publishing, which model and provider the team can reach and pay, appeals | 3 |
+| 26 | Rate limiting at the edge | Decided (policy) | Two layers with Envoy's local rate limit and no shared store: by client address on every route, and by user id on the abusable actions of logged-in users; see the [rate limiting conventions](guidelines/rate-limiting.md). The numbers wait for data; the client address behind another proxy is not verified | 1, 2 |
 
 ## Product and domain questions
 
