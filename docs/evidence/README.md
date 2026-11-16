@@ -13,3 +13,4 @@ Each file states the date, the setup, the results, and what was **not** verified
 | [elasticsearch-matching-load-test.md](elasticsearch-matching-load-test.md) | Elasticsearch for the Matching index |
 | [mvp-stack-memory.md](mvp-stack-memory.md) | Deployment guideline (memory of the MVP stack) |
 | [observability-stack.md](observability-stack.md) | Observability stack (ADR 0020) and the deployment guideline |
+| [envoy-rate-limiting.md](envoy-rate-limiting.md) | Rate limiting conventions (Envoy's local rate limit) |

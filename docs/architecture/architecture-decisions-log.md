@@ -485,5 +485,11 @@ Source: discussion of the real-time channel and the storage of Communication.
 - **The message model has to be right from the start:** conversation key (the user pair and the Ad), message id and order, read state, idempotent send by a client message id, cursor pagination.
 - **Communication stores its data in PostgreSQL**, as the other services do (ADR 0013). Messages are relational and ordered, the scale is far below where a specialised store pays off, and the platform libraries assume PostgreSQL. Because Communication owns its database, moving messages to another store later stays inside the service.
 
+## Rate limiting at the edge, 2026-11-16
+Source: discussion of rate limiting and a quick test of Envoy 1.34; recorded in docs/guidelines/rate-limiting.md.
+
+- **Two layers, both with Envoy's local rate limit and no shared store (so no Redis):** by client address on every route as a shield (it is the only layer for anonymous browsing), and by user id on the actions a logged-in user can abuse (creating and editing an Ad, opening a negotiation, sending a chat message, reporting abuse).
+- **A plain route bucket is shared by all clients**, which the earlier spike had not shown; per-client limits need one bucket per key. Per-key buckets worked in the test with the `x-user-id` header; the client address behind another proxy was not verified. No numbers are proposed until there is data.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
