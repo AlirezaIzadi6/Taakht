@@ -478,5 +478,12 @@ Source: discussion of observability; recorded in ADR 0020.
 
 - **OpenTelemetry in the platform libraries; Prometheus for metrics, Loki for logs, Tempo for traces, Grafana, Alertmanager.** Logstash is dropped (it does not store or search logs), and Elasticsearch is kept for Matching only, so a log index does not compete for its heap. Built in stages: metrics and logs, then traces, then alerts and runbooks, tested with the MVP's fault-injection scenarios; service level objectives wait until there is a running system with real data. Tried with the MVP's real logs and metrics: all five parts worked and used about 600 MB at 2,000 log lines per second (evidence in docs/evidence/observability-stack.md); `request_id` is not a Loki label. The goal is serious practice, not just coverage.
 
+## Communication in phase 1, 2026-11-16
+Source: discussion of the real-time channel and the storage of Communication.
+
+- **Chat over REST with polling in phase 1.** The demo is API-driven and has no product UI, so there is nobody to hold a WebSocket open. WebSocket push can be added later on top without changing the message model, but it is an exception to the REST-only edge (ADR 0007) and needs its own ADR; across several instances it needs a backplane, which is where Redis could return.
+- **The message model has to be right from the start:** conversation key (the user pair and the Ad), message id and order, read state, idempotent send by a client message id, cursor pagination.
+- **Communication stores its data in PostgreSQL**, as the other services do (ADR 0013). Messages are relational and ordered, the scale is far below where a specialised store pays off, and the platform libraries assume PostgreSQL. Because Communication owns its database, moving messages to another store later stays inside the service.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
