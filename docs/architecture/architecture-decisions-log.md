@@ -496,5 +496,6 @@ Source: discussion of Reputation's storage; recorded in ADR 0021 (Proposed).
 
 - **Event sourcing stays for Reputation**: the formula will change and the score has to be recomputable, the pair cap needs history, and practising the pattern is a goal. This is the one-way door and the decision of ADR 0021 (one stream per user, versions, an append with an expected version, projections, replay).
 - **The store is a convention, not part of the ADR**, because it sits inside the service and can be replaced: for now an append-only table in Reputation's own PostgreSQL. Marten and a dedicated store such as EventStoreDB (liked, but the stack fits PostgreSQL better and its memory on the 8 GB server is unmeasured) are noted in docs/guidelines/reputation-event-store.md. Payload format, upcasting, snapshots and projection mechanics are still open.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
