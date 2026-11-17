@@ -93,3 +93,9 @@ Each entry answers five questions: what the idea is, how it helps, why it is par
 - **Why parked:** the trust score is internal for now, and showing it needs business feedback on how it should look and what it should reveal.
 - **What it needs:** a decision on what is shown, a stable score, and protection against gaming.
 - **Revisit when:** the score has been running long enough to be believed, and after business feedback.
+
+## User-interface questions
+
+- **Idea:** decide the home page (which Ads, in what order, whether by the user's neighbourhood), how "search by what I am looking for" works for a user with no Ad yet, and the call to action "create an Ad first".
+- **Why parked:** phase 1 is API-driven and has no product interface.
+- **Revisit when:** a user interface is planned.

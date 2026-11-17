@@ -26,3 +26,7 @@ Use the fault-injection scenarios of the MVP: kill the Ad service during the loc
 - Loki labels are `service` and `level` only. `request_id` and the other fields stay in the line or in structured metadata: as a label, `request_id` exhausted Loki's default limit of 5,000 active streams within seconds in the test ([evidence](../evidence/observability-stack.md)).
 - Lines that are not JSON (the Kafka client library writes some from the .NET services) arrive without labels unless the Collector has a fallback; add one.
 - A readiness check that fails while a service starts is not an error for an alert; log it at a lower level.
+
+## To decide when building
+
+These are set when there is a running system and data to calibrate them: the alert thresholds, the retention of logs, metrics and traces, trace sampling, where the stack runs (the same node or another one), and the service level objectives.
