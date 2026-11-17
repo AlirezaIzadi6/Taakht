@@ -20,3 +20,10 @@ The stack and the platform libraries already use it, it adds no component to the
 ## Moving to another store
 
 Copy the streams in order, keeping their versions, then rebuild the projections. The events themselves do not change shape, so nothing outside the service notices.
+
+## Changing the shape of an event (upcasting)
+
+- Every event carries a schema version. An event that is written is never changed or rewritten in the table.
+- When a reader meets an older version, an upcaster turns it into the current shape as it reads it. Upcasters chain (version 1 to 2, then 2 to 3), so each one only knows one step.
+- A change that alters what an event means, not only its fields, gets a new event type instead of a new version.
+- The old versions stay in the table forever, so replaying the whole history always works through the upcasters.
