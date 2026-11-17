@@ -491,5 +491,10 @@ Source: discussion of rate limiting and a quick test of Envoy 1.34; recorded in 
 - **Two layers, both with Envoy's local rate limit and no shared store (so no Redis):** by client address on every route as a shield (it is the only layer for anonymous browsing), and by user id on the actions a logged-in user can abuse (creating and editing an Ad, opening a negotiation, sending a chat message, reporting abuse).
 - **A plain route bucket is shared by all clients**, which the earlier spike had not shown; per-client limits need one bucket per key. Per-key buckets worked in the test with the `x-user-id` header; the client address behind another proxy was not verified. No numbers are proposed until there is data.
 
+## Reputation event sourcing, 2026-11-17
+Source: discussion of Reputation's storage; recorded in ADR 0021 (Proposed).
+
+- **Event sourcing stays for Reputation**: the formula will change and the score has to be recomputable, the pair cap needs history, and practising the pattern is a goal. This is the one-way door and the decision of ADR 0021 (one stream per user, versions, an append with an expected version, projections, replay).
+- **The store is a convention, not part of the ADR**, because it sits inside the service and can be replaced: for now an append-only table in Reputation's own PostgreSQL. Marten and a dedicated store such as EventStoreDB (liked, but the stack fits PostgreSQL better and its memory on the 8 GB server is unmeasured) are noted in docs/guidelines/reputation-event-store.md. Payload format, upcasting, snapshots and projection mechanics are still open.
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*

@@ -57,3 +57,4 @@ ADRs are written in English.
 | [0018](0018-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Proposed | Deal (Swap), Ad, Reputation |
 | [0019](0019-use-elasticsearch-for-the-matching-index.md) | Use Elasticsearch for the Matching index, without Redis for now | Accepted | Matching |
 | [0020](0020-use-opentelemetry-for-observability.md) | Use OpenTelemetry for observability, with Prometheus, Loki, Tempo and Grafana behind it | Proposed | cross-cutting |
+| [0021](0021-event-source-reputation.md) | Event-source Reputation | Proposed | Reputation |

@@ -76,7 +76,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 - **Languages:** Go 1.27 (Ad, Matching, Communication), C# / .NET 10 (Deal modular monolith, Reputation)
 - **Async communication:** Apache Kafka (domain events published through a transactional outbox)
 - **Sync communication:** gRPC between services, REST/JSON at the edge behind an API Gateway (Envoy: load balancing, rate limiting, JWT validation); no GraphQL
-- **Storage:** PostgreSQL as the durable store, Elasticsearch for search and match scoring, no shared cache for now (static reference data such as the category tree and the neighbourhood distances stays in service memory), dedicated Event Store for Reputation
+- **Storage:** PostgreSQL as the durable store, Elasticsearch for search and match scoring, no shared cache for now (static reference data such as the category tree and the neighbourhood distances stays in service memory), an append-only events table in Reputation's own PostgreSQL database ([ADR 0021](docs/adr/0021-event-source-reputation.md))
 - **Observability:** OpenTelemetry in the services, with Prometheus (metrics), Loki (logs), Tempo (traces), Grafana and Alertmanager, built in stages ([ADR 0020](docs/adr/0020-use-opentelemetry-for-observability.md))
 - **Testing:** unit, integration and end-to-end tests; scripted load and stress tests kept in the repo, with results recorded
 
