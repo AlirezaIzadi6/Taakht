@@ -8,6 +8,14 @@ Conventions that follow from [ADR 0012](../adr/0012-describe-kafka-events-in-pro
 - Each record carries two headers: `message-type` (the fully qualified message name) and `schema-version`.
 - The partition key is the aggregate id ([ADR 0011](../adr/0011-use-kafka-for-events-between-services.md)).
 
+## Topics
+
+- One topic per service, named `<service>.events` (for example `ad.events`). It carries every event the service publishes, and the `message-type` header tells them apart.
+- The key is the aggregate id, so all events of one aggregate stay in one partition and arrive in order. Kafka gives no order across topics, which is why event types of one aggregate do not get a topic each.
+- A consumer reads the whole topic and skips the types it does not handle.
+- Topics are created before the services start (see the [deployment guideline](deployment.md)).
+- Known cost: Kafka UI decodes a topic with one message name, so on a mixed topic it cannot show every event decoded. Not tried yet.
+
 ## Schema rules
 
 - Never reuse or retype a field number; use `reserved` for removed fields.
@@ -16,9 +24,8 @@ Conventions that follow from [ADR 0012](../adr/0012-describe-kafka-events-in-pro
 
 ## Still to decide
 
-- Topic layout: one message type per topic, or a type header on shared topics.
-- Kafka UI: it decodes events when given the `.proto` directory (`protobufFilesDir`) and one message name per topic.
-- Retry and dead-letter handling, and topic naming.
+- Kafka UI: it decodes events when given the `.proto` directory (`protobufFilesDir`) and one message name per topic; how to read a topic that mixes message types is not tried.
+- Partition count per topic.
 
 ## Consumer failures
 
