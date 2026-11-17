@@ -60,7 +60,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 ## Key design decisions
 
 - **Persistent, class-level, versioned Ad** instead of a toggle on an existing Divar ad.
-- **Modular Monolith for Deal in .NET**, keeping negotiation and swap in isolated modules with internal transactional outbox events to eliminate unnecessary network latency.
+- **Modular Monolith for Deal in .NET**, keeping negotiation and swap in isolated modules with an internal outbox, so there is no network hop or distributed transaction between them.
 - **An atomic, synchronous Ad lock in the Ad service, and a Saga with compensating transactions for the swap lifecycle** (lock, locker fees, completion or cancellation).
 - **Three-pillar Proposal snapshot model** (`Ad1_Version + Ad2_Version + Terms`) with single approval per side, ensuring legal safety and clean state machines.
 - **Matching versus search:** matching is automatic, two-way and ranked per viewer (category fit, then distance, then trust); search is a plain filter over the index with no distance.
@@ -80,7 +80,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 - **Observability:** OpenTelemetry in the services, with Prometheus (metrics), Loki (logs), Tempo (traces), Grafana and Alertmanager, built in stages ([ADR 0020](docs/adr/0020-use-opentelemetry-for-observability.md))
 - **Testing:** unit, integration and end-to-end tests; scripted load and stress tests kept in the repo, with results recorded
 
-`TBD:` real-time channel specifics and load-testing tooling. Deployment topology and scaling approach are open as well. There is no service-to-service authentication in phase 1.
+`TBD:` load-testing tooling, and WebSocket push for chat (phase 1 chat is REST with polling). Phase 1 runs on one node per environment, see the [deployment guideline](docs/guidelines/deployment.md); a cloud, Kubernetes and several nodes are later experiments. There is no service-to-service authentication in phase 1 beyond a shared-secret guard for system identities.
 
 ## Quick start
 
@@ -169,7 +169,7 @@ Known and intentional for the current phase:
 | [`docs/architecture/`](docs/architecture) | Architecture overview (current state), chronological decisions log, diagrams |
 | [`docs/adr/`](docs/adr/README.md) | One architecture decision per file, with the reasoning |
 | [`docs/evidence/`](docs/evidence) | Experiments and document reviews behind the ADRs, with what was not verified (the runnable code is in [`spikes/`](spikes)) |
-| [`docs/guidelines/`](docs/guidelines) | Conventions that follow from decisions (topic naming, retry/DLQ, code style) |
+| [`docs/guidelines/`](docs/guidelines) | Conventions that follow from decisions (API, Kafka events, outbox and sweepers, observability, rate limiting, deployment, the Reputation event store) |
 | [`docs/api/`](docs/api) | API documentation and event contracts |
 | [`docs/testing/`](docs/testing) | Test strategy, load/stress scenarios and recorded results |
 | [`docs/process/`](docs/process) | How the team works |
