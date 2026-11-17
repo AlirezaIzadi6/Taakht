@@ -27,3 +27,9 @@ Copy the streams in order, keeping their versions, then rebuild the projections.
 - When a reader meets an older version, an upcaster turns it into the current shape as it reads it. Upcasters chain (version 1 to 2, then 2 to 3), so each one only knows one step.
 - A change that alters what an event means, not only its fields, gets a new event type instead of a new version.
 - The old versions stay in the table forever, so replaying the whole history always works through the upcasters.
+
+## The payload of an event
+
+- The payload is a Protobuf message, kept as bytes in the table, with the same toolchain as the other contracts ([ADR 0012](../adr/0012-describe-kafka-events-in-protobuf.md)). `buf breaking` runs in CI on these messages too, because events live forever and a breaking change would be costly to find late.
+- The fields a query needs sit in their own indexed columns next to the payload: the user (the stream), the other party of a pair, the time and the event type. The anti-collusion cap, which counts deals between two users in a time window, reads those columns, not the payload.
+- The schema version of the previous section is stored in a column as well, so an upcaster can be chosen without decoding the payload.
