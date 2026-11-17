@@ -29,7 +29,7 @@ We will use Apache Kafka as the broker for domain events between services, with 
 
 - Positive: per-aggregate ordering through the partition key; several consumers per event; replay.
 - Negative: the broker does not order events across different aggregates, so the lock and index consistency are not solved by it and need their own mechanism; memory overhead on one node; Kafka is one more component to run.
-- Follow-ups, each its own decision: the event format is ADR 0012, the transactional outbox is ADR 0014, delivery semantics are ADR 0015, and the partition count and the topic layout are still open. Domain timeouts (negotiation expiry, payment deadlines) use a scheduler inside the service, not the broker. Topic names, retry and dead-letter handling and client settings go in a convention document.
+- Follow-ups, each its own decision: the event format is ADR 0012, the transactional outbox is ADR 0014, delivery semantics are ADR 0015, and the partition count is still open. Domain timeouts (negotiation expiry, payment deadlines) use a scheduler inside the service, not the broker. Topic layout and names, retry and dead-letter handling and client settings go in the [Kafka event conventions](../guidelines/kafka-events.md).
 
 ## References
 
