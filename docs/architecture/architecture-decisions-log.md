@@ -498,6 +498,7 @@ Source: discussion of Reputation's storage; recorded in ADR 0021 (Proposed).
 - **The store is a convention, not part of the ADR**, because it sits inside the service and can be replaced: for now an append-only table in Reputation's own PostgreSQL. Marten and a dedicated store such as EventStoreDB (liked, but the stack fits PostgreSQL better and its memory on the 8 GB server is unmeasured) are noted in docs/guidelines/reputation-event-store.md. Payload format, upcasting, snapshots and projection mechanics are still open.
 - **Upcasting policy:** every event carries a schema version and is never rewritten; a reader upcasts an older version to the current shape as it reads, and a change of meaning gets a new event type (docs/guidelines/reputation-event-store.md).
 - **Payload:** a Protobuf message as bytes, with `buf breaking` in CI as for the other contracts, and the fields a query needs (user, the other party of a pair, time, event type, schema version) in their own indexed columns.
+- **Left for the implementation:** when projections are updated (in the append transaction or by a worker), snapshots, and the anti-collusion query model. They are reversible, and the projections can always be rebuilt by replaying the events, so there is nothing to gain by deciding them now.
 
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
