@@ -142,6 +142,7 @@ Details of actors, commands and policies: [domain/event-storming.md](../domain/e
   - **Elasticsearch:** the main Matching index and ranking of results by Criteria and neighbourhood filters.
   - **In service memory, no shared cache for now:** the category tree and the precomputed neighbourhood distances ([ADR 0019](../adr/0019-use-elasticsearch-for-the-matching-index.md)).
   - **Reputation's events:** an append-only table in the Reputation service's own PostgreSQL database, one stream per user, with the score and the other read models as projections ([ADR 0021](../adr/0021-event-source-reputation.md)).
+- **Local read models** (copies kept by other services and fed by events, so they are eventually consistent; the windows are accepted and not measured): Matching's copy of the trust scores and of the Ad lifecycle; the copies of the blocked user pairs in Deal, Matching and Communication; and the count of open negotiations in Ad, an eventual copy of what Negotiation counts, since the cap itself is enforced atomically by Negotiation.
 - **Authentication:** the JWT issued by `AuthProvider` is validated at the Envoy Gateway and the `x-user-id` header is passed to the services. In the demo phase there is no authentication between services, apart from a shared-secret guard that keeps a user from claiming a `system:` identity ([ADR 0010](../adr/0010-authenticate-service-to-service-calls.md)).
 
 ## 6. Deployment topology

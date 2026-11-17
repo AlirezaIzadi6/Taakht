@@ -29,6 +29,7 @@ Options 2 and 3 were argued, not tried.
 
 - Positive: the score can be recomputed when the formula changes; history queries have the data; the store sits inside the service, so replacing it later is contained (the streams would have to be migrated, which is work, but nobody else reads them).
 - Negative: this is the one-way door. The events are the facts and stay forever, so changing the shape of an event (upcasting) is hard; replays take longer as the history grows; the projections are eventually consistent with the events unless they are updated in the same transaction.
+- The admin queue and blocking are modelled as events too (`AbuseReported`, `ReportConfirmed`, `ObjectionFiled`, `ObjectionUpheld`, `UserBlocked` and the like), with the queue and the blocked pairs as projections; a command checks the current state, from the user's stream or a projection, before it appends. Other services learn about a block from the published `UserBlocked` event, so how Reputation stores it changes nothing for them. The costs: the admin queue is a list across many users, so its projection is fed from many streams, and a report needs the reporter's score, which lives in another stream and is only eventually consistent.
 - Follow-ups, in the conventions: the payload format of the events and the upcasting policy (open item 13), snapshots, how the projections are updated, and the query model for the anti-collusion cap.
 
 ## References

@@ -1,98 +1,71 @@
 # Open items
 
-Decisions that are not yet recorded as ADRs, in the order we work through them. Rule: an item stays here until it is decided; only then does it become an ADR (see [ADR rules](adr/README.md)). ADR numbers are given in the order ADRs are accepted, not by the position in this list.
+Questions that are not decided yet, and decisions that will need an ADR when their time comes. An item is open when its answer has to be decided or needs an ADR (see the [ADR rules](adr/README.md)). Details that only become clear when building go in the matching guideline under "To decide when building", not here. Decisions already taken are recorded in the [ADR index](adr/README.md); the item numbers below stay stable because ADRs and guidelines refer to them.
 
-## How each item is handled
+No design question blocks the work at the moment. What is left is listed under "Later" and in the domain and product questions.
 
-1. Discuss the question and the real options with the owner.
-2. Gather evidence for the options (documentation, spike where it matters) and note what remains unverified.
-3. The owner confirms the decision.
-4. Write the ADR (rejected options and reasons included), give it the next number, add it to the [ADR index](adr/README.md), and remove or mark the item here.
+## Later
 
-## Status values
+Each of these will need an ADR when its time comes.
 
-- **Open** - not decided.
-- **Stack named** - the README names the choice, but the reasoning and rejected options are not recorded.
-- **Draft** - a draft ADR exists on the branch `docs/adr-drafts` (not on `main` until it is reviewed, one ADR per branch); spike-verified drafts say so inside.
-- **Done** - ADR accepted (link it).
+| # | Topic | Note |
+|---|---|---|
+| 16 | Matching sharding and scaling | A production concern. The city is a natural shard key, since matching never crosses cities. Needed when the index outgrows one node |
+| 21 | WebSocket push for chat | Phase 1 chat is REST with polling, and the message model is the source of truth. Push comes later on top of it, as an exception to ADR 0007; across several Communication instances it also needs a backplane |
+| 23 | Hosting beyond one node | A domestic cloud or PaaS, Kubernetes (tried locally first), several nodes and replicas. For now one node per environment, see the [deployment guideline](guidelines/deployment.md). Several nodes break the isolated-network assumption of ADR 0010 |
+| 25 | Ad content moderation by an LLM | Direction (2026-11-15): not needed from day one; parked until the design is complete and the first development phase runs. To design: what is checked (text now, media if uploads come), before or after publishing, which model and provider the team can reach and pay, appeals |
+| 27 | A hold on the Ad after `AgreementReached` | Postponed (2026-11-15), if the need appears; it would extend ADR 0017. To decide then: whether the hold blocks only new requests or also a second agreement on the same Ad, the release rules, whether a negotiation waiting for the lock is frozen, and what "available" means for `ClaimLock` (Published or Hidden, not Locked, Closed or Suspended), with a rejection reason `NotAvailable` that cancels the negotiation |
+| 28 | mTLS between services | The production target of ADR 0010; the certificate mechanism is chosen with the hosting platform |
+| 29 | Redis | Out of the design (ADR 0019). It returns, as its own ADR, only for a concrete need: a cache shared by several instances, a backplane for chat across several Communication instances, or a global rate limit across several gateways |
 
-## Order
+## Closed
 
-| # | Topic | Status | Draft or note | Depends on |
-|---|---|---|---|---|
-| **Foundation** | | | | |
-| 1 | Monorepo | Decided | ADR 0004 (Accepted); README, Makefile and CI already assume it; one platform library per language for infrastructure code, no shared domain code | 2, 4 |
-| 2 | Microservice architecture | Decided | ADR 0001 (Accepted); reasoning from published guidance, not an experiment; three drivers (product, demonstration, team and learning) | - |
-| 3 | Service decomposition | Decided | ADR 0002 (Accepted); five services, the merges that were rejected are listed there; Deal is structured in ADR 0016; context map in [docs/domain/context-map.md](domain/context-map.md) | 2 |
-| 4 | Languages: Go and .NET, and the rule that splits services between them | Decided | ADR 0003 (Accepted); Go for Ad, Matching and Communication, .NET for Deal and Reputation; no benchmark, rests on the learning goal and a workload rule of thumb | 3 |
-| **Communication** | | | | |
-| 5 | Sync versus async rule (gRPC for requests, events for state changes) | Decided | ADR 0005 (Accepted); reasoning, nothing tried; the list of synchronous calls is decided per feature | 3 |
-| 6 | Kafka | Decided | ADR 0011 (Accepted); reasoning from the decisions log, nothing benchmarked | 5 |
-| 7 | API contract in Protobuf | Decided | ADR 0006 (Accepted); tried only with a hello-world service in a spike (Go and .NET); the other alternatives were argued, not tried | 1, 5 |
-| 8 | Kafka event format (Protobuf, no registry for now) | Decided | ADR 0012 (Accepted); tried only with a hello-world event in a spike; registry options compared from documentation only | 6, 7 |
-| 9 | Transactional outbox | Decided | ADR 0014 (Accepted); polling relay, change data capture left as a later option; argued from documentation, not tried | 6, 12 |
-| 10 | Consistency and cross-service workflows (saga or process manager, idempotent consumers, the exclusive lock) | Decided | ADR 0015 (delivery at least once, idempotent consumers), ADR 0017 (synchronous atomic lock in Ad, tested in the MVP) and ADR 0018 (swap lifecycle Saga); the penalty to Reputation and the locker reservation cancel were not built in the MVP | 5, 6, 9 |
-| **Data** | | | | |
-| 11 | Data ownership and local read models | Open | Known read models: Matching's copy of trust scores and of Ad lifecycle; copies of blocked user pairs in Deal, Matching and Communication; the open-negotiation counter in Ad (an eventual copy, the cap is enforced atomically by Negotiation). Consistency windows are accepted but not measured | 3, 10 |
-| 12 | PostgreSQL | Decided | ADR 0013 (Accepted); the features the design relies on are listed there; Communication also uses PostgreSQL (2026-11-16, applying this ADR); whether any NoSQL store is needed and the Reputation event store are still open | 11 |
-| 13 | Event sourcing in Reputation (including upcasting) | Partly decided | ADR 0021 (Proposed, awaiting review): Reputation is event-sourced, one stream per user with a version and an expected-version append, and projections for the score, blocks, penalties and the admin queue. The store (an append-only PostgreSQL table for now), the upcasting policy and the payload (Protobuf bytes) are conventions, see the [event store conventions](guidelines/reputation-event-store.md). Still to check: that event sourcing fits the admin queue and blocking | 8, 12 |
-| 14 | Search (Elasticsearch for search and match scoring) | Decided | ADR 0019 (Accepted); load-tested on synthetic data up to 1,000,000 Ads with a 1 to 1.5 GB heap (see the evidence); the MVP used a SQL read model | 3 |
-| 15 | Neighbourhood distance and the role of Redis | Decided | ADR 0019 (Accepted); no Redis for now, the precomputed neighbourhood matrix and the category tree stay in service memory; Redis returns only with a concrete need | 14 |
-| 16 | Matching sharding and scaling | Open | README: approach TBD, production concern | 14, 15 |
-| 24 | Ad and Proposal versioning (state-based, immutable `AdVersion`, three-component proposal snapshot with no implicit approval) | Open | Decided in the domain docs; no ADR for now (the MVP draft "bind approvals to versions" described the earlier approval model and is not carried over). Open: pruning of `AdVersion`s unrelated to a Swap | 3, 10 |
-| **Edge and security** | | | | |
-| 17 | Edge API style | Decided | ADR 0007 (Accepted); REST/JSON only, no GraphQL (revisit if clients with different access patterns appear) | 7 |
-| 18 | Envoy as edge gateway and REST to gRPC transcoding | Decided | ADR 0008 (Accepted); tried only with a hello-world service in a spike, grpc-gateway compared in the same spike; rate limit values are configuration, not an ADR | 7, 17 |
-| 19 | JWT validation at the edge | Decided | ADR 0009 (Accepted); tried only with a hello-world service in a spike | 18 |
-| 20 | Service-to-service authentication | Decided | ADR 0010 (Accepted); reasoning from documentation only, no spike; no service-to-service authentication in phase 1, mTLS as the production target | 19 |
-| 21 | Real-time channel (chat, notifications) | Decided for phase 1 | 2026-11-16: chat over REST (send, read with a cursor, mark as read) with polling; the message model is the source of truth (conversation key of the user pair and the Ad, message id and order, read state, idempotent send by a client message id). WebSocket push comes later as a transport on top, an exception to ADR 0007 that needs its own ADR; across several Communication instances it also needs a backplane. Notifications come from Kafka events through `NotificationProvider`, not from the chat channel | 5 |
-| **Operations** | | | | |
-| 22 | Observability stack | Decided | ADR 0020 (Proposed, awaiting review); the stack was tried with the MVP's real logs and metrics (see the evidence); real traces and Alertmanager were not; alert rules, retention, sampling and where it runs are still to define, and service level objectives wait until there is a running system | - |
-| 23 | Deployment topology and scaling | Partly decided | For now one node per environment, described in the [deployment guideline](guidelines/deployment.md); a domestic cloud or PaaS, Kubernetes (locally first), several nodes and replicas are later experiments and will need an ADR | 1, 2 |
-| 25 | Ad content moderation | Open | Direction (2026-11-15): approval of Ads by an LLM, not needed from day one. Parked until the design is complete and the first development phase is up and running. To design: what is checked (text now, media if uploads come), before or after publishing, which model and provider the team can reach and pay, appeals | 3 |
-| 26 | Rate limiting at the edge | Decided (policy) | Two layers with Envoy's local rate limit and no shared store: by client address on every route, and by user id on the abusable actions of logged-in users; see the [rate limiting conventions](guidelines/rate-limiting.md). The numbers wait for data; the client address behind another proxy is not verified | 1, 2 |
+Decided. The ADR index is the record; the numbers stay for the references.
 
-## Product and domain questions
+| # | Topic | Closed by |
+|---|---|---|
+| 1 | Monorepo | ADR 0004 |
+| 2 | Microservice architecture | ADR 0001 |
+| 3 | Service decomposition | ADR 0002 (Deal: ADR 0016) |
+| 4 | Languages: Go and .NET | ADR 0003 |
+| 5 | Sync versus async rule | ADR 0005 |
+| 6 | Kafka | ADR 0011 |
+| 7 | API contract in Protobuf | ADR 0006 |
+| 8 | Kafka event format | ADR 0012 |
+| 9 | Transactional outbox | ADR 0014 |
+| 10 | Consistency and cross-service workflows | ADR 0015, 0017 and 0018 |
+| 11 | Data ownership and local read models | ADR 0002, 0005 and 0015; the read models are listed in the [architecture overview](architecture/architecture-overview.md) |
+| 12 | PostgreSQL | ADR 0013 (Communication uses it too) |
+| 13 | Event sourcing in Reputation | ADR 0021 (Proposed): the admin queue and blocking are modelled as events too; the store, the upcasting policy and the payload are in the [event store conventions](guidelines/reputation-event-store.md) |
+| 14 | Search | ADR 0019 |
+| 15 | Neighbourhood distance and the role of Redis | ADR 0019 |
+| 17 | Edge API style | ADR 0007 |
+| 18 | Envoy as the edge gateway | ADR 0008 |
+| 19 | JWT validation at the edge | ADR 0009 |
+| 20 | Service-to-service authentication | ADR 0010 |
+| 22 | Observability stack | ADR 0020 (Proposed); alert thresholds, retention, sampling and where it runs are in the [observability conventions](guidelines/observability.md) |
+| 24 | Ad and Proposal versioning | The domain docs, no ADR (the MVP draft "bind approvals to versions" described the earlier approval model and is not carried over) |
+| 26 | Rate limiting at the edge | The [rate limiting conventions](guidelines/rate-limiting.md) |
 
-Open questions that are not ADRs. Carried over from the Persian working list in TaakhtDraft and checked against the decisions made up to 2026-11-08. Items resolved by the Event Storming work are not repeated here (see [event-storming.md](domain/event-storming.md)).
+## Domain and product questions
 
-**Matching and search**
-- Neighbourhood distance: the neighbourhood centres and where the data comes from, and the selectable distances for the optional distance filter (a polygon-based matrix is parked). See [matching.md](domain/matching.md).
-- Matching logic with incomplete information: what counts as a match, scoring, thresholds, how unknowns are treated.
-- Exact fields of an Ad and of Criteria (category, neighbourhood, photo, description, the "I want" side, visibility, notification; value and price are parked, see [parked ideas](product/parked-ideas.md)). The minimum for an Ad is decided, see [matching.md](domain/matching.md).
-- Whether a separate, clearly labelled row of broader or fuzzier results is shown next to exact matches (a complement to the Cold Start solution).
-- How "search by what I am looking for" works for a user with no Ad yet, and the UX of the call to action "create an Ad first".
-- Home page: which Ads are shown and in what order (no filter, or by the user's neighbourhood).
+Open questions that are not ADRs. Carried over from the Persian working list in TaakhtDraft and checked against the decisions made up to 2026-11-17. Items resolved by the Event Storming work are not repeated here (see [event-storming.md](domain/event-storming.md)).
 
 **Ad**
-- Expiry rules for an Ad, and whether `AdExpired` is needed (states are only `Published ⇄ Hidden`, plus `Locked` and `Closed`).
-- Cap on the number of items in one deal (a small, configurable MVP value; it belongs to the Ad, not the Proposal).
+- Expiry rules for an Ad, and whether `AdExpired` is needed (the states are only `Published ⇄ Hidden`, plus `Locked` and `Closed`).
+- Pruning of `AdVersion`s that no Swap refers to (data retention).
 
 **Trust and safety**
 - Reputation: the formula, the minimum score for an instant abuse-report effect, and the size of penalties.
 - The shape of the review answer (yes/no or score) and its time window (currently 5 days).
-- Rate limiting and spam control for chat started from any Ad (mute is a later phase).
-- The price difference and the risk of non-payment: no technical action for now; risks to be researched.
-- Identity edge case in locker handover disputes (mandatory identification, handing the claimant the defendant's claim checklist): probably obsolete under the zero-liability model; confirm and close.
 
 **Partners and real-team questions**
 - Locker partner: the integration capabilities needed (payment session with expiry, status webhook, status inquiry, `CancelReservation`, automatic refund for a late payment), and the locker price model (who sets it).
 - Paying the locker fee with Divar's wallet: public sources say it cannot be relied on. Keep a `LockerFeePaymentProvider` interface; a Divar-wallet adapter is optional and depends on Divar allowing payments to a partner.
 - For a real Divar team: is Divar's existing chat enough, or is a deal-specific chat needed (moderation, evidence in disputes)?
-- Research on informal swap competitors (Telegram/Instagram groups, Vinted-like apps), so that "why Divar wins" rests on evidence.
+- Research on informal swap competitors (Telegram and Instagram groups, Vinted-like apps), so that "why Divar wins" rests on evidence.
 
-**Negotiation and lock** (postponed; would extend ADR 0017)
-- Postponed (2026-11-15, to be discussed if the need appears): when a negotiation on an Ad reaches `AgreementReached`, mark the Ad as being in an agreement, so no new negotiation opens on it and two agreements on the same Ad cannot happen at once. One possible shape: a hold per Ad in Deal's own database (unique `ad_id`), inserted atomically with `AgreementReached` and released when the lock result arrives (rejected), or replaced by the Ad's `Locked` state.
-- To decide: whether the hold blocks only new requests, or also a second agreement on the same Ad (the second approval is refused and not recorded); the release rules; whether a negotiation waiting for the lock is frozen (no edit, approve, retract or withdraw, with its expiry timer paused); and what "available" means for `ClaimLock` (Published or Hidden, because an Ad hidden by the negotiation cap must still be able to conclude; not Locked, Closed or Suspended), with a new rejection reason `NotAvailable` that cancels the negotiation.
-- Effect: the `AlreadyLocked` refusal would become rare and the Ad claim would remain the final authority, so ADR 0017 would be extended or followed by a new ADR.
-
-**Parked ideas** (pricing sub-domain, hotspots, multi-item Ads, filming, trust badge) live in [product/parked-ideas.md](product/parked-ideas.md).
-
-**Scope, process and writing**
-- Alignment of technology choices with the skills the team wants to learn (for example for deployment in a later phase).
-- Testing and observability details: pilot services for TDD, target numbers for metrics (consult experts), the load-test tool, and the format of the results overview page.
-- Name and structure of the directory for AI-generated files (see [development-process.md](process/development-process.md)).
-- Structure of the cover letter.
+**Parked ideas** (pricing sub-domain, hotspots, multi-item Ads, filming, trust badge, and the user-interface questions) live in [product/parked-ideas.md](product/parked-ideas.md).
 
 ## Not ADRs (go elsewhere)
 

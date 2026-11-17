@@ -500,5 +500,12 @@ Source: discussion of Reputation's storage; recorded in ADR 0021 (Proposed).
 - **Payload:** a Protobuf message as bytes, with `buf breaking` in CI as for the other contracts, and the fields a query needs (user, the other party of a pair, time, event type, schema version) in their own indexed columns.
 - **Left for the implementation:** when projections are updated (in the append transaction or by a worker), snapshots, and the anti-collusion query model. They are reversible, and the projections can always be rebuilt by replaying the events, so there is nothing to gain by deciding them now.
 
+## The open items sorted, 2026-11-17
+Source: discussion of what counts as an open item.
+
+- **An open item is a design question that needs an answer or an ADR.** Details that only become clear when building go in the matching guideline under "To decide when building". Decisions taken are recorded in the ADR index, so `open-items.md` keeps a short "Closed" table (the item numbers stay because ADRs refer to them) and a "Later" list of decisions that will need an ADR when their time comes.
+- **Reputation's admin queue and blocking are modelled as events too** (ADR 0021): the transitions are facts with event names, other services learn about a block from the published event, and keeping a second state-table model inside the service would duplicate the history that the anti-collusion rule needs. Costs noted in the ADR.
+- Removed from the list: the cover letter, the alignment of technology with skills, and product questions that were decided, duplicated or parked.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
