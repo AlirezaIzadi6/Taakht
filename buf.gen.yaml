@@ -1,0 +1,16 @@
+version: v2
+clean: false
+managed:
+  enabled: true
+  disable:
+    - module: buf.build/googleapis/googleapis
+  override:
+    - file_option: go_package_prefix
+      value: github.com/AlirezaIzadi6/Taakht/gen/go
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: gen/go
+    opt: paths=source_relative
+  - remote: buf.build/grpc/go
+    out: gen/go
+    opt: paths=source_relative

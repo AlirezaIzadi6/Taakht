@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package taakht.ad.v1;
+
+import "google/api/annotations.proto";
+
+// AdService is the Ad service's public API. The caller is the user in the
+// x-user-id metadata key, set by the edge from the verified JWT, never a field.
+// This is the skeleton contract; it grows with the features.
+service AdService {
+  // CreateAd creates an Ad and publishes it at once.
+  rpc CreateAd(CreateAdRequest) returns (CreateAdResponse) {
+    option (google.api.http) = {
+      post: "/v1/ads"
+      body: "*"
+    };
+  }
+}
+
+message CreateAdRequest {
+  // The category of the item ("I have").
+  string category_id = 1;
+  // The neighbourhood of the item.
+  string neighbourhood_id = 2;
+  string description = 3;
+}
+
+message CreateAdResponse {
+  string ad_id = 1;
+}

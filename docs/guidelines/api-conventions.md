@@ -33,5 +33,5 @@ Conventions that follow from the Protobuf API contract decision. Not an ADR; che
 ## Generated code
 
 - Code generated from `api/` (Go stubs, .NET gRPC classes, the gateway descriptor, the OpenAPI document) is not committed. It is produced at build time and ignored by git.
-- Go: `buf generate`, run by a `make generate` target that `make lint` and `make test` depend on, and by CI before the Go jobs. .NET: the `Grpc.Tools` package generates the classes during the build.
+- Go: `buf generate` writes to `gen/go`, a Go module of its own (module file committed, generated files ignored) that services find with a `replace` directive like the platform library. It is run by a `make generate` target that `make lint` and `make test` depend on, and by CI before the Go jobs. .NET: the `Grpc.Tools` package generates the classes during the build.
 - Reason: the `.proto` files stay the only source of truth, and generated diffs never need review or cause merge conflicts. Cost: building needs `buf` installed (`make tools` installs it) and its plugins.
