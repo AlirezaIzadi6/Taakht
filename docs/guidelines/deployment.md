@@ -9,7 +9,7 @@ How the system is run for now. Not an ADR: it is cheap to change. The choice of 
 
 ## Rules for one node
 
-- Only Envoy publishes a port; everything else stays on the internal network. The isolated-network assumption of [ADR 0010](../adr/0010-authenticate-service-to-service-calls.md) holds only on one node, so the node must not be exposed beyond the gateway.
+- Only Envoy publishes a port; everything else stays on the internal network. The isolated-network assumption of [ADR 0010](../adr/0010-authenticate-service-to-service-calls.md) holds only on one node, so the node must not be exposed beyond the gateway. On a laptop `compose.override.yaml` also publishes Postgres and Kafka, on the loopback address only, for services run from an IDE; on the server run the base file only (`make up-server`).
 - PostgreSQL is one instance with one database per service ([ADR 0013](../adr/0013-use-postgresql-as-the-service-database.md)).
 - Kafka and Elasticsearch are single nodes with their JVM heaps capped by hand: Kafka at 1 GB, Elasticsearch at 1 to 1.5 GB (see the measurements below).
 - Every service runs as one instance; there are no replicas and no database replication. Data is protected by backups.
@@ -29,6 +29,8 @@ Measured on a laptop, not on this server, with small data ([MVP stack memory](..
 | Elasticsearch container, heap 1 to 1.5 GB, up to 1,000,000 synthetic Ads | about 2.0 to 2.2 GiB |
 
 The MVP stack without Elasticsearch came to about 0.9 GB at peak, so with Elasticsearch the services need roughly 3 GB, which leaves about 5 GB of the 8 GB for the operating system, Docker, backups and an observability stack. This is an estimate from the measurements above, not a measurement of the whole system. The Communication and Reputation services were not in the MVP.
+
+Kafka keeps its data in a volume: `make down` keeps it and `make reset` deletes it.
 
 Create the Kafka topics before the services start: on a fresh Kafka, a consumer subscribed to a topic that does not exist yet stays not ready until the first event is produced.
 

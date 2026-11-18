@@ -8,6 +8,10 @@ import "google/protobuf/timestamp.proto";
 // is the Ad id. Event messages are never used in the API.
 
 // AdPublished is emitted when an Ad becomes visible to matching.
+//
+// Skeleton: the full design also emits AdCreated before it. An event id for the
+// consumers' processed-events table and a version of the Ad are still to be
+// added; the event id is decided together with the outbox.
 message AdPublished {
   string ad_id = 1;
   string owner_id = 2;

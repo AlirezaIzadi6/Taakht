@@ -8,21 +8,31 @@ name: taakht-dev
 services:
   postgres:
     image: postgres:17
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-taakht}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-taakht}
+      # The service roles are created by the init script. The defaults are for development;
+      # on the shared server set real values in a .env file (see .env.example).
+      AD_DB_PASSWORD: ${AD_DB_PASSWORD:-ad}
+      MATCHING_DB_PASSWORD: ${MATCHING_DB_PASSWORD:-matching}
+      DEAL_DB_PASSWORD: ${DEAL_DB_PASSWORD:-deal}
+      REPUTATION_DB_PASSWORD: ${REPUTATION_DB_PASSWORD:-reputation}
+      COMMUNICATION_DB_PASSWORD: ${COMMUNICATION_DB_PASSWORD:-communication}
     volumes:
       - postgres-data:/var/lib/postgresql/data
       # One database per service (ADR 0013), created on the first start of an empty volume.
       - ./postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      # Over TCP: while the init scripts run, a temporary server listens on the socket only.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $${POSTGRES_USER}"]
       interval: 5s
       timeout: 3s
       retries: 10
 
   kafka:
     image: apache/kafka:3.9.0
+    restart: unless-stopped
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -39,6 +49,10 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
       # The heap is capped by hand (docs/guidelines/deployment.md).
       KAFKA_HEAP_OPTS: -Xms256m -Xmx1g
+      # The image writes to /tmp by default, which is not the volume below.
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      # One broker: no reason to wait for more consumers before the first rebalance.
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
     volumes:
       - kafka-data:/var/lib/kafka/data
     healthcheck:
@@ -62,7 +76,7 @@ services:
     command:
       - |
         set -e
-        for topic in ad.events deal.events reputation.events; do
+        for topic in ad.events matching.events deal.events reputation.events; do
           /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 \
             --create --if-not-exists --topic "$$topic" --partitions 3 --replication-factor 1
         done

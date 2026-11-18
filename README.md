@@ -117,12 +117,14 @@ Then follow a scripted walkthrough of API calls: log in as a seeded user, publis
 ```text
 Taakht/
 ├── docs/            design documents (see Documentation below)
-├── api/             Protobuf contracts for the services and events (planned)
+├── api/             Protobuf contracts for the services and events
+├── gen/             Go code generated from api/ (not committed, see make generate)
+├── deploy/          Docker Compose for local development and the shared server
 ├── libs/            one platform library per language: infrastructure code only (planned)
 ├── src/             one solution (.NET) or module (Go) per service
 ├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── spikes/          throwaway experiments behind the evidence docs
-├── Makefile         setup, fmt, lint, test
+├── Makefile         setup, generate, up and down, fmt, lint, test
 ├── lefthook.yml     git hooks (pre-commit fixes, Conventional Commits check)
 └── .github/         CI
 ```

@@ -11,6 +11,7 @@ Install these yourself. `make setup` only checks that they exist, it never insta
 | Git | |
 | .NET SDK | Version pinned in [`global.json`](../global.json). If it is missing, `dotnet` commands fail with a message naming the required version. |
 | Go | Version comes from each module's `go.mod`. Go downloads the matching toolchain automatically, so any recent Go is enough to bootstrap. |
+| Docker with Compose | Runs Postgres and Kafka (and later the other infrastructure); see `make up`. |
 | make | Linux/macOS: preinstalled or via the package manager. Windows: `scoop install make` or `choco install make`, and run it from Git Bash because the Makefile uses `bash` and `find`. |
 
 ## Setup
@@ -25,8 +26,8 @@ make setup
 
 | Target | What it does |
 |---|---|
-| `make prereqs` | Checks that `git`, `dotnet` and `go` are on `PATH` and that the SDK required by `global.json` is installed. Reports only. |
-| `make tools` | Installs `lefthook` and `golangci-lint` with `go install` if they are not already on `PATH`. |
+| `make prereqs` | Checks that `git`, `dotnet`, `go` and `docker` are on `PATH` and that the SDK required by `global.json` is installed. Reports only. |
+| `make tools` | Installs `lefthook`, `golangci-lint` and `buf` with `go install` if they are not already on `PATH`. |
 | `make hooks` | Runs `lefthook install`, which registers the git hooks defined in [`lefthook.yml`](../lefthook.yml). |
 
 `go install` places binaries in `$(go env GOPATH)/bin`. That directory must be on your `PATH`; if it is not, `make tools` stops with a message telling you so.
@@ -38,6 +39,9 @@ make setup
 | `make fmt` | Auto-fixes formatting and style for .NET and Go. |
 | `make lint` | Checks everything without fixing anything. This is exactly what CI runs. |
 | `make test` | Runs all .NET and Go tests (Go with `-race`). |
+| `make generate` | Generates the Go code from the Protobuf contracts in `api/` into `gen/go`; it is not committed. `lint` and `test` run it first, and it needs network access to buf.build. |
+| `make up` | Starts Postgres and Kafka with Docker Compose and creates the Kafka topics. `make down` stops them and keeps the data; `make reset` stops them and deletes the data. |
+| `make up-server` | The same for the shared server: only the base compose file, no published ports. |
 
 Run `make` with no arguments to list all targets.
 

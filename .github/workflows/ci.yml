@@ -24,6 +24,7 @@ jobs:
       dotnet: ${{ steps.filter.outputs.dotnet }}
       go: ${{ steps.filter.outputs.go }}
       contracts: ${{ steps.filter.outputs.contracts }}
+      deploy: ${{ steps.filter.outputs.deploy }}
       dotnet-solutions: ${{ steps.solutions.outputs.list }}
       go-modules: ${{ steps.modules.outputs.list }}
     steps:
@@ -58,6 +59,9 @@ jobs:
               - 'buf.yaml'
               - 'buf.gen.yaml'
               - 'buf.lock'
+              - '.github/workflows/ci.yml'
+            deploy:
+              - 'deploy/**'
               - '.github/workflows/ci.yml'
 
       # Every solution file (one per .NET service) becomes one matrix entry.
@@ -133,6 +137,22 @@ jobs:
       - name: Test
         run: dotnet test "$SOLUTION" -c Release --no-build
 
+  # Docker Compose files and their scripts: the files must be valid and the shell scripts clean.
+  deploy:
+    needs: changes
+    if: needs.changes.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate the Compose files
+        run: |
+          docker compose --project-directory deploy/compose config -q
+          docker compose --project-directory deploy/compose -f deploy/compose/compose.yaml config -q
+
+      - name: Lint the shell scripts
+        run: shellcheck deploy/compose/postgres/init/*.sh
+
   # The Protobuf contracts in api/: lint always, and compare with main for breaking changes.
   contracts:
     needs: changes
@@ -198,7 +218,7 @@ jobs:
   # Single required status check for branch protection: skipped jobs count as OK, failed/cancelled ones don't.
   ci-ok:
     if: always()
-    needs: [commit-messages, dotnet, contracts, go]
+    needs: [changes, commit-messages, dotnet, deploy, contracts, go]
     runs-on: ubuntu-latest
     steps:
       - name: Verify results
