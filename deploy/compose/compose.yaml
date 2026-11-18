@@ -1,0 +1,73 @@
+# The shared base: Postgres and Kafka on an internal network, nothing published.
+# On a laptop, compose.override.yaml is loaded as well and publishes the ports a
+# developer needs; on the shared server run with `-f compose.yaml` only
+# (docs/guidelines/deployment.md).
+# A project name of its own, so it cannot clash with the containers and volumes of the MVP prototype.
+name: taakht-dev
+
+services:
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-taakht}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-taakht}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      # One database per service (ADR 0013), created on the first start of an empty volume.
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  kafka:
+    image: apache/kafka:3.9.0
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      # Topics are created explicitly by kafka-init, never by a client by accident.
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
+      # The heap is capped by hand (docs/guidelines/deployment.md).
+      KAFKA_HEAP_OPTS: -Xms256m -Xmx1g
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 12
+      start_period: 20s
+
+  # Creates the topics before any service starts: on a fresh Kafka a consumer of a
+  # missing topic stays not ready (docs/guidelines/deployment.md).
+  # One topic per publishing service, named <service>.events (docs/guidelines/kafka-events.md).
+  # Services depend on this one with condition: service_completed_successfully.
+  kafka-init:
+    image: apache/kafka:3.9.0
+    depends_on:
+      kafka:
+        condition: service_healthy
+    restart: "no"
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        set -e
+        for topic in ad.events deal.events reputation.events; do
+          /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 \
+            --create --if-not-exists --topic "$$topic" --partitions 3 --replication-factor 1
+        done
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list
+
+volumes:
+  postgres-data:
+  kafka-data:
