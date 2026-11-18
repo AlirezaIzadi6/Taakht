@@ -22,7 +22,7 @@ The same names in every service, without a service prefix, because each service 
 |---|---|
 | `GRPC_ADDR` | gRPC listen address, for example `:9101` |
 | `HTTP_ADDR` | health and metrics listen address, for example `:8101`; bound on all interfaces so Prometheus can reach it from another container |
-| `DATABASE_URL` | the service's own PostgreSQL database |
+| `DATABASE_URL` | the service's own PostgreSQL database, with a role of its own that only it can connect with (in development `postgres://ad:ad@localhost:5432/ad`) |
 | `KAFKA_BROKERS` | Kafka bootstrap addresses |
 | `LOG_LEVEL` | log level |
 | `INTERNAL_TOKEN` | shared-secret guard for system identities ([ADR 0010](../adr/0010-authenticate-service-to-service-calls.md)) |
