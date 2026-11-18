@@ -507,5 +507,15 @@ Source: discussion of what counts as an open item.
 - **Reputation's admin queue and blocking are modelled as events too** (ADR 0021): the transitions are facts with event names, other services learn about a block from the published event, and keeping a second state-table model inside the service would duplicate the history that the anti-collusion rule needs. Costs noted in the ADR.
 - Removed from the list: the cover letter, the alignment of technology with skills, and product questions that were decided, duplicated or parked.
 
+## Skeleton conventions, 2026-11-18
+Source: discussion of what the development phase needs first; Alireza builds the shared part and the Go services, Arman the .NET services. Recorded in docs/guidelines/service-conventions.md, docs/guidelines/api-conventions.md and docs/guidelines/kafka-events.md. None of these is an ADR: all are cheap to change.
+
+- **Kafka topics:** one topic per service, `<service>.events`, keyed by the aggregate id, with the `message-type` header telling event types apart. Ordering is the reason: Kafka gives none across topics. Known cost: Kafka UI decodes one message name per topic.
+- **Protos:** `api/taakht/<service>/v1/`, one package per service, API and events in separate files.
+- **Development tokens:** RS256, so the Envoy setup matches a real identity provider; the spike only tried HS256.
+- **Go:** one module per service, the platform library found with `replace`, migrations with goose (not tried yet).
+- **Ports and environment variables:** fixed ports per service (9101 to 9105 for gRPC, 8101 to 8105 for HTTP) and the same variable names everywhere, including `OTEL_SERVICE_NAME`.
+- **First slice:** Ad creates an Ad, writes the outbox, the event goes to `ad.events`, Matching consumes it. Both are Go, so it does not need Arman; the .NET services are built on the same base later.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
