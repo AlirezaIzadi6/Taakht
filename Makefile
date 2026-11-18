@@ -12,7 +12,7 @@ DOTNET_SOLUTIONS := $(shell find . \( -name '*.sln' -o -name '*.slnx' \) -not -p
 # gen/go only holds code generated from api/, so it is not linted or tested.
 GO_MODULES := $(shell find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -not -path './gen/*' -exec dirname {} \;)
 
-.PHONY: help setup prereqs tools hooks generate fmt lint test
+.PHONY: help setup prereqs tools hooks generate up down fmt lint test
 
 help: ## Show available targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "} {printf "  %-10s %s\n", $$1, $$2}'
@@ -41,6 +41,12 @@ hooks: ## Install git hooks defined in lefthook.yml
 
 generate: ## Generate Go code from api/ with buf (not committed)
 	buf generate
+
+up: ## Start Postgres and Kafka with Docker Compose (topics are created first)
+	docker compose --project-directory deploy/compose up -d --wait
+
+down: ## Stop the Docker Compose stack (data volumes are kept)
+	docker compose --project-directory deploy/compose down
 
 fmt: ## Auto-fix formatting and style
 	@for s in $(DOTNET_SOLUTIONS); do dotnet format "$$s" || exit 1; done
