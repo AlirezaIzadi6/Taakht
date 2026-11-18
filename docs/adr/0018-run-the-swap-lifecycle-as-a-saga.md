@@ -1,6 +1,6 @@
 # 0018. Run the swap lifecycle as a Saga with compensating transactions
 
-- Status: Proposed (by @AlirezaIzadi6; awaiting review by @ArmanIzadi99)
+- Status: Proposed (by @AlirezaIzadi6; Accepted by @ArmanIzadi99)
 - Date: 2026-11-13
 - Deciders: @AlirezaIzadi6, @ArmanIzadi99
 - Bounded context(s): Deal (Swap), Ad, Reputation
