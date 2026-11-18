@@ -492,7 +492,7 @@ Source: discussion of rate limiting and a quick test of Envoy 1.34; recorded in 
 - **A plain route bucket is shared by all clients**, which the earlier spike had not shown; per-client limits need one bucket per key. Per-key buckets worked in the test with the `x-user-id` header; the client address behind another proxy was not verified. No numbers are proposed until there is data.
 
 ## Reputation event sourcing, 2026-11-17
-Source: discussion of Reputation's storage; recorded in ADR 0021 (Proposed).
+Source: discussion of Reputation's storage; recorded in ADR 0021.
 
 - **Event sourcing stays for Reputation**: the formula will change and the score has to be recomputable, the pair cap needs history, and practising the pattern is a goal. This is the one-way door and the decision of ADR 0021 (one stream per user, versions, an append with an expected version, projections, replay).
 - **The store is a convention, not part of the ADR**, because it sits inside the service and can be replaced: for now an append-only table in Reputation's own PostgreSQL. Marten and a dedicated store such as EventStoreDB (liked, but the stack fits PostgreSQL better and its memory on the 8 GB server is unmeasured) are noted in docs/guidelines/reputation-event-store.md. Payload format, upcasting, snapshots and projection mechanics are still open.
@@ -516,6 +516,11 @@ Source: discussion of what the development phase needs first; Alireza builds the
 - **Go:** one module per service, the platform library found with `replace`, migrations with goose (not tried yet).
 - **Ports and environment variables:** fixed ports per service (9101 to 9105 for gRPC, 8101 to 8105 for HTTP) and the same variable names everywhere, including `OTEL_SERVICE_NAME`.
 - **First slice:** Ad creates an Ad, writes the outbox, the event goes to `ad.events`, Matching consumes it. Both are Go, so it does not need Arman; the .NET services are built on the same base later.
+
+## ADRs 0017, 0018, 0020 and 0021 accepted, 2026-11-18
+Source: Arman's review (PR 45).
+
+- The synchronous Ad lock, the swap lifecycle Saga, the OpenTelemetry stack and event-sourced Reputation are Accepted; the status word in the four ADRs, the ADR index and the open items now say so. The behaviour when a proposal changes while the lock is claimed (`VersionChanged`) is a detail that still needs Arman's answer, it is not part of the acceptance.
 
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
