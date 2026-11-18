@@ -169,7 +169,7 @@ Known and intentional for the current phase:
 | [`docs/architecture/`](docs/architecture) | Architecture overview (current state), chronological decisions log, diagrams |
 | [`docs/adr/`](docs/adr/README.md) | One architecture decision per file, with the reasoning |
 | [`docs/evidence/`](docs/evidence) | Experiments and document reviews behind the ADRs, with what was not verified (the runnable code is in [`spikes/`](spikes)) |
-| [`docs/guidelines/`](docs/guidelines) | Conventions that follow from decisions (API, Kafka events, outbox and sweepers, observability, rate limiting, deployment, the Reputation event store) |
+| [`docs/guidelines/`](docs/guidelines) | Conventions that follow from decisions (API, service conventions, Kafka events, outbox and sweepers, observability, rate limiting, deployment, the Reputation event store) |
 | [`docs/api/`](docs/api) | API documentation and event contracts |
 | [`docs/testing/`](docs/testing) | Test strategy, load/stress scenarios and recorded results |
 | [`docs/process/`](docs/process) | How the team works |

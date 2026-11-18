@@ -8,6 +8,11 @@ Conventions that follow from the Protobuf API contract decision. Not an ADR; che
 - Compatible changes (new optional fields, new RPCs) stay in `v1`. A breaking change requires a new `v2` package and path, with both versions served during migration.
 - `buf breaking` runs against `main` in CI and blocks accidental breaking changes.
 
+## Layout
+
+- One directory and one proto package per service and version: `api/taakht/<service>/v1/`, package `taakht.<service>.v1`.
+- The API and the events of a service share the package but live in separate files: `<service>_service.proto` and `<service>_events.proto` (for example `ad_service.proto` and `ad_events.proto`). Event messages are never reused in the API.
+
 ## Errors
 
 - Services return standard gRPC status codes with `google.rpc.Status` details.
