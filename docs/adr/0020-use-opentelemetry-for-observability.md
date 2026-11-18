@@ -1,6 +1,6 @@
 # 0020. Use OpenTelemetry for observability, with Prometheus, Loki, Tempo and Grafana behind it
 
-- Status: Proposed (by @AlirezaIzadi6; awaiting review by @ArmanIzadi99)
+- Status: Proposed (by @AlirezaIzadi6; Accepted by @ArmanIzadi99)
 - Date: 2026-11-15
 - Deciders: @AlirezaIzadi6, @ArmanIzadi99
 - Bounded context(s): cross-cutting

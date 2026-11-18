@@ -1,6 +1,6 @@
 # 0017. Take the exclusive Ad lock in the Ad service with a synchronous atomic claim
 
-- Status: Proposed (by @AlirezaIzadi6; awaiting review by @ArmanIzadi99)
+- Status: Proposed (by @AlirezaIzadi6; Accepted by @ArmanIzadi99)
 - Date: 2026-11-13
 - Deciders: @AlirezaIzadi6, @ArmanIzadi99
 - Bounded context(s): Ad, Deal (Negotiation and Swap)
