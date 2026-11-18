@@ -24,7 +24,8 @@ launchSettings.local.json
 *.prof
 coverage.txt
 coverage.html
-# go.work and go.work.sum are committed on purpose (multi-module monorepo)
+# Code generated from api/ by `make generate` (the module files in gen/go stay committed)
+gen/go/**/*.pb.go
 
 # ---------- IDE / editor ----------
 .idea/

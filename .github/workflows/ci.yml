@@ -23,6 +23,7 @@ jobs:
     outputs:
       dotnet: ${{ steps.filter.outputs.dotnet }}
       go: ${{ steps.filter.outputs.go }}
+      contracts: ${{ steps.filter.outputs.contracts }}
       dotnet-solutions: ${{ steps.solutions.outputs.list }}
       go-modules: ${{ steps.modules.outputs.list }}
     steps:
@@ -46,8 +47,17 @@ jobs:
               - '**/*.go'
               - '**/go.mod'
               - '**/go.sum'
-              - 'go.work'
+              - 'api/**'
+              - 'buf.yaml'
+              - 'buf.gen.yaml'
+              - 'buf.lock'
               - '.golangci.yml'
+              - '.github/workflows/ci.yml'
+            contracts:
+              - 'api/**'
+              - 'buf.yaml'
+              - 'buf.gen.yaml'
+              - 'buf.lock'
               - '.github/workflows/ci.yml'
 
       # Every solution file (one per .NET service) becomes one matrix entry.
@@ -59,7 +69,7 @@ jobs:
       # Every directory holding a go.mod becomes one matrix entry.
       - id: modules
         run: |
-          list=$(find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -exec dirname {} \; | sort | jq -R -s -c 'split("\n")[:-1]')
+          list=$(find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -not -path './gen/*' -exec dirname {} \; | sort | jq -R -s -c 'split("\n")[:-1]')
           echo "list=$list" >> "$GITHUB_OUTPUT"
 
   commit-messages:
@@ -123,6 +133,33 @@ jobs:
       - name: Test
         run: dotnet test "$SOLUTION" -c Release --no-build
 
+  # The Protobuf contracts in api/: lint always, and compare with main for breaking changes.
+  contracts:
+    needs: changes
+    if: needs.changes.outputs.contracts == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: bufbuild/buf-setup-action@v1
+        with:
+          github_token: ${{ github.token }}
+
+      - name: Lint
+        run: buf lint
+
+      # main has no contracts until the first PR that adds api/ is merged; nothing to compare with then.
+      - name: Check for breaking changes against main
+        if: github.event_name == 'pull_request'
+        run: |
+          if git cat-file -e "origin/${{ github.base_ref }}:buf.yaml" 2>/dev/null; then
+            buf breaking --against ".git#ref=origin/${{ github.base_ref }}"
+          else
+            echo "No contracts on ${{ github.base_ref }} yet; skipping."
+          fi
+
   go:
     needs: changes
     if: needs.changes.outputs.go == 'true' && needs.changes.outputs.go-modules != '[]'
@@ -139,6 +176,14 @@ jobs:
           go-version-file: ${{ matrix.module }}/go.mod
           cache-dependency-path: ${{ matrix.module }}/go.sum
 
+      # The Go code generated from api/ is not committed (see docs/guidelines/api-conventions.md).
+      - uses: bufbuild/buf-setup-action@v1
+        with:
+          github_token: ${{ github.token }}
+
+      - name: Generate code from api/
+        run: buf generate
+
       - name: Lint
         uses: golangci/golangci-lint-action@v8
         with:
@@ -153,7 +198,7 @@ jobs:
   # Single required status check for branch protection: skipped jobs count as OK, failed/cancelled ones don't.
   ci-ok:
     if: always()
-    needs: [commit-messages, dotnet, go]
+    needs: [commit-messages, dotnet, contracts, go]
     runs-on: ubuntu-latest
     steps:
       - name: Verify results

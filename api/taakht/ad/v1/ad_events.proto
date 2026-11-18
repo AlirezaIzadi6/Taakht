@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package taakht.ad.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Events published by the Ad service on the ad.events topic. The partition key
+// is the Ad id. Event messages are never used in the API.
+
+// AdPublished is emitted when an Ad becomes visible to matching.
+message AdPublished {
+  string ad_id = 1;
+  string owner_id = 2;
+  string category_id = 3;
+  string neighbourhood_id = 4;
+  string description = 5;
+  google.protobuf.Timestamp occurred_at = 6;
+}
