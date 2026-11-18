@@ -1,6 +1,6 @@
 # 0021. Event-source Reputation
 
-- Status: Proposed (by @AlirezaIzadi6; Accepted by @ArmanIzadi99)
+- Status: Accepted (by @AlirezaIzadi6 and @ArmanIzadi99)
 - Date: 2026-11-17
 - Deciders: @AlirezaIzadi6, @ArmanIzadi99
 - Bounded context(s): Reputation

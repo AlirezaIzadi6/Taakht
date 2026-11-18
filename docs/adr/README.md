@@ -53,8 +53,8 @@ ADRs are written in English.
 | [0014](0014-publish-events-through-a-transactional-outbox.md) | Publish events through a transactional outbox with a polling relay | Accepted | cross-cutting |
 | [0015](0015-deliver-events-at-least-once-with-idempotent-consumers.md) | Deliver events at least once and make consumers idempotent with a processed-events table | Accepted | cross-cutting |
 | [0016](0016-structure-deal-as-modular-monolith.md) | Structure Deal as a modular monolith in .NET combining negotiation and swap | Accepted | Deal (Negotiation and Swap) |
-| [0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md) | Take the exclusive Ad lock in the Ad service with a synchronous atomic claim | Proposed | Ad, Deal (Negotiation and Swap) |
-| [0018](0018-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Proposed | Deal (Swap), Ad, Reputation |
+| [0017](0017-take-the-exclusive-ad-lock-in-the-ad-service.md) | Take the exclusive Ad lock in the Ad service with a synchronous atomic claim | Accepted | Ad, Deal (Negotiation and Swap) |
+| [0018](0018-run-the-swap-lifecycle-as-a-saga.md) | Run the swap lifecycle as a Saga with compensating transactions | Accepted | Deal (Swap), Ad, Reputation |
 | [0019](0019-use-elasticsearch-for-the-matching-index.md) | Use Elasticsearch for the Matching index, without Redis for now | Accepted | Matching |
-| [0020](0020-use-opentelemetry-for-observability.md) | Use OpenTelemetry for observability, with Prometheus, Loki, Tempo and Grafana behind it | Proposed | cross-cutting |
-| [0021](0021-event-source-reputation.md) | Event-source Reputation | Proposed | Reputation |
+| [0020](0020-use-opentelemetry-for-observability.md) | Use OpenTelemetry for observability, with Prometheus, Loki, Tempo and Grafana behind it | Accepted | cross-cutting |
+| [0021](0021-event-source-reputation.md) | Event-source Reputation | Accepted | Reputation |

@@ -36,14 +36,14 @@ Decided. The ADR index is the record; the numbers stay for the references.
 | 10 | Consistency and cross-service workflows | ADR 0015, 0017 and 0018 |
 | 11 | Data ownership and local read models | ADR 0002, 0005 and 0015; the read models are listed in the [architecture overview](architecture/architecture-overview.md) |
 | 12 | PostgreSQL | ADR 0013 (Communication uses it too) |
-| 13 | Event sourcing in Reputation | ADR 0021 (Proposed): the admin queue and blocking are modelled as events too; the store, the upcasting policy and the payload are in the [event store conventions](guidelines/reputation-event-store.md) |
+| 13 | Event sourcing in Reputation | ADR 0021 (Accepted): the admin queue and blocking are modelled as events too; the store, the upcasting policy and the payload are in the [event store conventions](guidelines/reputation-event-store.md) |
 | 14 | Search | ADR 0019 |
 | 15 | Neighbourhood distance and the role of Redis | ADR 0019 |
 | 17 | Edge API style | ADR 0007 |
 | 18 | Envoy as the edge gateway | ADR 0008 |
 | 19 | JWT validation at the edge | ADR 0009 |
 | 20 | Service-to-service authentication | ADR 0010 |
-| 22 | Observability stack | ADR 0020 (Proposed); alert thresholds, retention, sampling and where it runs are in the [observability conventions](guidelines/observability.md) |
+| 22 | Observability stack | ADR 0020 (Accepted); alert thresholds, retention, sampling and where it runs are in the [observability conventions](guidelines/observability.md) |
 | 24 | Ad and Proposal versioning | The domain docs, no ADR (the MVP draft "bind approvals to versions" described the earlier approval model and is not carried over) |
 | 26 | Rate limiting at the edge | The [rate limiting conventions](guidelines/rate-limiting.md) |
 
