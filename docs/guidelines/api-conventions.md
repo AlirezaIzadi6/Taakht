@@ -23,6 +23,7 @@ Conventions that follow from the Protobuf API contract decision. Not an ADR; che
 
 - The user id reaches services as the `x-user-id` metadata key, set by Envoy from the verified JWT (`sub` claim). Services read it only through the identity interceptor of the platform library of their language (ADR 0004) and pass it unchanged on outgoing calls.
 - Verified in a spike (2026-10-06): a client-sent `x-user-id` is overwritten or dropped on routes covered by a `jwt_authn` rule.
+- Development tokens are signed with RS256 (decided 2026-11-18), as a real identity provider would. Envoy gets only the public key as JWKS; a small dev tool holds the private key and issues tokens for the seeded users. The spike used an HS256 secret, so the RS256 setup on Envoy is not tried yet. Both keys are throwaway dev keys.
 
 ## Generated code
 
