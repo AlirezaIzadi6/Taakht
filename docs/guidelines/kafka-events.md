@@ -5,7 +5,8 @@ Conventions that follow from [ADR 0012](../adr/0012-describe-kafka-events-in-pro
 ## Records
 
 - The payload is plain Protobuf bytes.
-- Each record carries two headers: `message-type` (the fully qualified message name) and `schema-version`.
+- Each record carries three headers: `message-type` (the fully qualified message name), `schema-version` and `event-id`.
+- `event-id` is the id of the outbox row (a UUID) and stays the same when the relay sends the row again. A consumer records it in `processed_events` and skips an event it has seen ([ADR 0015](../adr/0015-deliver-events-at-least-once-with-idempotent-consumers.md)).
 - The partition key is the aggregate id ([ADR 0011](../adr/0011-use-kafka-for-events-between-services.md)).
 
 ## Topics
