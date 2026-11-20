@@ -14,6 +14,21 @@ Each service has its own fixed ports, so several services can run on one laptop 
 | reputation | 9104 | 8104 |
 | communication | 9105 | 8105 |
 
+The mocks of external Providers live in `src/mocks/<name>/` and have ports of their own:
+
+| Mock | gRPC | HTTP (health and metrics) |
+|---|---|---|
+| taxonomy | 9201 | 8201 |
+| delivery | 9202 | 8202 |
+| notification | 9203 | 8203 |
+| auth | 9204 | 8204 |
+
+## Identifiers
+
+- Categories, neighbourhoods and the named demo users have stable readable keys (a slug such as `electronics`); the names, in Persian and English, are separate fields, so a rename never changes an id.
+- The other seeded users follow a pattern (`u0001`, `u0002`, ...).
+- An id never depends on an outside source such as OSM.
+
 ## Environment variables
 
 The same names in every service, without a service prefix, because each service has its own environment.
