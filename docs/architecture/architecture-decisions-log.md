@@ -522,5 +522,14 @@ Source: Arman's review (PR 45).
 
 - The synchronous Ad lock, the swap lifecycle Saga, the OpenTelemetry stack and event-sourced Reputation are Accepted; the status word in the four ADRs, the ADR index and the open items now say so. The behaviour when a proposal changes while the lock is claimed (`VersionChanged`) is a detail that still needs Arman's answer, it is not part of the acceptance.
 
+## Scope of the first four weeks, 2026-11-19
+Source: discussion with Alireza and Arman about what has to exist in about four weeks (a presentable project) while the whole project is planned for 8 to 11 weeks. The task list itself lives on the GitHub board, not in the documents.
+
+- **Phase 1 is the whole deal flow in a thin form:** Ad (create, publish, hide, edit, the category and neighbourhood lists, and the lock, its release and closing, which Swap needs), Matching (browse query, indexing new Ads, search, sorting in Elasticsearch, `MatchFound`), Negotiation (request, accept, decline, withdraw, a new proposal when one of the three components changes, editing the terms, choosing the handover method), Swap (finalising the agreement, the locker and payment coordination, cancellation), Reputation (listening to and recording the key events such as a deal succeeding or failing and a report of an Ad or a user), and Communication (sending the notifications). Arman builds the mock of the locker partner and of the payment gateway.
+- **Matching scores on two factors in phase 1, category fit and closeness; for search the newest Ad comes last in the order.** The trust score joins when Reputation publishes it.
+- **One negotiation per pair of Ads stays in phase 1.**
+- **Later (after about week 4):** suspending and approving Ads, the other scoring factors (trust, open requests, photos), rebuilding the index, the cap on open negotiations and on requests and declines, extending the locker deadline by agreement and keeping negotiations open until the locker is paid, reviews, publishing the trust score, admin review of reports, chat and the full notification list.
+- **Deal reads Ad data from Ad, with no copy.** Synchronous `GetAd` and `GetAdVersion` when a command needs the Ad, ids of the immutable `AdVersion`s in the proposal, and the `AdEdited` event for the rebase. Reason: Ad stays the only owner of Ad data and there is no read model to keep in step; the cost is that opening a negotiation fails while Ad is down. A local copy fed by events was the alternative, too much for the first weeks.
+
 ---
 *Dates: 1405/06/21 (2026-09-12), added on 1405/06/26 (2026-09-17), 1405/06/28 (2026-09-19), 1405/07/02 (2026-09-24), 1405/07/03 (2026-09-25), 1405/07/11 (2026-10-03), 1405/07/13 (2026-10-05), 1405/07/14 (2026-10-06), 1405/08/14 (2026-11-04) and 2026-11-06*
