@@ -22,15 +22,18 @@ cd Taakht
 make setup
 ```
 
-`make setup` runs three targets in order. Each is safe to re-run and skips work that is already done.
+`make setup` runs four targets in order. Each is safe to re-run and skips work that is already done.
 
 | Target | What it does |
 |---|---|
 | `make prereqs` | Checks that `git`, `dotnet`, `go` and `docker` are on `PATH` and that the SDK required by `global.json` is installed. Reports only. |
 | `make tools` | Installs `lefthook`, `golangci-lint` and `buf` with `go install` if they are not already on `PATH`. |
 | `make hooks` | Runs `lefthook install`, which registers the git hooks defined in [`lefthook.yml`](../lefthook.yml). |
+| `make dev-keys` | Creates the RS256 dev key pair and the JWKS file in `.dev-keys/` if they do not exist yet. |
 
 `go install` places binaries in `$(go env GOPATH)/bin`. That directory must be on your `PATH`; if it is not, `make tools` stops with a message telling you so.
+
+`make dev-keys` writes the private key `.dev-keys/jwt-private.pem` for the auth mock and the public key as `.dev-keys/jwks.json` for Envoy. The folder is git-ignored, so every machine and the shared server generate their own pair and the keys are never committed.
 
 ## Everyday commands
 
@@ -40,7 +43,8 @@ make setup
 | `make lint` | Checks everything without fixing anything. This is exactly what CI runs. |
 | `make test` | Runs all .NET and Go tests (Go with `-race`). |
 | `make generate` | Generates the Go code from the Protobuf contracts in `api/` into `gen/go`; it is not committed. `lint` and `test` run it first, and it needs network access to buf.build. |
-| `make up` | Starts Postgres and Kafka with Docker Compose and creates the Kafka topics. `make down` stops them and keeps the data; `make reset` stops them and deletes the data. |
+| `make dev-keys` | Creates the RS256 dev key pair and JWKS in `.dev-keys/` when missing; safe to re-run. |
+| `make up` | Creates the dev keys first, then starts Postgres and Kafka with Docker Compose and creates the Kafka topics. `make down` stops them and keeps the data; `make reset` stops them and deletes the data. |
 | `make up-server` | The same for the shared server: only the base compose file, no published ports. |
 
 Run `make` with no arguments to list all targets.

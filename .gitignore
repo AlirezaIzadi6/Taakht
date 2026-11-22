@@ -52,6 +52,7 @@ secrets.json
 *.pfx
 *.key
 *.pem
+.dev-keys/
 
 # ---------- Local tooling ----------
 lefthook-local.yml
