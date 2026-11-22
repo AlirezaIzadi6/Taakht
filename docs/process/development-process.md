@@ -21,8 +21,9 @@ Decisions about the team's way of working (a team of two). Architecture decision
 - **Force-push** a feature branch after rebasing, with `--force-with-lease`. Do not force-push `main`, except to repair history when both people agree.
 
 ## Testing
-- Unit + integration (mandatory) + end-to-end.
-- TDD: a pilot on some services, not everywhere.
+- Strategy and workflow: see [`docs/testing/README.md`](../testing/README.md).
+- Unit + integration (mandatory) + end-to-end. Phase 1 focuses exclusively on unit tests.
+- TDD: starts across all services for Domain, Application and shared libraries; evaluated per service.
 - Load and stress tests: scripts live in the repository; results are kept both as log records and on an overview page. Details: `architecture-overview.md`, section 7.
 
 ## AI-generated files
