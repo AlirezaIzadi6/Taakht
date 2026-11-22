@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AuthMock.Api/AuthMock.Api.csproj" />
+    <Project Path="src/AuthMock.Application/AuthMock.Application.csproj" />
+    <Project Path="src/AuthMock.Domain/AuthMock.Domain.csproj" />
+    <Project Path="src/AuthMock.Infrastructure/AuthMock.Infrastructure.csproj" />
+  </Folder>
+  <Project Path="../../../tests/mocks/auth/AuthMock.Application.Tests/AuthMock.Application.Tests.csproj" />
+  <Project Path="../../../tests/mocks/auth/AuthMock.Infrastructure.Tests/AuthMock.Infrastructure.Tests.csproj" />
+</Solution>

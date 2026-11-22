@@ -45,7 +45,7 @@ dev-keys: ## Generate the RS256 dev key pair and JWKS in .dev-keys/ (git-ignored
 generate: ## Generate Go code from api/ with buf (not committed)
 	buf generate
 
-up: dev-keys ## Start Postgres and Kafka with Docker Compose (topics are created first)
+up: dev-keys ## Start the local stack with Docker Compose (Postgres, Kafka and auth; topics are created first)
 	docker compose --project-directory deploy/compose up -d --wait
 
 up-server: dev-keys ## Start the stack as on the shared server: the base file only, no published ports

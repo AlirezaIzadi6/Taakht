@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Api.CommonProtos" />
+    <PackageReference Include="Grpc.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AuthMock.Application\AuthMock.Application.csproj" />
+    <ProjectReference Include="..\AuthMock.Infrastructure\AuthMock.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\..\..\..\api\taakht\auth\v1\auth_service.proto" ProtoRoot="..\..\..\..\..\api" AdditionalImportDirs="..\..\third_party" GrpcServices="Both" />
+    <Protobuf Include="..\..\third_party\google\api\annotations.proto" ProtoRoot="..\..\third_party" GrpcServices="None" ProtoCompile="false" />
+    <Protobuf Include="..\..\third_party\google\api\http.proto" ProtoRoot="..\..\third_party" GrpcServices="None" ProtoCompile="false" />
+  </ItemGroup>
+
+</Project>

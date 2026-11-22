@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package taakht.auth.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Taakht.Auth.V1";
+
+// Issues development tokens for the seeded users. This is the mock AuthProvider:
+// the password field is accepted but not checked in phase 1, and there is no
+// registration, session or revocation.
+service AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/v1/auth/login"
+      body: "*"
+    };
+  }
+}
+
+message LoginRequest {
+  // Seeded username, for example "ali" or "admin".
+  string username = 1;
+
+  // Accepted for contract compatibility; not checked in phase 1.
+  string password = 2;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}

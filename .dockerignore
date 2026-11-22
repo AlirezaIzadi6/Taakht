@@ -1,0 +1,11 @@
+.git
+.commandcode
+.dev-keys
+**/bin
+**/obj
+deploy
+docs
+gen
+spikes
+tests
+tools
