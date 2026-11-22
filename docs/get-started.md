@@ -33,7 +33,7 @@ make setup
 
 `go install` places binaries in `$(go env GOPATH)/bin`. That directory must be on your `PATH`; if it is not, `make tools` stops with a message telling you so.
 
-`make dev-keys` writes the private key `.dev-keys/jwt-private.pem` for the auth mock and the public key as `.dev-keys/jwks.json` for Envoy. The folder is git-ignored, so every machine and the shared server generate their own pair and the keys are never committed.
+`make dev-keys` writes the private key `.dev-keys/jwt-private.pem` for the auth mock and the public key as `.dev-keys/jwks.json` for Envoy. The folder is git-ignored, so every machine and the shared server generate their own pair and the keys are never committed. These are throwaway development keys, not real secrets; the private key is readable by the non-root auth mock container.
 
 ## Everyday commands
 
