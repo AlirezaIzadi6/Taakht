@@ -37,7 +37,10 @@ using var rsa = RSA.Create(2048);
 File.WriteAllText(privateKeyPath, rsa.ExportPkcs8PrivateKeyPem());
 if (!OperatingSystem.IsWindows())
 {
-    File.SetUnixFileMode(privateKeyPath, UnixFileMode.UserRead | UnixFileMode.UserWrite);
+    // The auth mock runs as a non-root container user and must read this throwaway dev key.
+    File.SetUnixFileMode(
+        privateKeyPath,
+        UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.GroupRead | UnixFileMode.OtherRead);
 }
 
 var publicParameters = rsa.ExportParameters(includePrivateParameters: false);
