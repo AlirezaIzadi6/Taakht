@@ -12,12 +12,12 @@ DOTNET_SOLUTIONS := $(shell find . \( -name '*.sln' -o -name '*.slnx' \) -not -p
 # gen/go only holds code generated from api/, so it is not linted or tested.
 GO_MODULES := $(shell find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -not -path './gen/*' -exec dirname {} \;)
 
-.PHONY: help setup prereqs tools hooks generate up up-server down reset fmt lint test
+.PHONY: help setup prereqs tools hooks dev-keys generate up up-server down reset fmt lint test
 
 help: ## Show available targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "} {printf "  %-10s %s\n", $$1, $$2}'
 
-setup: prereqs tools hooks ## One-time developer environment setup
+setup: prereqs tools hooks dev-keys ## One-time developer environment setup
 
 prereqs: ## Verify git, .NET SDK, Go and Docker are installed (reports only, never installs)
 	@missing=0; \
@@ -39,13 +39,16 @@ tools: ## Install lefthook, golangci-lint and buf if they are not already on PAT
 hooks: ## Install git hooks defined in lefthook.yml
 	lefthook install
 
+dev-keys: ## Generate the RS256 dev key pair and JWKS in .dev-keys/ (git-ignored)
+	@dotnet run --project tools/dev-keys -- --out .dev-keys
+
 generate: ## Generate Go code from api/ with buf (not committed)
 	buf generate
 
-up: ## Start Postgres and Kafka with Docker Compose (topics are created first)
+up: dev-keys ## Start Postgres and Kafka with Docker Compose (topics are created first)
 	docker compose --project-directory deploy/compose up -d --wait
 
-up-server: ## Start the stack as on the shared server: the base file only, no published ports
+up-server: dev-keys ## Start the stack as on the shared server: the base file only, no published ports
 	docker compose --project-directory deploy/compose -f deploy/compose/compose.yaml up -d --wait
 
 down: ## Stop the Docker Compose stack (data volumes are kept)
