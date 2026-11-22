@@ -1,4 +1,4 @@
-# The shared base: Postgres and Kafka on an internal network, nothing published.
+# The shared base: Postgres, Kafka and the auth mock on an internal network, nothing published.
 # On a laptop, compose.override.yaml is loaded as well and publishes the ports a
 # developer needs; on the shared server run with `-f compose.yaml` only
 # (docs/guidelines/deployment.md).
@@ -81,6 +81,23 @@ services:
             --create --if-not-exists --topic "$$topic" --partitions 3 --replication-factor 1
         done
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list
+
+  # Mock AuthProvider: login issues RS256 tokens for the seeded users. It sits on the
+  # internal network only; Envoy exposes POST /v1/auth/login at the edge (#59).
+  auth:
+    build:
+      context: ../..
+      dockerfile: src/mocks/auth/Dockerfile
+    restart: unless-stopped
+    environment:
+      GRPC_ADDR: ":9204"
+      HTTP_ADDR: ":8204"
+      JWT_PRIVATE_KEY_PATH: /keys/jwt-private.pem
+      JWT_KEY_ID: dev-1
+      JWT_ISSUER: taakht-auth-mock
+      JWT_AUDIENCE: taakht-api
+    volumes:
+      - ../../.dev-keys:/keys:ro
 
 volumes:
   postgres-data:

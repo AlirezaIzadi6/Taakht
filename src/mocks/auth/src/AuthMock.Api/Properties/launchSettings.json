@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GRPC_ADDR": ":9204",
+        "HTTP_ADDR": ":8204",
+        "JWT_PRIVATE_KEY_PATH": "../../../../../.dev-keys/jwt-private.pem"
+      }
+    }
+  }
+}

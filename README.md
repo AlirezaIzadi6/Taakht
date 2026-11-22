@@ -6,7 +6,7 @@
 
 **A goods-swap layer for a classifieds platform (designed around Divar), built as a microservices portfolio project.**
 
-> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as ADRs in [`docs/adr/`](docs/adr/README.md); repo tooling (CI, Makefile, edge gateway config) is in place. Service implementation has not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
+> **Status: design complete, scaffolding in progress (Phase 1).** The domain model and bounded contexts are documented and the key decisions are recorded as ADRs in [`docs/adr/`](docs/adr/README.md); repo tooling (CI, Makefile, Docker Compose) is in place. The auth mock (a provider adapter) is the first implemented slice; the five core services have not started. Sections marked `TBD` depend on decisions that are still open. See [Status and known limitations](#status-and-known-limitations).
 
 ## The idea
 
@@ -46,7 +46,7 @@ Every dependency outside the swap domain sits behind a small interface with a mo
 
 | Interface | Phase 1 (this project) |
 |---|---|
-| `AuthProvider` | Issues a JWT for seeded users, no real password check |
+| `AuthProvider` | Issues an RS256 JWT for seeded users; the password field is ignored (no password check) |
 | `TaxonomyProvider` | Divar's category taxonomy and city/neighbourhood division, from a small fixed dataset (Taakht has no link to Divar ads) |
 | `KYCProvider` | Always passes |
 | `DeliveryProvider` | Simulated locker statuses (the only delivery method integrated with a partner) |
@@ -73,7 +73,7 @@ Rule of thumb: mock an external dependency when it cannot realistically be built
 
 ## Tech stack
 
-- **Languages:** Go 1.27 (Ad, Matching, Communication), C# / .NET 10 (Deal modular monolith, Reputation)
+- **Languages:** Go 1.27 (Ad, Matching, Communication), C# / .NET 10 (Deal modular monolith, Reputation, the auth mock)
 - **Async communication:** Apache Kafka (domain events published through a transactional outbox)
 - **Sync communication:** gRPC between services, REST/JSON at the edge behind an API Gateway (Envoy: load balancing, rate limiting, JWT validation); no GraphQL
 - **Storage:** PostgreSQL as the durable store, Elasticsearch for search and match scoring, no shared cache for now (static reference data such as the category tree and the neighbourhood distances stays in service memory), an append-only events table in Reputation's own PostgreSQL database ([ADR 0021](docs/adr/0021-event-source-reputation.md))
@@ -108,7 +108,7 @@ On Windows, run `make` from Git Bash. Prerequisites, hooks, CI and troubleshooti
 
 The demo is **API-driven**: no product UI (at most a minimal UI for testing), everything is exercised through API calls against seeded data.
 
-`TBD (planned, nothing exists yet):` one command to start the whole system and one to seed fake users, categories and Ads.
+`make up` currently starts Postgres, Kafka and the auth mock, with the RS256 dev keys created first. The rest of the system and the seed script are still `TBD`.
 
 Then follow a scripted walkthrough of API calls: log in as a seeded user, publish an Ad, watch a match notification, send competing Swap Requests, negotiate Proposals, approve, lock, settle.
 
@@ -122,6 +122,7 @@ Taakht/
 ├── deploy/          Docker Compose for local development and the shared server
 ├── libs/            one platform library per language: infrastructure code only (planned)
 ├── src/             one solution (.NET) or module (Go) per service
+├── tests/           unit and integration tests, outside the service folders
 ├── gateway/         Envoy edge gateway config (REST/JSON to gRPC)
 ├── spikes/          throwaway experiments behind the evidence docs
 ├── Makefile         setup, generate, up and down, fmt, lint, test

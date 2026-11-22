@@ -41,6 +41,7 @@ jobs:
               - '**/*.targets'
               - '**/*.sln'
               - '**/*.slnx'
+              - 'api/**'
               - 'global.json'
               - '.editorconfig'
               - '.github/workflows/ci.yml'
