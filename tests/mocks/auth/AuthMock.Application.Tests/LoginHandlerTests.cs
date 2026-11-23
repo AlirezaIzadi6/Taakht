@@ -96,7 +96,6 @@ public sealed class LoginHandlerTests
             Username = "ali",
             Email = "ali@example.com",
             Phone = "+989120000001",
-            PasswordHash = "unused",
             Role = UserRole.User,
         };
 }

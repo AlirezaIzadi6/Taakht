@@ -4,8 +4,6 @@ namespace AuthMock.Infrastructure;
 
 public static class SeedUsers
 {
-    private const string _seedPassword = "dev-password";
-
     public static IReadOnlyList<User> Create() =>
     [
         CreateUser("ali", "ali@example.com", "+989120000001", UserRole.User),
@@ -27,7 +25,6 @@ public static class SeedUsers
             Username = username,
             Email = email,
             Phone = phone,
-            PasswordHash = Pbkdf2PasswordHasher.Hash(_seedPassword),
             Role = role,
         };
 }

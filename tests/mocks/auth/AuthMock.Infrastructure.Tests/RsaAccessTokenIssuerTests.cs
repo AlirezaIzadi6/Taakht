@@ -94,7 +94,6 @@ public sealed class RsaAccessTokenIssuerTests
             Username = "ali",
             Email = "ali@example.com",
             Phone = "+989120000001",
-            PasswordHash = "unused",
             Role = role,
         };
 
