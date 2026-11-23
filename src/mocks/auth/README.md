@@ -16,7 +16,7 @@ Mock implementation of the `AuthProvider` for phase 1. It issues RS256 JWTs for 
 
 ## Seeded users
 
-`ali`, `sara`, `reza`, `mina`, `hossein`, `zahra`, `amir`, `neda`, `kian` have role `user`; `admin` has role `admin`. The model stores a `PasswordHash`, but login does not compare it: any password, including an empty one, works for a seeded username.
+`ali`, `sara`, `reza`, `mina`, `hossein`, `zahra`, `amir`, `neda`, `kian` have role `user`; `admin` has role `admin`. The model stores no password: the `password` field is accepted and ignored, so any password, including an empty one, works for a seeded username.
 
 ## Run and test
 

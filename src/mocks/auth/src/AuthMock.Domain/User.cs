@@ -10,7 +10,5 @@ public sealed class User
 
     public required string Phone { get; init; }
 
-    public required string PasswordHash { get; init; }
-
     public required UserRole Role { get; init; }
 }
