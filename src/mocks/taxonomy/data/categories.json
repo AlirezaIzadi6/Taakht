@@ -1,0 +1,182 @@
+[
+  {
+    "id": "home-kitchen",
+    "parent_id": "",
+    "name_fa": "خانه و آشپزخانه",
+    "name_en": "Home & Kitchen"
+  },
+  {
+    "id": "kitchen-utensils",
+    "parent_id": "home-kitchen",
+    "name_fa": "ظروف و لوازم آشپزخانه",
+    "name_en": "Kitchen Utensils"
+  },
+  {
+    "id": "pot-kettle",
+    "parent_id": "kitchen-utensils",
+    "name_fa": "قوری، کتری و قهوه‌ساز دستی",
+    "name_en": "Pots, Kettles & Manual Coffee Makers"
+  },
+  {
+    "id": "home-catering",
+    "parent_id": "kitchen-utensils",
+    "name_fa": "ظروف سرو و پذیرایی",
+    "name_en": "Tableware & Catering"
+  },
+  {
+    "id": "cooking-utensils",
+    "parent_id": "kitchen-utensils",
+    "name_fa": "ظروف پخت‌وپز",
+    "name_en": "Cookware"
+  },
+  {
+    "id": "furniture-wood",
+    "parent_id": "home-kitchen",
+    "name_fa": "مبلمان و صنایع چوب",
+    "name_en": "Furniture & Woodwork"
+  },
+  {
+    "id": "furniture",
+    "parent_id": "furniture-wood",
+    "name_fa": "مبلمان خانگی و میز عسلی",
+    "name_en": "Living Room Furniture"
+  },
+  {
+    "id": "dining-table",
+    "parent_id": "furniture-wood",
+    "name_fa": "میز و صندلی غذاخوری",
+    "name_en": "Dining Tables & Chairs"
+  },
+  {
+    "id": "bookcase-shelf",
+    "parent_id": "furniture-wood",
+    "name_fa": "کتابخانه، شلف و قفسه‌های دیواری",
+    "name_en": "Bookcases, Shelves & Racks"
+  },
+  {
+    "id": "carpet-moquette",
+    "parent_id": "home-kitchen",
+    "name_fa": "فرش، گلیم، موکت",
+    "name_en": "Carpets & Rugs"
+  },
+  {
+    "id": "carpet",
+    "parent_id": "carpet-moquette",
+    "name_fa": "فرش",
+    "name_en": "Carpets"
+  },
+  {
+    "id": "rugs-woolen-cloth",
+    "parent_id": "carpet-moquette",
+    "name_fa": "گلیم، جاجیم و گبه",
+    "name_en": "Traditional Rugs & Kilims"
+  },
+  {
+    "id": "sleep-goods",
+    "parent_id": "home-kitchen",
+    "name_fa": "تشک، روتختی، رختخواب",
+    "name_en": "Bedding & Mattresses"
+  },
+  {
+    "id": "bed-pillow-blanket",
+    "parent_id": "sleep-goods",
+    "name_fa": "رختخواب، بالش و پتو",
+    "name_en": "Bedding, Pillows & Blankets"
+  },
+  {
+    "id": "personal",
+    "parent_id": "",
+    "name_fa": "وسایل شخصی",
+    "name_en": "Personal Goods"
+  },
+  {
+    "id": "clothing-and-shoes",
+    "parent_id": "personal",
+    "name_fa": "کیف، کفش و لباس",
+    "name_en": "Clothing, Bags & Shoes"
+  },
+  {
+    "id": "clothing",
+    "parent_id": "clothing-and-shoes",
+    "name_fa": "لباس",
+    "name_en": "Clothing"
+  },
+  {
+    "id": "shoes-belt-bag",
+    "parent_id": "clothing-and-shoes",
+    "name_fa": "کیف، کفش و کمربند",
+    "name_en": "Bags, Shoes & Belts"
+  },
+  {
+    "id": "baby-and-toys",
+    "parent_id": "personal",
+    "name_fa": "وسایل بچه و اسباب‌بازی",
+    "name_en": "Baby Gear & Toys"
+  },
+  {
+    "id": "personal-toys",
+    "parent_id": "baby-and-toys",
+    "name_fa": "اسباب‌بازی بچه",
+    "name_en": "Kids Toys"
+  },
+  {
+    "id": "childrens-furniture",
+    "parent_id": "baby-and-toys",
+    "name_fa": "اسباب و اثاث بچه",
+    "name_en": "Nursery Furniture"
+  },
+  {
+    "id": "stationery",
+    "parent_id": "personal",
+    "name_fa": "لوازم التحریر",
+    "name_en": "Stationery"
+  },
+  {
+    "id": "leisure-hobbies",
+    "parent_id": "",
+    "name_fa": "سرگرمی و فراغت",
+    "name_en": "Leisure & Hobbies"
+  },
+  {
+    "id": "book-student-literature",
+    "parent_id": "leisure-hobbies",
+    "name_fa": "کتاب و مجله",
+    "name_en": "Books & Magazines"
+  },
+  {
+    "id": "sport-leisure",
+    "parent_id": "leisure-hobbies",
+    "name_fa": "ورزش و تناسب اندام",
+    "name_en": "Sports & Fitness"
+  },
+  {
+    "id": "training",
+    "parent_id": "sport-leisure",
+    "name_fa": "تجهیزات ورزشی و بدنسازی",
+    "name_en": "Fitness & Workout Equipment"
+  },
+  {
+    "id": "camping-outdoor",
+    "parent_id": "sport-leisure",
+    "name_fa": "کوهنوردی و کمپینگ",
+    "name_en": "Camping & Outdoor"
+  },
+  {
+    "id": "leisure-hobbies-toys",
+    "parent_id": "leisure-hobbies",
+    "name_fa": "بازی‌های فکری و سرگرمی",
+    "name_en": "Board Games & Hobbies"
+  },
+  {
+    "id": "tools-materials-equipment",
+    "parent_id": "",
+    "name_fa": "ابزار، لوازم ساختمانی و صنعتی",
+    "name_en": "Tools & Equipment"
+  },
+  {
+    "id": "toolbox",
+    "parent_id": "tools-materials-equipment",
+    "name_fa": "ابزارآلات دستی",
+    "name_en": "Hand Tools"
+  }
+]
