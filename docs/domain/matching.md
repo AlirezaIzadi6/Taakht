@@ -39,10 +39,11 @@ Categories form a tree (Divar's taxonomy). Two categories are compatible if they
 
 | "I have" | "I want" | Match? |
 |---|---|---|
-| drill | drill | Yes (same) |
-| drill | tools | Yes: a drill is a kind of tool; no penalty |
-| tools | drill | Yes, with a lower score: the owner was general and it may or may not be a drill |
-| books | tools | No |
+| `cooking-utensils` | `cooking-utensils` | Yes (same) |
+| `cooking-utensils` | `home-kitchen` | Yes: cookware is under home and kitchen; no penalty |
+| `home-kitchen` | `cooking-utensils` | Yes, with a lower score: the owner was general and it may or may not be cookware |
+| `cooking-utensils` | `home-catering` | No: siblings under `kitchen-utensils`, neither is ancestor of the other |
+| `book-student-literature` | `toolbox` | No (separate branches) |
 
 The further apart two compatible categories are in the tree, the lower the score. An empty "I want" accepts every category.
 
