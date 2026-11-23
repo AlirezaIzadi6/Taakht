@@ -12,7 +12,7 @@ DOTNET_SOLUTIONS := $(shell find . \( -name '*.sln' -o -name '*.slnx' \) -not -p
 # gen/go only holds code generated from api/, so it is not linted or tested.
 GO_MODULES := $(shell find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -not -path './gen/*' -exec dirname {} \;)
 
-.PHONY: help setup prereqs tools hooks dev-keys generate up up-server down reset fmt lint test
+.PHONY: help setup prereqs tools hooks dev-keys generate gen-users gen-users-check up up-server down reset fmt lint test
 
 help: ## Show available targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "} {printf "  %-10s %s\n", $$1, $$2}'
@@ -45,6 +45,12 @@ dev-keys: ## Generate the RS256 dev key pair and JWKS in .dev-keys/ (git-ignored
 generate: ## Generate Go code from api/ with buf (not committed)
 	buf generate
 
+gen-users: ## Regenerate the auth mock's user file (10 named + 2000 generated)
+	dotnet run --project tools/seed-users -- --out "$(CURDIR)/src/mocks/auth/data/users.json"
+
+gen-users-check: ## Verify the committed user file matches the generator
+	dotnet run --project tools/seed-users -- --check --out "$(CURDIR)/src/mocks/auth/data/users.json"
+
 up: dev-keys ## Start the local stack with Docker Compose (Postgres, Kafka and auth; topics are created first)
 	docker compose --project-directory deploy/compose up -d --wait
 
@@ -61,7 +67,7 @@ fmt: ## Auto-fix formatting and style
 	@for s in $(DOTNET_SOLUTIONS); do dotnet format "$$s" || exit 1; done
 	@for m in $(GO_MODULES); do (cd $$m && golangci-lint fmt ./...) || exit 1; done
 
-lint: generate ## Check everything without fixing (same as CI)
+lint: generate gen-users-check ## Check everything without fixing (same as CI)
 	@for s in $(DOTNET_SOLUTIONS); do \
 		dotnet format "$$s" --verify-no-changes && dotnet build "$$s" -c Release || exit 1; \
 	done

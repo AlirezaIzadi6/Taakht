@@ -43,6 +43,8 @@ make setup
 | `make lint` | Checks everything without fixing anything. This is exactly what CI runs. |
 | `make test` | Runs all .NET and Go tests (Go with `-race`). |
 | `make generate` | Generates the Go code from the Protobuf contracts in `api/` into `gen/go`; it is not committed. `lint` and `test` run it first, and it needs network access to buf.build. |
+| `make gen-users` | Regenerates the auth mock's user file (`src/mocks/auth/data/users.json`) from `tools/seed-users`; the file is committed. |
+| `make gen-users-check` | Verifies the committed user file matches the generator. `make lint` runs it. |
 | `make dev-keys` | Creates the RS256 dev key pair and JWKS in `.dev-keys/` when missing; safe to re-run. |
 | `make up` | Creates the dev keys first, then starts Postgres, Kafka and the auth mock with Docker Compose and creates the Kafka topics. `make down` stops them and keeps the data; `make reset` stops them and deletes the data. |
 | `make up-server` | The same for the shared server: only the base compose file, no published ports. |
