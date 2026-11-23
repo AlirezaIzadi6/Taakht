@@ -5,16 +5,16 @@ namespace AuthMock.Infrastructure.Tests;
 
 public sealed class InMemoryUserRepositoryTests
 {
-    private readonly InMemoryUserRepository _repository = new(SeedUsers.Create());
+    private readonly InMemoryUserRepository _repository = new(SeedUsers.Load(TestSeedFile.FilePath));
 
     [Fact]
-    public void SeedsTenUsers()
+    public void LoadsTenUsers()
     {
         // Arrange
         const int expectedCount = 10;
 
         // Act
-        var users = SeedUsers.Create();
+        var users = SeedUsers.Load(TestSeedFile.FilePath);
 
         // Assert
         users.Should().HaveCount(expectedCount);

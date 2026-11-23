@@ -13,4 +13,11 @@
     <ProjectReference Include="..\AuthMock.Domain\AuthMock.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\data\users.json"
+             Link="data\users.json"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

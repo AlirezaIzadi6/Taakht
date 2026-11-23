@@ -13,10 +13,11 @@ Mock implementation of the `AuthProvider` for phase 1. It issues RS256 JWTs for 
 
 - gRPC `9204`, health HTTP `8204`.
 - `GRPC_ADDR`, `HTTP_ADDR`, `JWT_PRIVATE_KEY_PATH`, `JWT_KEY_ID`, `JWT_ISSUER`, `JWT_AUDIENCE`, `TOKEN_TTL`.
+- `USERS_FILE_PATH` points at the seeded user file; the default is `data/users.json` next to the application.
 
 ## Seeded users
 
-`ali`, `sara`, `reza`, `mina`, `hossein`, `zahra`, `amir`, `neda`, `kian` have role `user`; `admin` has role `admin`. The model stores no password: the `password` field is accepted and ignored, so any password, including an empty one, works for a seeded username.
+The ten users live in [`data/users.json`](data/users.json) and are loaded at startup. `ali`, `sara`, `reza`, `mina`, `hossein`, `zahra`, `amir`, `neda`, `kian` have role `user`; `admin` has role `admin`. The model stores no password: the `password` field is accepted and ignored, so any password, including an empty one, works for a seeded username. The generator for the larger seeded set arrives with #65.
 
 ## Run and test
 

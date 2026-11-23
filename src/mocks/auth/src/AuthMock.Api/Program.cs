@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 var builder = WebApplication.CreateBuilder(args);
 
 var authOptions = ReadAuthOptions(builder.Configuration);
+var usersPath = ReadUsersPath(builder.Configuration);
+var seedUsers = SeedUsers.Load(usersPath);
 builder.Services.AddSingleton(authOptions);
 builder.Services.AddSingleton(TimeProvider.System);
-builder.Services.AddSingleton<IUserRepository>(_ => new InMemoryUserRepository(SeedUsers.Create()));
+builder.Services.AddSingleton<IUserRepository>(_ => new InMemoryUserRepository(seedUsers));
 builder.Services.AddSingleton<IAccessTokenIssuer, RsaAccessTokenIssuer>();
 builder.Services.AddSingleton<LoginHandler>();
 builder.Services.AddGrpc();
@@ -23,6 +25,11 @@ builder.WebHost.ConfigureKestrel(options =>
 });
 
 var app = builder.Build();
+
+if (app.Logger.IsEnabled(LogLevel.Information))
+{
+    app.Logger.LogInformation("Loaded {UserCount} seeded users from {UsersFile}", seedUsers.Count, usersPath);
+}
 
 app.MapGrpcService<AuthGrpcService>();
 app.MapGet("/healthz", () => Results.Ok());
@@ -63,6 +70,14 @@ static AuthOptions ReadAuthOptions(IConfiguration configuration)
         Audience = configuration["JWT_AUDIENCE"] ?? "taakht-api",
         TokenLifetime = tokenLifetime,
     };
+}
+
+static string ReadUsersPath(IConfiguration configuration)
+{
+    var configuredPath = configuration["USERS_FILE_PATH"];
+    return string.IsNullOrWhiteSpace(configuredPath)
+        ? Path.Combine(AppContext.BaseDirectory, "data", "users.json")
+        : Path.GetFullPath(configuredPath);
 }
 
 public partial class Program;

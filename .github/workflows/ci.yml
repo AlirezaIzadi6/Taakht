@@ -42,6 +42,7 @@ jobs:
               - '**/*.sln'
               - '**/*.slnx'
               - 'api/**'
+              - 'src/mocks/auth/data/**'
               - 'global.json'
               - '.editorconfig'
               - '.github/workflows/ci.yml'
