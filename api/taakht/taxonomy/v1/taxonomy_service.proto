@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package taakht.taxonomy.v1;
+
+import "google/api/annotations.proto";
+
+option csharp_namespace = "Taakht.Taxonomy.V1";
+
+// TaxonomyService provides category taxonomy, cities, and neighbourhoods.
+// It serves as a read-only foundation for ad placement and location-based matching.
+service TaxonomyService {
+  // ListCategories returns the complete category tree in a single response.
+  rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse) {
+    option (google.api.http) = {
+      get: "/v1/taxonomy/categories"
+    };
+  }
+
+  // ListCities returns the list of all supported cities.
+  rpc ListCities(ListCitiesRequest) returns (ListCitiesResponse) {
+    option (google.api.http) = {
+      get: "/v1/taxonomy/cities"
+    };
+  }
+
+  // ListNeighbourhoods returns all neighbourhoods for a given city.
+  rpc ListNeighbourhoods(ListNeighbourhoodsRequest) returns (ListNeighbourhoodsResponse) {
+    option (google.api.http) = {
+      get: "/v1/taxonomy/cities/{city_id}/neighbourhoods"
+      additional_bindings {
+        get: "/v1/taxonomy/neighbourhoods"
+      }
+    };
+  }
+}
+
+// Coordinates represents a geographic point with latitude and longitude.
+message Coordinates {
+  double latitude = 1;
+  double longitude = 2;
+}
+
+// Request to list all categories.
+message ListCategoriesRequest {}
+
+// Response containing all categories.
+message ListCategoriesResponse {
+  repeated Category categories = 1;
+}
+
+// Category represents a node in the category tree.
+message Category {
+  // Unique stable identifier/slug (e.g., "electronic-devices").
+  string id = 1;
+  // Identifier of the parent category. Empty string for root categories.
+  string parent_id = 2;
+  // Persian display name.
+  string name_fa = 3;
+  // English display name.
+  string name_en = 4;
+}
+
+// Request to list all supported cities.
+message ListCitiesRequest {}
+
+// Response containing all supported cities.
+message ListCitiesResponse {
+  repeated City cities = 1;
+}
+
+// City represents a supported city.
+message City {
+  // Unique identifier/slug (e.g., "tehran", "shiraz").
+  string id = 1;
+  // Persian display name.
+  string name_fa = 2;
+  // English display name.
+  string name_en = 3;
+}
+
+// Request to list neighbourhoods of a city.
+message ListNeighbourhoodsRequest {
+  // Target city identifier.
+  string city_id = 1;
+}
+
+// Response containing neighbourhoods of a city.
+message ListNeighbourhoodsResponse {
+  repeated Neighbourhood neighbourhoods = 1;
+}
+
+// Neighbourhood represents a district or area within a city.
+message Neighbourhood {
+  // Unique identifier/slug for the neighbourhood.
+  string id = 1;
+  // The city this neighbourhood belongs to.
+  string city_id = 2;
+  // Persian display name.
+  string name_fa = 3;
+  // English display name.
+  string name_en = 4;
+  // Geographic center of the neighbourhood.
+  Coordinates center = 5;
+  // Indicates if the neighbourhood is active for trading.
+  bool active = 6;
+}
