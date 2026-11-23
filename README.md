@@ -48,7 +48,7 @@ Every dependency outside the swap domain sits behind a small interface with a mo
 |---|---|
 | `AuthProvider` | Issues an RS256 JWT for seeded users; the password field is ignored (no password check) |
 | `TaxonomyProvider` | Divar's category taxonomy and city/neighbourhood division, from a small fixed dataset (Taakht has no link to Divar ads) |
-| `KYCProvider` | Always passes |
+| `KYCProvider` | Passes for every seeded user except `ali` and `hossein` |
 | `DeliveryProvider` | Simulated locker statuses (the only delivery method integrated with a partner) |
 | `ReportProvider` | Records an abuse report (any user can be reported, not only a trade counterpart), no review workflow |
 | `NotificationProvider` | Dispatches notifications to external channels (Divar OHS) |

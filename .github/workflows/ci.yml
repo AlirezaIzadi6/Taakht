@@ -139,6 +139,10 @@ jobs:
       - name: Test
         run: dotnet test "$SOLUTION" -c Release --no-build
 
+      - name: Check the seeded users are current
+        if: matrix.solution == './src/mocks/auth/AuthMock.slnx'
+        run: make gen-users-check
+
   # Docker Compose files and their scripts: the files must be valid and the shell scripts clean.
   deploy:
     needs: changes

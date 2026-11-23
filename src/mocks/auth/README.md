@@ -17,7 +17,9 @@ Mock implementation of the `AuthProvider` for phase 1. It issues RS256 JWTs for 
 
 ## Seeded users
 
-The ten users live in [`data/users.json`](data/users.json) and are loaded at startup. `ali`, `sara`, `reza`, `mina`, `hossein`, `zahra`, `amir`, `neda`, `kian` have role `user`; `admin` has role `admin`. The model stores no password: the `password` field is accepted and ignored, so any password, including an empty one, works for a seeded username. The generator for the larger seeded set arrives with #65.
+The file [`data/users.json`](data/users.json) holds 2010 users: the ten named users and the generated `u0001`–`u2000`. It is loaded at startup and committed. `ali`, `sara`, `reza`, `mina`, `hossein`, `zahra`, `amir`, `neda`, `kian` have role `user`; `admin` has role `admin`; the generated users are all `user`. The model stores no password: the `password` field is accepted and ignored, so any password, including an empty one, works for a seeded username.
+
+The file is generated from `tools/seed-users`; do not hand-edit it. `make gen-users` regenerates it and `make gen-users-check` verifies it is current.
 
 ## Run and test
 
