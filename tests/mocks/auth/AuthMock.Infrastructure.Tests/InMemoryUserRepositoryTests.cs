@@ -8,10 +8,10 @@ public sealed class InMemoryUserRepositoryTests
     private readonly InMemoryUserRepository _repository = new(SeedUsers.Load(TestSeedFile.FilePath));
 
     [Fact]
-    public void LoadsTenUsers()
+    public void LoadsAllUsers()
     {
         // Arrange
-        const int expectedCount = 10;
+        const int expectedCount = 2010;
 
         // Act
         var users = SeedUsers.Load(TestSeedFile.FilePath);
