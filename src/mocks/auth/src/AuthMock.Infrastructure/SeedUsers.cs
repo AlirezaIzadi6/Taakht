@@ -1,30 +1,58 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using AuthMock.Domain;
 
 namespace AuthMock.Infrastructure;
 
 public static class SeedUsers
 {
-    public static IReadOnlyList<User> Create() =>
-    [
-        CreateUser("ali", "ali@example.com", "+989120000001", UserRole.User),
-        CreateUser("sara", "sara@example.com", "+989120000002", UserRole.User),
-        CreateUser("reza", "reza@example.com", "+989120000003", UserRole.User),
-        CreateUser("mina", "mina@example.com", "+989120000004", UserRole.User),
-        CreateUser("hossein", "hossein@example.com", "+989120000005", UserRole.User),
-        CreateUser("zahra", "zahra@example.com", "+989120000006", UserRole.User),
-        CreateUser("amir", "amir@example.com", "+989120000007", UserRole.User),
-        CreateUser("neda", "neda@example.com", "+989120000008", UserRole.User),
-        CreateUser("kian", "kian@example.com", "+989120000009", UserRole.User),
-        CreateUser("admin", "admin@example.com", "+989120000010", UserRole.Admin),
-    ];
+    private static readonly JsonSerializerOptions _options = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        PropertyNameCaseInsensitive = true,
+        Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) },
+    };
 
-    private static User CreateUser(string username, string email, string phone, UserRole role) =>
-        new()
+    public static IReadOnlyList<User> Load(string path)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(path);
+
+        if (!File.Exists(path))
         {
-            Id = username,
-            Username = username,
-            Email = email,
-            Phone = phone,
-            Role = role,
-        };
+            throw new FileNotFoundException($"User seed file not found: {path}", path);
+        }
+
+        List<User>? users;
+        try
+        {
+            users = JsonSerializer.Deserialize<List<User>>(File.ReadAllText(path), _options);
+        }
+        catch (JsonException exception)
+        {
+            throw new InvalidOperationException($"User seed file is invalid: {path}", exception);
+        }
+
+        if (users is null || users.Count == 0)
+        {
+            throw new InvalidOperationException($"User seed file is empty: {path}");
+        }
+
+        var usernames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var ids = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var user in users)
+        {
+            if (!usernames.Add(user.Username))
+            {
+                throw new InvalidOperationException(
+                    $"Duplicate username in user seed file: {user.Username}");
+            }
+
+            if (!ids.Add(user.Id))
+            {
+                throw new InvalidOperationException($"Duplicate id in user seed file: {user.Id}");
+            }
+        }
+
+        return users;
+    }
 }

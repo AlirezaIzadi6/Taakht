@@ -1,0 +1,12 @@
+[
+  {"id":"ali","username":"ali","email":"ali@example.com","phone":"+989120000001","role":"user"},
+  {"id":"sara","username":"sara","email":"sara@example.com","phone":"+989120000002","role":"user"},
+  {"id":"reza","username":"reza","email":"reza@example.com","phone":"+989120000003","role":"user"},
+  {"id":"mina","username":"mina","email":"mina@example.com","phone":"+989120000004","role":"user"},
+  {"id":"hossein","username":"hossein","email":"hossein@example.com","phone":"+989120000005","role":"user"},
+  {"id":"zahra","username":"zahra","email":"zahra@example.com","phone":"+989120000006","role":"user"},
+  {"id":"amir","username":"amir","email":"amir@example.com","phone":"+989120000007","role":"user"},
+  {"id":"neda","username":"neda","email":"neda@example.com","phone":"+989120000008","role":"user"},
+  {"id":"kian","username":"kian","email":"kian@example.com","phone":"+989120000009","role":"user"},
+  {"id":"admin","username":"admin","email":"admin@example.com","phone":"+989120000010","role":"admin"}
+]
