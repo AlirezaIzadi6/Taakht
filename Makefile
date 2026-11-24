@@ -12,7 +12,7 @@ DOTNET_SOLUTIONS := $(shell find . \( -name '*.sln' -o -name '*.slnx' \) -not -p
 # gen/go only holds code generated from api/, so it is not linted or tested.
 GO_MODULES := $(shell find . -name go.mod -not -path '*/node_modules/*' -not -path './spikes/*' -not -path './gen/*' -exec dirname {} \;)
 
-.PHONY: help setup prereqs tools hooks dev-keys generate gen-users gen-users-check up up-server down reset fmt lint test
+.PHONY: help setup prereqs tools hooks dev-keys generate gen-users gen-users-check gateway up up-server down reset fmt lint test
 
 help: ## Show available targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "} {printf "  %-10s %s\n", $$1, $$2}'
@@ -51,10 +51,13 @@ gen-users: ## Regenerate the auth mock's user file (10 named + 2000 generated)
 gen-users-check: ## Verify the committed user file matches the generator
 	dotnet run --project tools/seed-users -- --check --out "$(CURDIR)/src/mocks/auth/data/users.json"
 
-up: dev-keys ## Start the local stack with Docker Compose (Postgres, Kafka and auth; topics are created first)
+gateway: ## Rebuild the Envoy gateway image after a proto or gateway config change
+	docker compose --project-directory deploy/compose build gateway
+
+up: dev-keys ## Start the local stack with Docker Compose (Postgres, Kafka, auth and the gateway; topics are created first)
 	docker compose --project-directory deploy/compose up -d --wait
 
-up-server: dev-keys ## Start the stack as on the shared server: the base file only, no published ports
+up-server: dev-keys ## Start the stack as on the shared server: the base file only; only the gateway publishes a port
 	docker compose --project-directory deploy/compose -f deploy/compose/compose.yaml up -d --wait
 
 down: ## Stop the Docker Compose stack (data volumes are kept)
