@@ -26,9 +26,9 @@ Conventions that follow from the Protobuf API contract decision. Not an ADR; che
 
 ## Caller identity
 
-- The user id reaches services as the `x-user-id` metadata key, set by Envoy from the verified JWT (`sub` claim). Services read it only through the identity interceptor of the platform library of their language (ADR 0004) and pass it unchanged on outgoing calls.
-- Verified in a spike (2026-10-06): a client-sent `x-user-id` is overwritten or dropped on routes covered by a `jwt_authn` rule.
-- Development tokens are signed with RS256 (decided 2026-11-18), as a real identity provider would. Envoy gets only the public key as JWKS; the auth mock holds the private key and issues tokens for the seeded users. The spike used an HS256 secret, so the RS256 setup on Envoy is not tried yet. Both keys are throwaway dev keys.
+- The user id reaches services as the `x-user-id` metadata key, set by Envoy from the verified JWT (`sub` claim). The role reaches services as `x-user-role` from the `role` claim; authorization decisions still belong to each service. Services read the user identity through the identity interceptor of the platform library of their language (ADR 0004) and pass it unchanged on outgoing calls.
+- Verified in a spike (2026-10-06) and on the product edge (#59): a client-sent `x-user-id` is overwritten on routes covered by a `jwt_authn` rule.
+- Development tokens are signed with RS256 (decided 2026-11-18), as a real identity provider would. Envoy gets only the public key as JWKS; the auth mock holds the private key and issues tokens for the seeded users. The product edge verified RS256 with the dev JWKS (#59). Both keys are throwaway dev keys.
 - The auth mock signs tokens with issuer `taakht-auth-mock`, audience `taakht-api`, key id `dev-1` and a one-hour lifetime (configurable with `TOKEN_TTL`). Its contract is `taakht.auth.v1.AuthService/Login` in `api/taakht/auth/v1/auth_service.proto`, exposed by Envoy as `POST /v1/auth/login` with `{"username": "...", "password": "..."}`. The password field is accepted but not checked in phase 1.
 
 ## Generated code

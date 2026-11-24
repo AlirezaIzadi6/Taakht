@@ -108,7 +108,7 @@ On Windows, run `make` from Git Bash. Prerequisites, hooks, CI and troubleshooti
 
 The demo is **API-driven**: no product UI (at most a minimal UI for testing), everything is exercised through API calls against seeded data.
 
-`make up` currently starts Postgres, Kafka and the auth mock, with the RS256 dev keys created first. The rest of the system and the seed script are still `TBD`.
+`make up` currently starts Postgres, Kafka, the auth mock and the Envoy gateway, with the RS256 dev keys created first. The edge is at `http://localhost:8080`: `POST /v1/auth/login` is public, and every other route needs the Bearer token. The rest of the system is still `TBD`.
 
 Then follow a scripted walkthrough of API calls: log in as a seeded user, publish an Ad, watch a match notification, send competing Swap Requests, negotiate Proposals, approve, lock, settle.
 

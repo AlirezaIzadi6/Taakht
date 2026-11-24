@@ -1,0 +1,120 @@
+admin:
+  address:
+    socket_address:
+      address: 0.0.0.0
+      port_value: 9901
+
+static_resources:
+  listeners:
+    - name: edge
+      address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 8080
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: edge
+                access_log:
+                  - name: envoy.access_loggers.stdout
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog
+                      log_format:
+                        text_format_source:
+                          inline_string: "[%START_TIME%] %REQ(:METHOD)% %REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% %RESPONSE_CODE% user=%REQ(x-user-id)% role=%REQ(x-user-role)%\n"
+                route_config:
+                  name: edge_routes
+                  virtual_hosts:
+                    - name: edge
+                      domains: ["*"]
+                      routes:
+                        - match:
+                            prefix: "/v1/auth/"
+                          route:
+                            cluster: auth
+                        - match:
+                            prefix: "/v1/ads"
+                          route:
+                            cluster: ad
+                        # matching: /v1/matching -> matching:9090
+                        # deal: /v1/deals -> deal:9090
+                        # reputation: /v1/reputation -> reputation:9090
+                        # communication: /v1/communication -> communication:9090
+                        # taxonomy: /v1/taxonomy -> taxonomy:9201 (contract on main; mock service later)
+                http_filters:
+                  - name: envoy.filters.http.jwt_authn
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication
+                      providers:
+                        taakht:
+                          issuer: taakht-auth-mock
+                          audiences:
+                            - taakht-api
+                          local_jwks:
+                            filename: /keys/jwks.json
+                          claim_to_headers:
+                            - header_name: x-user-id
+                              claim_name: sub
+                            - header_name: x-user-role
+                              claim_name: role
+                      rules:
+                        - match:
+                            prefix: "/v1/auth/"
+                          requires:
+                            allow_missing: {}
+                        - match:
+                            prefix: "/"
+                          requires:
+                            provider_name: taakht
+                  - name: envoy.filters.http.grpc_json_transcoder
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.grpc_json_transcoder.v3.GrpcJsonTranscoder
+                      proto_descriptor: /etc/envoy/descriptor.binpb
+                      services:
+                        - taakht.auth.v1.AuthService
+                        - taakht.ad.v1.AdService
+                      auto_mapping: false
+                      match_incoming_request_route: true
+                      convert_grpc_status: true
+                      print_options:
+                        preserve_proto_field_names: true
+                  - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+  clusters:
+    - name: auth
+      type: STRICT_DNS
+      typed_extension_protocol_options:
+        envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+          "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+          explicit_http_config:
+            http2_protocol_options: {}
+      load_assignment:
+        cluster_name: auth
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: auth
+                      port_value: 9204
+
+    - name: ad
+      type: STRICT_DNS
+      typed_extension_protocol_options:
+        envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+          "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+          explicit_http_config:
+            http2_protocol_options: {}
+      load_assignment:
+        cluster_name: ad
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: ad
+                      port_value: 9090

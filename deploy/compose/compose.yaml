@@ -1,4 +1,5 @@
-# The shared base: Postgres, Kafka and the auth mock on an internal network, nothing published.
+# The shared base: Postgres, Kafka, the auth mock and the Envoy gateway. Only the
+# gateway publishes a port; everything else stays on the internal network.
 # On a laptop, compose.override.yaml is loaded as well and publishes the ports a
 # developer needs; on the shared server run with `-f compose.yaml` only
 # (docs/guidelines/deployment.md).
@@ -98,6 +99,21 @@ services:
       JWT_AUDIENCE: taakht-api
     volumes:
       - ../../.dev-keys:/keys:ro
+
+  # Envoy edge: REST/JSON to gRPC, JWT validation and claim forwarding. It is the
+  # only published port; the auth mock and the future services stay internal (#59).
+  gateway:
+    build:
+      context: ../..
+      dockerfile: gateway/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      auth:
+        condition: service_started
+    ports:
+      - "${GATEWAY_PORT:-8080}:8080"
+    volumes:
+      - ../../.dev-keys/jwks.json:/keys/jwks.json:ro
 
 volumes:
   postgres-data:

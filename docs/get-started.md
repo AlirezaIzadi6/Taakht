@@ -11,7 +11,7 @@ Install these yourself. `make setup` only checks that they exist, it never insta
 | Git | |
 | .NET SDK | Version pinned in [`global.json`](../global.json). If it is missing, `dotnet` commands fail with a message naming the required version. |
 | Go | Version comes from each module's `go.mod`. Go downloads the matching toolchain automatically, so any recent Go is enough to bootstrap. |
-| Docker with Compose | Runs Postgres, Kafka and the auth mock (and later the other infrastructure); see `make up`. |
+| Docker with Compose | Runs Postgres, Kafka, the auth mock and the Envoy gateway (and later the other infrastructure); see `make up`. |
 | make | Linux/macOS: preinstalled or via the package manager. Windows: `scoop install make` or `choco install make`, and run it from Git Bash because the Makefile uses `bash` and `find`. |
 
 ## Setup
@@ -35,6 +35,10 @@ make setup
 
 `make dev-keys` writes the private key `.dev-keys/jwt-private.pem` for the auth mock and the public key as `.dev-keys/jwks.json` for Envoy. The folder is git-ignored, so every machine and the shared server generate their own pair and the keys are never committed. These are throwaway development keys, not real secrets; the private key is readable by the non-root auth mock container.
 
+## The edge
+
+The gateway is the only public entry point. On a laptop it listens on `http://localhost:8080`; `POST /v1/auth/login` is public, and every other route needs `Authorization: Bearer <token>`. If 8080 is reserved on Windows (Hyper-V excluded ranges), set `GATEWAY_PORT=18080` in `deploy/compose/.env` and use that port in the URLs. See [gateway/README.md](../gateway/README.md) for the route table, the JWT contract and the smoke-test commands.
+
 ## Everyday commands
 
 | Command | What it does |
@@ -45,9 +49,10 @@ make setup
 | `make generate` | Generates the Go code from the Protobuf contracts in `api/` into `gen/go`; it is not committed. `lint` and `test` run it first, and it needs network access to buf.build. |
 | `make gen-users` | Regenerates the auth mock's user file (`src/mocks/auth/data/users.json`) from `tools/seed-users`; the file is committed. |
 | `make gen-users-check` | Verifies the committed user file matches the generator. `make lint` runs it. |
+| `make gateway` | Rebuilds the Envoy gateway image after a proto or gateway config change. |
 | `make dev-keys` | Creates the RS256 dev key pair and JWKS in `.dev-keys/` when missing; safe to re-run. |
-| `make up` | Creates the dev keys first, then starts Postgres, Kafka and the auth mock with Docker Compose and creates the Kafka topics. `make down` stops them and keeps the data; `make reset` stops them and deletes the data. |
-| `make up-server` | The same for the shared server: only the base compose file, no published ports. |
+| `make up` | Creates the dev keys first, then starts Postgres, Kafka, the auth mock and the Envoy gateway with Docker Compose and creates the Kafka topics. The edge is at `http://localhost:8080`. `make down` stops them and keeps the data; `make reset` stops them and deletes the data. |
+| `make up-server` | The same for the shared server: only the base compose file; only the gateway publishes a port. |
 
 Run `make` with no arguments to list all targets.
 
@@ -110,3 +115,4 @@ Package versions are declared only in `Directory.Packages.props`; project files 
 | `dotnet` complains about a missing SDK | Install the version pinned in `global.json`. |
 | `make: command not found` on Windows | Install make (see Prerequisites) and use Git Bash. |
 | `make lint` passes locally but CI fails | Make sure you ran it from the repo root with the same SDK version, and that you did not commit with `--no-verify` after a failed hook. |
+| `ports are not available` for 8080 or 9094 | Windows/Hyper-V has reserved the port. For the edge, set `GATEWAY_PORT` in `deploy/compose/.env` to a free port such as 18080. Kafka's 9094 is only needed for the full stack; for the edge smoke test, start only `auth` and `gateway`. |

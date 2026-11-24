@@ -11,7 +11,7 @@ Clients authenticate with JWTs (in phase 1 `AuthProvider` is a mock that issues 
 
 ## Decision
 
-We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt_authn` filter and reject invalid requests before they reach a service. Envoy forwards only the claims services need (initially the user id as `x-user-id`; the role claim that admin endpoints need is to be forwarded the same way, not yet tried) as gRPC metadata, using `claim_to_headers`. Services read the user identity through the identity interceptor in the platform library of its language ([ADR 0004](0004-use-a-monorepo.md)) and pass it unchanged on outgoing calls. `jwt_authn` has no revocation, so we rely on short-lived tokens; the lifetime is set when the identity provider is chosen.
+We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt_authn` filter and reject invalid requests before they reach a service. Envoy forwards only the claims services need — the user id as `x-user-id` and the role as `x-user-role` — as gRPC metadata, using `claim_to_headers`. Services read the user identity through the identity interceptor in the platform library of its language ([ADR 0004](0004-use-a-monorepo.md)) and pass it unchanged on outgoing calls. `jwt_authn` has no revocation, so we rely on short-lived tokens; the lifetime is set when the identity provider is chosen.
 
 ## Options considered
 
@@ -23,9 +23,9 @@ We will verify JWTs (signature, expiry, issuer, audience) in Envoy with the `jwt
 
 - Positive: consistent authentication in one place; simpler services.
 - Negative: a service reachable without passing through Envoy would accept forged identity metadata (the README relies on an isolated internal network for now; how services authenticate each other is decided separately); no token revocation; authorization decisions still belong to each service because `jwt_authn` only checks issuer and audience.
-- Follow-ups: keep every service route covered by a `jwt_authn` rule, because the header protection was verified only on routes matched by a rule; choose the identity provider, key rotation and token lifetime.
+- Follow-ups: keep every service route covered by a `jwt_authn` rule; choose the identity provider, key rotation and token lifetime. The product edge (#59) verified RS256 with the dev JWKS and both claim headers.
 
 ## References
 
-- [Evidence: edge gateway](../evidence/edge-gateway.md) (`jwt_authn` rejected missing and expired tokens with 401; on a covered route a forged `x-user-id` was overwritten or dropped; tried in the spike with a hello-world service). The Taakht MVP validated HS256 development tokens against a key set with `kid` rotation in front of four services. HS256 is symmetric, so whoever can validate a token can mint one; the production path is an identity provider with RS256 or ES256 and a remote key set (`docs/architecture/mvp-architecture.md` in `Taakht-MVP`)
+- [Evidence: edge gateway](../evidence/edge-gateway.md) (`jwt_authn` rejected missing and expired tokens with 401; on a covered route a forged `x-user-id` was overwritten or dropped; tried in the spike with a hello-world service, and with RS256 on the product edge in #59). The Taakht MVP validated HS256 development tokens against a key set with `kid` rotation in front of four services. HS256 is symmetric, so whoever can validate a token can mint one; the production path is an identity provider with RS256 or ES256 and a remote key set (`docs/architecture/mvp-architecture.md` in `Taakht-MVP`)
 - Envoy `jwt_authn` filter documentation

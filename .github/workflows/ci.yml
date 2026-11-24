@@ -64,6 +64,11 @@ jobs:
               - '.github/workflows/ci.yml'
             deploy:
               - 'deploy/**'
+              - 'gateway/**'
+              - 'api/**'
+              - 'buf.yaml'
+              - 'buf.lock'
+              - '.dockerignore'
               - '.github/workflows/ci.yml'
 
       # Every solution file (one per .NET service) becomes one matrix entry.
@@ -155,6 +160,9 @@ jobs:
         run: |
           docker compose --project-directory deploy/compose config -q
           docker compose --project-directory deploy/compose -f deploy/compose/compose.yaml config -q
+
+      - name: Build the gateway image
+        run: docker compose --project-directory deploy/compose build gateway
 
       - name: Lint the shell scripts
         run: shellcheck deploy/compose/postgres/init/*.sh

@@ -1,6 +1,6 @@
 # Evidence: edge gateway (Envoy, transcoding, JWT)
 
-Dates: 2026-10-05 and 2026-10-06. Backs the ADRs "Use Envoy for REST to gRPC transcoding" and "Validate JWTs at the Envoy edge".
+Dates: 2026-10-05, 2026-10-06 and 2026-11-23. Backs the ADRs "Use Envoy for REST to gRPC transcoding" and "Validate JWTs at the Envoy edge".
 
 ## Setup
 
@@ -34,6 +34,19 @@ Envoy v1.34, a Go gRPC service (grpc-go), `buf` for the descriptor and code gene
     convert_grpc_status: true
 ```
 
+## RS256 on the product edge (#59)
+
+Date: 2026-11-23. The product config [`gateway/envoy.yaml`](../../gateway/envoy.yaml) uses the RS256 dev JWKS from `.dev-keys/jwks.json` (issuer `taakht-auth-mock`, audience `taakht-api`, `kid=dev-1`) and forwards `sub` to `x-user-id` and `role` to `x-user-role`.
+
+| Check | Result |
+|---|---|
+| Login through Envoy (`POST /v1/auth/login`) | 200, RS256 token |
+| Protected route without a token | 401 |
+| Protected route with the token | accepted; Ad returns 503 because `ad:9090` is not in Compose yet |
+| Access log | `user=ali role=user` |
+| Forged `x-user-id` with a valid token | log shows the real user, not `attacker` |
+| Admin token | `user=admin role=admin` |
+
 ## Spoofing test (x-user-id)
 
 With `claim_to_headers`, a valid token plus a forged `x-user-id: attacker` (sent once or twice) reached the service as the real `user-42`. A token without `sub` plus a forged header reached the service with no value. A forged header without a token got 401. Only requests matched by a `jwt_authn` rule were tested.
@@ -60,4 +73,4 @@ The hand-written version first contained a bug: the rate limiter ran before JWT 
 
 ## Not verified
 
-Hot reload of the descriptor (xDS), Envoy memory, requests on routes without a `jwt_authn` rule, streaming and multipart, Kong's annotation support.
+Hot reload of the descriptor (xDS), Envoy memory, streaming and multipart, Kong's annotation support.
