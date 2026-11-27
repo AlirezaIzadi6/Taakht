@@ -28,7 +28,7 @@ Search with an empty Criteria, or with only neighbourhoods, is simply a view of 
 
 ### Minimum Ad
 
-- "I have": a category (it can be very general) and the neighbourhood of the item are required. The neighbourhood is mandatory, so the distance can always be computed and the city is known. Description, photos and the claim checklist are optional.
+- "I have": a category (it can be very general) and the neighbourhood of the item are required. The neighbourhood is mandatory, so the distance can always be computed and the city is known. Description and photos are optional (claim checklists are postponed to Phase 2; see [parked ideas](../product/parked-ideas.md)).
 - "I want": nothing is required. The city is the item's city (one city per Ad), so Criteria needs no city of its own; categories, neighbourhoods and the distance filter are optional.
 - This replaces the earlier "minimum filter" rule (at least one filter plus an explicit "show me" tick).
 - In a search there is no item, so the user picks the city; everything else is optional.

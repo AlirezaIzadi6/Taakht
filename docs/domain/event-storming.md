@@ -10,18 +10,18 @@ Main aggregate root for the data of the items.
 
 | Actor | Command | Event | Policy afterwards |
 |---|---|---|---|
-| Ad owner | `CreateAd` | `AdCreated` | If the publish option is on, `AdPublished` is emitted immediately after. |
+| Ad owner | `CreateAd` | `AdCreated` | In Phase 1, `AdPublished` is emitted immediately after (no server-side Draft). |
 | Ad owner | `PublishAd` | `AdPublished` | Matching indexes the Ad and starts looking for matches. |
 | Ad owner | `EditAd` | `AdEdited` | 1. Matching updates its index.<br>2. The Deal context invalidates all active proposals tied to the old version and creates a new proposal based on the new version.<br>3. Communication notifies the parties of the negotiations. |
 | Ad owner | `HideAd` | `AdHidden` | Matching removes the Ad from the public index. |
-| System (negotiation cap) | `HideAd` (reason: cap) | `AdHidden` + `system_hold` | Notification to the Ad owner that the cap of 10 concurrent negotiations was reached. |
+| System (negotiation cap) | `HideAd` (reason: cap) | `AdHidden` + `system_hold` | *(Postponed beyond Phase 1; see [ad.md](ad.md).)* Notification to the Ad owner that the cap of 10 concurrent negotiations was reached. |
 | Admin | `SuspendAd` / `ReinstateAd` | `AdSuspended` / `AdReinstated` | `Suspended` is a state of its own, separate from `Hidden`, so the owner cannot publish the Ad again; reinstating restores the state it had before (Published or Hidden).<br>1. Matching removes the Ad from the index, like `Hidden`.<br>2. Open negotiations on the Ad that have not reached `AgreementReached` are cancelled by the system (`CancelNegotiation`, reason: suspended). A negotiation waiting for the lock and any existing Swap are not touched, because an agreement is binding.<br>3. The owner is notified. The owner can still edit the Ad (a new `AdVersion`), but cannot publish it, and can file an objection (see the Reputation & Trust cluster). |
 | System (Matching) | `FindMatches` | `MatchFound` (per pair) | Communication sends a match-suggestion notification to the owners of both Ads. |
 | System (Deal, lock) | `ClaimLock` (both Ads with the agreed version, one transaction) | `ExclusiveLockAcquired` / `ExclusiveLockRejected` (reason: `AlreadyLocked` or `VersionChanged`) | On success: both Ads become `Locked` together and leave the index.<br>On rejection: no Ad changes. `AlreadyLocked`: the negotiation is cancelled. `VersionChanged`: the negotiation stays open and a new proposal is built on the current version. |
 | System (end of deal) | `CloseAd` | `AdClosed` | Final state of the Ad; irreversible, consumed by the deal. |
 
 **Key decisions:**
-- The item-condition claims (the claim checklist) live directly on the Ad and on `AdVersion`. There is no separate `ItemConditionClaimed` event in Negotiation.
+- The item-condition claims (the claim checklist) live directly on the Ad and on `AdVersion` (when introduced in Phase 2; postponed from Phase 1 per [parked-ideas.md](../product/parked-ideas.md)). There is no separate `ItemConditionClaimed` event in Negotiation.
 - The post-receipt confirmation checklist was removed entirely. Checking the item is the parties' own responsibility (Zero Liability).
 
 ---
