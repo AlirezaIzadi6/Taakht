@@ -7,7 +7,7 @@ Entry point for all Taakht design documents. The root [README](../README.md) is 
 | Folder / file | What goes here | Not here |
 |---|---|---|
 | [`product/`](product/) | The business case: [business summary](product/business-summary.md), [business decisions log](product/business-decisions-log.md), [parked ideas](product/parked-ideas.md); later PRD, risk assessment, roadmap | Technical design |
-| [`domain/`](domain/) | [Ubiquitous language](domain/ubiquitous-language.md), [Event Storming output](domain/event-storming.md), [context map](domain/context-map.md), [event reconciliation](domain/event-storming-reconciliation.md) | Technology choices |
+| [`domain/`](domain/) | [Ad domain](domain/ad.md), [Matching rules](domain/matching.md), [Ubiquitous language](domain/ubiquitous-language.md), [Event Storming output](domain/event-storming.md), [context map](domain/context-map.md), [event reconciliation](domain/event-storming-reconciliation.md) | Technology choices |
 | [`architecture/`](architecture/) | [Architecture overview](architecture/architecture-overview.md) (current state), [chronological decisions log](architecture/architecture-decisions-log.md), [design principles](architecture/design-principles.md), diagrams | The final "why" of a single decision (that is an ADR) |
 | `adr/` | One file per architecture decision, in English. See [adr/README.md](adr/README.md) | Conventions, remaining work |
 | `evidence/` | Experiments and document reviews behind ADRs, with results and what was not verified | The decision itself |

@@ -61,7 +61,7 @@ The full glossary is in [domain/ubiquitous-language.md](../domain/ubiquitous-lan
 ## 4. Key flows
 
 ### Flow 1: from Ad to agreement and exclusive lock (synchronous lock)
-1. **Creating and publishing an Ad:** user A creates an Ad. If "publish" is selected, `AdCreated` and `AdPublished` are emitted. Matching indexes the Ad, publishes `MatchFound` if there is a match (once per Ad pair), and Communication sends a notification.
+1. **Creating and publishing an Ad:** user A creates an Ad, which is published directly (no server-side Draft), emitting `AdCreated` and `AdPublished`. Matching indexes the Ad, publishes `MatchFound` if there is a match (once per Ad pair), and Communication sends a notification.
 2. **Requesting and opening a negotiation:** user B sends `RequestNegotiation` on A's Ad, which starts the negotiation (`NegotiationOpened` with an initial system proposal). Each directed Ad pair (requester's Ad, target Ad) has only 3 request rights; every request consumes one at the moment it is sent, only one negotiation can be open per pair, and acceptance resets the counter to zero. A request with no rights left is rejected and only the user sees an error. The Ad owner accepts with `AcceptNegotiation` (`NegotiationActive`). The open-negotiation counter of both Ads goes up by one (when it reaches 10, the Ad is temporarily hidden with the `system_hold` flag).
 3. **Bargaining and changes (three-component snapshot model):**
    - The parties can send text messages (chat is independent and does not extend the negotiation deadline).
@@ -96,7 +96,7 @@ The full glossary is in [domain/ubiquitous-language.md](../domain/ubiquitous-lan
 
 ```
 -- Ad cluster
-AdCreated, AdPublished, AdHidden, AdEdited (→ new AdVersion), AdSuspended, AdReinstated
+AdCreated, AdPublished, AdHidden, AdEdited (→ new AdVersion), ExclusiveLockAcquired, ExclusiveLockReleased, AdClosed, AdSuspended, AdReinstated
 MatchFound (Matching → Communication)
 ExclusiveLockAcquired, ExclusiveLockRejected (AlreadyLocked | VersionChanged), ExclusiveLockReleased, AdClosed
 
