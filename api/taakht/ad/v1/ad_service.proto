@@ -3,10 +3,11 @@ syntax = "proto3";
 package taakht.ad.v1;
 
 import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
 
-// AdService is the Ad service's public API. The caller is the user in the
-// x-user-id metadata key, set by the edge from the verified JWT, never a field.
-// This is the skeleton contract; it grows with the features.
+// AdService is the Ad service's public API and internal control surface.
+// The caller is the user in the x-user-id metadata key, set by the edge
+// from the verified JWT, never an unverified payload field.
 service AdService {
   // CreateAd creates an Ad and publishes it at once.
   rpc CreateAd(CreateAdRequest) returns (CreateAdResponse) {
@@ -15,16 +16,269 @@ service AdService {
       body: "*"
     };
   }
+
+  // GetAd retrieves the current aggregate state and latest version of an Ad.
+  rpc GetAd(GetAdRequest) returns (GetAdResponse) {
+    option (google.api.http) = {
+      get: "/v1/ads/{ad_id}"
+    };
+  }
+
+  // GetAdVersion retrieves an exact immutable historical snapshot of an Ad.
+  // Used by Deal to inspect proposal terms without keeping a copy of Ad data.
+  rpc GetAdVersion(GetAdVersionRequest) returns (GetAdVersionResponse) {
+    option (google.api.http) = {
+      get: "/v1/ads/{ad_id}/versions/{version}"
+    };
+  }
+
+  // EditAd updates an Ad's content, incrementing its version and creating a new snapshot.
+  rpc EditAd(EditAdRequest) returns (EditAdResponse) {
+    option (google.api.http) = {
+      put: "/v1/ads/{ad_id}"
+      body: "*"
+    };
+  }
+
+  // PublishAd transitions a hidden Ad back to published.
+  rpc PublishAd(PublishAdRequest) returns (PublishAdResponse) {
+    option (google.api.http) = {
+      post: "/v1/ads/{ad_id}/publish"
+      body: "*"
+    };
+  }
+
+  // HideAd hides an Ad from matching and search without deleting it.
+  rpc HideAd(HideAdRequest) returns (HideAdResponse) {
+    option (google.api.http) = {
+      post: "/v1/ads/{ad_id}/hide"
+      body: "*"
+    };
+  }
+
+  // ListMyAds returns all Ads owned by the calling user.
+  rpc ListMyAds(ListMyAdsRequest) returns (ListMyAdsResponse) {
+    option (google.api.http) = {
+      get: "/v1/ads/mine"
+    };
+  }
+
+  // ClaimLock claims an atomic exclusive lock on two Ads in one transaction.
+  // Internal service-to-service gRPC call from Deal (Swap module).
+  rpc ClaimLock(ClaimLockRequest) returns (ClaimLockResponse);
+
+  // ReleaseLock releases exclusive locks when a Swap is cancelled.
+  // Internal service-to-service gRPC call from Deal.
+  rpc ReleaseLock(ReleaseLockRequest) returns (ReleaseLockResponse);
+
+  // CloseAd marks Ads permanently closed when a Swap completes.
+  // Internal service-to-service gRPC call from Deal.
+  rpc CloseAd(CloseAdRequest) returns (CloseAdResponse);
+
+  // SuspendAd suspends an Ad following an administrative review (reserved for Phase 2).
+  rpc SuspendAd(SuspendAdRequest) returns (SuspendAdResponse) {
+    option (google.api.http) = {
+      post: "/v1/ads/{ad_id}/suspend"
+      body: "*"
+    };
+  }
+
+  // ReinstateAd reinstates a previously suspended Ad (reserved for Phase 2).
+  rpc ReinstateAd(ReinstateAdRequest) returns (ReinstateAdResponse) {
+    option (google.api.http) = {
+      post: "/v1/ads/{ad_id}/reinstate"
+      body: "*"
+    };
+  }
+}
+
+// Lifecycle states of an Ad.
+enum AdState {
+  AD_STATE_UNSPECIFIED = 0;
+  AD_STATE_PUBLISHED = 1;
+  AD_STATE_HIDDEN = 2;
+  AD_STATE_LOCKED = 3;
+  AD_STATE_SUSPENDED = 4;
+  AD_STATE_CLOSED = 5;
+}
+
+// Reason why a ClaimLock call was refused.
+enum LockRefusalReason {
+  LOCK_REFUSAL_REASON_UNSPECIFIED = 0;
+  LOCK_REFUSAL_REASON_ALREADY_LOCKED = 1;
+  LOCK_REFUSAL_REASON_VERSION_CHANGED = 2;
+}
+
+// Criteria represents the "I want" side of an Ad.
+message Criteria {
+  // Target categories. Empty means any category is acceptable. Max 10 items.
+  repeated string target_category_ids = 1;
+  // Target neighbourhoods. Empty means the entire city is acceptable. Max 30 items.
+  repeated string target_neighbourhood_ids = 2;
+  // Optional maximum distance filter in km (2, 5, 10, or 20).
+  optional int32 max_distance_km = 3;
+}
+
+// Ad represents the current state of an Ad aggregate.
+message Ad {
+  string id = 1;
+  string owner_id = 2;
+  AdState state = 3;
+  int32 current_version = 4;
+  AdVersion latest_version = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}
+
+// AdVersion represents an immutable historical snapshot of an Ad at a version.
+message AdVersion {
+  string ad_id = 1;
+  int32 version = 2;
+  string category_id = 3;
+  string neighbourhood_id = 4;
+  string city_id = 5;
+  string description = 6;
+  repeated string photo_urls = 7;
+  Criteria criteria = 8;
+  google.protobuf.Timestamp created_at = 9;
+}
+
+// AdSummary provides a compact representation for list views.
+message AdSummary {
+  string id = 1;
+  string category_id = 2;
+  string neighbourhood_id = 3;
+  string description = 4;
+  AdState state = 5;
+  int32 current_version = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+// Specification of an Ad and its required version for ClaimLock.
+message LockedAdSpec {
+  string ad_id = 1;
+  int32 version = 2;
 }
 
 message CreateAdRequest {
-  // The category of the item ("I have").
+  // The category of the item ("I have"). Mandatory.
   string category_id = 1;
-  // The neighbourhood of the item.
+  // The neighbourhood of the item. Mandatory.
   string neighbourhood_id = 2;
+  // Optional detailed description. Max 2000 characters.
   string description = 3;
+  // Optional photo references (e.g. Divar CDN image URL or asset key). Max 10 items, each max 2048 characters.
+  repeated string photo_urls = 4;
+  // Optional "I want" criteria. Empty means any item.
+  Criteria criteria = 5;
 }
 
 message CreateAdResponse {
   string ad_id = 1;
+  int32 version = 2;
+  AdState state = 3;
+}
+
+message GetAdRequest {
+  string ad_id = 1;
+}
+
+message GetAdResponse {
+  Ad ad = 1;
+}
+
+message GetAdVersionRequest {
+  string ad_id = 1;
+  int32 version = 2;
+}
+
+message GetAdVersionResponse {
+  AdVersion ad_version = 1;
+}
+
+message EditAdRequest {
+  string ad_id = 1;
+  string category_id = 2;
+  string neighbourhood_id = 3;
+  string description = 4;
+  repeated string photo_urls = 5;
+  Criteria criteria = 6;
+}
+
+message EditAdResponse {
+  string ad_id = 1;
+  int32 new_version = 2;
+  AdState state = 3;
+}
+
+message PublishAdRequest {
+  string ad_id = 1;
+}
+
+message PublishAdResponse {
+  string ad_id = 1;
+  AdState state = 2;
+}
+
+message HideAdRequest {
+  string ad_id = 1;
+}
+
+message HideAdResponse {
+  string ad_id = 1;
+  AdState state = 2;
+}
+
+message ListMyAdsRequest {}
+
+message ListMyAdsResponse {
+  repeated AdSummary ads = 1;
+}
+
+message ClaimLockRequest {
+  string swap_id = 1;
+  repeated LockedAdSpec ads = 2;
+}
+
+message ClaimLockResponse {
+  bool success = 1;
+  LockRefusalReason refusal_reason = 2;
+}
+
+message ReleaseLockRequest {
+  string swap_id = 1;
+  repeated string ad_ids = 2;
+}
+
+message ReleaseLockResponse {
+  bool success = 1;
+}
+
+message CloseAdRequest {
+  string swap_id = 1;
+  repeated string ad_ids = 2;
+}
+
+message CloseAdResponse {
+  bool success = 1;
+}
+
+message SuspendAdRequest {
+  string ad_id = 1;
+  string reason = 2;
+}
+
+message SuspendAdResponse {
+  string ad_id = 1;
+  AdState state = 2;
+}
+
+message ReinstateAdRequest {
+  string ad_id = 1;
+}
+
+message ReinstateAdResponse {
+  string ad_id = 1;
+  AdState state = 2;
 }

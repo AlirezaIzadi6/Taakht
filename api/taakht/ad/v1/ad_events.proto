@@ -5,13 +5,29 @@ package taakht.ad.v1;
 import "google/protobuf/timestamp.proto";
 
 // Events published by the Ad service on the ad.events topic. The partition key
-// is the Ad id. Event messages are never used in the API.
+// is the Ad id. Event messages are never used directly in the public API.
 
-// AdPublished is emitted when an Ad becomes visible to matching.
-//
-// Skeleton: the full design also emits AdCreated before it. An event id for the
-// consumers' processed-events table and a version of the Ad are still to be
-// added; the event id is decided together with the outbox.
+// AdCriteria represents search/match criteria inside an event message.
+message AdCriteria {
+  repeated string target_category_ids = 1;
+  repeated string target_neighbourhood_ids = 2;
+  optional int32 max_distance_km = 3;
+}
+
+// AdCreated is emitted when an Ad aggregate is initially created.
+message AdCreated {
+  string ad_id = 1;
+  int32 version = 2;
+  string owner_id = 3;
+  string category_id = 4;
+  string neighbourhood_id = 5;
+  string description = 6;
+  repeated string photo_urls = 7;
+  AdCriteria criteria = 8;
+  google.protobuf.Timestamp occurred_at = 9;
+}
+
+// AdPublished is emitted when an Ad becomes visible to matching and search.
 message AdPublished {
   string ad_id = 1;
   string owner_id = 2;
@@ -19,4 +35,67 @@ message AdPublished {
   string neighbourhood_id = 4;
   string description = 5;
   google.protobuf.Timestamp occurred_at = 6;
+  int32 version = 7;
+  AdCriteria criteria = 8;
+  repeated string photo_urls = 9;
+}
+
+// AdEdited is emitted when an Ad's content changes, producing a new AdVersion.
+// Downstream consumers (Deal) use this event to trigger proposal rebasing.
+message AdEdited {
+  string ad_id = 1;
+  int32 version = 2;
+  string owner_id = 3;
+  string category_id = 4;
+  string neighbourhood_id = 5;
+  string description = 6;
+  repeated string photo_urls = 7;
+  AdCriteria criteria = 8;
+  google.protobuf.Timestamp occurred_at = 9;
+}
+
+// AdHidden is emitted when an Ad is hidden by user request.
+message AdHidden {
+  string ad_id = 1;
+  int32 version = 2;
+  google.protobuf.Timestamp occurred_at = 3;
+}
+
+// ExclusiveLockAcquired is emitted when an Ad is successfully locked for a swap.
+message ExclusiveLockAcquired {
+  string swap_id = 1;
+  string ad_id = 2;
+  int32 version = 3;
+  google.protobuf.Timestamp occurred_at = 4;
+}
+
+// ExclusiveLockReleased is emitted when an Ad lock is released after cancellation.
+message ExclusiveLockReleased {
+  string swap_id = 1;
+  string ad_id = 2;
+  int32 version = 3;
+  google.protobuf.Timestamp occurred_at = 4;
+}
+
+// AdClosed is emitted when an Ad is permanently consumed by a completed swap.
+message AdClosed {
+  string ad_id = 1;
+  int32 version = 2;
+  string swap_id = 3;
+  google.protobuf.Timestamp occurred_at = 4;
+}
+
+// AdSuspended is emitted when an Ad is administratively suspended (Phase 2).
+message AdSuspended {
+  string ad_id = 1;
+  int32 version = 2;
+  string reason = 3;
+  google.protobuf.Timestamp occurred_at = 4;
+}
+
+// AdReinstated is emitted when an Ad is reinstated from suspension (Phase 2).
+message AdReinstated {
+  string ad_id = 1;
+  int32 version = 2;
+  google.protobuf.Timestamp occurred_at = 3;
 }
