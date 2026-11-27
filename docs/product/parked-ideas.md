@@ -99,3 +99,20 @@ Each entry answers five questions: what the idea is, how it helps, why it is par
 - **Idea:** decide the home page (which Ads, in what order, whether by the user's neighbourhood), how "search by what I am looking for" works for a user with no Ad yet, and the call to action "create an Ad first".
 - **Why parked:** phase 1 is API-driven and has no product interface.
 - **Revisit when:** a user interface is planned.
+
+## User closing their own Ad (Withdrawing an Ad)
+
+- **Idea:** allow an owner to close their own Ad (e.g. item sold outside the platform, broken, or withdrawn from barter) before an agreement is reached. Open, non-agreed negotiations on the Ad are cancelled.
+- **How it helps:** cleans up inactive Ads and informs negotiating counterparties immediately rather than letting them wait or keeping the Ad indefinitely in `Hidden` state.
+- **Why parked:** phase 1 keeps the Ad lifecycle minimal; `Hidden` is sufficient to remove an Ad from search and matching, and `Closed` is reserved as the terminal state of a completed Swap.
+- **What it needs:** an owner-facing endpoint / authorization on `CloseAd`, a guard preventing closure when `state == Locked`, and a policy to cancel open negotiations.
+- **Revisit when:** users accumulate stale Ads in `Hidden` or counterparties complain about negotiations hanging for items no longer available.
+
+## Category-specific condition claim checklists
+
+- **Idea:** each taxonomy category defines a dynamic checklist of condition claims (e.g. cookware: no cracks, complete parts; carpets: no burns, intact fringes), which the owner checks off when creating or editing an Ad.
+- **How it helps:** counterparties receive structured condition details before negotiating, reducing disputes; can also back damage claims with locker partners.
+- **Why parked:** requires dynamic category attributes and checklist schemas in the Taxonomy service, which only serves basic categories and locations in phase 1. The core barter flow functions without it.
+- **What it needs:** Taxonomy API and storage for per-category checklist schemas, dynamic client form rendering, and storing asserted items in `AdVersion`.
+- **Revisit when:** Taxonomy expands beyond basic tree navigation, or counterparties frequently dispute item condition.
+- **Revisit when:** a user interface is planned.
