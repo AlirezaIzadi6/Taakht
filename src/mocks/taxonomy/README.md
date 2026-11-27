@@ -27,4 +27,8 @@ The category tree lives in [`data/categories.json`](data/categories.json). It de
 
 ### Cities and neighbourhoods
 
-Cities and neighbourhoods are defined in `data/cities.json` and `data/neighbourhoods.json` (added in #63).
+Cities and neighbourhoods are defined in [`data/cities.json`](data/cities.json) (2 cities: Tehran and Shiraz) and [`data/neighbourhoods.json`](data/neighbourhoods.json) (542 neighbourhoods: 364 in Tehran with 28 active pilot neighbourhoods, and 178 in Shiraz with 19 active pilot neighbourhoods), generated once by [`tools/seed-neighbourhoods/extract.py`](../../../tools/seed-neighbourhoods/extract.py).
+
+- **Selection & identifiers:** Extracted from OSM `way` and `relation` elements tagged `place=neighbourhood` inside each city's administrative boundary, excluding non-neighbourhood, industrial, cemetery, and numeric-code entries. Each neighbourhood has a globally unique slug `id` prefixed by city (`thr-` / `shz-`), Persian and English names, and an `active` flag marking the dense central pilot clusters.
+- **Centres:** Computed via Overpass `out center` (the bounding-box centre of each polygon, averaged when a neighbourhood is split across multiple polygons).
+- **Source & licence:** Derived from OpenStreetMap (https://www.openstreetmap.org) via Overpass API, licensed under the Open Database License (ODbL 1.0) — see [`data/ATTRIBUTION.md`](data/ATTRIBUTION.md).

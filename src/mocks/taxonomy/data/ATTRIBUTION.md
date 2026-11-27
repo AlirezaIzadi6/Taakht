@@ -1,0 +1,1 @@
+Neighbourhood names and centres in `cities.json` and `neighbourhoods.json` are derived from OpenStreetMap (https://www.openstreetmap.org) via Overpass API, licensed under the Open Database License (ODbL 1.0).
