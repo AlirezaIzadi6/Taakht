@@ -1,0 +1,5964 @@
+[
+  {
+    "id": "thr-13-aban",
+    "city_id": "tehran",
+    "name_fa": "سیزده آبان",
+    "name_en": "13 Aban",
+    "center": {
+      "latitude": 35.606003,
+      "longitude": 51.409833
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abazar",
+    "city_id": "tehran",
+    "name_fa": "اباذر",
+    "name_en": "Abazar",
+    "center": {
+      "latitude": 35.731158,
+      "longitude": 51.330349
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abbas-abad-andisheh",
+    "city_id": "tehran",
+    "name_fa": "عباس آباد - اندیشه",
+    "name_en": "Abbas Abad - Andisheh",
+    "center": {
+      "latitude": 35.727457,
+      "longitude": 51.433301
+    },
+    "active": true
+  },
+  {
+    "id": "thr-abbas-abad-shahr-e-rey",
+    "city_id": "tehran",
+    "name_fa": "عباس آباد شهر ری",
+    "name_en": "Abbas Abad (Shahr-e-Rey)",
+    "center": {
+      "latitude": 35.571012,
+      "longitude": 51.468302
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abbasi",
+    "city_id": "tehran",
+    "name_fa": "عباسی",
+    "name_en": "Abbasi",
+    "center": {
+      "latitude": 35.663669,
+      "longitude": 51.385501
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abdol-abad",
+    "city_id": "tehran",
+    "name_fa": "عبدل آباد",
+    "name_en": "Abdol Abad",
+    "center": {
+      "latitude": 35.635131,
+      "longitude": 51.363704
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abshar",
+    "city_id": "tehran",
+    "name_fa": "آبشار",
+    "name_en": "Abshar",
+    "center": {
+      "latitude": 35.67882,
+      "longitude": 51.441721
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abshar-tehran",
+    "city_id": "tehran",
+    "name_fa": "آبشار تهران",
+    "name_en": "Abshar Tehran",
+    "center": {
+      "latitude": 35.760638,
+      "longitude": 51.22469
+    },
+    "active": false
+  },
+  {
+    "id": "thr-abuzar",
+    "city_id": "tehran",
+    "name_fa": "ابوذر",
+    "name_en": "Abuzar",
+    "center": {
+      "latitude": 35.683913,
+      "longitude": 51.487326
+    },
+    "active": false
+  },
+  {
+    "id": "thr-agahi",
+    "city_id": "tehran",
+    "name_fa": "آگاهی",
+    "name_en": "Agahi",
+    "center": {
+      "latitude": 35.664817,
+      "longitude": 51.40109
+    },
+    "active": false
+  },
+  {
+    "id": "thr-aghdasieh",
+    "city_id": "tehran",
+    "name_fa": "اقدسیه",
+    "name_en": "Aghdasieh",
+    "center": {
+      "latitude": 35.793744,
+      "longitude": 51.487881
+    },
+    "active": false
+  },
+  {
+    "id": "thr-aghdasieh-shahr-e-rey",
+    "city_id": "tehran",
+    "name_fa": "اقدسیه شهرری",
+    "name_en": "Aghdasieh (Shahr-e-Rey)",
+    "center": {
+      "latitude": 35.593835,
+      "longitude": 51.44512
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ahang",
+    "city_id": "tehran",
+    "name_fa": "آهنگ",
+    "name_en": "Ahang",
+    "center": {
+      "latitude": 35.663446,
+      "longitude": 51.476435
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ahangaran",
+    "city_id": "tehran",
+    "name_fa": "آهنگران",
+    "name_en": "Ahangaran",
+    "center": {
+      "latitude": 35.676694,
+      "longitude": 51.459816
+    },
+    "active": false
+  },
+  {
+    "id": "thr-alaein",
+    "city_id": "tehran",
+    "name_fa": "علایین",
+    "name_en": "Alaein",
+    "center": {
+      "latitude": 35.582582,
+      "longitude": 51.455304
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ali-abad",
+    "city_id": "tehran",
+    "name_fa": "علی آباد",
+    "name_en": "Ali Abad",
+    "center": {
+      "latitude": 35.625685,
+      "longitude": 51.427058
+    },
+    "active": false
+  },
+  {
+    "id": "thr-almahdi-simun-bolivar",
+    "city_id": "tehran",
+    "name_fa": "المهدی - سیمون بولیوار",
+    "name_en": "Almahdi - Simun Bolivar",
+    "center": {
+      "latitude": 35.773986,
+      "longitude": 51.327745
+    },
+    "active": false
+  },
+  {
+    "id": "thr-amin-abad",
+    "city_id": "tehran",
+    "name_fa": "امین آباد",
+    "name_en": "Amin Abad",
+    "center": {
+      "latitude": 35.587793,
+      "longitude": 51.459091
+    },
+    "active": false
+  },
+  {
+    "id": "thr-amir-abad",
+    "city_id": "tehran",
+    "name_fa": "امیرآباد",
+    "name_en": "Amir Abad",
+    "center": {
+      "latitude": 35.733277,
+      "longitude": 51.391675
+    },
+    "active": true
+  },
+  {
+    "id": "thr-amirieh",
+    "city_id": "tehran",
+    "name_fa": "امیریه",
+    "name_en": "Amirieh",
+    "center": {
+      "latitude": 35.678486,
+      "longitude": 51.401277
+    },
+    "active": false
+  },
+  {
+    "id": "thr-amjadieh",
+    "city_id": "tehran",
+    "name_fa": "امجدیه",
+    "name_en": "Amjadieh",
+    "center": {
+      "latitude": 35.710385,
+      "longitude": 51.428803
+    },
+    "active": true
+  },
+  {
+    "id": "thr-anbar-naft",
+    "city_id": "tehran",
+    "name_fa": "انبار نفت",
+    "name_en": "Anbar Naft",
+    "center": {
+      "latitude": 35.663053,
+      "longitude": 51.390608
+    },
+    "active": false
+  },
+  {
+    "id": "thr-andisheh-javanmardan",
+    "city_id": "tehran",
+    "name_fa": "اندیشه - جوانمردان",
+    "name_en": "Andisheh - Javanmardan",
+    "center": {
+      "latitude": 35.746733,
+      "longitude": 51.276911
+    },
+    "active": false
+  },
+  {
+    "id": "thr-aramaneh",
+    "city_id": "tehran",
+    "name_fa": "ارامنه",
+    "name_en": "Aramaneh",
+    "center": {
+      "latitude": 35.721739,
+      "longitude": 51.456784
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ararat",
+    "city_id": "tehran",
+    "name_fa": "آرارات",
+    "name_en": "Ararat",
+    "center": {
+      "latitude": 35.771475,
+      "longitude": 51.400683
+    },
+    "active": true
+  },
+  {
+    "id": "thr-aseman",
+    "city_id": "tehran",
+    "name_fa": "آسمان",
+    "name_en": "Aseman",
+    "center": {
+      "latitude": 35.777897,
+      "longitude": 51.352572
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ashtiani",
+    "city_id": "tehran",
+    "name_fa": "آشتیانی",
+    "name_en": "Ashtiani",
+    "center": {
+      "latitude": 35.714893,
+      "longitude": 51.510959
+    },
+    "active": false
+  },
+  {
+    "id": "thr-atabak",
+    "city_id": "tehran",
+    "name_fa": "اتابک",
+    "name_en": "Atabak",
+    "center": {
+      "latitude": 35.650565,
+      "longitude": 51.462013
+    },
+    "active": false
+  },
+  {
+    "id": "thr-azarbayjan",
+    "city_id": "tehran",
+    "name_fa": "آذربایجان",
+    "name_en": "Azarbayjan",
+    "center": {
+      "latitude": 35.691609,
+      "longitude": 51.398001
+    },
+    "active": false
+  },
+  {
+    "id": "thr-azari",
+    "city_id": "tehran",
+    "name_fa": "آذری",
+    "name_en": "Azari",
+    "center": {
+      "latitude": 35.667213,
+      "longitude": 51.350327
+    },
+    "active": false
+  },
+  {
+    "id": "thr-azgol",
+    "city_id": "tehran",
+    "name_fa": "ازگل",
+    "name_en": "Azgol",
+    "center": {
+      "latitude": 35.788609,
+      "longitude": 51.510757
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bagh-azari",
+    "city_id": "tehran",
+    "name_fa": "باغ آذری",
+    "name_en": "Bagh Azari",
+    "center": {
+      "latitude": 35.652586,
+      "longitude": 51.423184
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bagh-ferdous",
+    "city_id": "tehran",
+    "name_fa": "باغ فردوس",
+    "name_en": "Bagh Ferdous",
+    "center": {
+      "latitude": 35.803516,
+      "longitude": 51.422698
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bagh-feyz",
+    "city_id": "tehran",
+    "name_fa": "باغ فیض",
+    "name_en": "Bagh Feyz",
+    "center": {
+      "latitude": 35.743896,
+      "longitude": 51.32253
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bagh-khazaneh",
+    "city_id": "tehran",
+    "name_fa": "باغ خزانه",
+    "name_en": "Bagh Khazaneh",
+    "center": {
+      "latitude": 35.664032,
+      "longitude": 51.370625
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bahar",
+    "city_id": "tehran",
+    "name_fa": "بهار",
+    "name_en": "Bahar",
+    "center": {
+      "latitude": 35.709808,
+      "longitude": 51.433751
+    },
+    "active": true
+  },
+  {
+    "id": "thr-baharan",
+    "city_id": "tehran",
+    "name_fa": "بهاران",
+    "name_en": "Baharan",
+    "center": {
+      "latitude": 35.769839,
+      "longitude": 51.273031
+    },
+    "active": false
+  },
+  {
+    "id": "thr-baharestan",
+    "city_id": "tehran",
+    "name_fa": "بهارستان",
+    "name_en": "Baharestan",
+    "center": {
+      "latitude": 35.693707,
+      "longitude": 51.431213
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bahmanyar",
+    "city_id": "tehran",
+    "name_fa": "بهمنیار",
+    "name_en": "Bahmanyar",
+    "center": {
+      "latitude": 35.626789,
+      "longitude": 51.397858
+    },
+    "active": false
+  },
+  {
+    "id": "thr-banihashem",
+    "city_id": "tehran",
+    "name_fa": "بنی‌هاشم",
+    "name_en": "Banihashem",
+    "center": {
+      "latitude": 35.749755,
+      "longitude": 51.470097
+    },
+    "active": false
+  },
+  {
+    "id": "thr-barut-kubi",
+    "city_id": "tehran",
+    "name_fa": "باروت کوبی",
+    "name_en": "Barut Kubi",
+    "center": {
+      "latitude": 35.60328,
+      "longitude": 51.452629
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bashgah-naft",
+    "city_id": "tehran",
+    "name_fa": "باشگاه نفت",
+    "name_en": "Bashgah Naft",
+    "center": {
+      "latitude": 35.700366,
+      "longitude": 51.252757
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bazaar",
+    "city_id": "tehran",
+    "name_fa": "بازار",
+    "name_en": "Bazaar",
+    "center": {
+      "latitude": 35.672904,
+      "longitude": 51.426993
+    },
+    "active": false
+  },
+  {
+    "id": "thr-behdasht",
+    "city_id": "tehran",
+    "name_fa": "بهداشت",
+    "name_en": "Behdasht",
+    "center": {
+      "latitude": 35.656623,
+      "longitude": 51.338337
+    },
+    "active": false
+  },
+  {
+    "id": "thr-behjat-abad",
+    "city_id": "tehran",
+    "name_fa": "بهجت‌آباد",
+    "name_en": "Behjat Abad",
+    "center": {
+      "latitude": 35.71969,
+      "longitude": 51.412137
+    },
+    "active": true
+  },
+  {
+    "id": "thr-beryanak",
+    "city_id": "tehran",
+    "name_fa": "بریانک",
+    "name_en": "Beryanak",
+    "center": {
+      "latitude": 35.674979,
+      "longitude": 51.377291
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bolursazi",
+    "city_id": "tehran",
+    "name_fa": "بلورسازی",
+    "name_en": "BolurSazi",
+    "center": {
+      "latitude": 35.662566,
+      "longitude": 51.377909
+    },
+    "active": false
+  },
+  {
+    "id": "thr-bolvar-abuzar-ahang",
+    "city_id": "tehran",
+    "name_fa": "بلوار ابوذر - آهنگ",
+    "name_en": "Bolvar Abuzar - Ahang",
+    "center": {
+      "latitude": 35.648127,
+      "longitude": 51.474825
+    },
+    "active": false
+  },
+  {
+    "id": "thr-boroumand",
+    "city_id": "tehran",
+    "name_fa": "برومند",
+    "name_en": "Boroumand",
+    "center": {
+      "latitude": 35.579252,
+      "longitude": 51.453928
+    },
+    "active": false
+  },
+  {
+    "id": "thr-borujerdi-dehgan",
+    "city_id": "tehran",
+    "name_fa": "بروجردی - دهقان",
+    "name_en": "Borujerdi - Dehgan",
+    "center": {
+      "latitude": 35.637352,
+      "longitude": 51.469611
+    },
+    "active": false
+  },
+  {
+    "id": "thr-central-janatabad",
+    "city_id": "tehran",
+    "name_fa": "جنت آباد مرکزی",
+    "name_en": "Central JanatAbad",
+    "center": {
+      "latitude": 35.760486,
+      "longitude": 51.303061
+    },
+    "active": false
+  },
+  {
+    "id": "thr-central-tehransar",
+    "city_id": "tehran",
+    "name_fa": "تهرانسر مرکزی",
+    "name_en": "Central Tehransar",
+    "center": {
+      "latitude": 35.69616,
+      "longitude": 51.257313
+    },
+    "active": false
+  },
+  {
+    "id": "thr-chaharsad-dastgah",
+    "city_id": "tehran",
+    "name_fa": "چهارصد دستگاه",
+    "name_en": "ChaharSad Dastgah",
+    "center": {
+      "latitude": 35.68818,
+      "longitude": 51.45705
+    },
+    "active": false
+  },
+  {
+    "id": "thr-chitgar",
+    "city_id": "tehran",
+    "name_fa": "چیتگر",
+    "name_en": "Chitgar",
+    "center": {
+      "latitude": 35.718038,
+      "longitude": 51.157235
+    },
+    "active": false
+  },
+  {
+    "id": "thr-chizar",
+    "city_id": "tehran",
+    "name_fa": "چیذر",
+    "name_en": "Chizar",
+    "center": {
+      "latitude": 35.796864,
+      "longitude": 51.455244
+    },
+    "active": false
+  },
+  {
+    "id": "thr-chub-tarash",
+    "city_id": "tehran",
+    "name_fa": "چوب تراش",
+    "name_en": "Chub Tarash",
+    "center": {
+      "latitude": 35.715346,
+      "longitude": 51.344109
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dabestan",
+    "city_id": "tehran",
+    "name_fa": "دبستان",
+    "name_en": "Dabestan",
+    "center": {
+      "latitude": 35.735604,
+      "longitude": 51.452928
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dahom-farvardin",
+    "city_id": "tehran",
+    "name_fa": "دهم فروردین",
+    "name_en": "Dahom Farvardin",
+    "center": {
+      "latitude": 35.685907,
+      "longitude": 51.466713
+    },
+    "active": false
+  },
+  {
+    "id": "thr-darabad",
+    "city_id": "tehran",
+    "name_fa": "داراباد",
+    "name_en": "Darabad",
+    "center": {
+      "latitude": 35.811763,
+      "longitude": 51.49105
+    },
+    "active": false
+  },
+  {
+    "id": "thr-darakeh",
+    "city_id": "tehran",
+    "name_fa": "درکه",
+    "name_en": "Darakeh",
+    "center": {
+      "latitude": 35.803915,
+      "longitude": 51.383721
+    },
+    "active": false
+  },
+  {
+    "id": "thr-darband",
+    "city_id": "tehran",
+    "name_fa": "دربند",
+    "name_en": "Darband",
+    "center": {
+      "latitude": 35.818261,
+      "longitude": 51.425022
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dardasht",
+    "city_id": "tehran",
+    "name_fa": "دردشت",
+    "name_en": "Dardasht",
+    "center": {
+      "latitude": 35.727153,
+      "longitude": 51.508435
+    },
+    "active": false
+  },
+  {
+    "id": "thr-darus",
+    "city_id": "tehran",
+    "name_fa": "دروس",
+    "name_en": "Darus",
+    "center": {
+      "latitude": 35.772414,
+      "longitude": 51.457194
+    },
+    "active": false
+  },
+  {
+    "id": "thr-darvazeh-shemiran",
+    "city_id": "tehran",
+    "name_fa": "دروازه شمیران",
+    "name_en": "Darvazeh Shemiran",
+    "center": {
+      "latitude": 35.695827,
+      "longitude": 51.440788
+    },
+    "active": false
+  },
+  {
+    "id": "thr-darya",
+    "city_id": "tehran",
+    "name_fa": "دریا",
+    "name_en": "Darya",
+    "center": {
+      "latitude": 35.765364,
+      "longitude": 51.377176
+    },
+    "active": false
+  },
+  {
+    "id": "thr-daryacheh",
+    "city_id": "tehran",
+    "name_fa": "دریاچه",
+    "name_en": "Daryacheh",
+    "center": {
+      "latitude": 35.736965,
+      "longitude": 51.217336
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dastgheyb",
+    "city_id": "tehran",
+    "name_fa": "دستغیب",
+    "name_en": "Dastgheyb",
+    "center": {
+      "latitude": 35.685865,
+      "longitude": 51.348005
+    },
+    "active": false
+  },
+  {
+    "id": "thr-deh-narmak",
+    "city_id": "tehran",
+    "name_fa": "ده نارمک",
+    "name_en": "Deh Narmak",
+    "center": {
+      "latitude": 35.761086,
+      "longitude": 51.513777
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dehghan-kukakula",
+    "city_id": "tehran",
+    "name_fa": "دهقان - کوکاکولا",
+    "name_en": "Dehghan - Kukakula",
+    "center": {
+      "latitude": 35.696946,
+      "longitude": 51.476335
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dehkadeh-olympic",
+    "city_id": "tehran",
+    "name_fa": "دهکده المپیک",
+    "name_en": "Dehkadeh Olympic",
+    "center": {
+      "latitude": 35.763856,
+      "longitude": 51.253234
+    },
+    "active": false
+  },
+  {
+    "id": "thr-derakhti",
+    "city_id": "tehran",
+    "name_fa": "درختی",
+    "name_en": "Derakhti",
+    "center": {
+      "latitude": 35.768779,
+      "longitude": 51.354114
+    },
+    "active": false
+  },
+  {
+    "id": "thr-deylaman",
+    "city_id": "tehran",
+    "name_fa": "دیلمان",
+    "name_en": "Deylaman",
+    "center": {
+      "latitude": 35.60266,
+      "longitude": 51.432102
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dezashib",
+    "city_id": "tehran",
+    "name_fa": "دزاشیب",
+    "name_en": "Dezashib",
+    "center": {
+      "latitude": 35.807255,
+      "longitude": 51.451073
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dezhkam",
+    "city_id": "tehran",
+    "name_fa": "دژکام",
+    "name_en": "Dezhkam",
+    "center": {
+      "latitude": 35.678221,
+      "longitude": 51.452739
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dibaji-farmanieh",
+    "city_id": "tehran",
+    "name_fa": "دیباجی - فرمانیه",
+    "name_en": "Dibaji - Farmanieh",
+    "center": {
+      "latitude": 35.795798,
+      "longitude": 51.472704
+    },
+    "active": false
+  },
+  {
+    "id": "thr-doctor-hushmand",
+    "city_id": "tehran",
+    "name_fa": "دکتر هوشیار",
+    "name_en": "Doctor Hushmand",
+    "center": {
+      "latitude": 35.694432,
+      "longitude": 51.35111
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dowlat-abad",
+    "city_id": "tehran",
+    "name_fa": "دولت آباد",
+    "name_en": "Dowlat Abad",
+    "center": {
+      "latitude": 35.621208,
+      "longitude": 51.453786
+    },
+    "active": false
+  },
+  {
+    "id": "thr-dulab",
+    "city_id": "tehran",
+    "name_fa": "دولاب",
+    "name_en": "Dulab",
+    "center": {
+      "latitude": 35.664929,
+      "longitude": 51.460941
+    },
+    "active": false
+  },
+  {
+    "id": "thr-east-abuzar",
+    "city_id": "tehran",
+    "name_fa": "ابوذر شرقی",
+    "name_en": "East Abuzar",
+    "center": {
+      "latitude": 35.65951,
+      "longitude": 51.367626
+    },
+    "active": false
+  },
+  {
+    "id": "thr-east-lashkar",
+    "city_id": "tehran",
+    "name_fa": "لشکر غربی",
+    "name_en": "East Lashkar",
+    "center": {
+      "latitude": 35.726684,
+      "longitude": 51.464497
+    },
+    "active": false
+  },
+  {
+    "id": "thr-east-tehranpars",
+    "city_id": "tehran",
+    "name_fa": "تهرانپارس شرقی",
+    "name_en": "East TehranPars",
+    "center": {
+      "latitude": 35.739688,
+      "longitude": 51.546303
+    },
+    "active": false
+  },
+  {
+    "id": "thr-east-tehransar",
+    "city_id": "tehran",
+    "name_fa": "تهرانسر شرقی",
+    "name_en": "East Tehransar",
+    "center": {
+      "latitude": 35.685867,
+      "longitude": 51.252835
+    },
+    "active": false
+  },
+  {
+    "id": "thr-edalat",
+    "city_id": "tehran",
+    "name_fa": "عدالت",
+    "name_en": "Edalat",
+    "center": {
+      "latitude": 35.737036,
+      "longitude": 51.285312
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ekbatan",
+    "city_id": "tehran",
+    "name_fa": "اکباتان",
+    "name_en": "Ekbatan",
+    "center": {
+      "latitude": 35.706918,
+      "longitude": 51.305227
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ekhtiarieh",
+    "city_id": "tehran",
+    "name_fa": "اختیاریه",
+    "name_en": "Ekhtiarieh",
+    "center": {
+      "latitude": 35.786538,
+      "longitude": 51.461183
+    },
+    "active": false
+  },
+  {
+    "id": "thr-elahieh",
+    "city_id": "tehran",
+    "name_fa": "الهیه",
+    "name_en": "Elahieh",
+    "center": {
+      "latitude": 35.789787,
+      "longitude": 51.42617
+    },
+    "active": false
+  },
+  {
+    "id": "thr-elm-o-sanat",
+    "city_id": "tehran",
+    "name_fa": "علم و صنعت",
+    "name_en": "Elm o Sanat",
+    "center": {
+      "latitude": 35.741606,
+      "longitude": 51.508798
+    },
+    "active": false
+  },
+  {
+    "id": "thr-emamzadeh-abdollah",
+    "city_id": "tehran",
+    "name_fa": "امام زاده عبدالله",
+    "name_en": "Emamzadeh Abdollah",
+    "center": {
+      "latitude": 35.678235,
+      "longitude": 51.348328
+    },
+    "active": false
+  },
+  {
+    "id": "thr-emamzadeh-ghasem",
+    "city_id": "tehran",
+    "name_fa": "امام زاده قاسم",
+    "name_en": "Emamzadeh Ghasem",
+    "center": {
+      "latitude": 35.811559,
+      "longitude": 51.441216
+    },
+    "active": false
+  },
+  {
+    "id": "thr-emamzadeh-hasan",
+    "city_id": "tehran",
+    "name_fa": "امام زاده حسن",
+    "name_en": "Emamzadeh Hasan",
+    "center": {
+      "latitude": 35.665658,
+      "longitude": 51.360648
+    },
+    "active": false
+  },
+  {
+    "id": "thr-emamzadeh-yahya",
+    "city_id": "tehran",
+    "name_fa": "امام زاده یحیی",
+    "name_en": "Emamzadeh Yahya",
+    "center": {
+      "latitude": 35.679948,
+      "longitude": 51.434344
+    },
+    "active": false
+  },
+  {
+    "id": "thr-eram",
+    "city_id": "tehran",
+    "name_fa": "ارم",
+    "name_en": "Eram",
+    "center": {
+      "latitude": 35.72843,
+      "longitude": 51.283713
+    },
+    "active": false
+  },
+  {
+    "id": "thr-esfandiari-bostan",
+    "city_id": "tehran",
+    "name_fa": "اسفندیاری و بستان",
+    "name_en": "Esfandiari - Bostan",
+    "center": {
+      "latitude": 35.629315,
+      "longitude": 51.385453
+    },
+    "active": false
+  },
+  {
+    "id": "thr-eshraghi",
+    "city_id": "tehran",
+    "name_fa": "اشراقی",
+    "name_en": "Eshraghi",
+    "center": {
+      "latitude": 35.707508,
+      "longitude": 51.474098
+    },
+    "active": false
+  },
+  {
+    "id": "thr-eskandari",
+    "city_id": "tehran",
+    "name_fa": "اسکندری",
+    "name_en": "Eskandari",
+    "center": {
+      "latitude": 35.68853,
+      "longitude": 51.381437
+    },
+    "active": false
+  },
+  {
+    "id": "thr-eslam-abad-valfajr",
+    "city_id": "tehran",
+    "name_fa": "اسلام آباد - والفجر",
+    "name_en": "Eslam Abad - Valfajr",
+    "center": {
+      "latitude": 35.640313,
+      "longitude": 51.494507
+    },
+    "active": false
+  },
+  {
+    "id": "thr-esmaeil-abad",
+    "city_id": "tehran",
+    "name_fa": "اسماعیل آباد",
+    "name_en": "Esmaeil Abad",
+    "center": {
+      "latitude": 35.619154,
+      "longitude": 51.332965
+    },
+    "active": false
+  },
+  {
+    "id": "thr-estakhr",
+    "city_id": "tehran",
+    "name_fa": "استخر",
+    "name_en": "Estakhr",
+    "center": {
+      "latitude": 35.757029,
+      "longitude": 51.563106
+    },
+    "active": false
+  },
+  {
+    "id": "thr-estakhr-shahr-e-rey",
+    "city_id": "tehran",
+    "name_fa": "محله استخر شهرری",
+    "name_en": "Estakhr (Shahr-e-Rey)",
+    "center": {
+      "latitude": 35.590089,
+      "longitude": 51.44502
+    },
+    "active": false
+  },
+  {
+    "id": "thr-evin",
+    "city_id": "tehran",
+    "name_fa": "اوین",
+    "name_en": "Evin",
+    "center": {
+      "latitude": 35.799138,
+      "longitude": 51.395245
+    },
+    "active": false
+  },
+  {
+    "id": "thr-eyvanak",
+    "city_id": "tehran",
+    "name_fa": "ایوانک",
+    "name_en": "Eyvanak",
+    "center": {
+      "latitude": 35.757639,
+      "longitude": 51.356732
+    },
+    "active": false
+  },
+  {
+    "id": "thr-fadak",
+    "city_id": "tehran",
+    "name_fa": "فدک",
+    "name_en": "Fadak",
+    "center": {
+      "latitude": 35.728667,
+      "longitude": 51.479998
+    },
+    "active": false
+  },
+  {
+    "id": "thr-farahzad",
+    "city_id": "tehran",
+    "name_fa": "فرحزاد",
+    "name_en": "Farahzad",
+    "center": {
+      "latitude": 35.789556,
+      "longitude": 51.345608
+    },
+    "active": false
+  },
+  {
+    "id": "thr-farzaneh",
+    "city_id": "tehran",
+    "name_fa": "فرزانه",
+    "name_en": "Farzaneh",
+    "center": {
+      "latitude": 35.686037,
+      "longitude": 51.474497
+    },
+    "active": false
+  },
+  {
+    "id": "thr-fatemi",
+    "city_id": "tehran",
+    "name_fa": "دکتر شهید سیدحسین فاطمی",
+    "name_en": "Fatemi",
+    "center": {
+      "latitude": 35.718463,
+      "longitude": 51.391446
+    },
+    "active": true
+  },
+  {
+    "id": "thr-felestin-enghelab",
+    "city_id": "tehran",
+    "name_fa": "فلسطین - انقلاب",
+    "name_en": "Felestin - Enghelab",
+    "center": {
+      "latitude": 35.698385,
+      "longitude": 51.398155
+    },
+    "active": true
+  },
+  {
+    "id": "thr-ferdows",
+    "city_id": "tehran",
+    "name_fa": "فردوس",
+    "name_en": "Ferdows",
+    "center": {
+      "latitude": 35.722221,
+      "longitude": 51.321716
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ferdowsi",
+    "city_id": "tehran",
+    "name_fa": "فردوسی",
+    "name_en": "Ferdowsi",
+    "center": {
+      "latitude": 35.693497,
+      "longitude": 51.418154
+    },
+    "active": false
+  },
+  {
+    "id": "thr-firuz-abadi",
+    "city_id": "tehran",
+    "name_fa": "فیروز آبادی",
+    "name_en": "Firuz Abadi",
+    "center": {
+      "latitude": 35.595371,
+      "longitude": 51.43329
+    },
+    "active": false
+  },
+  {
+    "id": "thr-foruzesh-amir-bahador",
+    "city_id": "tehran",
+    "name_fa": "فروزش - امیر بهادر",
+    "name_en": "Foruzesh - Amir Bahador",
+    "center": {
+      "latitude": 35.671305,
+      "longitude": 51.403695
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghaem-chitgar",
+    "city_id": "tehran",
+    "name_fa": "قائم چیتگر",
+    "name_en": "Ghaem Chitgar",
+    "center": {
+      "latitude": 35.752408,
+      "longitude": 51.220658
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghalamestan-baradaran-javadian",
+    "city_id": "tehran",
+    "name_fa": "قلمستان - براداران جوادیان",
+    "name_en": "Ghalamestan - Baradaran Javadian",
+    "center": {
+      "latitude": 35.671359,
+      "longitude": 51.397676
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghanat-kosar",
+    "city_id": "tehran",
+    "name_fa": "قنات کوثر",
+    "name_en": "Ghanat kosar",
+    "center": {
+      "latitude": 35.764246,
+      "longitude": 51.534102
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghasem-abad",
+    "city_id": "tehran",
+    "name_fa": "قاسم آباد شیان",
+    "name_en": "Ghasem abad",
+    "center": {
+      "latitude": 35.76509,
+      "longitude": 51.525048
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghasr-firuzeh-1",
+    "city_id": "tehran",
+    "name_fa": "قصر فیروزه ۱",
+    "name_en": "Ghasr Firuzeh 1",
+    "center": {
+      "latitude": 35.674746,
+      "longitude": 51.506985
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghasr-firuzeh-2",
+    "city_id": "tehran",
+    "name_fa": "قصر فیروزه ۲",
+    "name_en": "Ghasr Firuzeh 2",
+    "center": {
+      "latitude": 35.652241,
+      "longitude": 51.506868
+    },
+    "active": false
+  },
+  {
+    "id": "thr-gheytarieh",
+    "city_id": "tehran",
+    "name_fa": "قیطریه",
+    "name_en": "Gheytarieh",
+    "center": {
+      "latitude": 35.790103,
+      "longitude": 51.446062
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ghiam",
+    "city_id": "tehran",
+    "name_fa": "قیام",
+    "name_en": "Ghiam",
+    "center": {
+      "latitude": 35.669861,
+      "longitude": 51.440831
+    },
+    "active": false
+  },
+  {
+    "id": "thr-gholhak",
+    "city_id": "tehran",
+    "name_fa": "قلهک",
+    "name_en": "Gholhak",
+    "center": {
+      "latitude": 35.773379,
+      "longitude": 51.444059
+    },
+    "active": false
+  },
+  {
+    "id": "thr-golab-dareh",
+    "city_id": "tehran",
+    "name_fa": "گلاب دره",
+    "name_en": "Golab Dareh",
+    "center": {
+      "latitude": 35.82005,
+      "longitude": 51.440642
+    },
+    "active": false
+  },
+  {
+    "id": "thr-golchin",
+    "city_id": "tehran",
+    "name_fa": "گلچین",
+    "name_en": "Golchin",
+    "center": {
+      "latitude": 35.653219,
+      "longitude": 51.367282
+    },
+    "active": false
+  },
+  {
+    "id": "thr-golestan",
+    "city_id": "tehran",
+    "name_fa": "گلستان",
+    "name_en": "Golestan",
+    "center": {
+      "latitude": 35.753849,
+      "longitude": 51.24744
+    },
+    "active": false
+  },
+  {
+    "id": "thr-golestan-shomali",
+    "city_id": "tehran",
+    "name_fa": "گلستان شمالی",
+    "name_en": "Golestan Shomali",
+    "center": {
+      "latitude": 35.807744,
+      "longitude": 51.475457
+    },
+    "active": false
+  },
+  {
+    "id": "thr-golshan",
+    "city_id": "tehran",
+    "name_fa": "گلشن",
+    "name_en": "Golshan",
+    "center": {
+      "latitude": 35.741761,
+      "longitude": 51.56416
+    },
+    "active": false
+  },
+  {
+    "id": "thr-gorgan",
+    "city_id": "tehran",
+    "name_fa": "گرگان",
+    "name_en": "Gorgan",
+    "center": {
+      "latitude": 35.709603,
+      "longitude": 51.450353
+    },
+    "active": false
+  },
+  {
+    "id": "thr-habibollah",
+    "city_id": "tehran",
+    "name_fa": "حبیب الله",
+    "name_en": "Habibollah",
+    "center": {
+      "latitude": 35.713814,
+      "longitude": 51.358488
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hafezieh",
+    "city_id": "tehran",
+    "name_fa": "حافظیه",
+    "name_en": "Hafezieh",
+    "center": {
+      "latitude": 35.700202,
+      "longitude": 51.495698
+    },
+    "active": false
+  },
+  {
+    "id": "thr-haft-chenar",
+    "city_id": "tehran",
+    "name_fa": "هفت چنار",
+    "name_en": "Haft chenar",
+    "center": {
+      "latitude": 35.674516,
+      "longitude": 51.368878
+    },
+    "active": false
+  },
+  {
+    "id": "thr-haft-hos",
+    "city_id": "tehran",
+    "name_fa": "هفت حوض",
+    "name_en": "Haft Hos",
+    "center": {
+      "latitude": 35.728505,
+      "longitude": 51.489856
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hakimieh",
+    "city_id": "tehran",
+    "name_fa": "حکیمیه",
+    "name_en": "Hakimieh",
+    "center": {
+      "latitude": 35.737828,
+      "longitude": 51.57995
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hamzeh-abad",
+    "city_id": "tehran",
+    "name_fa": "حمزه آباد",
+    "name_en": "Hamzeh Abad",
+    "center": {
+      "latitude": 35.597725,
+      "longitude": 51.423282
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hashem-abad",
+    "city_id": "tehran",
+    "name_fa": "هاشم آباد",
+    "name_en": "Hashem Abad",
+    "center": {
+      "latitude": 35.644537,
+      "longitude": 51.473414
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hashem-abad-shahr-e-rey",
+    "city_id": "tehran",
+    "name_fa": "هاشم آباد شهر ری",
+    "name_en": "Hashem Abad (Shahr-e-Rey)",
+    "center": {
+      "latitude": 35.584954,
+      "longitude": 51.440012
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hashemi",
+    "city_id": "tehran",
+    "name_fa": "هاشمی",
+    "name_en": "Hashemi",
+    "center": {
+      "latitude": 35.684724,
+      "longitude": 51.359454
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hefdah-shahrivar",
+    "city_id": "tehran",
+    "name_fa": "هفده شهریور",
+    "name_en": "Hefdah Shahrivar",
+    "center": {
+      "latitude": 35.66907,
+      "longitude": 51.293852
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hekmat",
+    "city_id": "tehran",
+    "name_fa": "حکمت",
+    "name_en": "Hekmat",
+    "center": {
+      "latitude": 35.800778,
+      "longitude": 51.447536
+    },
+    "active": false
+  },
+  {
+    "id": "thr-helalahmar",
+    "city_id": "tehran",
+    "name_fa": "هلال احمر",
+    "name_en": "HelalAhmar",
+    "center": {
+      "latitude": 35.671176,
+      "longitude": 51.388587
+    },
+    "active": false
+  },
+  {
+    "id": "thr-herandi",
+    "city_id": "tehran",
+    "name_fa": "هرندی",
+    "name_en": "Herandi",
+    "center": {
+      "latitude": 35.664211,
+      "longitude": 51.425465
+    },
+    "active": false
+  },
+  {
+    "id": "thr-heravi-hossein-abad",
+    "city_id": "tehran",
+    "name_fa": "هروی - حسین آباد",
+    "name_en": "Heravi - Hossein Abad",
+    "center": {
+      "latitude": 35.772555,
+      "longitude": 51.478586
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hesar-bouali",
+    "city_id": "tehran",
+    "name_fa": "حصار بوعلی",
+    "name_en": "Hesar Bouali",
+    "center": {
+      "latitude": 35.805343,
+      "longitude": 51.468092
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hesarak",
+    "city_id": "tehran",
+    "name_fa": "حصارک",
+    "name_en": "Hesarak",
+    "center": {
+      "latitude": 35.782536,
+      "longitude": 51.312135
+    },
+    "active": false
+  },
+  {
+    "id": "thr-heshmatieh",
+    "city_id": "tehran",
+    "name_fa": "حشمتیه",
+    "name_en": "Heshmatieh",
+    "center": {
+      "latitude": 35.725983,
+      "longitude": 51.450748
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hor",
+    "city_id": "tehran",
+    "name_fa": "حر",
+    "name_en": "Hor",
+    "center": {
+      "latitude": 35.687302,
+      "longitude": 51.38805
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hosseini",
+    "city_id": "tehran",
+    "name_fa": "حسینی",
+    "name_en": "Hosseini",
+    "center": {
+      "latitude": 35.662394,
+      "longitude": 51.325994
+    },
+    "active": false
+  },
+  {
+    "id": "thr-hosseinieh-ershad-ghoba",
+    "city_id": "tehran",
+    "name_fa": "حسینیه ارشاد - قبا",
+    "name_en": "Hosseinieh Ershad - Ghoba",
+    "center": {
+      "latitude": 35.759706,
+      "longitude": 51.44866
+    },
+    "active": false
+  },
+  {
+    "id": "thr-iran",
+    "city_id": "tehran",
+    "name_fa": "ایران",
+    "name_en": "Iran",
+    "center": {
+      "latitude": 35.687292,
+      "longitude": 51.439588
+    },
+    "active": false
+  },
+  {
+    "id": "thr-iranshahr",
+    "city_id": "tehran",
+    "name_fa": "ایرانشهر",
+    "name_en": "IranShahr",
+    "center": {
+      "latitude": 35.708465,
+      "longitude": 51.421736
+    },
+    "active": true
+  },
+  {
+    "id": "thr-jaberi",
+    "city_id": "tehran",
+    "name_fa": "جابری",
+    "name_en": "Jaberi",
+    "center": {
+      "latitude": 35.684043,
+      "longitude": 51.454432
+    },
+    "active": false
+  },
+  {
+    "id": "thr-jahad",
+    "city_id": "tehran",
+    "name_fa": "جهاد",
+    "name_en": "Jahad",
+    "center": {
+      "latitude": 35.724413,
+      "longitude": 51.401652
+    },
+    "active": true
+  },
+  {
+    "id": "thr-jalili",
+    "city_id": "tehran",
+    "name_fa": "جلیلی",
+    "name_en": "Jalili",
+    "center": {
+      "latitude": 35.650099,
+      "longitude": 51.362109
+    },
+    "active": false
+  },
+  {
+    "id": "thr-jamalzadeh",
+    "city_id": "tehran",
+    "name_fa": "جمالزاده",
+    "name_en": "Jamalzadeh",
+    "center": {
+      "latitude": 35.702242,
+      "longitude": 51.3863
+    },
+    "active": true
+  },
+  {
+    "id": "thr-jamaran",
+    "city_id": "tehran",
+    "name_fa": "جماران",
+    "name_en": "Jamaran",
+    "center": {
+      "latitude": 35.820233,
+      "longitude": 51.458901
+    },
+    "active": false
+  },
+  {
+    "id": "thr-javadieh-tehranpars",
+    "city_id": "tehran",
+    "name_fa": "جوادیه تهرانپارس",
+    "name_en": "Javadieh Tehranpars",
+    "center": {
+      "latitude": 35.733384,
+      "longitude": 51.549516
+    },
+    "active": false
+  },
+  {
+    "id": "thr-javadieh-zamani",
+    "city_id": "tehran",
+    "name_fa": "جوادیه (زمانی)",
+    "name_en": "Javadieh ( Zamani )",
+    "center": {
+      "latitude": 35.652263,
+      "longitude": 51.397792
+    },
+    "active": false
+  },
+  {
+    "id": "thr-javanmard-ghasab",
+    "city_id": "tehran",
+    "name_fa": "جوانمرد قصاب",
+    "name_en": "Javanmard Ghasab",
+    "center": {
+      "latitude": 35.610324,
+      "longitude": 51.426402
+    },
+    "active": false
+  },
+  {
+    "id": "thr-jey",
+    "city_id": "tehran",
+    "name_fa": "جی",
+    "name_en": "Jey",
+    "center": {
+      "latitude": 35.674788,
+      "longitude": 51.356664
+    },
+    "active": false
+  },
+  {
+    "id": "thr-jolfa",
+    "city_id": "tehran",
+    "name_fa": "جلفا",
+    "name_en": "Jolfa",
+    "center": {
+      "latitude": 35.746938,
+      "longitude": 51.442621
+    },
+    "active": false
+  },
+  {
+    "id": "thr-jomhuri",
+    "city_id": "tehran",
+    "name_fa": "جمهوری",
+    "name_en": "Jomhuri",
+    "center": {
+      "latitude": 35.697282,
+      "longitude": 51.382118
+    },
+    "active": true
+  },
+  {
+    "id": "thr-jordan-park-melat",
+    "city_id": "tehran",
+    "name_fa": "جردن - پارک ملت",
+    "name_en": "Jordan - Park Melat",
+    "center": {
+      "latitude": 35.780944,
+      "longitude": 51.415798
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kaj",
+    "city_id": "tehran",
+    "name_fa": "کاج",
+    "name_en": "Kaj",
+    "center": {
+      "latitude": 35.714344,
+      "longitude": 51.442553
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kan",
+    "city_id": "tehran",
+    "name_fa": "کن",
+    "name_en": "Kan",
+    "center": {
+      "latitude": 35.759327,
+      "longitude": 51.277933
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kashanak",
+    "city_id": "tehran",
+    "name_fa": "کاشانک",
+    "name_en": "Kashanak",
+    "center": {
+      "latitude": 35.81024,
+      "longitude": 51.48094
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kaveh",
+    "city_id": "tehran",
+    "name_fa": "کاوه",
+    "name_en": "Kaveh",
+    "center": {
+      "latitude": 35.780877,
+      "longitude": 51.442849
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kerman",
+    "city_id": "tehran",
+    "name_fa": "کرمان",
+    "name_en": "Kerman",
+    "center": {
+      "latitude": 35.732019,
+      "longitude": 51.47375
+    },
+    "active": false
+  },
+  {
+    "id": "thr-keshavarz-park-laleh",
+    "city_id": "tehran",
+    "name_fa": "کشاورز - پارک لاله",
+    "name_en": "Keshavarz - Park Laleh",
+    "center": {
+      "latitude": 35.714092,
+      "longitude": 51.399068
+    },
+    "active": true
+  },
+  {
+    "id": "thr-khajeh-nasir",
+    "city_id": "tehran",
+    "name_fa": "خواجه نصیر",
+    "name_en": "Khajeh Nasir",
+    "center": {
+      "latitude": 35.704269,
+      "longitude": 51.438386
+    },
+    "active": false
+  },
+  {
+    "id": "thr-khajeh-nezam",
+    "city_id": "tehran",
+    "name_fa": "خواجه نظام الملک",
+    "name_en": "Khajeh Nezam",
+    "center": {
+      "latitude": 35.713426,
+      "longitude": 51.447833
+    },
+    "active": false
+  },
+  {
+    "id": "thr-khalij-fars",
+    "city_id": "tehran",
+    "name_fa": "خلیج فارس",
+    "name_en": "Khalij Fars",
+    "center": {
+      "latitude": 35.664144,
+      "longitude": 51.257776
+    },
+    "active": false
+  },
+  {
+    "id": "thr-khavaran",
+    "city_id": "tehran",
+    "name_fa": "خاوران",
+    "name_en": "Khavaran",
+    "center": {
+      "latitude": 35.664451,
+      "longitude": 51.45263
+    },
+    "active": false
+  },
+  {
+    "id": "thr-khazaneh",
+    "city_id": "tehran",
+    "name_fa": "خزانه",
+    "name_en": "Khazaneh",
+    "center": {
+      "latitude": 35.638876,
+      "longitude": 51.420649
+    },
+    "active": false
+  },
+  {
+    "id": "thr-khoram-shahr",
+    "city_id": "tehran",
+    "name_fa": "خرمشهر",
+    "name_en": "Khoram Shahr",
+    "center": {
+      "latitude": 35.676452,
+      "longitude": 51.384084
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kooye-faraz",
+    "city_id": "tehran",
+    "name_fa": "کوی فراز",
+    "name_en": "Kooye Faraz",
+    "center": {
+      "latitude": 35.789784,
+      "longitude": 51.37026
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kosar",
+    "city_id": "tehran",
+    "name_fa": "کوثر",
+    "name_en": "Kosar",
+    "center": {
+      "latitude": 35.663664,
+      "longitude": 51.438257
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kouhak",
+    "city_id": "tehran",
+    "name_fa": "کوهک",
+    "name_en": "Kouhak",
+    "center": {
+      "latitude": 35.73336,
+      "longitude": 51.245131
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kuhsar",
+    "city_id": "tehran",
+    "name_fa": "کوهسار",
+    "name_en": "Kuhsar",
+    "center": {
+      "latitude": 35.794426,
+      "longitude": 51.379433
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kuy-bimeh",
+    "city_id": "tehran",
+    "name_fa": "کوی بیمه",
+    "name_en": "Kuy Bimeh",
+    "center": {
+      "latitude": 35.705554,
+      "longitude": 51.318634
+    },
+    "active": false
+  },
+  {
+    "id": "thr-kuy-nasr",
+    "city_id": "tehran",
+    "name_fa": "کوی نصر",
+    "name_en": "Kuy Nasr",
+    "center": {
+      "latitude": 35.737638,
+      "longitude": 51.377424
+    },
+    "active": true
+  },
+  {
+    "id": "thr-kuye-nasr-mehrabad",
+    "city_id": "tehran",
+    "name_fa": "کوی نصر مهرآباد",
+    "name_en": "Kuye Nasr Mehrabad",
+    "center": {
+      "latitude": 35.679378,
+      "longitude": 51.321533
+    },
+    "active": false
+  },
+  {
+    "id": "thr-lavizan-shian",
+    "city_id": "tehran",
+    "name_fa": "لویزان - شیان",
+    "name_en": "Lavizan - Shian",
+    "center": {
+      "latitude": 35.776465,
+      "longitude": 51.503778
+    },
+    "active": false
+  },
+  {
+    "id": "thr-madaen",
+    "city_id": "tehran",
+    "name_fa": "مدائن",
+    "name_en": "Madaen",
+    "center": {
+      "latitude": 35.72771,
+      "longitude": 51.496959
+    },
+    "active": false
+  },
+  {
+    "id": "thr-mahmudieh",
+    "city_id": "tehran",
+    "name_fa": "محمودیه",
+    "name_en": "Mahmudieh",
+    "center": {
+      "latitude": 35.797091,
+      "longitude": 51.412586
+    },
+    "active": false
+  },
+  {
+    "id": "thr-majid-abad-esteghlal",
+    "city_id": "tehran",
+    "name_fa": "مجید آباد - استقلال",
+    "name_en": "Majid abad - Esteghlal",
+    "center": {
+      "latitude": 35.762363,
+      "longitude": 51.544522
+    },
+    "active": false
+  },
+  {
+    "id": "thr-majidieh",
+    "city_id": "tehran",
+    "name_fa": "مجیدیه",
+    "name_en": "Majidieh",
+    "center": {
+      "latitude": 35.735513,
+      "longitude": 51.466393
+    },
+    "active": false
+  },
+  {
+    "id": "thr-makhsus",
+    "city_id": "tehran",
+    "name_fa": "مخصوص",
+    "name_en": "Makhsus",
+    "center": {
+      "latitude": 35.677937,
+      "longitude": 51.388941
+    },
+    "active": false
+  },
+  {
+    "id": "thr-malek-abad",
+    "city_id": "tehran",
+    "name_fa": "ملک آباد",
+    "name_en": "Malek Abad",
+    "center": {
+      "latitude": 35.621562,
+      "longitude": 51.429341
+    },
+    "active": false
+  },
+  {
+    "id": "thr-mansurieh-mangol",
+    "city_id": "tehran",
+    "name_fa": "منصوریه منگل",
+    "name_en": "Mansurieh Mangol",
+    "center": {
+      "latitude": 35.608947,
+      "longitude": 51.435741
+    },
+    "active": false
+  },
+  {
+    "id": "thr-marzdaran",
+    "city_id": "tehran",
+    "name_fa": "مرزداران",
+    "name_en": "Marzdaran",
+    "center": {
+      "latitude": 35.733568,
+      "longitude": 51.341307
+    },
+    "active": false
+  },
+  {
+    "id": "thr-masudieh",
+    "city_id": "tehran",
+    "name_fa": "مسعودیه",
+    "name_en": "Masudieh",
+    "center": {
+      "latitude": 35.625535,
+      "longitude": 51.497031
+    },
+    "active": false
+  },
+  {
+    "id": "thr-mazaheri",
+    "city_id": "tehran",
+    "name_fa": "مظاهری",
+    "name_en": "Mazaheri",
+    "center": {
+      "latitude": 35.655135,
+      "longitude": 51.437881
+    },
+    "active": false
+  },
+  {
+    "id": "thr-mehran",
+    "city_id": "tehran",
+    "name_fa": "مهران",
+    "name_en": "Mehran",
+    "center": {
+      "latitude": 35.748928,
+      "longitude": 51.456158
+    },
+    "active": false
+  },
+  {
+    "id": "thr-mehran-payambar",
+    "city_id": "tehran",
+    "name_fa": "مهران - پیامبر",
+    "name_en": "Mehran - Payambar",
+    "center": {
+      "latitude": 35.73214,
+      "longitude": 51.319058
+    },
+    "active": false
+  },
+  {
+    "id": "thr-minayi",
+    "city_id": "tehran",
+    "name_fa": "مینایی",
+    "name_en": "Minayi",
+    "center": {
+      "latitude": 35.652677,
+      "longitude": 51.455436
+    },
+    "active": false
+  },
+  {
+    "id": "thr-mirdamad",
+    "city_id": "tehran",
+    "name_fa": "میرداماد",
+    "name_en": "Mirdamad",
+    "center": {
+      "latitude": 35.758896,
+      "longitude": 51.434562
+    },
+    "active": false
+  },
+  {
+    "id": "thr-moghadam",
+    "city_id": "tehran",
+    "name_fa": "مقدم",
+    "name_en": "Moghadam",
+    "center": {
+      "latitude": 35.656738,
+      "longitude": 51.374304
+    },
+    "active": false
+  },
+  {
+    "id": "thr-monirieh",
+    "city_id": "tehran",
+    "name_fa": "منیریه",
+    "name_en": "Monirieh",
+    "center": {
+      "latitude": 35.683866,
+      "longitude": 51.401518
+    },
+    "active": false
+  },
+  {
+    "id": "thr-morad-abad",
+    "city_id": "tehran",
+    "name_fa": "مراد آباد",
+    "name_en": "Morad Abad",
+    "center": {
+      "latitude": 35.785997,
+      "longitude": 51.324909
+    },
+    "active": false
+  },
+  {
+    "id": "thr-moshirieh",
+    "city_id": "tehran",
+    "name_fa": "مشیریه",
+    "name_en": "Moshirieh",
+    "center": {
+      "latitude": 35.624316,
+      "longitude": 51.474805
+    },
+    "active": false
+  },
+  {
+    "id": "thr-motahari",
+    "city_id": "tehran",
+    "name_fa": "مطهری",
+    "name_en": "Motahari",
+    "center": {
+      "latitude": 35.648744,
+      "longitude": 51.443666
+    },
+    "active": false
+  },
+  {
+    "id": "thr-nabi-akram",
+    "city_id": "tehran",
+    "name_fa": "نبی اکرم",
+    "name_en": "Nabi Akram",
+    "center": {
+      "latitude": 35.682425,
+      "longitude": 51.475816
+    },
+    "active": false
+  },
+  {
+    "id": "thr-narmak",
+    "city_id": "tehran",
+    "name_fa": "نارمک",
+    "name_en": "Narmak",
+    "center": {
+      "latitude": 35.736333,
+      "longitude": 51.504209
+    },
+    "active": false
+  },
+  {
+    "id": "thr-nazi-abad",
+    "city_id": "tehran",
+    "name_fa": "نازی آباد",
+    "name_en": "Nazi Abad",
+    "center": {
+      "latitude": 35.641282,
+      "longitude": 51.405212
+    },
+    "active": false
+  },
+  {
+    "id": "thr-nemat-abad",
+    "city_id": "tehran",
+    "name_fa": "نعمت آباد",
+    "name_en": "Nemat Abad",
+    "center": {
+      "latitude": 35.629773,
+      "longitude": 51.352339
+    },
+    "active": false
+  },
+  {
+    "id": "thr-nezam-abad",
+    "city_id": "tehran",
+    "name_fa": "نظام آباد",
+    "name_en": "Nezam Abad",
+    "center": {
+      "latitude": 35.706875,
+      "longitude": 51.45181
+    },
+    "active": false
+  },
+  {
+    "id": "thr-nezami-ganjavi",
+    "city_id": "tehran",
+    "name_fa": "نظامی گنجوی",
+    "name_en": "Nezami Ganjavi",
+    "center": {
+      "latitude": 35.744743,
+      "longitude": 51.408453
+    },
+    "active": true
+  },
+  {
+    "id": "thr-niavaran",
+    "city_id": "tehran",
+    "name_fa": "نیاوران",
+    "name_en": "Niavaran",
+    "center": {
+      "latitude": 35.819289,
+      "longitude": 51.469569
+    },
+    "active": false
+  },
+  {
+    "id": "thr-niknam",
+    "city_id": "tehran",
+    "name_fa": "نیکنام",
+    "name_en": "Niknam",
+    "center": {
+      "latitude": 35.683331,
+      "longitude": 51.457274
+    },
+    "active": false
+  },
+  {
+    "id": "thr-nilufar",
+    "city_id": "tehran",
+    "name_fa": "نیلوفر",
+    "name_en": "Nilufar",
+    "center": {
+      "latitude": 35.736359,
+      "longitude": 51.363192
+    },
+    "active": false
+  },
+  {
+    "id": "thr-niruye-daryayi",
+    "city_id": "tehran",
+    "name_fa": "نیروی دریایی",
+    "name_en": "Niruye daryayi",
+    "center": {
+      "latitude": 35.742395,
+      "longitude": 51.489735
+    },
+    "active": false
+  },
+  {
+    "id": "thr-niruye-havayi",
+    "city_id": "tehran",
+    "name_fa": "نیروی هوایی",
+    "name_en": "Niruye Havayi",
+    "center": {
+      "latitude": 35.700669,
+      "longitude": 51.474696
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-afsarieh",
+    "city_id": "tehran",
+    "name_fa": "افسریه شمالی",
+    "name_en": "North Afsarieh",
+    "center": {
+      "latitude": 35.655515,
+      "longitude": 51.494208
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-dowlatkhah",
+    "city_id": "tehran",
+    "name_fa": "دولتخواه شمالی",
+    "name_en": "North DowlatKhah",
+    "center": {
+      "latitude": 35.62713,
+      "longitude": 51.342734
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-janatabad",
+    "city_id": "tehran",
+    "name_fa": "جنت‌ آباد شمالی",
+    "name_en": "North JanatAbad",
+    "center": {
+      "latitude": 35.77137,
+      "longitude": 51.308753
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-karun",
+    "city_id": "tehran",
+    "name_fa": "کارون شمالی",
+    "name_en": "North Karun",
+    "center": {
+      "latitude": 35.694926,
+      "longitude": 51.366589
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-khani-abad",
+    "city_id": "tehran",
+    "name_fa": "خانی آباد شمالی",
+    "name_en": "North Khani Abad",
+    "center": {
+      "latitude": 35.632562,
+      "longitude": 51.389709
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-kianshahr",
+    "city_id": "tehran",
+    "name_fa": "کیانشهر شمالی",
+    "name_en": "North Kianshahr",
+    "center": {
+      "latitude": 35.639362,
+      "longitude": 51.44913
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-mina",
+    "city_id": "tehran",
+    "name_fa": "مینای شمالی",
+    "name_en": "North Mina",
+    "center": {
+      "latitude": 35.675714,
+      "longitude": 51.452181
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-salsabil",
+    "city_id": "tehran",
+    "name_fa": "سلسبیل شمالی",
+    "name_en": "North Salsabil",
+    "center": {
+      "latitude": 35.695335,
+      "longitude": 51.372364
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-sazman-barnameh",
+    "city_id": "tehran",
+    "name_fa": "سازمان برنامه شمالی",
+    "name_en": "North Sazman Barnameh",
+    "center": {
+      "latitude": 35.737629,
+      "longitude": 51.302389
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-shahrak-shariati",
+    "city_id": "tehran",
+    "name_fa": "شهرک شریعتی شمالی",
+    "name_en": "North Shahrak Shariati",
+    "center": {
+      "latitude": 35.637968,
+      "longitude": 51.372883
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-shahran",
+    "city_id": "tehran",
+    "name_fa": "شهران شمالی",
+    "name_en": "North Shahran",
+    "center": {
+      "latitude": 35.773755,
+      "longitude": 51.282818
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-tehransar",
+    "city_id": "tehran",
+    "name_fa": "تهرانسر شمالی",
+    "name_en": "North Tehransar",
+    "center": {
+      "latitude": 35.691794,
+      "longitude": 51.272486
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-valiasr",
+    "city_id": "tehran",
+    "name_fa": "شهرک ولیعصر شمالی",
+    "name_en": "North ValiAsr",
+    "center": {
+      "latitude": 35.649975,
+      "longitude": 51.340775
+    },
+    "active": false
+  },
+  {
+    "id": "thr-north-zanjan",
+    "city_id": "tehran",
+    "name_fa": "زنجان شمالی",
+    "name_en": "North Zanjan",
+    "center": {
+      "latitude": 35.703888,
+      "longitude": 51.357438
+    },
+    "active": false
+  },
+  {
+    "id": "thr-oghaf",
+    "city_id": "tehran",
+    "name_fa": "اوقاف",
+    "name_en": "Oghaf",
+    "center": {
+      "latitude": 35.750412,
+      "longitude": 51.51252
+    },
+    "active": false
+  },
+  {
+    "id": "thr-ostad-moein",
+    "city_id": "tehran",
+    "name_fa": "استاد معین",
+    "name_en": "Ostad Moein",
+    "center": {
+      "latitude": 35.695308,
+      "longitude": 51.340846
+    },
+    "active": false
+  },
+  {
+    "id": "thr-pamenar",
+    "city_id": "tehran",
+    "name_fa": "پامنار",
+    "name_en": "Pamenar",
+    "center": {
+      "latitude": 35.681083,
+      "longitude": 51.424558
+    },
+    "active": false
+  },
+  {
+    "id": "thr-parastar",
+    "city_id": "tehran",
+    "name_fa": "پرستار",
+    "name_en": "Parastar",
+    "center": {
+      "latitude": 35.687907,
+      "longitude": 51.4837
+    },
+    "active": false
+  },
+  {
+    "id": "thr-pardisan",
+    "city_id": "tehran",
+    "name_fa": "پردیسان",
+    "name_en": "Pardisan",
+    "center": {
+      "latitude": 35.74276,
+      "longitude": 51.356653
+    },
+    "active": false
+  },
+  {
+    "id": "thr-parvaz",
+    "city_id": "tehran",
+    "name_fa": "پرواز",
+    "name_en": "Parvaz",
+    "center": {
+      "latitude": 35.789599,
+      "longitude": 51.352968
+    },
+    "active": false
+  },
+  {
+    "id": "thr-pasdaran-zarab-khaneh",
+    "city_id": "tehran",
+    "name_fa": "پاسداران - ضرابخانه",
+    "name_en": "Pasdaran - Zarab Khaneh",
+    "center": {
+      "latitude": 35.772167,
+      "longitude": 51.468531
+    },
+    "active": false
+  },
+  {
+    "id": "thr-peykan-shahr",
+    "city_id": "tehran",
+    "name_fa": "پیکان شهر",
+    "name_en": "Peykan Shahr",
+    "center": {
+      "latitude": 35.731988,
+      "longitude": 51.184111
+    },
+    "active": false
+  },
+  {
+    "id": "thr-piruzi",
+    "city_id": "tehran",
+    "name_fa": "پیروزی",
+    "name_en": "Piruzi",
+    "center": {
+      "latitude": 35.696261,
+      "longitude": 51.486524
+    },
+    "active": false
+  },
+  {
+    "id": "thr-punak",
+    "city_id": "tehran",
+    "name_fa": "پونک",
+    "name_en": "Punak",
+    "center": {
+      "latitude": 35.76646,
+      "longitude": 51.329702
+    },
+    "active": false
+  },
+  {
+    "id": "thr-rah-ahan",
+    "city_id": "tehran",
+    "name_fa": "راه آهن",
+    "name_en": "Rah Ahan",
+    "center": {
+      "latitude": 35.660752,
+      "longitude": 51.399652
+    },
+    "active": false
+  },
+  {
+    "id": "thr-saadat-abad",
+    "city_id": "tehran",
+    "name_fa": "سعادت آباد",
+    "name_en": "Saadat Abad",
+    "center": {
+      "latitude": 35.78379,
+      "longitude": 51.377102
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sad-dastgah",
+    "city_id": "tehran",
+    "name_fa": "صد دستگاه",
+    "name_en": "Sad Dastgah",
+    "center": {
+      "latitude": 35.689259,
+      "longitude": 51.471343
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sadeghieh-town",
+    "city_id": "tehran",
+    "name_fa": "شهرک صادقیه",
+    "name_en": "Sadeghieh Town",
+    "center": {
+      "latitude": 35.637702,
+      "longitude": 51.351144
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sadeqiye",
+    "city_id": "tehran",
+    "name_fa": "صادقیه",
+    "name_en": "Sadeqiye",
+    "center": {
+      "latitude": 35.721966,
+      "longitude": 51.342584
+    },
+    "active": false
+  },
+  {
+    "id": "thr-saeed-abad",
+    "city_id": "tehran",
+    "name_fa": "سعید آباد",
+    "name_en": "Saeed Abad",
+    "center": {
+      "latitude": 35.653347,
+      "longitude": 51.288126
+    },
+    "active": false
+  },
+  {
+    "id": "thr-saeei",
+    "city_id": "tehran",
+    "name_fa": "ساعی",
+    "name_en": "Saeei",
+    "center": {
+      "latitude": 35.739662,
+      "longitude": 51.415891
+    },
+    "active": true
+  },
+  {
+    "id": "thr-safa",
+    "city_id": "tehran",
+    "name_fa": "صفا",
+    "name_en": "Safa",
+    "center": {
+      "latitude": 35.694857,
+      "longitude": 51.452257
+    },
+    "active": false
+  },
+  {
+    "id": "thr-safayieh",
+    "city_id": "tehran",
+    "name_fa": "صفاییه",
+    "name_en": "Safayieh",
+    "center": {
+      "latitude": 35.603681,
+      "longitude": 51.449157
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sahebozzaman",
+    "city_id": "tehran",
+    "name_fa": "صاحب الزمان",
+    "name_en": "Sahebozzaman",
+    "center": {
+      "latitude": 35.649615,
+      "longitude": 51.322547
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sahebqaraniyeh",
+    "city_id": "tehran",
+    "name_fa": "صاحبقرانیه",
+    "name_en": "sahebqaraniyeh",
+    "center": {
+      "latitude": 35.806039,
+      "longitude": 51.474786
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sajad",
+    "city_id": "tehran",
+    "name_fa": "سجاد",
+    "name_en": "Sajad",
+    "center": {
+      "latitude": 35.654425,
+      "longitude": 51.358122
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sanaei",
+    "city_id": "tehran",
+    "name_fa": "سنائی",
+    "name_en": "Sanaei",
+    "center": {
+      "latitude": 35.722283,
+      "longitude": 51.421472
+    },
+    "active": true
+  },
+  {
+    "id": "thr-sanglaj",
+    "city_id": "tehran",
+    "name_fa": "سنگلج",
+    "name_en": "Sanglaj",
+    "center": {
+      "latitude": 35.676749,
+      "longitude": 51.41244
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sarasiab-mehrabad",
+    "city_id": "tehran",
+    "name_fa": "سرآسیاب - مهرآباد",
+    "name_en": "SarAsiab - MehrAbad",
+    "center": {
+      "latitude": 35.672029,
+      "longitude": 51.328691
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sarsakht",
+    "city_id": "tehran",
+    "name_fa": "سرتخت",
+    "name_en": "Sarsakht",
+    "center": {
+      "latitude": 35.58947,
+      "longitude": 51.432219
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sarv",
+    "city_id": "tehran",
+    "name_fa": "سرو",
+    "name_en": "Sarv",
+    "center": {
+      "latitude": 35.736519,
+      "longitude": 51.288941
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sarv-azad",
+    "city_id": "tehran",
+    "name_fa": "سرو آزاد",
+    "name_en": "Sarv Azad",
+    "center": {
+      "latitude": 35.747663,
+      "longitude": 51.18055
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sattarkhan",
+    "city_id": "tehran",
+    "name_fa": "ستارخان",
+    "name_en": "SattarKhan",
+    "center": {
+      "latitude": 35.721838,
+      "longitude": 51.359102
+    },
+    "active": true
+  },
+  {
+    "id": "thr-sazman-ab",
+    "city_id": "tehran",
+    "name_fa": "سازمان آب",
+    "name_en": "Sazman Ab",
+    "center": {
+      "latitude": 35.74022,
+      "longitude": 51.29014
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shad-abad",
+    "city_id": "tehran",
+    "name_fa": "شاد آباد",
+    "name_en": "Shad Abad",
+    "center": {
+      "latitude": 35.656597,
+      "longitude": 51.299546
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shadman",
+    "city_id": "tehran",
+    "name_fa": "شادمان",
+    "name_en": "Shadman",
+    "center": {
+      "latitude": 35.709209,
+      "longitude": 51.36267
+    },
+    "active": true
+  },
+  {
+    "id": "thr-shahadat",
+    "city_id": "tehran",
+    "name_fa": "شهادت",
+    "name_en": "Shahadat",
+    "center": {
+      "latitude": 35.613506,
+      "longitude": 51.450427
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahed",
+    "city_id": "tehran",
+    "name_fa": "شاهد",
+    "name_en": "Shahed",
+    "center": {
+      "latitude": 35.692575,
+      "longitude": 51.470642
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahid-asadi",
+    "city_id": "tehran",
+    "name_fa": "شهید اسدی",
+    "name_en": "Shahid Asadi",
+    "center": {
+      "latitude": 35.701834,
+      "longitude": 51.454915
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahid-beheshti",
+    "city_id": "tehran",
+    "name_fa": "شهید بهشتی",
+    "name_en": "Shahid Beheshti",
+    "center": {
+      "latitude": 35.584679,
+      "longitude": 51.420837
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahid-ghayuri",
+    "city_id": "tehran",
+    "name_fa": "شهید غیوری",
+    "name_en": "Shahid Ghayuri",
+    "center": {
+      "latitude": 35.602064,
+      "longitude": 51.442295
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahid-kazemi",
+    "city_id": "tehran",
+    "name_fa": "شهید کاظمی",
+    "name_en": "Shahid Kazemi",
+    "center": {
+      "latitude": 35.617656,
+      "longitude": 51.356814
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahid-rajaei",
+    "city_id": "tehran",
+    "name_fa": "شهید رجایی",
+    "name_en": "Shahid Rajaei",
+    "center": {
+      "latitude": 35.631817,
+      "longitude": 51.329785
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahin",
+    "city_id": "tehran",
+    "name_fa": "شاهین",
+    "name_en": "Shahin",
+    "center": {
+      "latitude": 35.671139,
+      "longitude": 51.459091
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahin-mokhberi",
+    "city_id": "tehran",
+    "name_fa": "شاهین - مخبری",
+    "name_en": "Shahin - Mokhberi",
+    "center": {
+      "latitude": 35.761769,
+      "longitude": 51.315059
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahr-ziba",
+    "city_id": "tehran",
+    "name_fa": "شهر زیبا",
+    "name_en": "Shahr Ziba",
+    "center": {
+      "latitude": 35.748341,
+      "longitude": 51.29129
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrabi",
+    "city_id": "tehran",
+    "name_fa": "شهرابی",
+    "name_en": "Shahrabi",
+    "center": {
+      "latitude": 35.677384,
+      "longitude": 51.477653
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-ansar",
+    "city_id": "tehran",
+    "name_fa": "شهرک انصار",
+    "name_en": "Shahrak Ansar",
+    "center": {
+      "latitude": 35.710416,
+      "longitude": 51.259421
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-apadana",
+    "city_id": "tehran",
+    "name_fa": "شهرک آپادانا",
+    "name_en": "Shahrak Apadana",
+    "center": {
+      "latitude": 35.70743,
+      "longitude": 51.328991
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-azadi",
+    "city_id": "tehran",
+    "name_fa": "شهرک آزادی",
+    "name_en": "Shahrak Azadi",
+    "center": {
+      "latitude": 35.709138,
+      "longitude": 51.272677
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-azmayesh",
+    "city_id": "tehran",
+    "name_fa": "شهرک آزمایش",
+    "name_en": "Shahrak Azmayesh",
+    "center": {
+      "latitude": 35.730534,
+      "longitude": 51.359513
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-besat",
+    "city_id": "tehran",
+    "name_fa": "شهرک بعثت",
+    "name_en": "Shahrak Besat",
+    "center": {
+      "latitude": 35.638171,
+      "longitude": 51.430716
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-buali",
+    "city_id": "tehran",
+    "name_fa": "شهرک بوعلی",
+    "name_en": "Shahrak Buali",
+    "center": {
+      "latitude": 35.791706,
+      "longitude": 51.367547
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-daneshgah-sharif",
+    "city_id": "tehran",
+    "name_fa": "شهرک دانشگاه شریف",
+    "name_en": "Shahrak Daneshgah Sharif",
+    "center": {
+      "latitude": 35.752017,
+      "longitude": 51.131864
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-daneshgah-tehran",
+    "city_id": "tehran",
+    "name_fa": "شهرک دانشگاه تهران",
+    "name_en": "Shahrak Daneshgah Tehran",
+    "center": {
+      "latitude": 35.711351,
+      "longitude": 51.199094
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-darya",
+    "city_id": "tehran",
+    "name_fa": "شهرک دریا",
+    "name_en": "Shahrak Darya",
+    "center": {
+      "latitude": 35.685912,
+      "longitude": 51.238243
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-e-ghods",
+    "city_id": "tehran",
+    "name_fa": "شهرک قدس",
+    "name_en": "Shahrak-e Ghods",
+    "center": {
+      "latitude": 35.760066,
+      "longitude": 51.374183
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-emam-khomeini",
+    "city_id": "tehran",
+    "name_fa": "شهرک امام خمینی",
+    "name_en": "Shahrak Emam Khomeini",
+    "center": {
+      "latitude": 35.662528,
+      "longitude": 51.314779
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-esteghlal",
+    "city_id": "tehran",
+    "name_fa": "شهرک استقلال",
+    "name_en": "Shahrak Esteghlal",
+    "center": {
+      "latitude": 35.701397,
+      "longitude": 51.227529
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-farhangian",
+    "city_id": "tehran",
+    "name_fa": "شهرک فرهنگیان",
+    "name_en": "Shahrak Farhangian",
+    "center": {
+      "latitude": 35.708648,
+      "longitude": 51.281028
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-ghaem",
+    "city_id": "tehran",
+    "name_fa": "شهرک قائم",
+    "name_en": "Shahrak Ghaem",
+    "center": {
+      "latitude": 35.805654,
+      "longitude": 51.526171
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-ghazali",
+    "city_id": "tehran",
+    "name_fa": "شهرک غزالی",
+    "name_en": "Shahrak Ghazali",
+    "center": {
+      "latitude": 35.732775,
+      "longitude": 51.160532
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-golha",
+    "city_id": "tehran",
+    "name_fa": "شهرک گلها",
+    "name_en": "Shahrak Golha",
+    "center": {
+      "latitude": 35.804248,
+      "longitude": 51.498467
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-homa",
+    "city_id": "tehran",
+    "name_fa": "شهرک هما",
+    "name_en": "Shahrak Homa",
+    "center": {
+      "latitude": 35.745678,
+      "longitude": 51.337026
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-kuhsar",
+    "city_id": "tehran",
+    "name_fa": "شهرک کوهسار",
+    "name_en": "Shahrak Kuhsar",
+    "center": {
+      "latitude": 35.782176,
+      "longitude": 51.333077
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-mahalati",
+    "city_id": "tehran",
+    "name_fa": "شهرک محلاتی",
+    "name_en": "Shahrak mahalati",
+    "center": {
+      "latitude": 35.804035,
+      "longitude": 51.514991
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-mokhaberat",
+    "city_id": "tehran",
+    "name_fa": "شهرک مخابرات",
+    "name_en": "Shahrak Mokhaberat",
+    "center": {
+      "latitude": 35.794006,
+      "longitude": 51.360051
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-naft",
+    "city_id": "tehran",
+    "name_fa": "شهرک نفت (البرز)",
+    "name_en": "Shahrak Naft",
+    "center": {
+      "latitude": 35.808109,
+      "longitude": 51.505851
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-naft-simun-bolivar",
+    "city_id": "tehran",
+    "name_fa": "شهرک نفت - سیمون بولیوار",
+    "name_en": "Shahrak Naft - Simun Bolivar",
+    "center": {
+      "latitude": 35.794202,
+      "longitude": 51.336455
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-parvaz",
+    "city_id": "tehran",
+    "name_fa": "شهرک پرواز",
+    "name_en": "Shahrak Parvaz",
+    "center": {
+      "latitude": 35.725173,
+      "longitude": 51.30656
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-pasdaran",
+    "city_id": "tehran",
+    "name_fa": "شهرک پاسداران",
+    "name_en": "Shahrak Pasdaran",
+    "center": {
+      "latitude": 35.695132,
+      "longitude": 51.262279
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-razavieh",
+    "city_id": "tehran",
+    "name_fa": "شهرک رضویه",
+    "name_en": "Shahrak Razavieh",
+    "center": {
+      "latitude": 35.612715,
+      "longitude": 51.495023
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-sadra",
+    "city_id": "tehran",
+    "name_fa": "شهرک صدرا",
+    "name_en": "Shahrak Sadra",
+    "center": {
+      "latitude": 35.73138,
+      "longitude": 51.253747
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-shahid-bagheri",
+    "city_id": "tehran",
+    "name_fa": "شهرک شهید باقری",
+    "name_en": "Shahrak Shahid Bagheri",
+    "center": {
+      "latitude": 35.761239,
+      "longitude": 51.20094
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-shahid-rajaei",
+    "city_id": "tehran",
+    "name_fa": "شهرک شهید رجایی",
+    "name_en": "Shahrak Shahid Rajaei",
+    "center": {
+      "latitude": 35.783706,
+      "longitude": 51.485438
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-shahid-shahparian-alborz",
+    "city_id": "tehran",
+    "name_fa": "شهرک شهید شهپریان (البرز)",
+    "name_en": "Shahrak Shahid Shahparian (Alborz)",
+    "center": {
+      "latitude": 35.758768,
+      "longitude": 51.569764
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-shahrdari",
+    "city_id": "tehran",
+    "name_fa": "شهرک شهرداری",
+    "name_en": "Shahrak Shahrdari",
+    "center": {
+      "latitude": 35.725997,
+      "longitude": 51.181576
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrak-shariati",
+    "city_id": "tehran",
+    "name_fa": "شهرک شریعتی",
+    "name_en": "Shahrak Shariati",
+    "center": {
+      "latitude": 35.623257,
+      "longitude": 51.376603
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shahrara-patris",
+    "city_id": "tehran",
+    "name_fa": "شهرآرا - پاتریس",
+    "name_en": "ShahrAra - Patris",
+    "center": {
+      "latitude": 35.716708,
+      "longitude": 51.373573
+    },
+    "active": true
+  },
+  {
+    "id": "thr-shakiba",
+    "city_id": "tehran",
+    "name_fa": "شکیبا",
+    "name_en": "Shakiba",
+    "center": {
+      "latitude": 35.673986,
+      "longitude": 51.468685
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shams-abad",
+    "city_id": "tehran",
+    "name_fa": "شمس آباد",
+    "name_en": "Shams Abad",
+    "center": {
+      "latitude": 35.703007,
+      "longitude": 51.391657
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shamshiri",
+    "city_id": "tehran",
+    "name_fa": "شمشیری",
+    "name_en": "Shamshiri",
+    "center": {
+      "latitude": 35.670487,
+      "longitude": 51.344064
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sheikh-hadi",
+    "city_id": "tehran",
+    "name_fa": "شیخ هادی",
+    "name_en": "Sheikh Hadi",
+    "center": {
+      "latitude": 35.693747,
+      "longitude": 51.407782
+    },
+    "active": true
+  },
+  {
+    "id": "thr-shemiran-no",
+    "city_id": "tehran",
+    "name_fa": "شمیران نو",
+    "name_en": "Shemiran no",
+    "center": {
+      "latitude": 35.751268,
+      "longitude": 51.498184
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shiva",
+    "city_id": "tehran",
+    "name_fa": "شیوا",
+    "name_en": "Shiva",
+    "center": {
+      "latitude": 35.680296,
+      "longitude": 51.468714
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shokufeh",
+    "city_id": "tehran",
+    "name_fa": "شکوفه",
+    "name_en": "Shokufeh",
+    "center": {
+      "latitude": 35.655159,
+      "longitude": 51.409088
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shura",
+    "city_id": "tehran",
+    "name_fa": "شورا",
+    "name_en": "Shura",
+    "center": {
+      "latitude": 35.710926,
+      "longitude": 51.496597
+    },
+    "active": false
+  },
+  {
+    "id": "thr-shush",
+    "city_id": "tehran",
+    "name_fa": "شوش",
+    "name_en": "Shush",
+    "center": {
+      "latitude": 35.657932,
+      "longitude": 51.438107
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sohrevardi-bagh-saba",
+    "city_id": "tehran",
+    "name_fa": "سهروردی - باغ صبا",
+    "name_en": "Sohrevardi - Bagh Saba",
+    "center": {
+      "latitude": 35.720019,
+      "longitude": 51.43419
+    },
+    "active": true
+  },
+  {
+    "id": "thr-soleymani-teymuri",
+    "city_id": "tehran",
+    "name_fa": "سلیمانی - تیموری",
+    "name_en": "Soleymani - Teymuri",
+    "center": {
+      "latitude": 35.673747,
+      "longitude": 51.3647
+    },
+    "active": false
+  },
+  {
+    "id": "thr-sorkheh-hesar",
+    "city_id": "tehran",
+    "name_fa": "سرخه حصار",
+    "name_en": "Sorkheh hesar",
+    "center": {
+      "latitude": 35.718679,
+      "longitude": 51.555321
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-afsarieh",
+    "city_id": "tehran",
+    "name_fa": "افسریه جنوبی",
+    "name_en": "South Afsarieh",
+    "center": {
+      "latitude": 35.643379,
+      "longitude": 51.489694
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-dowlatkhah",
+    "city_id": "tehran",
+    "name_fa": "دولتخواه جنوبی",
+    "name_en": "South DowlatKhah",
+    "center": {
+      "latitude": 35.615158,
+      "longitude": 51.342981
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-janatabad",
+    "city_id": "tehran",
+    "name_fa": "جنت‌ آباد جنوبی",
+    "name_en": "South JanatAbad",
+    "center": {
+      "latitude": 35.742697,
+      "longitude": 51.305228
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-karun",
+    "city_id": "tehran",
+    "name_fa": "کارون جنوبی",
+    "name_en": "South Karun",
+    "center": {
+      "latitude": 35.68532,
+      "longitude": 51.367629
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-khani-abad",
+    "city_id": "tehran",
+    "name_fa": "خانی آباد جنوبی",
+    "name_en": "South Khani Abad",
+    "center": {
+      "latitude": 35.619944,
+      "longitude": 51.395289
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-kianshahr",
+    "city_id": "tehran",
+    "name_fa": "کیانشهر جنوبی",
+    "name_en": "South Kianshahr",
+    "center": {
+      "latitude": 35.63447,
+      "longitude": 51.450073
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-majidieh",
+    "city_id": "tehran",
+    "name_fa": "مجیدیه جنوبی",
+    "name_en": "South Majidieh",
+    "center": {
+      "latitude": 35.735538,
+      "longitude": 51.462419
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-mehrabad",
+    "city_id": "tehran",
+    "name_fa": "مهرآباد جنوبی",
+    "name_en": "South Mehrabad",
+    "center": {
+      "latitude": 35.676638,
+      "longitude": 51.337975
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-mina",
+    "city_id": "tehran",
+    "name_fa": "مینای جنوبی",
+    "name_en": "South Mina",
+    "center": {
+      "latitude": 35.670618,
+      "longitude": 51.451221
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-narmak",
+    "city_id": "tehran",
+    "name_fa": "نارمک جنوبی",
+    "name_en": "South Narmak",
+    "center": {
+      "latitude": 35.71701,
+      "longitude": 51.492318
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-salsabil",
+    "city_id": "tehran",
+    "name_fa": "سلسبیل جنوبی",
+    "name_en": "South Salsabil",
+    "center": {
+      "latitude": 35.685935,
+      "longitude": 51.375162
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-sazman-barnameh",
+    "city_id": "tehran",
+    "name_fa": "سازمان برنامه جنوبی",
+    "name_en": "South Sazman Barnameh",
+    "center": {
+      "latitude": 35.725014,
+      "longitude": 51.30009
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-shahran",
+    "city_id": "tehran",
+    "name_fa": "شهران جنوبی",
+    "name_en": "South Shahran",
+    "center": {
+      "latitude": 35.758485,
+      "longitude": 51.290452
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-valiasr",
+    "city_id": "tehran",
+    "name_fa": "شهرک ولیعصر جنوبی",
+    "name_en": "South ValiAsr",
+    "center": {
+      "latitude": 35.64222,
+      "longitude": 51.342941
+    },
+    "active": false
+  },
+  {
+    "id": "thr-south-zanjan",
+    "city_id": "tehran",
+    "name_fa": "زنجان جنوبی",
+    "name_en": "South Zanjan",
+    "center": {
+      "latitude": 35.694686,
+      "longitude": 51.359542
+    },
+    "active": false
+  },
+  {
+    "id": "thr-suhanak",
+    "city_id": "tehran",
+    "name_fa": "سوهانک",
+    "name_en": "Suhanak",
+    "center": {
+      "latitude": 35.802154,
+      "longitude": 51.528786
+    },
+    "active": false
+  },
+  {
+    "id": "thr-taghi-abad",
+    "city_id": "tehran",
+    "name_fa": "تقی آباد",
+    "name_en": "Taghi Abad",
+    "center": {
+      "latitude": 35.579629,
+      "longitude": 51.463381
+    },
+    "active": false
+  },
+  {
+    "id": "thr-tajrish",
+    "city_id": "tehran",
+    "name_fa": "تجریش",
+    "name_en": "Tajrish",
+    "center": {
+      "latitude": 35.804188,
+      "longitude": 51.428987
+    },
+    "active": false
+  },
+  {
+    "id": "thr-takhti",
+    "city_id": "tehran",
+    "name_fa": "تختی",
+    "name_en": "Takhti",
+    "center": {
+      "latitude": 35.643653,
+      "longitude": 51.412916
+    },
+    "active": false
+  },
+  {
+    "id": "thr-tarasht",
+    "city_id": "tehran",
+    "name_fa": "طرشت",
+    "name_en": "Tarasht",
+    "center": {
+      "latitude": 35.706342,
+      "longitude": 51.343626
+    },
+    "active": false
+  },
+  {
+    "id": "thr-taslihat",
+    "city_id": "tehran",
+    "name_fa": "تسلیحات",
+    "name_en": "Taslihat",
+    "center": {
+      "latitude": 35.719438,
+      "longitude": 51.472559
+    },
+    "active": false
+  },
+  {
+    "id": "thr-taxirani",
+    "city_id": "tehran",
+    "name_fa": "تاکسیرانی",
+    "name_en": "Taxirani",
+    "center": {
+      "latitude": 35.671631,
+      "longitude": 51.486635
+    },
+    "active": false
+  },
+  {
+    "id": "thr-tayeb",
+    "city_id": "tehran",
+    "name_fa": "طیب",
+    "name_en": "Tayeb",
+    "center": {
+      "latitude": 35.660738,
+      "longitude": 51.450874
+    },
+    "active": false
+  },
+  {
+    "id": "thr-tehran-pars",
+    "city_id": "tehran",
+    "name_fa": "تهران پارس",
+    "name_en": "Tehran pars",
+    "center": {
+      "latitude": 35.725482,
+      "longitude": 51.520231
+    },
+    "active": false
+  },
+  {
+    "id": "thr-tehran-vila",
+    "city_id": "tehran",
+    "name_fa": "تهران ویلا",
+    "name_en": "Tehran Vila",
+    "center": {
+      "latitude": 35.722902,
+      "longitude": 51.36545
+    },
+    "active": true
+  },
+  {
+    "id": "thr-teymuri",
+    "city_id": "tehran",
+    "name_fa": "تیموری",
+    "name_en": "Teymuri",
+    "center": {
+      "latitude": 35.707209,
+      "longitude": 51.351781
+    },
+    "active": false
+  },
+  {
+    "id": "thr-tolid-daru",
+    "city_id": "tehran",
+    "name_fa": "تولید دارو",
+    "name_en": "Tolid Daru",
+    "center": {
+      "latitude": 35.663772,
+      "longitude": 51.338189
+    },
+    "active": false
+  },
+  {
+    "id": "thr-towhid",
+    "city_id": "tehran",
+    "name_fa": "توحید",
+    "name_en": "Towhid",
+    "center": {
+      "latitude": 35.7073,
+      "longitude": 51.370553
+    },
+    "active": true
+  },
+  {
+    "id": "thr-vahidieh",
+    "city_id": "tehran",
+    "name_fa": "وحیدیه",
+    "name_en": "Vahidieh",
+    "center": {
+      "latitude": 35.715222,
+      "longitude": 51.470998
+    },
+    "active": false
+  },
+  {
+    "id": "thr-valfajr",
+    "city_id": "tehran",
+    "name_fa": "والفجر",
+    "name_en": "Valfajr",
+    "center": {
+      "latitude": 35.746268,
+      "longitude": 51.394126
+    },
+    "active": true
+  },
+  {
+    "id": "thr-vali-abad",
+    "city_id": "tehran",
+    "name_fa": "ولی آباد",
+    "name_en": "Vali Abad",
+    "center": {
+      "latitude": 35.586469,
+      "longitude": 51.428553
+    },
+    "active": false
+  },
+  {
+    "id": "thr-valiasr",
+    "city_id": "tehran",
+    "name_fa": "ولیعصر",
+    "name_en": "ValiAsr",
+    "center": {
+      "latitude": 35.708238,
+      "longitude": 51.412094
+    },
+    "active": true
+  },
+  {
+    "id": "thr-valiasr-bisim",
+    "city_id": "tehran",
+    "name_fa": "ولیعصر - بیسیم",
+    "name_en": "ValiAsr - BiSim",
+    "center": {
+      "latitude": 35.653539,
+      "longitude": 51.450011
+    },
+    "active": false
+  },
+  {
+    "id": "thr-vanak",
+    "city_id": "tehran",
+    "name_fa": "ونک",
+    "name_en": "Vanak",
+    "center": {
+      "latitude": 35.764935,
+      "longitude": 51.405205
+    },
+    "active": true
+  },
+  {
+    "id": "thr-vardavard",
+    "city_id": "tehran",
+    "name_fa": "وردآورد",
+    "name_en": "Vardavard",
+    "center": {
+      "latitude": 35.736449,
+      "longitude": 51.121422
+    },
+    "active": false
+  },
+  {
+    "id": "thr-vasfnard",
+    "city_id": "tehran",
+    "name_fa": "وصفنارد",
+    "name_en": "Vasfnard",
+    "center": {
+      "latitude": 35.645879,
+      "longitude": 51.354977
+    },
+    "active": false
+  },
+  {
+    "id": "thr-velenjak",
+    "city_id": "tehran",
+    "name_fa": "ولنجک",
+    "name_en": "Velenjak",
+    "center": {
+      "latitude": 35.806065,
+      "longitude": 51.399836
+    },
+    "active": false
+  },
+  {
+    "id": "thr-vilashahr",
+    "city_id": "tehran",
+    "name_fa": "ویلاشهر",
+    "name_en": "VilaShahr",
+    "center": {
+      "latitude": 35.728183,
+      "longitude": 51.174833
+    },
+    "active": false
+  },
+  {
+    "id": "thr-west-abuzar",
+    "city_id": "tehran",
+    "name_fa": "ابوذر غربی",
+    "name_en": "West Abuzar",
+    "center": {
+      "latitude": 35.660614,
+      "longitude": 51.358523
+    },
+    "active": false
+  },
+  {
+    "id": "thr-west-tehranpars",
+    "city_id": "tehran",
+    "name_fa": "تهرانپارس غربی",
+    "name_en": "West TehranPars",
+    "center": {
+      "latitude": 35.741577,
+      "longitude": 51.532165
+    },
+    "active": false
+  },
+  {
+    "id": "thr-west-tehransar",
+    "city_id": "tehran",
+    "name_fa": "تهرانسر غربی",
+    "name_en": "West Tehransar",
+    "center": {
+      "latitude": 35.69324,
+      "longitude": 51.246305
+    },
+    "active": false
+  },
+  {
+    "id": "thr-yaft-abad-jonoubi",
+    "city_id": "tehran",
+    "name_fa": "یافت آباد جنوبی",
+    "name_en": "Yaft Abad Jonoubi",
+    "center": {
+      "latitude": 35.642291,
+      "longitude": 51.298675
+    },
+    "active": false
+  },
+  {
+    "id": "thr-yaft-abad-shomali",
+    "city_id": "tehran",
+    "name_fa": "یافت آباد شمالی",
+    "name_en": "Yaft Abad Shomali",
+    "center": {
+      "latitude": 35.65782,
+      "longitude": 51.349576
+    },
+    "active": false
+  },
+  {
+    "id": "thr-yakhjiabad-rezvan",
+    "city_id": "tehran",
+    "name_fa": "یاخجی آباد - رضوان",
+    "name_en": "YakhjiAbad - Rezvan",
+    "center": {
+      "latitude": 35.626231,
+      "longitude": 51.403693
+    },
+    "active": false
+  },
+  {
+    "id": "thr-yousef-abad",
+    "city_id": "tehran",
+    "name_fa": "یوسف آباد",
+    "name_en": "Yousef Abad",
+    "center": {
+      "latitude": 35.736363,
+      "longitude": 51.404009
+    },
+    "active": true
+  },
+  {
+    "id": "thr-zaferanieh",
+    "city_id": "tehran",
+    "name_fa": "زعفرانیه",
+    "name_en": "Zaferanieh",
+    "center": {
+      "latitude": 35.807607,
+      "longitude": 51.414894
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zahed-gilani",
+    "city_id": "tehran",
+    "name_fa": "زاهد گیلانی",
+    "name_en": "Zahed Gilani",
+    "center": {
+      "latitude": 35.694853,
+      "longitude": 51.460896
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zahir-abad",
+    "city_id": "tehran",
+    "name_fa": "ظهیر آباد",
+    "name_en": "Zahir Abad",
+    "center": {
+      "latitude": 35.596229,
+      "longitude": 51.449588
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zahtabi",
+    "city_id": "tehran",
+    "name_fa": "زهتابی",
+    "name_en": "Zahtabi",
+    "center": {
+      "latitude": 35.641681,
+      "longitude": 51.361364
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zamzam",
+    "city_id": "tehran",
+    "name_fa": "زمزم",
+    "name_en": "Zamzam",
+    "center": {
+      "latitude": 35.650222,
+      "longitude": 51.370488
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zargandeh",
+    "city_id": "tehran",
+    "name_fa": "زرگنده",
+    "name_en": "Zargandeh",
+    "center": {
+      "latitude": 35.774348,
+      "longitude": 51.432789
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zarkesh",
+    "city_id": "tehran",
+    "name_fa": "زرکش",
+    "name_en": "Zarkesh",
+    "center": {
+      "latitude": 35.716375,
+      "longitude": 51.479792
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zeynabieh-town",
+    "city_id": "tehran",
+    "name_fa": "شهرک زینبیه",
+    "name_en": "Zeynabieh Town",
+    "center": {
+      "latitude": 35.709751,
+      "longitude": 51.506765
+    },
+    "active": false
+  },
+  {
+    "id": "thr-zibadasht",
+    "city_id": "tehran",
+    "name_fa": "زیبادشت",
+    "name_en": "Zibadasht",
+    "center": {
+      "latitude": 35.753028,
+      "longitude": 51.261048
+    },
+    "active": false
+  },
+  {
+    "id": "shz-20-metri-cinema-saadi",
+    "city_id": "shiraz",
+    "name_fa": "بیست متری سینما سعدی",
+    "name_en": "20 Metri Cinema Saadi",
+    "center": {
+      "latitude": 29.624421,
+      "longitude": 52.525756
+    },
+    "active": true
+  },
+  {
+    "id": "shz-abiverdi",
+    "city_id": "shiraz",
+    "name_fa": "ابیوردی",
+    "name_en": "Abiverdi",
+    "center": {
+      "latitude": 29.639467,
+      "longitude": 52.51823
+    },
+    "active": true
+  },
+  {
+    "id": "shz-abyari",
+    "city_id": "shiraz",
+    "name_fa": "آبیاری",
+    "name_en": "Abyari",
+    "center": {
+      "latitude": 29.610242,
+      "longitude": 52.51044
+    },
+    "active": false
+  },
+  {
+    "id": "shz-abzangi",
+    "city_id": "shiraz",
+    "name_fa": "آبزنگی",
+    "name_en": "Abzangi",
+    "center": {
+      "latitude": 29.644573,
+      "longitude": 52.570205
+    },
+    "active": false
+  },
+  {
+    "id": "shz-adel-abad",
+    "city_id": "shiraz",
+    "name_fa": "عادل آباد",
+    "name_en": "Adel Abad",
+    "center": {
+      "latitude": 29.580618,
+      "longitude": 52.510555
+    },
+    "active": false
+  },
+  {
+    "id": "shz-afif-abad",
+    "city_id": "shiraz",
+    "name_fa": "عفیف آباد",
+    "name_en": "Afif Abad",
+    "center": {
+      "latitude": 29.624949,
+      "longitude": 52.505939
+    },
+    "active": true
+  },
+  {
+    "id": "shz-ahmad-abad",
+    "city_id": "shiraz",
+    "name_fa": "احمد آباد",
+    "name_en": "Ahmad Abad",
+    "center": {
+      "latitude": 29.595995,
+      "longitude": 52.455542
+    },
+    "active": false
+  },
+  {
+    "id": "shz-astaneh",
+    "city_id": "shiraz",
+    "name_fa": "آستانه",
+    "name_en": "Astaneh",
+    "center": {
+      "latitude": 29.602969,
+      "longitude": 52.55045
+    },
+    "active": false
+  },
+  {
+    "id": "shz-atlasi",
+    "city_id": "shiraz",
+    "name_fa": "اطلسی",
+    "name_en": "Atlasi",
+    "center": {
+      "latitude": 29.629906,
+      "longitude": 52.555332
+    },
+    "active": false
+  },
+  {
+    "id": "shz-azadegan",
+    "city_id": "shiraz",
+    "name_fa": "آزادگان",
+    "name_en": "Azadegan",
+    "center": {
+      "latitude": 29.597232,
+      "longitude": 52.578754
+    },
+    "active": false
+  },
+  {
+    "id": "shz-bagh-e-takht",
+    "city_id": "shiraz",
+    "name_fa": "باغ تخت",
+    "name_en": "Bagh-e Takht",
+    "center": {
+      "latitude": 29.629134,
+      "longitude": 52.545588
+    },
+    "active": true
+  },
+  {
+    "id": "shz-baharan",
+    "city_id": "shiraz",
+    "name_fa": "بهاران",
+    "name_en": "Baharan",
+    "center": {
+      "latitude": 29.670532,
+      "longitude": 52.45769
+    },
+    "active": false
+  },
+  {
+    "id": "shz-baharestan",
+    "city_id": "shiraz",
+    "name_fa": "بهارستان",
+    "name_en": "Baharestan",
+    "center": {
+      "latitude": 29.569885,
+      "longitude": 52.48296
+    },
+    "active": false
+  },
+  {
+    "id": "shz-baharestan-hejrat",
+    "city_id": "shiraz",
+    "name_fa": "بهارستان - هجرت",
+    "name_en": "Baharestan - Hejrat",
+    "center": {
+      "latitude": 29.616217,
+      "longitude": 52.548453
+    },
+    "active": false
+  },
+  {
+    "id": "shz-barf-forushan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک برف فروشان",
+    "name_en": "Barf Forushan",
+    "center": {
+      "latitude": 29.69526,
+      "longitude": 52.428131
+    },
+    "active": false
+  },
+  {
+    "id": "shz-bist-metri-emam-khomeini",
+    "city_id": "shiraz",
+    "name_fa": "بیست متری امام خمینی",
+    "name_en": "Bist Metri Emam Khomeini",
+    "center": {
+      "latitude": 29.594508,
+      "longitude": 52.501995
+    },
+    "active": false
+  },
+  {
+    "id": "shz-bist-metri-fazel",
+    "city_id": "shiraz",
+    "name_fa": "بیست متری فاضل",
+    "name_en": "Bist Metri Fazel",
+    "center": {
+      "latitude": 29.566823,
+      "longitude": 52.606335
+    },
+    "active": false
+  },
+  {
+    "id": "shz-chanchaneh",
+    "city_id": "shiraz",
+    "name_fa": "چنچنه",
+    "name_en": "Chanchaneh",
+    "center": {
+      "latitude": 29.636809,
+      "longitude": 52.535685
+    },
+    "active": true
+  },
+  {
+    "id": "shz-chogia",
+    "city_id": "shiraz",
+    "name_fa": "چوگیا",
+    "name_en": "Chogia",
+    "center": {
+      "latitude": 29.642089,
+      "longitude": 52.505933
+    },
+    "active": true
+  },
+  {
+    "id": "shz-darvazeh-esfahan",
+    "city_id": "shiraz",
+    "name_fa": "دروازه اصفهان",
+    "name_en": "Darvazeh Esfahan",
+    "center": {
+      "latitude": 29.618541,
+      "longitude": 52.551281
+    },
+    "active": false
+  },
+  {
+    "id": "shz-darvazeh-ghasabkhaneh",
+    "city_id": "shiraz",
+    "name_fa": "دروازه قصاب خانه",
+    "name_en": "Darvazeh GhasabKhaneh",
+    "center": {
+      "latitude": 29.601272,
+      "longitude": 52.549543
+    },
+    "active": false
+  },
+  {
+    "id": "shz-darvazeh-qoran",
+    "city_id": "shiraz",
+    "name_fa": "دروازه قرآن",
+    "name_en": "Darvazeh Qoran",
+    "center": {
+      "latitude": 29.633665,
+      "longitude": 52.558393
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dasht-chenar-mehrab",
+    "city_id": "shiraz",
+    "name_fa": "دشت چنار - محراب",
+    "name_en": "Dasht Chenar - Mehrab",
+    "center": {
+      "latitude": 29.565905,
+      "longitude": 52.572577
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dast-e-khezr-naserabad",
+    "city_id": "shiraz",
+    "name_fa": "دستخضر - نصرآباد",
+    "name_en": "Dast-e Khezr - Naserabad",
+    "center": {
+      "latitude": 29.580524,
+      "longitude": 52.638179
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dehpialeh",
+    "city_id": "shiraz",
+    "name_fa": "دهپیاله",
+    "name_en": "Dehpialeh",
+    "center": {
+      "latitude": 29.568333,
+      "longitude": 52.558715
+    },
+    "active": false
+  },
+  {
+    "id": "shz-derki",
+    "city_id": "shiraz",
+    "name_fa": "درکی",
+    "name_en": "Derki",
+    "center": {
+      "latitude": 29.601618,
+      "longitude": 52.507131
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dezak",
+    "city_id": "shiraz",
+    "name_fa": "دزک",
+    "name_en": "Dezak",
+    "center": {
+      "latitude": 29.603441,
+      "longitude": 52.543335
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dinakan",
+    "city_id": "shiraz",
+    "name_fa": "دینکان",
+    "name_en": "Dinakan",
+    "center": {
+      "latitude": 29.694333,
+      "longitude": 52.476542
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dokoohak",
+    "city_id": "shiraz",
+    "name_fa": "دوکوهک",
+    "name_en": "Dokoohak",
+    "center": {
+      "latitude": 29.791256,
+      "longitude": 52.410525
+    },
+    "active": false
+  },
+  {
+    "id": "shz-douran",
+    "city_id": "shiraz",
+    "name_fa": "دوران",
+    "name_en": "Douran",
+    "center": {
+      "latitude": 29.563628,
+      "longitude": 52.597466
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dr-hesabi-hosein-abad",
+    "city_id": "shiraz",
+    "name_fa": "دکتر حسابی - حسین آباد",
+    "name_en": "Dr. Hesabi - Hosein Abad",
+    "center": {
+      "latitude": 29.711358,
+      "longitude": 52.460169
+    },
+    "active": false
+  },
+  {
+    "id": "shz-dustan",
+    "city_id": "shiraz",
+    "name_fa": "دوستان",
+    "name_en": "Dustan",
+    "center": {
+      "latitude": 29.67204,
+      "longitude": 52.468694
+    },
+    "active": false
+  },
+  {
+    "id": "shz-eram",
+    "city_id": "shiraz",
+    "name_fa": "ارم",
+    "name_en": "Eram",
+    "center": {
+      "latitude": 29.633473,
+      "longitude": 52.52979
+    },
+    "active": true
+  },
+  {
+    "id": "shz-erfan-bolouvar",
+    "city_id": "shiraz",
+    "name_fa": "محله بلوار عرفان",
+    "name_en": "Erfan Bolouvar",
+    "center": {
+      "latitude": 29.571391,
+      "longitude": 52.534188
+    },
+    "active": false
+  },
+  {
+    "id": "shz-eslahnejad",
+    "city_id": "shiraz",
+    "name_fa": "اصلاح نژاد",
+    "name_en": "Eslahnejad",
+    "center": {
+      "latitude": 29.61037,
+      "longitude": 52.518106
+    },
+    "active": false
+  },
+  {
+    "id": "shz-falahat-kuye-daneshghahian",
+    "city_id": "shiraz",
+    "name_fa": "فلاحت - کوی دانشگاهیان",
+    "name_en": "Falahat - Kuye Daneshghahian",
+    "center": {
+      "latitude": 29.612806,
+      "longitude": 52.577226
+    },
+    "active": false
+  },
+  {
+    "id": "shz-farhangian",
+    "city_id": "shiraz",
+    "name_fa": "فرهنگیان",
+    "name_en": "Farhangian",
+    "center": {
+      "latitude": 29.581602,
+      "longitude": 52.493687
+    },
+    "active": false
+  },
+  {
+    "id": "shz-farhangshahr",
+    "city_id": "shiraz",
+    "name_fa": "فرهنگ شهر",
+    "name_en": "FarhangShahr",
+    "center": {
+      "latitude": 29.666348,
+      "longitude": 52.450283
+    },
+    "active": false
+  },
+  {
+    "id": "shz-fazilat",
+    "city_id": "shiraz",
+    "name_fa": "فضیلت",
+    "name_en": "Fazilat",
+    "center": {
+      "latitude": 29.598382,
+      "longitude": 52.568899
+    },
+    "active": false
+  },
+  {
+    "id": "shz-fazl-abad",
+    "city_id": "shiraz",
+    "name_fa": "فضل آباد",
+    "name_en": "Fazl Abad",
+    "center": {
+      "latitude": 29.578577,
+      "longitude": 52.577106
+    },
+    "active": false
+  },
+  {
+    "id": "shz-ferdowsi",
+    "city_id": "shiraz",
+    "name_fa": "فردوسی",
+    "name_en": "Ferdowsi",
+    "center": {
+      "latitude": 29.622831,
+      "longitude": 52.538445
+    },
+    "active": false
+  },
+  {
+    "id": "shz-fergaz",
+    "city_id": "shiraz",
+    "name_fa": "فرگاز",
+    "name_en": "Fergaz",
+    "center": {
+      "latitude": 29.58462,
+      "longitude": 52.499658
+    },
+    "active": false
+  },
+  {
+    "id": "shz-gelkoub",
+    "city_id": "shiraz",
+    "name_fa": "گلکوب",
+    "name_en": "Gelkoub",
+    "center": {
+      "latitude": 29.60294,
+      "longitude": 52.532035
+    },
+    "active": false
+  },
+  {
+    "id": "shz-ghadamgah",
+    "city_id": "shiraz",
+    "name_fa": "قدمگاه",
+    "name_en": "Ghadamgah",
+    "center": {
+      "latitude": 29.607302,
+      "longitude": 52.515637
+    },
+    "active": false
+  },
+  {
+    "id": "shz-ghasr-e-abunasr",
+    "city_id": "shiraz",
+    "name_fa": "قصر ابونصر",
+    "name_en": "Ghasr-e Abunasr",
+    "center": {
+      "latitude": 29.57975,
+      "longitude": 52.623399
+    },
+    "active": false
+  },
+  {
+    "id": "shz-ghasrodasht",
+    "city_id": "shiraz",
+    "name_fa": "قصرالدشت",
+    "name_en": "Ghasrodasht",
+    "center": {
+      "latitude": 29.63605,
+      "longitude": 52.504486
+    },
+    "active": true
+  },
+  {
+    "id": "shz-ghebleh",
+    "city_id": "shiraz",
+    "name_fa": "قبله",
+    "name_en": "Ghebleh",
+    "center": {
+      "latitude": 29.588453,
+      "longitude": 52.520436
+    },
+    "active": false
+  },
+  {
+    "id": "shz-goede-araban-darbe-sheikh",
+    "city_id": "shiraz",
+    "name_fa": "گود عربان - درب شیخ",
+    "name_en": "Goede Araban - Darbe Sheikh",
+    "center": {
+      "latitude": 29.611023,
+      "longitude": 52.549256
+    },
+    "active": false
+  },
+  {
+    "id": "shz-goedeh-khazineh",
+    "city_id": "shiraz",
+    "name_fa": "گود خزینه",
+    "name_en": "Goedeh Khazineh",
+    "center": {
+      "latitude": 29.623845,
+      "longitude": 52.553384
+    },
+    "active": false
+  },
+  {
+    "id": "shz-gol-e-sorkh",
+    "city_id": "shiraz",
+    "name_fa": "گل سرخ",
+    "name_en": "Gol-e Sorkh",
+    "center": {
+      "latitude": 29.546193,
+      "longitude": 52.610052
+    },
+    "active": false
+  },
+  {
+    "id": "shz-goldasht-maali-abad",
+    "city_id": "shiraz",
+    "name_fa": "گلدشت معالی آباد",
+    "name_en": "Goldasht Maali Abad",
+    "center": {
+      "latitude": 29.686004,
+      "longitude": 52.464822
+    },
+    "active": false
+  },
+  {
+    "id": "shz-golestan-haft-tanan",
+    "city_id": "shiraz",
+    "name_fa": "گلستان - هفت تنان",
+    "name_en": "Golestan - Haft Tanan",
+    "center": {
+      "latitude": 29.627523,
+      "longitude": 52.568916
+    },
+    "active": false
+  },
+  {
+    "id": "shz-golestan-shomali",
+    "city_id": "shiraz",
+    "name_fa": "گلستان شمالی",
+    "name_en": "Golestan Shomali",
+    "center": {
+      "latitude": 29.766379,
+      "longitude": 52.405477
+    },
+    "active": false
+  },
+  {
+    "id": "shz-gouyom",
+    "city_id": "shiraz",
+    "name_fa": "گویم",
+    "name_en": "Gouyom",
+    "center": {
+      "latitude": 29.825286,
+      "longitude": 52.397712
+    },
+    "active": false
+  },
+  {
+    "id": "shz-hafezieh",
+    "city_id": "shiraz",
+    "name_fa": "حافظیه",
+    "name_en": "Hafezieh",
+    "center": {
+      "latitude": 29.627198,
+      "longitude": 52.558658
+    },
+    "active": false
+  },
+  {
+    "id": "shz-hava-bord",
+    "city_id": "shiraz",
+    "name_fa": "هوابرد",
+    "name_en": "Hava Bord",
+    "center": {
+      "latitude": 29.618484,
+      "longitude": 52.510149
+    },
+    "active": true
+  },
+  {
+    "id": "shz-hojjat-abad",
+    "city_id": "shiraz",
+    "name_fa": "حجت آباد",
+    "name_en": "Hojjat Abad",
+    "center": {
+      "latitude": 29.549823,
+      "longitude": 52.532299
+    },
+    "active": false
+  },
+  {
+    "id": "shz-hormozgan",
+    "city_id": "shiraz",
+    "name_fa": "هرمزگان",
+    "name_en": "Hormozgan",
+    "center": {
+      "latitude": 29.577691,
+      "longitude": 52.569547
+    },
+    "active": false
+  },
+  {
+    "id": "shz-hosseini-al-hashemi",
+    "city_id": "shiraz",
+    "name_fa": "حسینی الهاشمی",
+    "name_en": "Hosseini Al-Hashemi",
+    "center": {
+      "latitude": 29.715151,
+      "longitude": 52.420683
+    },
+    "active": false
+  },
+  {
+    "id": "shz-jahangardi-pirnia",
+    "city_id": "shiraz",
+    "name_fa": "جهانگردی - پیرنیا",
+    "name_en": "Jahangardi - Pirnia",
+    "center": {
+      "latitude": 29.608904,
+      "longitude": 52.56947
+    },
+    "active": false
+  },
+  {
+    "id": "shz-jamaran-mahdieh",
+    "city_id": "shiraz",
+    "name_fa": "جماران - مهدیه",
+    "name_en": "Jamaran - Mahdieh",
+    "center": {
+      "latitude": 29.624242,
+      "longitude": 52.44457
+    },
+    "active": false
+  },
+  {
+    "id": "shz-javadieh",
+    "city_id": "shiraz",
+    "name_fa": "جوادیه",
+    "name_en": "Javadieh",
+    "center": {
+      "latitude": 29.70562,
+      "longitude": 52.488961
+    },
+    "active": false
+  },
+  {
+    "id": "shz-jomhuri",
+    "city_id": "shiraz",
+    "name_fa": "جمهوری",
+    "name_en": "Jomhuri",
+    "center": {
+      "latitude": 29.643752,
+      "longitude": 52.538525
+    },
+    "active": true
+  },
+  {
+    "id": "shz-kaveh",
+    "city_id": "shiraz",
+    "name_fa": "کاوه",
+    "name_en": "Kaveh",
+    "center": {
+      "latitude": 29.60425,
+      "longitude": 52.566937
+    },
+    "active": false
+  },
+  {
+    "id": "shz-khold-barin",
+    "city_id": "shiraz",
+    "name_fa": "خلد برین",
+    "name_en": "Khold Barin",
+    "center": {
+      "latitude": 29.623197,
+      "longitude": 52.509788
+    },
+    "active": true
+  },
+  {
+    "id": "shz-kian-shahr",
+    "city_id": "shiraz",
+    "name_fa": "کیان شهر",
+    "name_en": "Kian Shahr",
+    "center": {
+      "latitude": 29.588618,
+      "longitude": 52.580154
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kolahduz",
+    "city_id": "shiraz",
+    "name_fa": "کلاهدوز",
+    "name_en": "Kolahduz",
+    "center": {
+      "latitude": 29.617715,
+      "longitude": 52.48371
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kolbeh",
+    "city_id": "shiraz",
+    "name_fa": "کلبه",
+    "name_en": "Kolbeh",
+    "center": {
+      "latitude": 29.616808,
+      "longitude": 52.571267
+    },
+    "active": false
+  },
+  {
+    "id": "shz-koushk-meydan",
+    "city_id": "shiraz",
+    "name_fa": "کوشک میدان",
+    "name_en": "Koushk Meydan",
+    "center": {
+      "latitude": 29.565778,
+      "longitude": 52.547197
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kushkak",
+    "city_id": "shiraz",
+    "name_fa": "کوشکک",
+    "name_en": "Kushkak",
+    "center": {
+      "latitude": 29.560775,
+      "longitude": 52.660319
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kuye-tollab",
+    "city_id": "shiraz",
+    "name_fa": "کوی طلاب",
+    "name_en": "Kuye Tollab",
+    "center": {
+      "latitude": 29.601564,
+      "longitude": 52.582594
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kuye-vahdat",
+    "city_id": "shiraz",
+    "name_fa": "کوی وحدت",
+    "name_en": "Kuye Vahdat",
+    "center": {
+      "latitude": 29.684089,
+      "longitude": 52.453896
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kuye-zahra",
+    "city_id": "shiraz",
+    "name_fa": "کوی زهرا",
+    "name_en": "Kuye Zahra",
+    "center": {
+      "latitude": 29.591958,
+      "longitude": 52.568016
+    },
+    "active": false
+  },
+  {
+    "id": "shz-kuzehgari",
+    "city_id": "shiraz",
+    "name_fa": "کوزه گری",
+    "name_en": "Kuzehgari",
+    "center": {
+      "latitude": 29.58553,
+      "longitude": 52.550686
+    },
+    "active": false
+  },
+  {
+    "id": "shz-maali-abad",
+    "city_id": "shiraz",
+    "name_fa": "معالی آباد",
+    "name_en": "Maali Abad",
+    "center": {
+      "latitude": 29.680726,
+      "longitude": 52.470102
+    },
+    "active": false
+  },
+  {
+    "id": "shz-mabaas",
+    "city_id": "shiraz",
+    "name_fa": "مبعث",
+    "name_en": "Mabaas",
+    "center": {
+      "latitude": 29.622274,
+      "longitude": 52.47507
+    },
+    "active": false
+  },
+  {
+    "id": "shz-mahallati",
+    "city_id": "shiraz",
+    "name_fa": "محلاتی",
+    "name_en": "Mahallati",
+    "center": {
+      "latitude": 29.711358,
+      "longitude": 52.460169
+    },
+    "active": false
+  },
+  {
+    "id": "shz-mahdi-abad",
+    "city_id": "shiraz",
+    "name_fa": "مهدی آباد",
+    "name_en": "Mahdi Abad",
+    "center": {
+      "latitude": 29.642616,
+      "longitude": 52.486192
+    },
+    "active": false
+  },
+  {
+    "id": "shz-manbae-ab",
+    "city_id": "shiraz",
+    "name_fa": "منبع آب",
+    "name_en": "Manbae Ab",
+    "center": {
+      "latitude": 29.660556,
+      "longitude": 52.473695
+    },
+    "active": false
+  },
+  {
+    "id": "shz-mianrud",
+    "city_id": "shiraz",
+    "name_fa": "میانرود",
+    "name_en": "Mianrud",
+    "center": {
+      "latitude": 29.564645,
+      "longitude": 52.492773
+    },
+    "active": false
+  },
+  {
+    "id": "shz-minoo-keshvari",
+    "city_id": "shiraz",
+    "name_fa": "مینو - کشوری",
+    "name_en": "Minoo - Keshvari",
+    "center": {
+      "latitude": 29.557174,
+      "longitude": 52.602235
+    },
+    "active": false
+  },
+  {
+    "id": "shz-molasadra",
+    "city_id": "shiraz",
+    "name_fa": "ملاصدرا",
+    "name_en": "Molasadra",
+    "center": {
+      "latitude": 29.628436,
+      "longitude": 52.516726
+    },
+    "active": true
+  },
+  {
+    "id": "shz-mosadegh",
+    "city_id": "shiraz",
+    "name_fa": "مصدق",
+    "name_en": "Mosadegh",
+    "center": {
+      "latitude": 29.604302,
+      "longitude": 52.551963
+    },
+    "active": false
+  },
+  {
+    "id": "shz-moslem-bani-hashem",
+    "city_id": "shiraz",
+    "name_fa": "مسلم - بنی هاشمی",
+    "name_en": "Moslem - Bani Hashem",
+    "center": {
+      "latitude": 29.582958,
+      "longitude": 52.537727
+    },
+    "active": false
+  },
+  {
+    "id": "shz-nader",
+    "city_id": "shiraz",
+    "name_fa": "نادر",
+    "name_en": "Nader",
+    "center": {
+      "latitude": 29.613566,
+      "longitude": 52.519065
+    },
+    "active": false
+  },
+  {
+    "id": "shz-nasr",
+    "city_id": "shiraz",
+    "name_fa": "نصر",
+    "name_en": "Nasr",
+    "center": {
+      "latitude": 29.591391,
+      "longitude": 52.60502
+    },
+    "active": false
+  },
+  {
+    "id": "shz-navab-safavi",
+    "city_id": "shiraz",
+    "name_fa": "نواب صفوی",
+    "name_en": "Navab Safavi",
+    "center": {
+      "latitude": 29.579732,
+      "longitude": 52.535996
+    },
+    "active": false
+  },
+  {
+    "id": "shz-neshat",
+    "city_id": "shiraz",
+    "name_fa": "نشاط",
+    "name_en": "Neshat",
+    "center": {
+      "latitude": 29.628516,
+      "longitude": 52.527081
+    },
+    "active": true
+  },
+  {
+    "id": "shz-neyestan-saadi",
+    "city_id": "shiraz",
+    "name_fa": "نیستان - سعدی",
+    "name_en": "Neyestan - Saadi",
+    "center": {
+      "latitude": 29.620796,
+      "longitude": 52.579215
+    },
+    "active": false
+  },
+  {
+    "id": "shz-north-qadir",
+    "city_id": "shiraz",
+    "name_fa": "غدیر شمالی",
+    "name_en": "North Qadir",
+    "center": {
+      "latitude": 29.755193,
+      "longitude": 52.405692
+    },
+    "active": false
+  },
+  {
+    "id": "shz-north-safir",
+    "city_id": "shiraz",
+    "name_fa": "سفیر شمالی",
+    "name_en": "North Safir",
+    "center": {
+      "latitude": 29.605228,
+      "longitude": 52.497842
+    },
+    "active": false
+  },
+  {
+    "id": "shz-north-sepah",
+    "city_id": "shiraz",
+    "name_fa": "سپاه شمالی",
+    "name_en": "North Sepah",
+    "center": {
+      "latitude": 29.600345,
+      "longitude": 52.517069
+    },
+    "active": false
+  },
+  {
+    "id": "shz-ordibehesht-gharbi",
+    "city_id": "shiraz",
+    "name_fa": "اردیبهشت غربی",
+    "name_en": "Ordibehesht Gharbi",
+    "center": {
+      "latitude": 29.626351,
+      "longitude": 52.525508
+    },
+    "active": false
+  },
+  {
+    "id": "shz-paeez",
+    "city_id": "shiraz",
+    "name_fa": "پاییز",
+    "name_en": "Paeez",
+    "center": {
+      "latitude": 29.592891,
+      "longitude": 52.485867
+    },
+    "active": false
+  },
+  {
+    "id": "shz-pansad-dastgah-artesh",
+    "city_id": "shiraz",
+    "name_fa": "پانصد دستگاه ارتش",
+    "name_en": "Pansad Dastgah Artesh",
+    "center": {
+      "latitude": 29.584915,
+      "longitude": 52.528526
+    },
+    "active": false
+  },
+  {
+    "id": "shz-pasargad",
+    "city_id": "shiraz",
+    "name_fa": "پاسارگاد",
+    "name_en": "Pasargad",
+    "center": {
+      "latitude": 29.595909,
+      "longitude": 52.480859
+    },
+    "active": false
+  },
+  {
+    "id": "shz-pasdaran",
+    "city_id": "shiraz",
+    "name_fa": "پاسداران",
+    "name_en": "Pasdaran",
+    "center": {
+      "latitude": 29.624276,
+      "longitude": 52.483635
+    },
+    "active": true
+  },
+  {
+    "id": "shz-posht-malleh",
+    "city_id": "shiraz",
+    "name_fa": "پشت مله",
+    "name_en": "Posht Malleh",
+    "center": {
+      "latitude": 29.670955,
+      "longitude": 52.491649
+    },
+    "active": false
+  },
+  {
+    "id": "shz-qale-shahzadeh-beygom",
+    "city_id": "shiraz",
+    "name_fa": "قلعه شاهزاده بیگم",
+    "name_en": "Qale Shahzadeh Beygom",
+    "center": {
+      "latitude": 29.583401,
+      "longitude": 52.563264
+    },
+    "active": false
+  },
+  {
+    "id": "shz-rabbani",
+    "city_id": "shiraz",
+    "name_fa": "ربانی",
+    "name_en": "Rabbani",
+    "center": {
+      "latitude": 29.63199,
+      "longitude": 52.554594
+    },
+    "active": false
+  },
+  {
+    "id": "shz-rahmat-abad",
+    "city_id": "shiraz",
+    "name_fa": "رحمت آباد",
+    "name_en": "Rahmat Abad",
+    "center": {
+      "latitude": 29.624131,
+      "longitude": 52.513661
+    },
+    "active": true
+  },
+  {
+    "id": "shz-rahnemayi",
+    "city_id": "shiraz",
+    "name_fa": "راهنمایی",
+    "name_en": "Rahnemayi",
+    "center": {
+      "latitude": 29.611159,
+      "longitude": 52.558152
+    },
+    "active": false
+  },
+  {
+    "id": "shz-razi",
+    "city_id": "shiraz",
+    "name_fa": "رازی",
+    "name_en": "Razi",
+    "center": {
+      "latitude": 29.593067,
+      "longitude": 52.558574
+    },
+    "active": false
+  },
+  {
+    "id": "shz-riasati",
+    "city_id": "shiraz",
+    "name_fa": "ریاستی",
+    "name_en": "Riasati",
+    "center": {
+      "latitude": 29.604191,
+      "longitude": 52.589184
+    },
+    "active": false
+  },
+  {
+    "id": "shz-roknabad",
+    "city_id": "shiraz",
+    "name_fa": "رکن آباد",
+    "name_en": "Roknabad",
+    "center": {
+      "latitude": 29.682979,
+      "longitude": 52.548719
+    },
+    "active": false
+  },
+  {
+    "id": "shz-saadi-cinema",
+    "city_id": "shiraz",
+    "name_fa": "سینما سعدی",
+    "name_en": "Saadi Cinema",
+    "center": {
+      "latitude": 29.619332,
+      "longitude": 52.52125
+    },
+    "active": true
+  },
+  {
+    "id": "shz-sahl-abad",
+    "city_id": "shiraz",
+    "name_fa": "سهل آباد",
+    "name_en": "Sahl Abad",
+    "center": {
+      "latitude": 29.554256,
+      "longitude": 52.614576
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sajjadieh-mohammadieh",
+    "city_id": "shiraz",
+    "name_fa": "سجادیه - محمدیه",
+    "name_en": "Sajjadieh - Mohammadieh",
+    "center": {
+      "latitude": 29.608334,
+      "longitude": 52.439366
+    },
+    "active": false
+  },
+  {
+    "id": "shz-salahshour",
+    "city_id": "shiraz",
+    "name_fa": "سلحشور",
+    "name_en": "Salahshour",
+    "center": {
+      "latitude": 29.583624,
+      "longitude": 52.595999
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sar-e-dezak",
+    "city_id": "shiraz",
+    "name_fa": "سر دزک",
+    "name_en": "Sar-e Dezak",
+    "center": {
+      "latitude": 29.607125,
+      "longitude": 52.545101
+    },
+    "active": false
+  },
+  {
+    "id": "shz-saraye-moshir",
+    "city_id": "shiraz",
+    "name_fa": "سرای مشیر",
+    "name_en": "Saraye Moshir",
+    "center": {
+      "latitude": 29.612341,
+      "longitude": 52.546483
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sardaran",
+    "city_id": "shiraz",
+    "name_fa": "سرداران",
+    "name_en": "Sardaran",
+    "center": {
+      "latitude": 29.595575,
+      "longitude": 52.590076
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sardkhaneh-fale-asiri",
+    "city_id": "shiraz",
+    "name_fa": "سردخانه - فال اسیری",
+    "name_en": "Sardkhaneh - Fale Asiri",
+    "center": {
+      "latitude": 29.571268,
+      "longitude": 52.59276
+    },
+    "active": false
+  },
+  {
+    "id": "shz-seraj",
+    "city_id": "shiraz",
+    "name_fa": "سراج",
+    "name_en": "Seraj",
+    "center": {
+      "latitude": 29.600638,
+      "longitude": 52.493105
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shah-daei-allah-dabbagh-khaneh",
+    "city_id": "shiraz",
+    "name_fa": "شاه داعی الله - دباغ خانه",
+    "name_en": "Shah Daei Allah - Dabbagh Khaneh",
+    "center": {
+      "latitude": 29.597554,
+      "longitude": 52.539302
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahcheragh-astaneh",
+    "city_id": "shiraz",
+    "name_fa": "شاهچراغ - آستانه",
+    "name_en": "Shahcheragh - Astaneh",
+    "center": {
+      "latitude": 29.609299,
+      "longitude": 52.545773
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahid-rajayi",
+    "city_id": "shiraz",
+    "name_fa": "شهید رجایی",
+    "name_en": "Shahid Rajayi",
+    "center": {
+      "latitude": 29.656611,
+      "longitude": 52.465632
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahijan",
+    "city_id": "shiraz",
+    "name_fa": "شاهیجان",
+    "name_en": "Shahijan",
+    "center": {
+      "latitude": 29.600643,
+      "longitude": 52.57266
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-amirkabir",
+    "city_id": "shiraz",
+    "name_fa": "شهرک امیرکبیر",
+    "name_en": "Shahrak Amirkabir",
+    "center": {
+      "latitude": 29.62013,
+      "longitude": 52.457525
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-anjireh",
+    "city_id": "shiraz",
+    "name_fa": "شهرک انجیره",
+    "name_en": "Shahrak Anjireh",
+    "center": {
+      "latitude": 29.733797,
+      "longitude": 52.456513
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-arian",
+    "city_id": "shiraz",
+    "name_fa": "شهرک آرین",
+    "name_en": "Shahrak Arian",
+    "center": {
+      "latitude": 29.716648,
+      "longitude": 52.465985
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-bahar",
+    "city_id": "shiraz",
+    "name_fa": "شهرک بهار",
+    "name_en": "Shahrak Bahar",
+    "center": {
+      "latitude": 29.602573,
+      "longitude": 52.560269
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-bahonar",
+    "city_id": "shiraz",
+    "name_fa": "شهرک باهنر",
+    "name_en": "Shahrak Bahonar",
+    "center": {
+      "latitude": 29.695318,
+      "longitude": 52.459692
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-bargh",
+    "city_id": "shiraz",
+    "name_fa": "شهرک برق",
+    "name_en": "Shahrak Bargh",
+    "center": {
+      "latitude": 29.557947,
+      "longitude": 52.509203
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-beheshti",
+    "city_id": "shiraz",
+    "name_fa": "شهرک بهشتی",
+    "name_en": "Shahrak Beheshti",
+    "center": {
+      "latitude": 29.722386,
+      "longitude": 52.433843
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-daraei",
+    "city_id": "shiraz",
+    "name_fa": "شهرک دارایی",
+    "name_en": "Shahrak Daraei",
+    "center": {
+      "latitude": 29.560597,
+      "longitude": 52.502348
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-emam-hossein",
+    "city_id": "shiraz",
+    "name_fa": "شهرک امام حسین (ع)",
+    "name_en": "Shahrak-e Emam Hossein",
+    "center": {
+      "latitude": 29.63202,
+      "longitude": 52.59749
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-niru-entezami",
+    "city_id": "shiraz",
+    "name_fa": "شهرک نیروی انتظامی",
+    "name_en": "Shahrak-e Niru Entezami",
+    "center": {
+      "latitude": 29.58191,
+      "longitude": 52.60747
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-parvaz",
+    "city_id": "shiraz",
+    "name_fa": "شهرک پرواز",
+    "name_en": "Shahrak-e Parvaz",
+    "center": {
+      "latitude": 29.584476,
+      "longitude": 52.585237
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-saadi",
+    "city_id": "shiraz",
+    "name_fa": "شهرک سعدی",
+    "name_en": "Shahrak-e Saadi",
+    "center": {
+      "latitude": 29.627235,
+      "longitude": 52.585155
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-sadeghieh",
+    "city_id": "shiraz",
+    "name_fa": "شهرک صادقیه",
+    "name_en": "Shahrak-e Sadeghieh",
+    "center": {
+      "latitude": 29.566042,
+      "longitude": 52.635708
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-shohada-fathiyeh",
+    "city_id": "shiraz",
+    "name_fa": "شهرک شهدا - فتحیه",
+    "name_en": "Shahrak-e Shohada - Fathiyeh",
+    "center": {
+      "latitude": 29.577639,
+      "longitude": 52.587972
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-e-sibouyeh-podnak",
+    "city_id": "shiraz",
+    "name_fa": "شهرک سیبویه - پودنک",
+    "name_en": "Shahrak-e Sibouyeh - Podnak",
+    "center": {
+      "latitude": 29.575429,
+      "longitude": 52.602261
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-emam-hossein",
+    "city_id": "shiraz",
+    "name_fa": "شهرک امام حسین",
+    "name_en": "Shahrak Emam Hossein",
+    "center": {
+      "latitude": 29.578452,
+      "longitude": 52.615046
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-erfan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک عرفان",
+    "name_en": "Shahrak Erfan",
+    "center": {
+      "latitude": 29.691183,
+      "longitude": 52.451101
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-esar",
+    "city_id": "shiraz",
+    "name_fa": "شهرک ایثار",
+    "name_en": "Shahrak Esar",
+    "center": {
+      "latitude": 29.618892,
+      "longitude": 52.477623
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-esteghlal-bezeyn",
+    "city_id": "shiraz",
+    "name_fa": "شهرک استقلال - بزین",
+    "name_en": "Shahrak Esteghlal - Bezeyn",
+    "center": {
+      "latitude": 29.744107,
+      "longitude": 52.420915
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-farhangian",
+    "city_id": "shiraz",
+    "name_fa": "شهرک فرهنگیان",
+    "name_en": "Shahrak Farhangian",
+    "center": {
+      "latitude": 29.5868,
+      "longitude": 52.469853
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-farzanegan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک فرزانگان",
+    "name_en": "Shahrak Farzanegan",
+    "center": {
+      "latitude": 29.583787,
+      "longitude": 52.477972
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-goldasht-mohammadi",
+    "city_id": "shiraz",
+    "name_fa": "شهرک گلدشت محمدی",
+    "name_en": "Shahrak Goldasht Mohammadi",
+    "center": {
+      "latitude": 29.695933,
+      "longitude": 52.460624
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-golestan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک گلستان",
+    "name_en": "Shahrak Golestan",
+    "center": {
+      "latitude": 29.754888,
+      "longitude": 52.420632
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-golha",
+    "city_id": "shiraz",
+    "name_fa": "شهرک گلها",
+    "name_en": "Shahrak Golha",
+    "center": {
+      "latitude": 29.551609,
+      "longitude": 52.547472
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-golshan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک گلشن",
+    "name_en": "Shahrak Golshan",
+    "center": {
+      "latitude": 29.622365,
+      "longitude": 52.464984
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-hafez",
+    "city_id": "shiraz",
+    "name_fa": "شهرک حافظ",
+    "name_en": "Shahrak Hafez",
+    "center": {
+      "latitude": 29.732401,
+      "longitude": 52.428126
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-mahdi-abad",
+    "city_id": "shiraz",
+    "name_fa": "شهرک مهدی آباد",
+    "name_en": "Shahrak Mahdi Abad",
+    "center": {
+      "latitude": 29.556896,
+      "longitude": 52.533908
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-modarres",
+    "city_id": "shiraz",
+    "name_fa": "شهرک مدرس",
+    "name_en": "Shahrak Modarres",
+    "center": {
+      "latitude": 29.56766,
+      "longitude": 52.510894
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-mofatteh",
+    "city_id": "shiraz",
+    "name_fa": "شهرک مفتح",
+    "name_en": "Shahrak Mofatteh",
+    "center": {
+      "latitude": 29.585762,
+      "longitude": 52.56806
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-mokhaberat",
+    "city_id": "shiraz",
+    "name_fa": "شهرک مخابرات",
+    "name_en": "Shahrak Mokhaberat",
+    "center": {
+      "latitude": 29.611783,
+      "longitude": 52.463961
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-motahhari",
+    "city_id": "shiraz",
+    "name_fa": "شهرک مطهری",
+    "name_en": "Shahrak Motahhari",
+    "center": {
+      "latitude": 29.577343,
+      "longitude": 52.520771
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-qasr-qomsheh",
+    "city_id": "shiraz",
+    "name_fa": "شهرک قصر قمشه",
+    "name_en": "Shahrak Qasr Qomsheh",
+    "center": {
+      "latitude": 29.776102,
+      "longitude": 52.442422
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-rezvan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک رضوان",
+    "name_en": "Shahrak Rezvan",
+    "center": {
+      "latitude": 29.580037,
+      "longitude": 52.485003
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-sobhan",
+    "city_id": "shiraz",
+    "name_fa": "شهرک سبحان",
+    "name_en": "Shahrak Sobhan",
+    "center": {
+      "latitude": 29.573677,
+      "longitude": 52.496609
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrak-valfajr",
+    "city_id": "shiraz",
+    "name_fa": "شهرک والفجر",
+    "name_en": "Shahrak Valfajr",
+    "center": {
+      "latitude": 29.608324,
+      "longitude": 52.458349
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shahrdari",
+    "city_id": "shiraz",
+    "name_fa": "شهرداری",
+    "name_en": "Shahrdari",
+    "center": {
+      "latitude": 29.61579,
+      "longitude": 52.541706
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sharifabad",
+    "city_id": "shiraz",
+    "name_fa": "شریف آباد",
+    "name_en": "Sharifabad",
+    "center": {
+      "latitude": 29.571991,
+      "longitude": 52.608662
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sheikh-ruzbehan",
+    "city_id": "shiraz",
+    "name_fa": "شیخ روزبهان",
+    "name_en": "Sheikh Ruzbehan",
+    "center": {
+      "latitude": 29.574302,
+      "longitude": 52.476962
+    },
+    "active": false
+  },
+  {
+    "id": "shz-sheykhali-choopan",
+    "city_id": "shiraz",
+    "name_fa": "شیخ علی چوپان",
+    "name_en": "SheykhAli Choopan",
+    "center": {
+      "latitude": 29.578689,
+      "longitude": 52.554405
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shimi-giyah",
+    "city_id": "shiraz",
+    "name_fa": "شیمی گیاه",
+    "name_en": "Shimi Giyah",
+    "center": {
+      "latitude": 29.714945,
+      "longitude": 52.438193
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shishehgari",
+    "city_id": "shiraz",
+    "name_fa": "شیشه گری",
+    "name_en": "Shishehgari",
+    "center": {
+      "latitude": 29.593951,
+      "longitude": 52.549828
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shohadaye-shahrak-saadi",
+    "city_id": "shiraz",
+    "name_fa": "شهدای شهرک سعدی",
+    "name_en": "Shohadaye Shahrak Saadi",
+    "center": {
+      "latitude": 29.623372,
+      "longitude": 52.594243
+    },
+    "active": false
+  },
+  {
+    "id": "shz-shorghan-shahrak-mehregan",
+    "city_id": "shiraz",
+    "name_fa": "شرقان(شهرک مهرگان)",
+    "name_en": "Shorghan(Shahrak Mehregan)",
+    "center": {
+      "latitude": 29.5619,
+      "longitude": 52.648606
+    },
+    "active": false
+  },
+  {
+    "id": "shz-siyah-sang",
+    "city_id": "shiraz",
+    "name_fa": "سیاه سنگ",
+    "name_en": "Siyah Sang",
+    "center": {
+      "latitude": 29.609932,
+      "longitude": 52.537136
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-ahmadi-artesh",
+    "city_id": "shiraz",
+    "name_fa": "احمدی جنوبی - ارتش",
+    "name_en": "South Ahmadi - Artesh",
+    "center": {
+      "latitude": 29.594093,
+      "longitude": 52.531698
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-eman",
+    "city_id": "shiraz",
+    "name_fa": "ایمان جنوبی",
+    "name_en": "South Eman",
+    "center": {
+      "latitude": 29.639107,
+      "longitude": 52.458795
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-hemmat",
+    "city_id": "shiraz",
+    "name_fa": "همت جنوبی",
+    "name_en": "South Hemmat",
+    "center": {
+      "latitude": 29.631566,
+      "longitude": 52.466354
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-qadir",
+    "city_id": "shiraz",
+    "name_fa": "غدیر جنوبی",
+    "name_en": "South Qadir",
+    "center": {
+      "latitude": 29.750873,
+      "longitude": 52.400107
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-saadieh",
+    "city_id": "shiraz",
+    "name_fa": "سعدیه جنوبی",
+    "name_en": "South Saadieh",
+    "center": {
+      "latitude": 29.623916,
+      "longitude": 52.590649
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-safir",
+    "city_id": "shiraz",
+    "name_fa": "سفیر جنوبی",
+    "name_en": "South Safir",
+    "center": {
+      "latitude": 29.592214,
+      "longitude": 52.493045
+    },
+    "active": false
+  },
+  {
+    "id": "shz-south-sepah",
+    "city_id": "shiraz",
+    "name_fa": "سپاه جنوبی",
+    "name_en": "South Sepah",
+    "center": {
+      "latitude": 29.591543,
+      "longitude": 52.513838
+    },
+    "active": false
+  },
+  {
+    "id": "shz-tachara",
+    "city_id": "shiraz",
+    "name_fa": "تاچارا",
+    "name_en": "Tachara",
+    "center": {
+      "latitude": 29.694288,
+      "longitude": 52.46803
+    },
+    "active": false
+  },
+  {
+    "id": "shz-tahvili-fakhr-abad",
+    "city_id": "shiraz",
+    "name_fa": "تحویلی - فخر آباد",
+    "name_en": "Tahvili - Fakhr Abad",
+    "center": {
+      "latitude": 29.608085,
+      "longitude": 52.524672
+    },
+    "active": false
+  },
+  {
+    "id": "shz-torkan",
+    "city_id": "shiraz",
+    "name_fa": "ترکان",
+    "name_en": "Torkan",
+    "center": {
+      "latitude": 29.561563,
+      "longitude": 52.629883
+    },
+    "active": false
+  },
+  {
+    "id": "shz-valiasr",
+    "city_id": "shiraz",
+    "name_fa": "ولیعصر",
+    "name_en": "ValiAsr",
+    "center": {
+      "latitude": 29.629533,
+      "longitude": 52.503708
+    },
+    "active": true
+  },
+  {
+    "id": "shz-vazir-abad",
+    "city_id": "shiraz",
+    "name_fa": "وزیرآباد",
+    "name_en": "Vazir Abad",
+    "center": {
+      "latitude": 29.536859,
+      "longitude": 52.621458
+    },
+    "active": false
+  },
+  {
+    "id": "shz-west-ghoddowsi",
+    "city_id": "shiraz",
+    "name_fa": "قدوسی غربی",
+    "name_en": "West Ghoddowsi",
+    "center": {
+      "latitude": 29.637089,
+      "longitude": 52.47221
+    },
+    "active": false
+  },
+  {
+    "id": "shz-zand",
+    "city_id": "shiraz",
+    "name_fa": "زند",
+    "name_en": "Zand",
+    "center": {
+      "latitude": 29.61741,
+      "longitude": 52.532905
+    },
+    "active": true
+  },
+  {
+    "id": "shz-zerehi-amirkabir",
+    "city_id": "shiraz",
+    "name_fa": "زرهی - امیرکبیر",
+    "name_en": "Zerehi - AmirKabir",
+    "center": {
+      "latitude": 29.613135,
+      "longitude": 52.49557
+    },
+    "active": true
+  },
+  {
+    "id": "shz-ziba-shahr",
+    "city_id": "shiraz",
+    "name_fa": "زیبا شهر",
+    "name_en": "Ziba Shahr",
+    "center": {
+      "latitude": 29.663909,
+      "longitude": 52.56093
+    },
+    "active": false
+  }
+]
