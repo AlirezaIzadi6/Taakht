@@ -8,13 +8,14 @@ Mock implementation of the `TaxonomyProvider` for phase 1. It provides categorie
 - RPCs:
   - `ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse)` (edge: `GET /v1/taxonomy/categories`)
   - `ListCities(ListCitiesRequest) returns (ListCitiesResponse)` (edge: `GET /v1/taxonomy/cities`)
-  - `ListNeighbourhoods(ListNeighbourhoodsRequest) returns (ListNeighbourhoodsResponse)` (edge: `GET /v1/taxonomy/cities/{city_id}/neighbourhoods` and `GET /v1/taxonomy/neighbourhoods`)
+  - `ListNeighbourhoods(ListNeighbourhoodsRequest) returns (ListNeighbourhoodsResponse)` (edge: `GET /v1/taxonomy/cities/{city_id}/neighbourhoods`)
 - Responses return complete collections in a single answer without pagination.
+- `ListNeighbourhoods` requires `city_id` (`InvalidArgument` when empty), returns an empty list for an unknown `city_id`, and returns only `active: true` neighbourhoods.
 
 ## Ports and configuration
 
-- gRPC `9201`, health HTTP `8201`.
-- `GRPC_ADDR`, `HTTP_ADDR`, `DATA_DIR` (defaults to `data/` next to the binary).
+- gRPC `9201`, health HTTP `8201` (`GET /healthz`).
+- `GRPC_ADDR` (default `:9201`), `HTTP_ADDR` (default `:8201`), `DATA_DIR` (defaults to `data/` next to the binary).
 
 ## Seed data
 

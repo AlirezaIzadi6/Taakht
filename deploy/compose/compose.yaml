@@ -1,4 +1,4 @@
-# The shared base: Postgres, Kafka, the auth mock and the Envoy gateway. Only the
+# The shared base: Postgres, Kafka, the auth and taxonomy mocks, and the Envoy gateway. Only the
 # gateway publishes a port; everything else stays on the internal network.
 # On a laptop, compose.override.yaml is loaded as well and publishes the ports a
 # developer needs; on the shared server run with `-f compose.yaml` only
