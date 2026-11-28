@@ -11,15 +11,15 @@ The single public entry point for the API: REST/JSON in, gRPC out, JWT validatio
 
 | Route | Upstream | JWT | Notes |
 |---|---|---|---|
-| `POST /v1/auth/login` (`/v1/auth/*`) | `auth:9204` | no | The only public route; issues the RS256 token. |
+| `POST /v1/auth/login` (`/v1/auth/*`) | `auth:9204` | no | Public route; issues the RS256 token. |
+| `GET /v1/taxonomy/*` | `taxonomy:9201` | no | Public route; categories, cities, and active neighbourhoods. |
 | `POST /v1/ads` (`/v1/ads`) | `ad:9090` | yes | The Ad service is not in Compose yet; a valid request returns 503. |
 | Matching | `matching:9090` | yes | Placeholder in the config comments. |
 | Deal | `deal:9090` | yes | Placeholder. |
 | Reputation | `reputation:9090` | yes | Placeholder. |
 | Communication | `communication:9090` | yes | Placeholder. |
-| Taxonomy | `taxonomy:9201` | yes | Contract on main; the mock service lands later. |
 
-`jwt_authn` rules are ordered: `/v1/auth/` allows a missing JWT; `/` requires the `taakht` provider. Unknown paths with no token get 401; with a valid token they reach the router and get 404.
+`jwt_authn` rules are ordered: `/v1/auth/` and `/v1/taxonomy/` allow a missing JWT; `/` requires the `taakht` provider. Unknown paths with no token get 401; with a valid token they reach the router and get 404.
 
 ## JWT
 
