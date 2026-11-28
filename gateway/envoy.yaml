@@ -35,6 +35,10 @@ static_resources:
                           route:
                             cluster: auth
                         - match:
+                            prefix: "/v1/taxonomy/"
+                          route:
+                            cluster: taxonomy
+                        - match:
                             prefix: "/v1/ads"
                           route:
                             cluster: ad
@@ -42,7 +46,6 @@ static_resources:
                         # deal: /v1/deals -> deal:9090
                         # reputation: /v1/reputation -> reputation:9090
                         # communication: /v1/communication -> communication:9090
-                        # taxonomy: /v1/taxonomy -> taxonomy:9201 (contract on main; mock service later)
                 http_filters:
                   - name: envoy.filters.http.jwt_authn
                     typed_config:
@@ -65,6 +68,10 @@ static_resources:
                           requires:
                             allow_missing: {}
                         - match:
+                            prefix: "/v1/taxonomy/"
+                          requires:
+                            allow_missing: {}
+                        - match:
                             prefix: "/"
                           requires:
                             provider_name: taakht
@@ -75,6 +82,7 @@ static_resources:
                       services:
                         - taakht.auth.v1.AuthService
                         - taakht.ad.v1.AdService
+                        - taakht.taxonomy.v1.TaxonomyService
                       auto_mapping: false
                       match_incoming_request_route: true
                       convert_grpc_status: true
@@ -118,3 +126,20 @@ static_resources:
                     socket_address:
                       address: ad
                       port_value: 9090
+
+    - name: taxonomy
+      type: STRICT_DNS
+      typed_extension_protocol_options:
+        envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+          "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+          explicit_http_config:
+            http2_protocol_options: {}
+      load_assignment:
+        cluster_name: taxonomy
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: taxonomy
+                      port_value: 9201
